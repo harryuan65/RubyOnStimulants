@@ -1,0 +1,39 @@
+#form-ph .input-ph{
+  padding: 5px 0px 5px 20px;
+  border-radius: 15px;
+  color: #444444;
+  border:1px solid #222222;
+  margin-left:10px;
+  margin-right:10px;
+}
+
+#form-ph .select{
+  font-size: 20px;
+}
+
+#form-ph .select option{
+  background-color: #222222;
+  color:#fafafa;
+  font-size: 10px;
+}
+
+#form .btn-ph{
+  padding: 5px 10px 5px 0px;
+}
+
+#form-ph{
+  display: flex;
+}
+
+@media only screen and (max-width:700px){
+    #form-ph{
+        flex-direction: column;
+    }
+    #form-ph .input-ph{
+        padding: 5px;
+        border-radius: 15px;
+        color: #444444;
+        border:1px solid #222222;
+        margin: 5px;
+      }
+}

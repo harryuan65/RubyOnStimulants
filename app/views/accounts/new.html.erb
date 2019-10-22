@@ -1,0 +1,14 @@
+<%= render("shared/header",title:"新的紀錄") %>
+<div class="form">
+  <%= form_for @new_purchase_history, url:add_accounts_path(@new_purchase_history),html:{id:"form-ph"},method: 'post' do |f| %>
+    <%= f.text_field "content"    ,placeholder:"Content",required:true           , class:"input-ph"%>
+    <%= f.text_field "price"      ,placeholder:"$$$$"   ,required:true           , class:"input-ph"%>
+    <%= f.text_field "category"   ,placeholder:"Cate"   , required:true          , class:"input-ph" %>
+    <%= select_tag "currency"     ,options_for_select(["NTD","JPY","USD","RMB"]) , class:"input-ph select"%>
+    <%= f.text_field "description",placeholder:"備註"                             ,class:"input-ph" %>
+    <%= f.submit "Send",class:"btn-ph" %>
+  <% end %>
+</div>
+
+<div class="result">
+</div>

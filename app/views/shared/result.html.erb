@@ -1,0 +1,23 @@
+<%= render('shared/header', title:"Home")%>
+
+<% if status %>
+  <div class="alert alert-success">
+    <h2> <strong>Success</strong> </h2>
+    <p> <%= message%> </p>
+    <div class="alert alert-dark">
+      <% if data %>
+       <div>
+         <%= data %>
+       </div>
+       <%end%>
+    </div>
+  </div>
+<% else %>
+  <div class="alert alert-danger">
+    <h2> <strong>Error</strong> </h2>
+    <p><%= error %></p>
+  </div>
+<% end %>
+
+
+</div>

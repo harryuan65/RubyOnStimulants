@@ -1,35 +1,35 @@
 <%= render('shared/header', title:"Check List")%>
+<div id="container">
+  <%= form_tag(post_list_path, method:'post') do %>
+  <table class="txt table table-dark">
+    <thead>
+    <th scope="col">Ban</th>
+    <th scope="col">ID</th>
+    <th scope="col">Name</th>
+    <th scope="col">Gender</th>
+    <th scope="col">Email</th>
+    </thead>
 
-<%= form_tag(post_list_path, method:'post') do %>
-<table class="txt table table-dark">
-  <thead>
-  <th scope="col">Ban</th>
-  <th scope="col">ID</th>
-  <th scope="col">Name</th>
-  <th scope="col">Gender</th>
-  <th scope="col">Email</th>
-  </thead>
+    <tbody class="list">
+      <div class="form-wrapper">
+      <%@data.each do |d|%>
+        <tr>
+          <td> <%= check_box_tag("ban_user[]" ,d[:id],false)%></td>
+          <td scope="row"><%=d[:id] %>  </td>
+          <td scope="row"><%=d[:name] %>  </td>
+          <td scope="row"><%=d[:gender] %>  </td>
+          <td scope="row"><%=d[:email] %>  </td>
+        </tr>
+      <%end%>
+      </div>
+    </tbody>
 
-  <tbody class="list">
-    <div class="form-wrapper">
-    <%@data.each do |d|%>
-      <tr>
-        <td> <%= check_box_tag("ban_user[]" ,d[:id],false)%></td>
-        <td scope="row"><%=d[:id] %>  </td>
-        <td scope="row"><%=d[:name] %>  </td>
-        <td scope="row"><%=d[:gender] %>  </td>
-        <td scope="row"><%=d[:email] %>  </td>
-      </tr>
-    <%end%>
-    </div>
-  </tbody>
+  </table>
 
-</table>
+   <div class="lower_row">
+       <%= submit_tag("Go",class:"btn btn-secondary")%>
+   </div>
 
-<div class="lower_row">
-    <%= submit_tag("Go",class:"btn btn-secondary")%>
-</div>
+   <%end%>
 
-<%end%>
-
-</div>
+   </div>

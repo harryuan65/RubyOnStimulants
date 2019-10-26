@@ -1,18 +1,16 @@
 class AccountsController < ApplicationController
     def index
+      # if "#{params[:controller]}##{params[:action]}" == "accounts#index"
+      #    flash[:notice]="Welcome to accounts!"
+      # end
+      @new_purchase_history = Account.new
     end
 
     def new
-        @new_purchase_history = Account.new
     end
 
     def add
-      puts '========================'
-      params.each do|k,v|
-          puts k.to_s + ' '+ v.to_s
-      end
-      puts '========================'
-      render('shared/result',message:"Success",data:params.permit(Account.column_names))
+      render json:{message:"Success",data:params.fetch(:account)}
     end
 
     def all

@@ -1,12 +1,23 @@
+<%= javascript_include_tag "home/home" %>
 <%= render('shared/header', title:"Home")%>
-<% if current_user.email %>
-  <%= link_to('Accounts', accounts_path, class:"btn btn-dark") %>
-<% else %>
-  <%= link_to('Login', new_user_session_path, class:"btn btn-dark") %>
-<% end %>
-<%# <%= link_to('send_post', post_newrecord_path, class:'btn btn-dark')%>
 
-<%# <%= link_to('Lists', list_home_path, class:'btn btn-dark')%>
+<div id="container">
+  <% if current_user %>
+    <%= link_to('Accounts', accounts_path, class:"btn") %>
+  <% else %>
+    <%= link_to('Login', new_user_session_path, class:"btn") %>
+  <% end %>
+  <%# <%= link_to('send_post', post_newrecord_path, class:'btn btn-dark')%>
+  <%# <%= link_to('Lists', list_home_path, class:'btn btn-dark')%>
+
+
+  <%# <div class="dropdown dropdown-state">
+    <div class="state" style="cursor: pointer" onclick="toggleDropdown(this)">按我 toggle</div>
+    <ul class="dropdown-menu" onmouseleave="disableDropdown(this)">
+      <li onclick="f1()"> Option1 </li>
+      <li onclick="f2()"> Option2 </li>
+    </ul>
+  </div> %>
 
 </div>
 

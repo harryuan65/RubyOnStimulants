@@ -14,7 +14,10 @@
         <h4>什麼都沒有，呢呢</h4>
       <% else %>
       <% @uploads.each do |path|  %>
-        <div class="path"><%= link_to("#{ image_tag("excel.png",class:"path-icon")} #{path.split('/')[-1]}".html_safe, excel_show_csv_path(file_io:path),class:"wrap-path") %></div>
+        <div class="wrap-path">
+          <%= link_to("#{image_tag("excel.png",class:"path-icon") }".html_safe, download_path(file_path:Rails.root.join(Global::CSV_UPLOAD_PATH, path)),class:"download-icon") %>
+          <%= link_to(path.split('/')[-1], excel_show_csv_path(file_io:path)) %>
+        </div>
       <% end %>
     <% end %>
    </div>
@@ -26,7 +29,10 @@
       <h4>什麼都沒有，呢呢</h4>
     <% else %>
       <% @exports.each do |path|  %>
-        <div class="path"><%= link_to("#{ image_tag("excel.png",class:"path-icon")} #{path.split('/')[-1]}".html_safe, excel_show_csv_path(file_io:path),class:"wrap-path") %></div>
+        <div class="wrap-path">
+          <%= link_to("#{image_tag("excel.png",class:"path-icon") }".html_safe, download_path(file_path:Rails.root.join(Global::CSV_EXPORT_PATH, path)),class:"download-icon") %>
+          <%= link_to(path.split('/')[-1], excel_show_csv_path(file_io:path)) %>
+        </div>
       <% end %>
     <% end %>
 

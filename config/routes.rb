@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get 'post_newrecord', controller: 'home', action:'post_newrecord'
   get 'list_home',controller:'home', action:'list_home'
   post 'post_list',controller:'home', action:'post_list'
+  get 'download', controller:'application', action:'download'
   resources :accounts, controller: 'accounts' do
     collection do
       get :index

@@ -14,4 +14,8 @@ class ApplicationController < ActionController::Base
       redirect_to new_user_session_path
     end
   end
+  def download
+    filepath = params[:file_path]
+    send_file(filepath,filename:filepath.split('/')[-1],type:'application/csv' ,status:202)
+  end
 end

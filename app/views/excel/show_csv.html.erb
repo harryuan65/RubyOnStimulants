@@ -5,17 +5,27 @@
 <table class="table-account">
   <thead>
     <tr>
-      <% @data[0].each do |data| %>
-        <th> <%= data[0] %></th>
-      <%end%>
+      <% begin %>
+        <% @data[0].each do |data| %>
+          <th> <%= data[0] %></th>
+        <%end%>
+        <% rescue=>exception %>
+         <%= @data %>
+        <% end %>
+
     </tr>
   </thead>
   <tbody>
     <% @data.each do |row| %>
       <tr>
-        <% row.each do |data| %>
-          <td> <%= data[1] %></td>
-        <%end%>
+        <% begin %>
+          <% row.each do |data| %>
+            <td> <%= data[1] %></td>
+          <%end%>
+        <% rescue=>exception %>
+          <%= @data %>
+        <% end %>
+
       </tr>
     <% end %>
   </tbody>

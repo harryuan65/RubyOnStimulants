@@ -27,6 +27,24 @@ $("#form-ph").on('submit',function(event){
 function test(){
     alert("Works!");
 }
+
+function updateTable(){
+   var e = document.getElementById("dropdown-toggle");
+   if (e){
+       console.log(e.id);
+   }else{
+    console.log("not found");
+   }
+   toggleForm(e);
+   $.get(window.location.href, (resText)=>{
+       var find = $('.table-account',resText);
+       if(find.length>0){
+           $('.table-account').replaceWith(find);
+       }
+   })
+}
+
+//deprecated
 function submit_ph(){
     var f = document.forms.namedItem("form-ph")
     var formData = new FormData(f);
@@ -56,6 +74,7 @@ function submit_ph(){
 }
 
 function toggleForm(this_obj){
+    console.log(this_obj.id)
     var FormMenu = this_obj.nextElementSibling;
     if(FormMenu.classList.contains("show")){
         console.log("====================")

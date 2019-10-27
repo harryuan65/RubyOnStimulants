@@ -1,0 +1,28 @@
+<%= render 'shared/header',subtitle: 'CSV' %>
+<div id="container-cl">
+<h1>這些都過濾了</h1>
+<div><%= @file_name %></div>
+<table class="table-account">
+  <thead>
+    <tr>
+      <% @data[0].each do |data| %>
+        <th> <%= data[0] %></th>
+      <%end%>
+    </tr>
+  </thead>
+  <tbody>
+    <% @data.each do |row| %>
+      <tr>
+        <% row.each do |data| %>
+          <td> <%= data[1] %></td>
+        <%end%>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<div><%= @data.size %></div>
+<%= link_to("輸出",excel_export_filter_africa_path(file_name:@file_name),class:"btn-export") %>
+
+
+
+</div>

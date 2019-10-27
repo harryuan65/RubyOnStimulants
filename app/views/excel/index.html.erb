@@ -1,0 +1,35 @@
+<%= render 'shared/header',subtitle: 'CSV' %>
+<%= javascript_include_tag "excel/excel" %>
+<div id="container-excel">
+  <div id="form-upload">
+    <%= form_tag(excel_upload_path, method:"post",:multipart => true,style:"margin:30px;") %>
+    <%= label_tag 'File'%>
+    <%= file_field_tag :csv_file %>
+    <%= button_tag 'Submit', class:'input submit'%>
+  </div>
+  <div class="list">
+   <h2>上傳的</h2>
+   <div class="upload">
+      <% if @uploads.size==0 %>
+        <h4>什麼都沒有，呢呢</h4>
+      <% else %>
+      <% @uploads.each do |path|  %>
+        <div class="path"><%= link_to("#{ image_tag("excel.png",class:"path-icon")} #{path.split('/')[-1]}".html_safe, excel_show_csv_path(file_io:path),class:"wrap-path") %></div>
+      <% end %>
+    <% end %>
+   </div>
+   <hr>
+   <h2>輸出的</h2>
+   <div class="export">
+
+    <% if @exports.size==0 %>
+      <h4>什麼都沒有，呢呢</h4>
+    <% else %>
+      <% @exports.each do |path|  %>
+        <div class="path"><%= link_to("#{ image_tag("excel.png",class:"path-icon")} #{path.split('/')[-1]}".html_safe, excel_show_csv_path(file_io:path),class:"wrap-path") %></div>
+      <% end %>
+    <% end %>
+
+   </div>
+  </div>
+</div>

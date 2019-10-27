@@ -14,8 +14,12 @@ Rails.application.routes.draw do
       get :all
       get :report
     end
-    member do
-
-    end
+  end
+  scope :controller => "excel", :path => "/excel", :as => "excel" do
+    # get 'meetings/:id' => :show, :as => "meeting"
+    get '/' => :index
+    post '/upload' => :upload
+    get '/show_csv' => :show_csv
+    get '/export_filter_africa' => :export_filter_africa
   end
 end

@@ -82,6 +82,13 @@ input:focus, textarea:focus {
 
 
 //components
+#container-cl{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 20px 20px 0 20px;
+  width: 90%;
+}
 #container{
   display: flex;
   flex-direction: row;
@@ -117,6 +124,10 @@ input:focus, textarea:focus {
 }
 .icon{
   background-color: transparent;
+}
+.icon-csv{
+  zoom:0.1;
+  margin-left:-40px;
 }
 .icon-wrap{
   display: flex;
@@ -277,8 +288,8 @@ a.btn-logout,a.btn-logout:hover,a.btn-logout:active,a.btn-logout:visited{
   align-items: center;
   transition: .3s ease-out;
 }
-.account-option:hover{
-  transform: translate(-2px,-2px);
+.account-option:not(.dropdown-form):hover{
+  // transform: translate(-2px,-2px);
   box-shadow: 2px 2px 10px #fafafa;
 }
 .btn-report{
@@ -351,8 +362,12 @@ a.btn-logout,a.btn-logout:hover,a.btn-logout:active,a.btn-logout:visited{
   background-color: #222222;
   padding: 5px 0px 5px 20px;
 }
-#form-ph .submit{
+.submit{
   background-color: #0075e2;
+}
+.submit:active, .submit:focus, .submit:visited{
+  background-color: #0065e2;
+  outline: none;
 }
 #form-ph .select{
   height:35px;
@@ -410,14 +425,41 @@ a.btn-logout,a.btn-logout:hover,a.btn-logout:active,a.btn-logout:visited{
     }
 }
 
+//Excel
+a.btn-export, a.btn-export:hover, a.btn-export:visited, a.btn-export:active{
+  text-decoration: none;
+  color: #fff;
+  border: 1px solid white;
+  border-radius: 15px;
+  text-align:center;
+  width: 50px;
+}
+#container-excel{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin: 20px 20px 0 20px;
+}
+#container-excel .list{
+  height: 100%;
+}
+.wrap-path{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.path-icon{
+  zoom: 0.05;
+}
 
 //Test list
-.list{
-  border: 1px solid black;
-  width: 100%;
-  overflow: scroll;
-  height: 300px;
-}
+// .list{
+//   border: 1px solid black;
+//   width: 100%;
+//   overflow: scroll;
+//   height: 300px;
+// }
 
 
 //Test background

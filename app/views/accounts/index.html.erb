@@ -41,13 +41,13 @@
 
         <div class="dropdown-form">
           <span class="txt form-title">New</span>
-          <%= form_for @new_purchase_history, url:add_accounts_path(@new_purchase_history),html:{id:"form-ph",name:"form-ph"},remote:true ,method: 'post' do |f| %>
+          <%= form_for @new_purchase_history, url:add_accounts_path(@new_purchase_history),html:{id:"form-ph",name:"form-ph",onsubmit:"updateTable()"},remote:true ,method: 'post' do |f| %>
             <%= f.text_field "content"    , placeholder:"內容物"   , required:true                               , class:"input text-field"%>
             <%= f.text_field "price"      , placeholder:"$$金額"   ,required:true                               , class:"input text-field"%>
             <%= f.select "category"       , options_for_select(["正餐","甜點","飲料","免死金牌","生活用品"]) ,{}    , class:"input select"%>
             <%= f.select "currency"       , options_for_select(["NTD","JPY","USD","RMB"]) ,{}                  , class:"input select" %>
             <%= f.text_field "description", placeholder:"備註"                                                 ,class:"input text-field" %>
-            <%= f.submit "Submit",class:"input submit" %>
+            <%= f.submit "Submit", class:"input submit" %>
           <% end %>
         </div>
       </div>

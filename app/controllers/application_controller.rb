@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  include CSVParser
+  include Global
   before_action :show_info
   def show_info
     puts '========================'

@@ -3,9 +3,9 @@
 <div id="container-excel">
   <div id="form-upload">
     <%= form_tag(excel_upload_path, method:"post",:multipart => true,style:"margin:30px;") %>
-    <%= label_tag 'File'%>
+    <%= label_tag '檔案'%>
     <%= file_field_tag :csv_file %>
-    <%= button_tag 'Submit', class:'input submit'%>
+    <%= button_tag '送出', class:'input submit',style:"font-size:15px;"%>
   </div>
   <div class="list">
    <h2>上傳的</h2>

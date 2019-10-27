@@ -33,27 +33,27 @@ class ExcelController < ApplicationController
 
     def show_csv
       @file_name = params[:file_io]
-      @africa_names = read_hash_from_uploaded "非洲國家_直.csv",true
+      @africa_names = read_hash_from "非洲國家_直.csv",true
       @africa_arr = []
       @africa_names.each do |row|
         row.each do |k,v|
           @africa_arr.push(v)
         end
       end
-      @data = read_hash_from_uploaded @file_name, true
+      @data = read_hash_from @file_name, true
       @data = @data.select{ |hash| @africa_arr.include?(hash['country'])}
     end
 
     def export_filter_africa
       begin
-        @africa_names = read_hash_from_uploaded "非洲國家_直.csv",true
+        @africa_names = read_hash_from "非洲國家_直.csv",true
         @africa_arr = []
         @africa_names.each do |row|
           row.each do |k,v|
             @africa_arr.push(v)
           end
         end
-        @data = read_hash_from_uploaded params[:file_name], true
+        @data = read_hash_from params[:file_name], true
         @data = @data.select{ |hash| @africa_arr.include?(hash['country'])}
         filename = export_africa @data, params[:file_name]
         flash[:notice] = "Successfully output #{filename}"

@@ -4,9 +4,7 @@
 <div id="container">
   <% if current_user %>
     <%= link_to('Accounts', accounts_path, class:"btn") %>
-    <div style="cursor:pointer;" >
-      <%= link_to(image_tag("excel.png",class:"icon icon-csv",style:"border:1px solid white; border-radius:50%;"),excel_path,style:"padding:20px;") %>
-    </div>
+    <%= link_to("Excel",excel_path,class:"btn") %>
   <% else %>
     <%= link_to('Login', new_user_session_path, class:"btn") %>
   <% end %>

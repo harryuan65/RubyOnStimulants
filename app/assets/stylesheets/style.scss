@@ -126,6 +126,7 @@ input:focus, textarea:focus {
   background-color: transparent;
 }
 .icon-csv{
+  padding: 300px;
   zoom:0.1;
   margin-left:-40px;
 }
@@ -448,6 +449,10 @@ a.btn-export, a.btn-export:hover, a.btn-export:visited, a.btn-export:active{
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+}
+.wrap-path a, .wrap-path a:hover, .wrap-path a:visited, .wrap-path a:active{
+  text-decoration: none;
+  color: #fff;
 }
 .download-icon{
   margin-right: 30px;

@@ -15,10 +15,11 @@ module CSVParser
         return r
     end
 
-    def read_hash_from_uploaded io,avoid_nil
+    def read_hash_from io,avoid_nil
         puts("[CSVParser]Loading hash from csv...")
         data = []
-        Dir.chdir(Global::CSV_UPLOAD_PATH) do
+        path = (File.exists?(File.join(Global::CSV_UPLOAD_PATH,io.to_s))? Global::CSV_UPLOAD_PATH : Global::CSV_EXPORT_PATH)
+        Dir.chdir(path) do
           print(' ')
           puts(Dir.getwd.to_s)
           CSV.foreach(io,headers: true) do |row|
@@ -40,13 +41,11 @@ module CSVParser
     def export_africa hash_arr,file_name
         check_exports
         Dir.chdir(Global::CSV_EXPORT_PATH) do
-          fn = file_name.split('.')[0] + DateTime.now.in_time_zone('Taipei').strftime("%Y-%m-%d_%H-%M-%S") +'.csv'
+          fn = file_name.split('.')[0]+'_' + DateTime.now.in_time_zone('Taipei').strftime("%m-%d_%H-%M") +'.csv'
           CSV.open(fn,'w') do |row|
             row << hash_arr[0].keys
             hash_arr.each do |hash|
-              row<<[
-                hash.values
-              ]
+              row<<hash.values
             end
           end
           return fn

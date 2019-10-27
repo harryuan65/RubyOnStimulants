@@ -1,26 +1,61 @@
 <%= javascript_include_tag("accounts/accounts") %>
-<%= render('shared/header',title:"Accounts") %>
+<%= render('shared/header',subtitle:"Accounts") %>
 
-
-<div>
-  <%# <textarea id="result">
-  </textarea> %>
-</div>
-<div class="options">
-<div id="dropdown-toggle"class="btn btn-dark link" onclick="toggleForm(this)">
- +
-</div>
-  <div class="dropdown-form">
-    <%= form_for @new_purchase_history, url:add_accounts_path(@new_purchase_history),html:{id:"form-ph",name:"form-ph"},method: 'post' do |f| %>
-      <%= f.label :name,"New purchase history",class:"txt  form-title"%>
-      <%= f.text_field "content"    , placeholder:"內容物",required:true                               , class:"input-ph"%>
-      <%= f.text_field "price"      , placeholder:"$$金額"   ,required:true                           , class:"input-ph"%>
-      <%= f.select "category"       , options_for_select(["正餐","甜點","飲料","免死金牌","生活用品"]) ,{}, class:"input-ph select select-category"%>
-      <%= f.select "currency"       , options_for_select(["NTD","JPY","USD","RMB"]) ,{}            , class:"input-ph select select-currency" %>
-      <%= f.text_field "description", placeholder:"備註"                                         ,class:"input-ph" %>
-      <%= button_tag("儲存",onclick:"submit_ph()",type: 'button',class:"btn btn-ph" ) %>
-    <% end %>
+<div id="container-account">
+  <div class="wrap-account-today">
+    <span class="table-title">Today</span>
+    <table class="table-account txt">
+      <thead>
+        <tr>
+          <%# <th>Edit📝</th> %>
+          <th class="rid">RID 📝</th>
+          <th class="content">Content❓</t>
+          <th class="price">Price💰</th>
+          <th class="category">Category📚</th>
+          <th class="description">Description 💡</th>
+          <th class="currency">Currency 🚩</th>
+          <th class="time">Time🕘</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @todays_purchase_histories.each do |record| %>
+          <tr>
+            <%# <td><%= button_tag("✏️",onclick:"edit(this, #{record.id})")</td> %>
+            <td class="rid"><%= record.id %></td>
+            <td class="content"><%= record.content %></td>
+            <td class="price"><%= record.price %></td>
+            <td class="category"><%= record.category %></td>
+            <td class="description"><%= record.description %></td>
+            <td class="currency"><%= record.currency %></td>
+            <td class="time"><%= taipei_time(record.created_at) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
-  <%= link_to('All',all_accounts_path,class:'btn btn-dark link') %>
-  <%= link_to('Report','#',class:'btn btn-dark link') %>
+  <div class="account-options">
+    <div class="account-option">
+      <div id="dropdown-toggle" onclick="toggleForm(this)">
+       <div class="icon-wrap"><%= image_tag("add.png",class:"icon-add") %></div>
+      </div>
+
+        <div class="dropdown-form">
+          <span class="txt form-title">New</span>
+          <%= form_for @new_purchase_history, url:add_accounts_path(@new_purchase_history),html:{id:"form-ph",name:"form-ph"},remote:true ,method: 'post' do |f| %>
+            <%= f.text_field "content"    , placeholder:"內容物"   , required:true                               , class:"input text-field"%>
+            <%= f.text_field "price"      , placeholder:"$$金額"   ,required:true                               , class:"input text-field"%>
+            <%= f.select "category"       , options_for_select(["正餐","甜點","飲料","免死金牌","生活用品"]) ,{}    , class:"input select"%>
+            <%= f.select "currency"       , options_for_select(["NTD","JPY","USD","RMB"]) ,{}                  , class:"input select" %>
+            <%= f.text_field "description", placeholder:"備註"                                                 ,class:"input text-field" %>
+            <%= f.submit "Submit",class:"input submit" %>
+          <% end %>
+        </div>
+      </div>
+
+    <div class="account-option">
+       <div style="cursor:pointer;" onclick="alert('抱歉姆咪，這還沒有功能')">
+         <div class="icon-wrap"><%= image_tag("report.png",class:"icon icon-report") %></div>
+       </div>
+    </div>
+  </div>
 </div>

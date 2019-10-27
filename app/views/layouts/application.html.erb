@@ -12,12 +12,19 @@
   </head>
 
   <body>
-      <% if notice %>
-       <p class="alert alert-success animation-forwards" onanimationend="reverseAnimation(this)"><%= notice %></p>
-      <% end %>
-      <% if alert %>
-        <p class="alert alert-danger animation-forwards" onanimationend="reverseAnimation(this)"><%= alert %></p>
-      <% end %>
+      <div class="wrap-alert">
+        <% if notice %>
+          <p class="txt alert alert-success animation-forwards" onanimationend="reverseAnimation(this)">
+           <span class="alert-txt"><%= notice %></span>
+          </p>
+        <% end %>
+        <% if alert %>
+           <p class="txt alert alert-danger animation-forwards" onanimationend="reverseAnimation(this)">
+           <span class="alert-txt"> <%= alert %></span>
+          </p>
+        <% end %>
+          <%# <p class="txt alert alert-danger animation-forwards" onanimationend="reverseAnimation(this)"><span class="alert-txt">Test abcdefghijadfadsf123</span></p> %>
+      </div>
       <%= yield %>
   </body>
 </html>

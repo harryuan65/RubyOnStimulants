@@ -1,11 +1,21 @@
-$.not("#dropdown-toggle").find("*").on('click',function(e){
-    console.log($(this));
-         var find = $(".dropdown-form.show");
-        if(find.length>0 && find.hasClass("show")) {
-          find.removeClass("show");
-          console.log(`${find.length}`)
-       }
-})
+// var mql = window.matchMedia("(max-width: 1100px)");
+// function matches()
+// {
+//    var times = $('td.time')
+//    if(mql.matches){
+//        console.log(times.html());
+//        times.html(times.html().split('/')[1]);
+//    }
+//    else{
+//        $.get(window.location.href,(resText)=>{
+//            var update = $('td.time',resText);
+//            if(update.length>0){
+//                $('td.time').replaceWith(update);
+//            }
+//        })
+//    }
+// }
+// mql.addListener(matches);
 
 $("#form-ph").on('submit',function(event){
     var formData = new FormData();
@@ -14,6 +24,9 @@ $("#form-ph").on('submit',function(event){
     }
 });
 
+function test(){
+    alert("Works!");
+}
 function submit_ph(){
     var f = document.forms.namedItem("form-ph")
     var formData = new FormData(f);
@@ -28,8 +41,14 @@ function submit_ph(){
     .then(r =>  r.json().then(data => ({status: r.status, body: data})))
     .then(obj => {
         // var updateElement = $("#result");
-        console.log(JSON.stringify(obj,null,2))
         // if (updateElement) $("#result").html(JSON.stringify(obj,null,2))
+        console.log(JSON.stringify(obj,null,2))
+        $.get(window.location.href,(resHTML)=>{
+            var newTable = $("table-account",resHTML)
+            if(newTable.length>0){
+                $("table-account").replaceWith(newTable);
+            }
+        })
     })
     .catch(err=>{
         $("#result").html(err)
@@ -38,5 +57,28 @@ function submit_ph(){
 
 function toggleForm(this_obj){
     var FormMenu = this_obj.nextElementSibling;
-    FormMenu.classList.toggle("show");
+    if(FormMenu.classList.contains("show")){
+        console.log("====================")
+        console.log("Folding")
+        FormMenu.classList.add("out");
+        FormMenu = this_obj.nextElementSibling;
+        FormMenu.addEventListener('animationend',stopAnimation)
+    }
+    else{
+        console.log("====================")
+        console.log("Dropping")
+        FormMenu.classList.add("show");
+    }
+}
+function stopAnimation(event){
+    var e = event.target;
+    e.classList.remove("out");
+    e.classList.remove("show");
+    e.classList.add("in")
+    e.removeEventListener('animationend', stopAnimation)
+}
+function mumi(){
+    var data = require('/Users/harry/Desktop/data.json');
+    console.table(data.result.fields);
+    console.table(data.result.records);
 }

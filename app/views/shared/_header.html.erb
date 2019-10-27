@@ -1,21 +1,23 @@
 <div id="container-top">
       <div class="txt" id="titles">
           <span id="title"><%= link_to "Harrysworkspace",root_path %></span>
-          <span id="subtitle"><%= title %></span>
-      </div>
-    <%if title!="Welcome"%>
-      <div id="user-status">
-       <span id="current-username">
-          <% if current_user %>
-            <%= current_user.email %>
-          <% else %>
-            <script>
-            window.location = "users/sign_in"
-            </script>
+          <% if subtitle!="" %>
+            <span id="subtitle"> <%= subtitle %> </span>
           <% end %>
-       </span>
+      </div>
+    <%if subtitle!=""%>
+      <div id="wrap-user-status">
+          <span id="current-username">
+             <% if current_user %>
+               <%= current_user.email.split('@')[0] %>
+             <% else %>
+               <script>
+               window.location = "users/sign_in"
+               </script>
+             <% end %>
+          </span>
 
-         <span><%= link_to "Logout",destroy_user_session_path,method:"delete",data:{confirm:"真der要登出嗎？😭"},class:"btn-logout" %></span>
+         <%= link_to "Logout",destroy_user_session_path,method:"delete",data:{confirm:"真der要登出嗎？😭"},class:"btn-logout" %>
       </div>
 
     <% end %>

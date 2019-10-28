@@ -40,10 +40,10 @@ class ExcelController < ApplicationController
     def show_csv
       begin
         @file_name = params[:file_io]
-        @data = read_hash_from @file_name, true
-        @data.each do |hash|
-          puts hash
-        end
+        @data = read_hash_from @file_name, false
+        # @data.each do |hash|
+        #   puts hash
+        # end
         @longest_hash = @data.max_by(&:length)
       rescue=>exception
         flash[:alert] = exception.to_s
@@ -61,9 +61,10 @@ class ExcelController < ApplicationController
             @africa_arr.push(v)
           end
         end
-        @data = read_hash_from @file_name, true
+        @data = read_hash_from @file_name, false
         @longest_hash = @data.max_by(&:length)
-        country = @longest_hash['country']? "country": "Country"
+        country = @longest_hash['country']? "country" : "Country"
+        puts @longest_hash
         @data = @data.select{ |hash| @africa_arr.include?(hash["#{country}"])}
       rescue=>exception
         flash[:alert] = exception.to_s

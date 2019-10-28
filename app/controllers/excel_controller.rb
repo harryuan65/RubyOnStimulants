@@ -54,7 +54,7 @@ class ExcelController < ApplicationController
     def processed_csv
       begin
         @file_name = params[:file_io]
-        @africa_names = read_hash_from "非洲國家_直.csv",true
+        @africa_names = read_hash_from "0_非洲國家_直.csv",true
         @africa_arr = []
         @africa_names.each do |row|
           row.each do |k,v|

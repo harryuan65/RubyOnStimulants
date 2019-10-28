@@ -1,12 +1,15 @@
 <%= render 'shared/header',subtitle: 'CSV' %>
 <div id="container-cl">
-<h1>這些都過濾了</h1>
+<h1>處理結果 </h1>
+<div class="count">
+   <h3> 非洲國家 找到<%= @data.size %>筆</h3>
+</div>
 <div><%= @file_name %></div>
 <table class="table-account">
   <thead>
     <tr>
       <% begin %>
-        <% @data[0].each do |data| %>
+        <% @longest_hash.each do |data| %>
           <th> <%= data[0] %></th>
         <%end%>
         <% rescue=>exception %>
@@ -30,8 +33,12 @@
     <% end %>
   </tbody>
 </table>
-<div><%= @data.size %></div>
-<%= link_to("輸出",excel_export_filter_africa_path(file_name:@file_name),class:"btn-export") %>
+
+<% if @data.size>0 %>
+  <%= link_to("輸出",excel_export_filter_africa_path(file_name:@file_name),class:"btn-export") %>
+  <% else %>
+  <h3>呢呢，裡面沒東西</h3>
+<% end %>
 
 
 

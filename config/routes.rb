@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get 'list_home',controller:'home', action:'list_home'
   post 'post_list',controller:'home', action:'post_list'
   get 'download', controller:'application', action:'download'
+  get 'delete', controller:'application', action:'delete'
   resources :accounts, controller: 'accounts' do
     collection do
       get :index

@@ -42,9 +42,13 @@ module CSVParser
     def export_africa hash_arr,file_name
         check_exports
         Dir.chdir(Global::CSV_EXPORT_PATH) do
-          fn = file_name.split('.')[0]+'_' + DateTime.now.in_time_zone('Taipei').strftime("%m-%d_%H-%M") +'.csv'
+          fn = file_name.gsub(' ','_').gsub('+','_plus').split('.')[0]+'_' + DateTime.now.in_time_zone('Taipei').strftime("%m-%d_%H-%M") +'.csv'
+          longest_hash = hash_arr.max_by(&:length)
+          puts "=============================="
+          puts hash_arr
+          puts "=============================="
           CSV.open(fn,'w') do |row|
-            row << hash_arr[0].keys
+            row << longest_hash.keys
             hash_arr.each do |hash|
               row<<hash.values
             end

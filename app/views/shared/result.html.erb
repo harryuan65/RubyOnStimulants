@@ -1,12 +1,12 @@
-<%= render('shared/header', subtitle:"Home")%>
+<%= render('shared/header', subtitle:"Result")%>
 
 <% if status %>
   <div class="alert alert-success">
-    <h2> <strong>Success</strong> </h2>
+    <h2 class="txt"> <strong>Success</strong> </h2>
     <p> <%= message%> </p>
     <div class="alert alert-dark">
       <% if data %>
-       <div>
+       <div class="txt">
          <%= data %>
        </div>
        <%end%>
@@ -14,8 +14,11 @@
   </div>
 <% else %>
   <div class="alert alert-danger">
-    <h2> <strong>Error</strong> </h2>
-    <p><%= error %></p>
+    <h2 class="txt"> <strong>Error</strong> </h2>
+    <% if defined?(message) %>
+      <h4 class="txt"> <%= message%> </h4>
+    <% end %>
+    <p class="txt"><%= error %></p>
   </div>
 <% end %>
 

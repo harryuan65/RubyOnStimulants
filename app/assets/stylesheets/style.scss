@@ -65,6 +65,7 @@ input:focus, textarea:focus {
   position: fixed;
   height: 90px;
   font-weight: bold;
+  z-index: 999;
   // border-radius: 0 0 10px 10px;
   text-shadow: -1px 0 #222222, 0 1px #222222, 1px 0 #222222, 0 -1px #222222;
   animation: alert-forwards .8s ease normal forwards;
@@ -450,7 +451,10 @@ a.btn-export, a.btn-export:hover, a.btn-export:visited, a.btn-export:active{
   border: 1px solid white;
   border-radius: 15px;
   text-align:center;
-  width: 50px;
+  font-size: 30px;
+  float: left;
+  width: 90px;
+  background-color: #004b91;
 }
 #container-excel{
   display: flex;
@@ -461,18 +465,29 @@ a.btn-export, a.btn-export:hover, a.btn-export:visited, a.btn-export:active{
 #container-excel .list{
   height: 100%;
 }
-.wrap-path{
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
+.table-file{
+  border-collapse: collapse;
 }
-.wrap-path a, .wrap-path a:hover, .wrap-path a:visited, .wrap-path a:active{
+.table-file th{
+  border:1px solid #555555;
+  background-color: #004b91;
+  padding: 4px 10px 4px 10px;
+}
+.table-file td{
+  text-align: center;
+  border:1px solid #555555;
+}
+.file-name a, .file-name a:hover, .file-name a:visited, .file-name a:active{
   text-decoration: none;
   color: #fff;
 }
-.download-icon{
-  margin-right: 30px;
+.delete a{
+  color: red;
+  font-size: 20px;
+}
+.delete {
+  border:1px solid #333333;
+  border-radius: 15px;
 }
 .path-icon{
   zoom: 0.06;

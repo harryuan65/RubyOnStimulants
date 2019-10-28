@@ -32,20 +32,22 @@ class ExcelController < ApplicationController
     end
 
     def show_csv
-      @file_name = params[:file_io]
-      @africa_names = read_hash_from "非洲國家_直.csv",true
-      @africa_arr = []
-      @africa_names.each do |row|
-        row.each do |k,v|
-          @africa_arr.push(v)
+      begin
+        @file_name = params[:file_io]
+        @africa_names = read_hash_from "非洲國家_直.csv",true
+        @africa_arr = []
+        @africa_names.each do |row|
+          row.each do |k,v|
+            @africa_arr.push(v)
+          end
         end
+        @data = read_hash_from @file_name, true
+        @longest_hash = @data.max_by(&:length)
+        country = @longest_hash['country']? 'country' : 'Country'
+        @data = @data.select{ |hash| @africa_arr.include?(hash["#{country}"])}
+      rescue=>exception
+        return render 'shared/result',locals:{status:false, message:"抱歉姆咪他怪怪的，把下面的貼給姆姆",error: exception.to_s}
       end
-      @data = read_hash_from @file_name, true
-      @data.each do |d|
-        puts d
-      end
-      country = @data[0]['country']? 'country' : 'Country'
-      @data = @data.select{ |hash| @africa_arr.include?(hash["#{country}"])}
     end
 
     def export_filter_africa
@@ -58,12 +60,14 @@ class ExcelController < ApplicationController
           end
         end
         @data = read_hash_from params[:file_name], true
-        @data = @data.select{ |hash| @africa_arr.include?(hash['country'])}
+        @longest_hash = @data.max_by(&:length)
+        country = @longest_hash['country']? 'country' : 'Country'
+        @data = @data.select{ |hash| @africa_arr.include?(hash["#{country}"])}
         filename = export_africa @data, params[:file_name]
         flash[:notice] = "Successfully output #{filename}"
         redirect_to action:'index'
       rescue=>exception
-        return render json:{err:exception}
+        return render 'shared/result',locals:{status:false, message:"抱歉姆咪他怪怪的，把下面的貼給姆姆",error: exception.to_s}
       end
     end
 end

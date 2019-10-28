@@ -1,4 +1,4 @@
-<%# <%= javascript_include_tag("accounts/accounts") %> %>
+<%# <%= javascript_include_tag("accounts/accounts") %>
 <%= render('shared/header',subtitle:"Accounts") %>
 
 <div id="container-account">
@@ -8,26 +8,26 @@
       <thead>
         <tr>
           <%# <th>Edit📝</th> %>
-          <th class="rid">RID 📝</th>
+          <%# <th class="rid">RID 📝</th> %>
+          <th class="time">Time🕘</th>
           <th class="content">Content❓</t>
           <th class="price">Price💰</th>
           <th class="category">Category📚</th>
           <th class="description">Description 💡</th>
           <th class="currency">Currency 🚩</th>
-          <th class="time">Time🕘</th>
         </tr>
       </thead>
       <tbody class="tbody-account">
         <% @purchase_histories.each do |record| %>
-          <tr>
+          <tr id="tr_<%=record.id%>" onclick="details(this)">
             <%# <td><%= button_tag("✏️",onclick:"edit(this, #{record.id})")</td> %>
-            <td class="rid"><%= record.id %></td>
+            <%# <td class="rid"><%= record.id %></td>
+            <td class="time"><%= taipei_time(record.created_at) %></td>
             <td class="content"><%= record.content %></td>
             <td class="price"><%= record.price %></td>
             <td class="category"><%= record.category %></td>
             <td class="description"><%= record.description %></td>
             <td class="currency"><%= record.currency %></td>
-            <td class="time"><%= taipei_time(record.created_at) %></td>
           </tr>
         <% end %>
       </tbody>

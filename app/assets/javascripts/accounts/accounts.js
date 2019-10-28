@@ -1,35 +1,12 @@
-// var mql = window.matchMedia("(max-width: 1100px)");
-// function matches()
-// {
-//    var times = $('td.time')
-//    if(mql.matches){
-//        console.log(times.html());
-//        times.html(times.html().split('/')[1]);
-//    }
-//    else{
-//        $.get(window.location.href,(resText)=>{
-//            var update = $('td.time',resText);
-//            if(update.length>0){
-//                $('td.time').replaceWith(update);
-//            }
-//        })
-//    }
-// }
-// mql.addListener(matches);
-// var formData = new FormData();
-// for(e in this){
-//     console.log(e.name,' ', e.value);
-// }
 
-$("#form-ph").on('submit',function(e){
-    e.preventDefault(); // cancel default submit
-    toggleForm();
-    var form = $(this);
-    if (!form.valid()) {
-        return; // will display the validation errors
-    }
-    console.log(form.getAttribute('action'))
-    $.post(form.getAttribute('action'), form.serialize(), function(data) {
+document.addEventListener("DOMContentLoaded", function(event) {
+    console.log("DOM fully loaded and parsed");
+    $("#form-ph").on('submit',function(e){
+        e.preventDefault(); // cancel default submit
+        toggleForm();
+        var form = $("#form-ph");
+    console.log(form.attr('action'))
+    $.post(form.attr('action'), form.serialize(), function(data) {
 
     })
     .done(function() {
@@ -41,13 +18,15 @@ $("#form-ph").on('submit',function(e){
                 $('.tbody-account').replaceWith(find);
             }
         })})
-    .fail(function() {
-        alert("Something is wrong!")
+        .fail(function() {
+            alert("Something is wrong!")
     });
+  });
+
 });
 
-function test(){
-    alert("Works!");
+function details(obj){
+    console.log(obj.id.split('_')[1])
 }
 
 function updateTable(){

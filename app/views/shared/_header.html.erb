@@ -16,8 +16,9 @@
                </script>
              <% end %>
           </span>
-
-         <%= link_to "Logout",destroy_user_session_path,method:"delete",data:{confirm:"真der要登出嗎？😭"},class:"btn-logout" %>
+        <div class="btn-logout">
+           <%= link_to "Logout",destroy_user_session_path,method:"delete",data:{confirm:"真der要登出嗎？😭"} %>
+         </div>
       </div>
 
     <% end %>

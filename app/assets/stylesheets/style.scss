@@ -14,7 +14,6 @@ body{
   padding: 0px;
   height: 100%;
   background-color: #292929;
-  // border: 1px solid white;
 }
 *{
   color: #fff;
@@ -134,6 +133,7 @@ input:focus, textarea:focus {
   padding: 15px;
   text-align:center;
   transition: .5s ease;
+  -webkit-transition: .5s ease;
 }
 .btn:hover{
   // background-color:#444444;
@@ -185,6 +185,7 @@ input:focus, textarea:focus {
   justify-content: center;
   align-items: center;
   transition:  .3s ease-out;
+  -webkit-transition:  .3s ease-out;
   height: 90px;
 }
 .login-option:hover{
@@ -202,10 +203,6 @@ a.login-option{
 
 
 //header
-#container-top *{
-  background-color:inherit;
-  // border: 1px solid red;
-}
 #container-top{
   position:relative;
   padding-top: 20px;
@@ -240,6 +237,12 @@ a.login-option{
   margin-left:20px;
   font-size: 20px;
 }
+.wrap-user-status{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 300px;
+}
 #current-username{
   border:1px solid white;
   background-color:#004b91;
@@ -248,15 +251,19 @@ a.login-option{
   border-radius:10px;
 }
 .btn-logout{
+  padding: 5px 10px 5px 10px;
   margin: 0 15px 0 15px;
+  border:1px solid white;
+  border-radius: 15px;
+  background-color: #7c0a02;
 }
-a.btn-logout::before{
+.btn-logout a::before{
   content:'';
   height: 100%;
   display: inline-block;
   vertical-align: middle;
 }
-a.btn-logout,a.btn-logout:hover,a.btn-logout:active,a.btn-logout:visited{
+.btn-logout a, .btn-logout a:hover, .btn-logout a:active,.btn-logout a:visited{
   text-decoration: none;
   color: #fff;
 }
@@ -289,15 +296,15 @@ a.btn-logout,a.btn-logout:hover,a.btn-logout:active,a.btn-logout:visited{
 .account-options{
   position: absolute;
   right: 50px;
-  background-color:transparent;
   bottom: 50px;
 }
 .account-options .link{
- text-decoration: none;
- color:#fff;
+  text-decoration: none;
+  color:#fff;
 }
 
 .account-option{
+  margin-bottom: 20px;
   height: 90px;
   width: 90px;
   border:1px solid #666666;
@@ -307,10 +314,8 @@ a.btn-logout,a.btn-logout:hover,a.btn-logout:active,a.btn-logout:visited{
   justify-content: center;
   align-items: center;
   transition: .3s ease-out;
-}
-.account-option:not(.dropdown-form):hover{
-  // transform: translate(-2px,-2px);
-  box-shadow: 2px 2px 10px #fafafa;
+  -webkit-transition: .3s ease-out;
+  background-color:#0075e2;
 }
 .btn-report{
    display:flex;
@@ -336,10 +341,10 @@ a.btn-logout,a.btn-logout:hover,a.btn-logout:active,a.btn-logout:visited{
   align-items: center;
   position: fixed;
   z-index: 99;
-  height: 400px;
-  width: 350px;
-  left: 35%;
-  top: 30%;
+  top: 25%;
+  left: 30%;
+  right: 30%;
+  bottom: 14%;
   border:1px solid white;
   border-radius: 15px;
   background-color: #242020;
@@ -372,6 +377,7 @@ a.btn-logout,a.btn-logout:hover,a.btn-logout:active,a.btn-logout:visited{
   border:1px solid white;
   border-radius: 50%;
   transition: .2s ease-out;
+  -webkit-transition: .2s ease-out;
   cursor: pointer;
 }
 .dropdown-form .wrap-form-title .x:hover{
@@ -401,6 +407,7 @@ a.btn-logout,a.btn-logout:hover,a.btn-logout:active,a.btn-logout:visited{
 }
 .submit{
   background-color: #0075e2;
+  height: 40px;
 }
 .submit:active, .submit:focus, .submit:visited{
   background-color: #0065e2;
@@ -408,6 +415,8 @@ a.btn-logout,a.btn-logout:hover,a.btn-logout:active,a.btn-logout:visited{
 }
 #form-ph .select{
   height:35px;
+  color: #000;
+  padding-left: 10px;
 }
 
 #form-ph .btn-ph{
@@ -415,7 +424,11 @@ a.btn-logout,a.btn-logout:hover,a.btn-logout:active,a.btn-logout:visited{
   margin-top:20px;
 }
 
-@media only screen and (max-width:1100px){
+
+@media only screen and (max-width:700px){
+    #current-username{
+      display: none;
+    }
     .login-options{
       width:100%
     }
@@ -429,11 +442,8 @@ a.btn-logout,a.btn-logout:hover,a.btn-logout:active,a.btn-logout:visited{
     #container-top{
       justify-content: center;
     }
-    #user-status{
-      margin:30px 30px 0px 30px;
-    }
     //table
-    .table-account .currency,.table-account .description{
+    table .currency, table .description{
       display: none;
     }
     //Form
@@ -442,11 +452,14 @@ a.btn-logout,a.btn-logout:hover,a.btn-logout:active,a.btn-logout:visited{
       flex-direction: row;
     }
     .dropdown-form{
-      left: 30%;
+      top: 19%;
+      left: 15%;
+      right: 15%;
+      bottom: 19%;
     }
     .account-options{
       right:auto;
-      bottom:40px;
+      bottom:30px;
       float: bottom;
       position: absolute;
       display: flex;
@@ -455,6 +468,9 @@ a.btn-logout,a.btn-logout:hover,a.btn-logout:active,a.btn-logout:visited{
       align-items: flex-end;
       width: 100%;
       z-index: 100;
+    }
+    .account-option{
+      margin-bottom: 0px;
     }
     #result{
       width: 80%;
@@ -478,6 +494,7 @@ a.btn-export, a.btn-export:hover, a.btn-export:visited, a.btn-export:active{
   padding: 5px 10px 5px 10px;
   background-color: #001d52;
   transition: .2s ease-out;
+  -webkit-transition: .2s ease-out;
 }
 a.btn-export:hover{
   background-color: #004b91;
@@ -508,6 +525,7 @@ a.btn-export:hover{
 .tr-data{
   background-color: #111111;
   transition: .2s;
+  -webkit-transition: .2s;
 }
 .tr-data:hover{
   background-color: #222222;

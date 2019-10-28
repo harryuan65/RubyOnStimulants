@@ -1,0 +1,22 @@
+// var mql = window.matchMedia("(max-width: 1100px)");
+// function matches()
+// {
+//    var times = $('td.time')
+//    if(mql.matches){
+//        console.log(times.html());
+//        times.html(times.html().split('/')[1]);
+//    }
+//    else{
+//        $.get(window.location.href,(resText)=>{
+//            var update = $('td.time',resText);
+//            if(update.length>0){
+//                $('td.time').replaceWith(update);
+//            }
+//        })
+//    }
+// }
+// mql.addListener(matches);
+// var formData = new FormData();
+// for(e in this){
+//     console.log(e.name,' ', e.value);
+// }

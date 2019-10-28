@@ -41,7 +41,11 @@ class ExcelController < ApplicationController
         end
       end
       @data = read_hash_from @file_name, true
-      @data = @data.select{ |hash| @africa_arr.include?(hash['country'])}
+      @data.each do |d|
+        puts d
+      end
+      country = @data[0]['country']? 'country' : 'Country'
+      @data = @data.select{ |hash| @africa_arr.include?(hash["#{country}"])}
     end
 
     def export_filter_africa

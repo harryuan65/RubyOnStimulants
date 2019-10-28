@@ -18,10 +18,11 @@ module CSVParser
     def read_hash_from io,avoid_nil
         puts("[CSVParser]Loading hash from csv...")
         data = []
-        path = (File.exists?(File.join(Global::CSV_UPLOAD_PATH,io.to_s))? Global::CSV_UPLOAD_PATH : Global::CSV_EXPORT_PATH)
+        file_path = File.join(Global::CSV_UPLOAD_PATH,io.to_s)
+        path = (File.exists?(file_path)? Global::CSV_UPLOAD_PATH : Global::CSV_EXPORT_PATH)
         Dir.chdir(path) do
           print(' ')
-          puts(Dir.getwd.to_s)
+          puts(file_path)
           CSV.foreach(io,headers: true) do |row|
             hsh = createhash row, avoid_nil
             data.push(hsh)

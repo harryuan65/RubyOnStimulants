@@ -16,18 +16,20 @@
 //    }
 // }
 // mql.addListener(matches);
+// var formData = new FormData();
+// for(e in this){
+//     console.log(e.name,' ', e.value);
+// }
 
-$("#form-ph").on('submit',function(event){
-    // var formData = new FormData();
-    // for(e in this){
-    //     console.log(e.name,' ', e.value);
-    // }
+$("#form-ph").on('submit',function(e){
     e.preventDefault(); // cancel default submit
+    toggleForm();
     var form = $(this);
     if (!form.valid()) {
         return; // will display the validation errors
     }
-    $.post(postUrl, form.serialize(), function(data) {
+    console.log(form.getAttribute('action'))
+    $.post(form.getAttribute('action'), form.serialize(), function(data) {
 
     })
     .done(function() {

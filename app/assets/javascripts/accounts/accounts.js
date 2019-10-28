@@ -18,10 +18,30 @@
 // mql.addListener(matches);
 
 $("#form-ph").on('submit',function(event){
-    var formData = new FormData();
-    for(e in this){
-        console.log(e.name,' ', e.value);
+    // var formData = new FormData();
+    // for(e in this){
+    //     console.log(e.name,' ', e.value);
+    // }
+    e.preventDefault(); // cancel default submit
+    var form = $(this);
+    if (!form.valid()) {
+        return; // will display the validation errors
     }
+    $.post(postUrl, form.serialize(), function(data) {
+
+    })
+    .done(function() {
+        $.get(window.location.href, (resText)=>{
+            var find = $('.tbody-account',resText);
+            console.log("=======");
+            console.log(find.length)
+            if(find.length>0){
+                $('.tbody-account').replaceWith(find);
+            }
+        })})
+    .fail(function() {
+        alert("Something is wrong!")
+    });
 });
 
 function test(){
@@ -29,17 +49,13 @@ function test(){
 }
 
 function updateTable(){
-   var e = document.getElementById("dropdown-toggle");
-   if (e){
-       console.log(e.id);
-   }else{
-    console.log("not found");
-   }
-   toggleForm(e);
+   toggleForm();
    $.get(window.location.href, (resText)=>{
-       var find = $('.table-account',resText);
+       var find = $('.tbody-account',resText);
+       console.log("=======");
+       console.log(find.length)
        if(find.length>0){
-           $('.table-account').replaceWith(find);
+           $('.tbody-account').replaceWith(find);
        }
    })
 }
@@ -73,14 +89,14 @@ function submit_ph(){
     })
 }
 
-function toggleForm(this_obj){
-    console.log(this_obj.id)
-    var FormMenu = this_obj.nextElementSibling;
+function toggleForm(){
+    var toggler = document.getElementById("dropdown-toggle");
+    var FormMenu = toggler.nextElementSibling;
     if(FormMenu.classList.contains("show")){
         console.log("====================")
         console.log("Folding")
         FormMenu.classList.add("out");
-        FormMenu = this_obj.nextElementSibling;
+        FormMenu = toggler.nextElementSibling;
         FormMenu.addEventListener('animationend',stopAnimation)
     }
     else{

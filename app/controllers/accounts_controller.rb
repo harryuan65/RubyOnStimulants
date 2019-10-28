@@ -4,7 +4,11 @@ class AccountsController < ApplicationController
       #    flash[:notice]="Welcome to accounts!"
       # end
       @new_purchase_history = Account.new
-      @todays_purchase_histories = User.find_by_email(current_user.email).accounts.where(created_at: Time.now.in_time_zone('Taipei').beginning_of_day..Time.now.in_time_zone('Taipei').end_of_day)
+      @user = User.find_by_email(current_user.email)
+      if @user
+        @purchase_histories = @user.accounts
+        puts @purchase_histories.size
+      end
     end
 
     def new

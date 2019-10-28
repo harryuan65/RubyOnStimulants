@@ -3,7 +3,7 @@
 
 <div id="container-account">
   <div class="wrap-account-today">
-    <span class="table-title">Today</span>
+    <span class="table-title">Recent: <%=  @purchase_histories.size %></span>
     <table class="table-account txt">
       <thead>
         <tr>
@@ -17,8 +17,8 @@
           <th class="time">Time🕘</th>
         </tr>
       </thead>
-      <tbody>
-        <% @todays_purchase_histories.each do |record| %>
+      <tbody class="tbody-account">
+        <% @purchase_histories.each do |record| %>
           <tr>
             <%# <td><%= button_tag("✏️",onclick:"edit(this, #{record.id})")</td> %>
             <td class="rid"><%= record.id %></td>
@@ -35,13 +35,16 @@
   </div>
   <div class="account-options">
     <div class="account-option">
-      <div id="dropdown-toggle" onclick="toggleForm(this)">
+      <div id="dropdown-toggle" onclick="toggleForm()">
        <div class="icon-wrap"><%= image_tag("add.png",class:"icon-add") %></div>
       </div>
 
         <div class="dropdown-form">
+          <div class="wrap-form-title">
           <span class="txt form-title">New</span>
-          <%= form_for @new_purchase_history, url:add_accounts_path(@new_purchase_history),html:{id:"form-ph",name:"form-ph",onsubmit:"updateTable()"},remote:true ,method: 'post' do |f| %>
+          <span class="txt x" onclick="toggleForm()">x</span>
+          </div>
+          <%= form_for @new_purchase_history, url:add_accounts_path(@new_purchase_history),html:{id:"form-ph",name:"form-ph"},remote:true ,method: 'post' do |f| %>
             <%= f.text_field "content"    , placeholder:"內容物"   , required:true                               , class:"input text-field"%>
             <%= f.text_field "price"      , placeholder:"$$金額"   ,required:true                               , class:"input text-field"%>
             <%= f.select "category"       , options_for_select(["正餐","甜點","飲料","免死金牌","生活用品"]) ,{}    , class:"input select"%>

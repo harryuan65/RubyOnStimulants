@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     get '/' => :index
     post '/upload' => :upload
     get '/show_csv' => :show_csv
+    get '/processed_csv' => :processed_csv
     get '/export_filter_africa' => :export_filter_africa
   end
 end

@@ -14,13 +14,12 @@ class ExcelController < ApplicationController
           @exports.push(file)
         end
       end
-
     end
 
     def upload
         uploaded_io = params[:csv_file]
         begin
-          File.open(Rails.root.join(Global::CSV_UPLOAD_PATH, uploaded_io.original_filename), 'wb') do |file|
+          File.open(Rails.root.join(Global::CSV_UPLOAD_PATH, uploaded_io.original_filename.gsub(' ','_')), 'wb') do |file|
             file.write(uploaded_io.read)
           end
           puts("Uploaded "+uploaded_io.original_filename)
@@ -34,6 +33,17 @@ class ExcelController < ApplicationController
     def show_csv
       begin
         @file_name = params[:file_io]
+        @data = read_hash_from @file_name, true
+        @longest_hash = @data.max_by(&:length)
+      rescue=>exception
+        flash[:alert] = exception.to_s
+        render 'shared/result',locals:{status:false, message:"抱歉姆咪他怪怪的，把下面的貼給姆姆",error: exception.to_s}
+      end
+    end
+
+    def processed_csv
+      begin
+        @file_name = params[:file_io]
         @africa_names = read_hash_from "非洲國家_直.csv",true
         @africa_arr = []
         @africa_names.each do |row|
@@ -43,10 +53,11 @@ class ExcelController < ApplicationController
         end
         @data = read_hash_from @file_name, true
         @longest_hash = @data.max_by(&:length)
-        country = @longest_hash['country']? 'country' : 'Country'
+        country = @longest_hash['country']? "country": "Country"
         @data = @data.select{ |hash| @africa_arr.include?(hash["#{country}"])}
       rescue=>exception
-        return render 'shared/result',locals:{status:false, message:"抱歉姆咪他怪怪的，把下面的貼給姆姆",error: exception.to_s}
+        flash[:alert] = exception.to_s
+        render 'shared/result',locals:{status:false, message:"抱歉姆咪他怪怪的，把下面的貼給姆姆",error: exception.to_s}
       end
     end
 
@@ -61,8 +72,10 @@ class ExcelController < ApplicationController
         end
         @data = read_hash_from params[:file_name], true
         @longest_hash = @data.max_by(&:length)
-        country = @longest_hash['country']? 'country' : 'Country'
+        country = @longest_hash['country']? "country": "Country"
+        puts "country ===>  #{country} :#{@data.size}"
         @data = @data.select{ |hash| @africa_arr.include?(hash["#{country}"])}
+
         filename = export_africa @data, params[:file_name]
         flash[:notice] = "Successfully output #{filename}"
         redirect_to action:'index'

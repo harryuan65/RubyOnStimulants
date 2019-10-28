@@ -6,9 +6,9 @@
     <%= file_field_tag :csv_file %>
     <%= button_tag '送出', class:'input submit',style:"font-size:15px;"%>
   </div>
-  <div class="list">
+  <div class="wrap-two-tables">
+   <div class="wrap-table">
    <h2>上傳的</h2>
-   <div class="upload">
       <% if @uploads.size==0 %>
         <h4>什麼都沒有，呢呢</h4>
       <% else %>
@@ -22,15 +22,15 @@
           </thead>
           <tbody>
               <% @uploads.each do |path|  %>
-              <tr>
-                <td class="file-path">
+              <tr class="tr-data">
+                <td class="file-icon">
                   <%= link_to("#{image_tag("excel.png",class:"path-icon") }".html_safe, download_path(file_path:Rails.root.join(Global::CSV_UPLOAD_PATH, path)),class:"") %>
                 </td>
-                <td class="file-path">
+                <td class="file-name">
                   <%= link_to(path.split('/')[-1], excel_show_csv_path(file_io:path)) %>
                 </td>
-                <td class="delete">
-                  <%= link_to("X",delete_path(file_path:Rails.root.join(Global::CSV_UPLOAD_PATH, path)),data:{confirm:"真的要刪掉#{path}嗎?"}) %>
+                <td class="file-delete">
+                  <%= link_to(content_tag(:div, "X",class:"wrap-delete"),delete_path(file_path:Rails.root.join(Global::CSV_UPLOAD_PATH, path)),data:{confirm:"真的要刪掉#{path}嗎?"}) %>
                 </td>
               </tr>
               <% end %>
@@ -41,35 +41,34 @@
 
    <hr>
 
-   <h2>輸出的</h2>
-   <div class="export">
-
-    <% if @exports.size==0 %>
-      <h4>什麼都沒有，呢呢</h4>
-    <% else %>
-      <table class="table-file">
-          <thead>
-            <tr>
-              <th>按這裡下載</th>
-              <th>檔名</th>
-              <th>刪除</th>
-            </tr>
-          </thead>
-          <tbody>
-              <% @exports.each do |path|  %>
+   <div class="wrap-table">
+     <h2>輸出的</h2>
+      <% if @exports.size==0 %>
+        <h4>什麼都沒有，呢呢</h4>
+      <% else %>
+        <table class="table-file">
+            <thead>
               <tr>
-                <td class="file-path">
-                  <%= link_to("#{image_tag("excel.png",class:"path-icon") }".html_safe, download_path(file_path:Rails.root.join(Global::CSV_EXPORT_PATH, path)),class:"") %>
-                </td>
-                <td class="file-path">
-                  <%= link_to(path.split('/')[-1], excel_show_csv_path(file_io:path)) %>
-                </td>
-                <td class="delete">
-                  <%= link_to("X",delete_path(file_path:Rails.root.join(Global::CSV_EXPORT_PATH, path)),data:{confirm:"真的要刪掉#{path}嗎?"}) %>
-                </td>
+                <th>按這裡下載</th>
+                <th>檔名</th>
+                <th>刪除</th>
               </tr>
-              <% end %>
-          </tbody>
+            </thead>
+            <tbody>
+                <% @exports.each do |path|  %>
+                <tr class="tr-data">
+                  <td class="file-icon">
+                    <%= link_to("#{image_tag("excel.png",class:"path-icon") }".html_safe, download_path(file_path:Rails.root.join(Global::CSV_EXPORT_PATH, path)),class:"") %>
+                  </td>
+                  <td class="file-name">
+                    <%= link_to(path.split('/')[-1], excel_show_csv_path(file_io:path)) %>
+                  </td>
+                  <td class="file-delete">
+                     <%= link_to(content_tag(:div, "X",class:"wrap-delete"),delete_path(file_path:Rails.root.join(Global::CSV_EXPORT_PATH, path)),data:{confirm:"真的要刪掉#{path}嗎?"}) %>
+                  </td>
+                </tr>
+                <% end %>
+            </tbody>
         </table>
     <% end %>
 

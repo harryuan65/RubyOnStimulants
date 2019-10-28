@@ -1,15 +1,15 @@
 <%= render 'shared/header',subtitle: 'CSV' %>
 <div id="container-cl">
-  <h1> 👀 預覽 </h1>
+<h1> <%= (@data.size>0? "✅":  "❌") %>  處理結果 </h1>
   <div class="count">
-     <h4>🗂檔案名稱：<%= image_tag("excel.png",class:"path-icon",style:"position:relative;top:100px;") %> <%= @file_name %></h4>
-     <h4>📚資料表共：<%= @data.size %> 列</h4>
+    <h4>檔案名稱： <%= @file_name %></h4>
+    <h4>處理後資料表共：<%= @data.size %> 列</h4>
   </div>
 
   <% if @data.size>0 %>
-    <%= link_to("過濾非洲",excel_processed_csv_path(file_io:@file_name),class:"btn-export") %>
-  <% else %>
-    <%= button_tag("不能處理","#",class:"btn-report") %>
+    <%= link_to("輸出",excel_export_filter_africa_path(file_name:@file_name),class:"btn-export") %>
+    <% else %>
+    <h3>呢呢，裡面沒東西</h3>
   <% end %>
 
   <table class="table">
@@ -40,4 +40,8 @@
       <% end %>
     </tbody>
   </table>
+
+
+
+
 </div>

@@ -2,12 +2,8 @@
 <%= render('shared/header', subtitle:"Home")%>
 
 <div id="container">
-  <% if current_user %>
-    <%= link_to('Accounts', accounts_path, class:"btn") %>
-    <%= link_to("Excel",excel_path,class:"btn") %>
-  <% else %>
-    <%= link_to('Login', new_user_session_path, class:"btn") %>
-  <% end %>
+  <%= link_to('記帳', accounts_path, class:"btn option") %>
+  <%= link_to("Excel", excel_path,class:"btn option") %>
   <%# <%= link_to('send_post', post_newrecord_path, class:'btn btn-dark')%>
   <%# <%= link_to('Lists', list_home_path, class:'btn btn-dark')%>
 

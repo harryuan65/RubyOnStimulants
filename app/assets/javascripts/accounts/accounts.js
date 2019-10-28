@@ -2,26 +2,28 @@
 document.addEventListener("DOMContentLoaded", function(event) {
     console.log("DOM fully loaded and parsed");
     $("#form-ph").on('submit',function(e){
+        console.log(e.target);
         e.preventDefault(); // cancel default submit
         toggleForm();
         var form = $("#form-ph");
-    console.log(form.attr('action'))
-    $.post(form.attr('action'), form.serialize(), function(data) {
-
-    })
-    .done(function() {
-        $.get(window.location.href, (resText)=>{
-            var find = $('.tbody-account',resText);
-            console.log("=======");
-            console.log(find.length)
-            if(find.length>0){
-                $('.tbody-account').replaceWith(find);
-            }
-        })})
-        .fail(function() {
-            alert("Something is wrong!")
-    });
+        $.post(form.attr('action'), form.serialize(), function(data) {
+             console.log(data);
+        })
+        .done(function() {
+            $.get(window.location.href, (resText)=>{
+                var find = $('.tbody-account',resText);
+                console.log("=======");
+                console.log(find.length)
+                if(find.length>0){
+                    $('.tbody-account').replaceWith(find);
+                }
+            })})
+            .fail(function() {
+                alert("Something is wrong!")
+        });
+        return false;
   });
+  console.log("Set form on submit");
 
 });
 

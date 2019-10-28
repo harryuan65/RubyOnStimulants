@@ -6,6 +6,7 @@ class ExcelController < ApplicationController
           @uploads.push(file)
         end
       end
+      @uploads= @uploads.sort_by{|str| str.split('_')[0].to_i}
 
       @exports=[]
       check_exports
@@ -18,8 +19,14 @@ class ExcelController < ApplicationController
 
     def upload
         uploaded_io = params[:csv_file]
+        @uploads = []
+        Dir.new(Global::CSV_UPLOAD_PATH).each do |file|
+          if file.end_with?(".csv")
+            @uploads.push(file)
+          end
+        end
         begin
-          File.open(Rails.root.join(Global::CSV_UPLOAD_PATH, uploaded_io.original_filename.gsub(' ','_')), 'wb') do |file|
+          File.open(Rails.root.join(Global::CSV_UPLOAD_PATH, @uploads.size.to_s+"_"+uploaded_io.original_filename.gsub(' ','_')), 'wb') do |file|
             file.write(uploaded_io.read)
           end
           puts("Uploaded "+uploaded_io.original_filename)
@@ -34,6 +41,9 @@ class ExcelController < ApplicationController
       begin
         @file_name = params[:file_io]
         @data = read_hash_from @file_name, true
+        @data.each do |hash|
+          puts hash
+        end
         @longest_hash = @data.max_by(&:length)
       rescue=>exception
         flash[:alert] = exception.to_s

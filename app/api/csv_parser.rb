@@ -7,12 +7,16 @@ module CSVParser
           |d| d[1]!=nil
         }
       end
-      r =  Hash[
-            row.each do |d|
-              [ (d[0]? d[0].split(' ')[0] : ""), (d[1]? d[1].split(' ')[0] : "")]
-            end
+      begin
+        r =  Hash[
+          row.each do |p|
+            [p[0],p[1]]
+          end
         ]
         return r
+      rescue=>exception
+        puts exception
+      end
     end
 
     def read_hash_from io,avoid_nil
@@ -24,6 +28,11 @@ module CSVParser
           print(' ')
           puts(file_path)
           CSV.foreach(io,headers: true) do |row|
+            row.each do |d|
+              if d[1]&&d[1][0]==" "
+                d[1] = d[1][1..-1]
+              end
+            end
             hsh = createhash row, avoid_nil
             data.push(hsh)
           end

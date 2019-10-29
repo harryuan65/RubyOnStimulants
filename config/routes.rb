@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get 'post_newrecord', controller: 'home', action:'post_newrecord'
   get 'list_home',controller:'home', action:'list_home'
   post 'post_list',controller:'home', action:'post_list'
+  get 'yeah',controller:'home', action:'yeah'
   get 'download', controller:'application', action:'download'
   get 'delete', controller:'application', action:'delete'
   resources :accounts, controller: 'accounts' do

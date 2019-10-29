@@ -31,6 +31,15 @@ class AccountsController < ApplicationController
       end
     end
 
+    def delete
+      ActiveRecord::Base.transaction do
+        Account.find(params[:id]).destroy!
+          respond_to do |format|
+            format.json { render json:{message:"Success", data:params.fetch(:account)} }
+          end
+      end
+    end
+
     def all
     end
 

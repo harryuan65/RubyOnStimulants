@@ -31,7 +31,6 @@ class ExcelController < ApplicationController
           end
           puts("Uploaded "+uploaded_io.original_filename)
           redirect_to action:'index'
-          # redirect_to action:'show_csv', file_io:uploaded_io.original_filename
         rescue=>exception
             puts(exception)
         end

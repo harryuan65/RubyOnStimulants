@@ -1,0 +1,63 @@
+// Place all the styles related to the Excel controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@keyframes pulse{
+  from{
+  }
+  to{
+    transform: translate( 50px ,50px);
+  }
+}
+#yeah{
+position: fixed;
+display: flex;
+top:300px;
+flex-direction: row;
+justify-content: center;
+width:100%;
+align-items: center;
+animation: pulse .4s alternate infinite;
+// border:1px solid black;
+}
+#yeah span{
+  font-size:100px;
+  color: #000;
+}
+body {
+  margin: 0;
+  // overflow: hidden;
+}
+
+.wrapper {
+  position: relative;
+  min-height: 100vh;
+  background-color: #fff;
+}
+
+[class|="confetti"] {
+  position: absolute;
+}
+
+$colors: (#d13447, #ffbf00, #263672);
+
+@for $i from 0 through 150 {
+  $w: random(8);
+  $l: random(100);
+  .confetti-#{$i} {
+    width: #{$w}px;
+    height: #{$w*0.4}px;
+    background-color: nth($colors, random(3));
+    top: -10%;
+    left: unquote($l+"%");
+    opacity: random() + 0.5;
+    transform: rotate(#{random()*360}deg);
+    animation: drop-#{$i} unquote(4+random()+"s") unquote(random()+"s") infinite;
+  }
+
+  @keyframes drop-#{$i} {
+    100% {
+      top: 110%;
+      left: unquote($l+random(15)+"%");
+    }
+  }
+}

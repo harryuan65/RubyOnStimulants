@@ -1,56 +1,64 @@
+$(document).ready(function() {
+console.log("DOM fully loaded and parsed");
+$("#form-ph").on('submit',function(e){
+    e.preventDefault(); // cancel default submit
+    var form = $("#form-ph");
+    $.post(form.attr('action'), form.serialize(), function() {})
+    .done(function() {
+        updateTable();
+    })
+        .fail(function() {
+            alert("Something is wrong!")
+    });
+    return false;
 
-document.addEventListener("DOMContentLoaded", function(event) {
-    console.log("DOM fully loaded and parsed");
-    $("#form-ph").on('submit',function(e){
-        console.log(e.target);
-        e.preventDefault(); // cancel default submit
-        toggleForm();
-        var form = $("#form-ph");
-        $.post(form.attr('action'), form.serialize(), function(data) {
-             console.log(data);
-        })
-        .done(function() {
-            $.get(window.location.href, (resText)=>{
-                var find = $('.tbody-account',resText);
-                console.log("=======");
-                console.log(find.length)
-                if(find.length>0){
-                    $('.tbody-account').replaceWith(find);
-                }
-            })})
-            .fail(function() {
-                alert("Something is wrong!")
-        });
-        return false;
-  });
-  console.log("Set form on submit");
-
+})
+console.log("Set form on submit");
 });
 
+//暫時沒用
 function details(obj){
     console.log(obj.id.split('_')[1])
 }
 
+function delete_history(id){
+    r = confirm("真的要刪掉嗎?");
+   if(r){
+       console.log(`刪除了 ${id}`);
+   }
+   else{
+    console.log(`沒有刪除`);
+   }
+}
 function updateTable(){
    toggleForm();
    $.get(window.location.href, (resText)=>{
-       var find = $('.tbody-account',resText);
-       console.log("=======");
-       console.log(find.length)
-       if(find.length>0){
-           $('.tbody-account').replaceWith(find);
+      var find = $('.tbody-account',resText);
+      console.log(find.length)
+      if(find.length>0){
+          console.log("Updating tbody-account");
+          $('.tbody-account').replaceWith(find);
+      }
+      var alrt = $('.wrap-alert',resText);
+      console.log(alrt.length);
+      if(alrt.length>0){
+          console.log("Updating tbody-account");
+          ('.wrap-alert').replaceWith(alrt);
        }
    })
 }
 
-//deprecated
-function submit_ph(){
+function submit_ph(e){
+    e.preventDefault();
     var f = document.forms.namedItem("form-ph")
     var formData = new FormData(f);
     // for (var pair of formData.entries()) {
     //     console.log(pair[0]+ ', ' + pair[1]);
     // }
+    var token = $('meta[name="csrf-token"]').attr('content');
+
     fetch('/accounts/add',{
+        headers:{'X-CSRF-TOKEN': token},
         method:"post",
         credentials: 'same-origin',
         body: formData
@@ -59,27 +67,30 @@ function submit_ph(){
     .then(obj => {
         // var updateElement = $("#result");
         // if (updateElement) $("#result").html(JSON.stringify(obj,null,2))
+        toggleForm();
         console.log(JSON.stringify(obj,null,2))
-        $.get(window.location.href,(resHTML)=>{
-            var newTable = $("table-account",resHTML)
-            if(newTable.length>0){
-                $("table-account").replaceWith(newTable);
+        $.get(window.location.href, (resText)=>{
+            var find = $('.tbody-account',resText);
+            console.log("=======");
+            // console.log(find.length)
+            if(find.length>0){
+                $('.tbody-account').replaceWith(find);
             }
         })
     })
     .catch(err=>{
         $("#result").html(err)
     })
+    return false;
 }
 
 function toggleForm(){
-    var toggler = document.getElementById("dropdown-toggle");
-    var FormMenu = toggler.nextElementSibling;
+    var FormMenu = document.getElementById("dropdown-form");
     if(FormMenu.classList.contains("show")){
         console.log("====================")
         console.log("Folding")
         FormMenu.classList.add("out");
-        FormMenu = toggler.nextElementSibling;
+        // FormMenu = document.getElementById("dropdown-form");
         FormMenu.addEventListener('animationend',stopAnimation)
     }
     else{

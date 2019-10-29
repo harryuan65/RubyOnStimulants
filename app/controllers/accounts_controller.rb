@@ -16,17 +16,19 @@ class AccountsController < ApplicationController
 
     def add
       ActiveRecord::Base.transaction do
-        ActiveRecord::Base.connection.reset_pk_sequence!("accounts")
         u = User.find_by_email(current_user.email)
-        u.accounts.create!(
+        record = u.accounts.create!(
           content:account_params[:content],
           price: account_params[:price],
           category:account_params[:category],
           currency:account_params[:currency],
           description:account_params[:description]
         )
+        flash[:notice] = "成功新增 #{record.content} #{record.price}"
       end
-      render json:{message:"Success",data:params.fetch(:account)}
+      respond_to do |format|
+        format.json { render json:{message:"Success", data:params.fetch(:account)} }
+      end
     end
 
     def all

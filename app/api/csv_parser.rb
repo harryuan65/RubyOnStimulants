@@ -9,7 +9,7 @@ module CSVParser
       end
       r =  Hash[
             row.each do |d|
-              [d[0],d[1]]
+              [ (d[0]? d[0].split(' ')[0] : ""), (d[1]? d[1].split(' ')[0] : "")]
             end
         ]
         return r

@@ -2,7 +2,12 @@
       <div class="txt" id="titles">
           <span id="title"><%= link_to "Our Workspace",root_path %></span>
           <% if subtitle!="" %>
-            <span id="subtitle"> <%= subtitle %> </span>
+            <span id="subtitle">
+              <% if subtitle!="Home" %>
+                <%= link_to("⬅",root_path,id:"home") %>
+              <% end %>
+              <%= subtitle %>
+            </span>
           <% end %>
       </div>
     <%if subtitle!=""%>

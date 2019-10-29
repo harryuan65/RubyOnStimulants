@@ -1,45 +1,7 @@
-<%# <%= javascript_include_tag("accounts/accounts") %>
+<%= javascript_include_tag("accounts/accounts") %>
 <%= render('shared/header',subtitle:"Accounts") %>
 
-<div id="container-account">
-  <div class="wrap-account-today">
-    <span class="table-title">Recent: <%=  @purchase_histories.size %></span>
-    <table class="table txt">
-      <thead>
-        <tr>
-          <%# <th>Edit📝</th> %>
-          <%# <th class="rid">RID 📝</th> %>
-          <th class="time">Time🕘</th>
-          <th class="content">Content❓</t>
-          <th class="price">Price💰</th>
-          <th class="category">Category📚</th>
-          <th class="description">Description 💡</th>
-          <th class="currency">Currency 🚩</th>
-        </tr>
-      </thead>
-      <tbody class="tbody-account">
-        <% @purchase_histories.each do |record| %>
-          <tr id="tr_<%=record.id%>" onclick="details(this)">
-            <%# <td><%= button_tag("✏️",onclick:"edit(this, #{record.id})")</td> %>
-            <%# <td class="rid"><%= record.id %></td>
-            <td class="time"><%= taipei_time(record.created_at) %></td>
-            <td class="content"><%= record.content %></td>
-            <td class="price"><%= record.price %></td>
-            <td class="category"><%= record.category %></td>
-            <td class="description"><%= record.description %></td>
-            <td class="currency"><%= record.currency %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
-  <div class="account-options">
-    <div class="account-option">
-      <div id="dropdown-toggle" onclick="toggleForm()">
-       <div class="icon-wrap"><%= image_tag("add.png",class:"icon-add") %></div>
-      </div>
-
-        <div class="dropdown-form">
+    <div id="dropdown-form">
           <div class="wrap-form-title">
           <span class="txt form-title">New</span>
           <span class="txt x" onclick="toggleForm()">x</span>
@@ -52,8 +14,48 @@
             <%= f.text_field "description", placeholder:"備註"                                                 ,class:"input text-field" %>
             <%= f.submit "Submit", class:"input submit" %>
           <% end %>
-        </div>
+    </div>
+
+<div id="container-account">
+  <div class="wrap-account-today">
+    <span class="table-title">Recent: <%=  @purchase_histories.size %></span>
+    <table class="table table-account txt">
+      <thead>
+        <tr>
+          <%# <th>Edit📝</th> %>
+          <%# <th class="rid">RID 📝</th> %>
+          <th class="time">時間🕘</th>
+          <th class="content">內容❓</t>
+          <th class="price">價格💰</th>
+          <th class="category">類型📚</th>
+          <th class="description">備註 💡</th>
+          <th class="currency">幣種 🚩</th>
+          <th class="delete">刪除</th>
+        </tr>
+      </thead>
+      <tbody class="tbody-account">
+        <% @purchase_histories.each do |record| %>
+          <tr id="tr_<%=record.id%>">
+            <%# <td><%= button_tag("✏️",onclick:"edit(this, #{record.id})")</td> %>
+            <%# <td class="rid"><%= record.id %></td>
+            <td class="time"><%= taipei_time(record.created_at) %></td>
+            <td class="content"><%= record.content %></td>
+            <td class="price"><%= record.price %></td>
+            <td class="category"><%= record.category %></td>
+            <td class="description"><%= record.description %></td>
+            <td class="currency"><%= record.currency %></td>
+            <td class="delete"> <div onclick='delete_history("<%= record.id%>")'> ❌</div></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="account-options">
+    <div class="account-option">
+      <div id="dropdown-toggle" onclick="toggleForm()">
+        <div class="icon-wrap"><%= image_tag("add.png",class:"icon-add") %></div>
       </div>
+    </div>
 
     <div class="account-option">
        <div style="cursor:pointer;" onclick="alert('抱歉姆咪，這還沒有功能')">

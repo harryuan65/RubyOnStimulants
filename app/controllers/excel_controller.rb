@@ -42,7 +42,11 @@ class ExcelController < ApplicationController
         @file_name = params[:file_io]
         @data = read_hash_from @file_name, false
         # @data.each do |hash|
-        #   puts hash
+        #   hash.each do |d|
+        #     print d[0]
+        #     print " => "
+        #     puts d[1]
+        #   end
         # end
         @longest_hash = @data.max_by(&:length)
       rescue=>exception
@@ -64,7 +68,6 @@ class ExcelController < ApplicationController
         @data = read_hash_from @file_name, false
         @longest_hash = @data.max_by(&:length)
         country = @longest_hash['country']? "country" : "Country"
-        puts @longest_hash
         @data = @data.select{ |hash| @africa_arr.include?(hash["#{country}"])}
       rescue=>exception
         flash[:alert] = exception.to_s

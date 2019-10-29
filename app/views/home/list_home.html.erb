@@ -1,5 +1,5 @@
 <%= render('shared/header', title:"Check List")%>
-<div id="container">
+<div id="container-rw">
   <%= form_tag(post_list_path, method:'post') do %>
   <table class="txt table table-dark">
     <thead>
@@ -27,7 +27,7 @@
   </table>
 
    <div class="lower_row">
-       <%= submit_tag("Go",class:"btn btn-secondary")%>
+       <%= submit_tag("Go",class:"btn-grad btn-secondary")%>
    </div>
 
    <%end%>

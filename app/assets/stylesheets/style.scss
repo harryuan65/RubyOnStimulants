@@ -98,19 +98,19 @@ input:focus, textarea:focus {
 
 
 //components
-#container-cl{
+%container{
   display: flex;
-  flex-direction: column;
   justify-content: flex-start;
   margin: 20px 20px 50px 20px;
   width: 90%;
 }
-#container{
-  display: flex;
+#container-cl{
+  @extend %container;
+  flex-direction: column;
+}
+#container-rw{
+  @extend %container;
   flex-direction: row;
-  justify-content: flex-start;
-  margin: 20px 20px 50px 20px;
-  width: 90%;
 }
 .txt{
   // font-family: 'Acme', sans-serif;
@@ -119,25 +119,29 @@ input:focus, textarea:focus {
 .round{
   border-radius: 50%;
 }
-.btn {
+.btn-grad {
   background-size: 300% auto; //imp
-  background-image: linear-gradient(90deg, rgba(15,15,15,1) 0%, rgba(40,40,40,1) 50%, rgba(15,15,15,1) 100%);
+  background-image: linear-gradient(90deg, rgba(0,75,145,1) 0%, rgba(0,90,160,1) 50%, rgba(0,75,145,1) 100%);
+  // background-image: linear-gradient(90deg, rgba(15,15,15,1) 0%, rgba(50,50,50,1) 50%, rgba(15,15,15,1) 100%);
   background-position: left center;
   box-shadow: 3px 3px 10px #333333;
 
   text-decoration: none;
-  // background-color: #353535;
-  // border: 1px solid #fff;
   color: #fff;
   margin: 0 15px 0 15px;
   padding: 15px;
   text-align:center;
   transition: .5s ease;
   -webkit-transition: .5s ease;
-}
-.btn:hover{
-  // background-color:#444444;
-  background-position: right center;
+  &:hover{
+    background-position: right center;
+    transform: translate3d(-3px,-3px,0);
+    width: 190px;
+  }
+  &:active{
+    transform: translate3d(-2px,2px,0);
+    width: 190px;
+  }
 }
 .icon{
   background-color: transparent;
@@ -187,11 +191,11 @@ input:focus, textarea:focus {
   transition:  .3s ease-out;
   -webkit-transition:  .3s ease-out;
   height: 90px;
-}
-.login-option:hover{
-  transform: translate(-5px, -5px);
-  background-color: #222222;
-  box-shadow: 3px 3px 10px #434343;
+  &:hover{
+    transform: translate(-5px, -5px);
+    background-color: #222222;
+    box-shadow: 3px 3px 10px #434343;
+  }
 }
 
 a.login-option{
@@ -203,6 +207,9 @@ a.login-option{
 
 
 //header
+#home{
+  display: none;
+}
 #container-top{
   position:relative;
   padding-top: 20px;
@@ -253,9 +260,6 @@ a.login-option{
 .btn-logout{
   padding: 5px 10px 5px 10px;
   margin: 0 15px 0 15px;
-  border:1px solid white;
-  border-radius: 15px;
-  background-color: #7c0a02;
 }
 .btn-logout a::before{
   content:'';
@@ -267,11 +271,15 @@ a.login-option{
   text-decoration: none;
   color: #fff;
 }
-//Options
-.option{
+
+//Home Options
+.home-option{
+  width: 200px;
+  margin:10px;
   border-radius: 10px;
   border:1px solid rgba(255,255,255,.5);
 }
+
 //Accounts/index
 #container-account{
   height: 80%;
@@ -290,13 +298,30 @@ a.login-option{
   border:1px solid #666666;
   background-color: #111111;
 }
+.table-account td, .table-account th{
+  text-align:center;
+}
+td.delete{
+  cursor: pointer;
+}
 .wrap-account-today{
   margin:30px 30px 0 30px;
 }
+@keyframes load-account-options-web{
+  from{
+    right: -5%;
+    bottom: -5%;
+  }
+  to{
+    right: 3%;
+    bottom:3%;
+  }
+}
 .account-options{
-  position: absolute;
-  right: 50px;
-  bottom: 50px;
+  right: 0%;
+  bottom:0%;
+  position: fixed;
+  animation: load-account-options-web .6s ease forwards;
 }
 .account-options .link{
   text-decoration: none;
@@ -305,9 +330,10 @@ a.login-option{
 
 .account-option{
   margin-bottom: 20px;
+  position: relative;
   height: 90px;
   width: 90px;
-  border:1px solid #666666;
+  border: 1px solid #666666;
   border-radius: 50%;
   display: flex;
   flex-direction: column;
@@ -316,7 +342,16 @@ a.login-option{
   transition: .3s ease-out;
   -webkit-transition: .3s ease-out;
   background-color:#0075e2;
+  transition: .2s ease;
+  &:hover{
+    transform: translate3d(-5px,-5px,0) rotate3d(0,1,1,10deg);
+    box-shadow: 5px 5px 15px #444;
+  }
+  &:active{
+    transform: translate3d(4px,4px,0) rotate3d(0,1,1,10deg);
+  }
 }
+
 .btn-report{
    display:flex;
    justify-content: center;
@@ -334,7 +369,7 @@ a.login-option{
 #dropdown-toggle{
   cursor: copy;
 }
-.dropdown-form {
+#dropdown-form {
   display: none; //should be none
   flex-direction: column;
   justify-content: flex-start;
@@ -350,25 +385,25 @@ a.login-option{
   background-color: #242020;
   animation: drop .3s normal forwards;
 }
-.dropdown-form.in{
+#dropdown-form.in{
   animation: drop $anim-drop-time normal forwards
 }
-.dropdown-form.out{
+#dropdown-form.out{
   animation: fold .2s normal forwards
 }
-.dropdown-form.show{
+#dropdown-form.show{
   display: flex;
 }
-.dropdown-form .form-title{
+#dropdown-form .form-title{
   background-color: transparent;
 }
-.dropdown-form .wrap-form-title{
+#dropdown-form .wrap-form-title{
   position: relative;
   background-color: inherit;
   font-size: 30px;
   margin-top:30px;
 }
-.dropdown-form .wrap-form-title .x{
+#dropdown-form .wrap-form-title .x{
   background-color: #004b91;
   position: absolute;
   float: right;
@@ -380,7 +415,7 @@ a.login-option{
   -webkit-transition: .2s ease-out;
   cursor: pointer;
 }
-.dropdown-form .wrap-form-title .x:hover{
+#dropdown-form .wrap-form-title .x:hover{
   transform: translate(-1px,-1px);
   box-shadow: 4px 4px 20px #555555;
 }
@@ -410,7 +445,7 @@ a.login-option{
   height: 40px;
 }
 .submit:active, .submit:focus, .submit:visited{
-  background-color: #0065e2;
+  background-color: #4a8ee2;
   outline: none;
 }
 #form-ph .select{
@@ -426,11 +461,19 @@ a.login-option{
 
 
 @media only screen and (max-width:700px){
+   #home{
+      display: inline-flex;
+    }
     #current-username{
       display: none;
     }
     .login-options{
       width:100%
+    }
+    .btn-logout{
+      border:1px solid white;
+      border-radius: 15px;
+      background-color: #7c0a02;
     }
     #title{
       display:none;
@@ -443,7 +486,7 @@ a.login-option{
       justify-content: center;
     }
     //table
-    table .currency, table .description{
+    .table-account .currency, .table-account .description{
       display: none;
     }
     //Form
@@ -451,27 +494,36 @@ a.login-option{
       display: flex;
       flex-direction: row;
     }
-    .dropdown-form{
+    #dropdown-form{
       top: 19%;
       left: 15%;
       right: 15%;
       bottom: 19%;
     }
+    @keyframes load-account-options-mob{
+      from{
+        bottom: -8%;
+      }
+      to{
+        bottom: 7%;
+      }
+    }
     .account-options{
-      right:auto;
-      bottom:30px;
+      right: 0%;
+      bottom:0%;
       float: bottom;
-      position: absolute;
+      position: fixed;
       display: flex;
       flex-direction: row;
       justify-content: space-around;
       align-items: flex-end;
       width: 100%;
-      z-index: 100;
+      animation: load-account-options-mob .6s ease forwards;
     }
     .account-option{
       margin-bottom: 0px;
     }
+
     #result{
       width: 80%;
       margin: 30px;

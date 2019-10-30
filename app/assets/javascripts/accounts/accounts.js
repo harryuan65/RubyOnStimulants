@@ -5,6 +5,7 @@ $("#form-ph").on('submit',function(e){
     var form = $("#form-ph");
     $.post(form.attr('action'), form.serialize(), function() {})
     .done(function() {
+        toggleForm();
         updateTable();
     })
         .fail(function() {
@@ -18,20 +19,26 @@ console.log("Set form on submit");
 
 //暫時沒用
 function details(obj){
-    console.log(obj.id.split('_')[1])
+    console.log(obj.id);
 }
 
-function delete_history(id){
+function delete_history(target){
     r = confirm("真的要刪掉嗎?");
    if(r){
-       console.log(`刪除了 ${id}`);
+       $.post(target.url,{from_page:true, id:target.id})
+       .done(data=>{
+           updateTable()
+           console.log(`刪除了 ${target.id}`);
+       })
+       .fail(err=>{
+           console.log(err);
+       })
    }
    else{
-    console.log(`沒有刪除`);
+       console.log(`沒有刪除`);
    }
 }
 function updateTable(){
-   toggleForm();
    $.get(window.location.href, (resText)=>{
       var find = $('.tbody-account',resText);
       console.log(find.length)
@@ -85,6 +92,7 @@ function submit_ph(e){
 }
 
 function toggleForm(){
+    var FormWrap = document.getElementById("wrap-dropdown-form");
     var FormMenu = document.getElementById("dropdown-form");
     if(FormMenu.classList.contains("show")){
         console.log("====================")

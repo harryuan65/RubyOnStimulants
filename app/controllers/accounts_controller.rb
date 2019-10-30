@@ -33,10 +33,18 @@ class AccountsController < ApplicationController
 
     def delete
       ActiveRecord::Base.transaction do
-        Account.find(params[:id]).destroy!
-          respond_to do |format|
-            format.json { render json:{message:"Success", data:params.fetch(:account)} }
-          end
+        if current_user && params[:from_page]
+          record = Account.find(params[:id])
+          confirm = record
+          record.destroy!
+            respond_to do |format|
+              format.json { render json:{message:"Success: Delete", data:confirm} }
+            end
+          else
+            respond_to do |format|
+              format.json { render json:{message:"Unauthorized"} }
+            end
+        end
       end
     end
 

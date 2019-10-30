@@ -1,12 +1,12 @@
 <%= javascript_include_tag("accounts/accounts") %>
 <%= render('shared/header',subtitle:"Accounts") %>
-
+<div id="wrap-dropdown-form">
     <div id="dropdown-form">
           <div class="wrap-form-title">
-          <span class="txt form-title">New</span>
-          <span class="txt x" onclick="toggleForm()">x</span>
+            <span class="txt form-title">New</span>
+            <span class="txt x" onclick="toggleForm()">x</span>
           </div>
-          <%= form_for @new_purchase_history, url:add_accounts_path(@new_purchase_history),html:{id:"form-ph",name:"form-ph"},remote:true ,method: 'post' do |f| %>
+          <%= form_for @new_purchase_history, url:add_accounts_path(@new_purchase_history),html:{id:"form-ph",name:"form-ph",autocomplete:"off"},remote:true ,method: 'post' do |f| %>
             <%= f.text_field "content"    , placeholder:"內容物"   , required:true                               , class:"input text-field"%>
             <%= f.text_field "price"      , placeholder:"$$金額"   ,required:true                               , class:"input text-field"%>
             <%= f.select "category"       , options_for_select(["正餐","甜點","飲料","免死金牌","生活用品"]) ,{}    , class:"input select"%>
@@ -15,7 +15,7 @@
             <%= f.submit "Submit", class:"input submit" %>
           <% end %>
     </div>
-
+</div>
 <div id="container-account">
   <div class="wrap-account-today">
     <span class="table-title">Recent: <%= @purchase_histories.size %></span>
@@ -38,13 +38,13 @@
           <tr id="tr_<%=record.id%>">
             <%# <td><%= button_tag("✏️",onclick:"edit(this, #{record.id})")</td> %>
             <%# <td class="rid"><%= record.id %></td>
-            <td class="time"><%= taipei_time(record.created_at) %></td>
+            <td class="time" id="<%=record.id%>" onclick="details(this)"><%= taipei_time(record.created_at) %></td>
             <td class="content"><%= record.content %></td>
             <td class="price"><%= record.price %></td>
             <td class="category"><%= record.category %></td>
             <td class="description"><%= record.description %></td>
             <td class="currency"><%= record.currency %></td>
-            <td class="delete"> <div onclick='delete_history("<%= record.id%>")'> ❌</div></td>
+            <td class="delete"> <div onclick='delete_history({url:"<%= delete_accounts_path%>", id:"<%= record.id %>"})' > ❌</div></td>
           </tr>
         <% end %>
       </tbody>

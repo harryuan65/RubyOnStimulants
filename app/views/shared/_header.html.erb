@@ -2,9 +2,10 @@
       <div class="txt" id="titles">
           <span id="title"><%= link_to "Our Workspace",root_path %></span>
           <% if subtitle!="" %>
+              <span class="home"><%= link_to(image_tag("home.png",class:"icon-home"), root_path ,class:"home") %></span>
             <span id="subtitle">
               <% if subtitle!="Home" %>
-                <%= link_to("⬅",root_path,id:"home") %>
+                <%= link_to("⬅",:back ,class:"home") %>
               <% end %>
               <%= subtitle %>
             </span>

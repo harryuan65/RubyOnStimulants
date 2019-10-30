@@ -9,18 +9,17 @@
   }
 }
 #yeah{
-position: fixed;
-display: flex;
-top:300px;
-flex-direction: row;
-justify-content: center;
-width:100%;
-align-items: center;
-animation: pulse .4s alternate infinite;
-// border:1px solid black;
+  position: fixed;
+  display: flex;
+  top:300px;
+  flex-direction: row;
+  justify-content: center;
+  width:100%;
+  align-items: center;
+  animation: pulse .4s ease-in alternate infinite;
 }
 #yeah span{
-  font-size:100px;
+  font-size:70px;
   color: #000;
 }
 body {

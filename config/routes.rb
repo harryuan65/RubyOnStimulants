@@ -15,7 +15,7 @@ Rails.application.routes.draw do
       get :new
       post :add
       get :all
-      get :delete
+      post :delete
       get :report
     end
   end

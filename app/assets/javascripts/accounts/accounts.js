@@ -14,7 +14,8 @@ $("#form-ph").on('submit',function(e){
     return false;
 
 })
-console.log("Set form on submit");
+  console.log("Set form on submit");
+
 });
 
 //暫時沒用
@@ -94,17 +95,17 @@ function submit_ph(e){
 function toggleForm(){
     var FormWrap = document.getElementById("wrap-dropdown-form");
     var FormMenu = document.getElementById("dropdown-form");
-    if(FormMenu.classList.contains("show")){
+    if(FormWrap.classList.contains("show")){
         console.log("====================")
         console.log("Folding")
-        FormMenu.classList.add("out");
+        FormWrap.classList.add("out");
         // FormMenu = document.getElementById("dropdown-form");
-        FormMenu.addEventListener('animationend',stopAnimation)
+        FormWrap.addEventListener('animationend',stopAnimation)
     }
     else{
         console.log("====================")
         console.log("Dropping")
-        FormMenu.classList.add("show");
+        FormWrap.classList.add("show");
     }
 }
 function stopAnimation(event){

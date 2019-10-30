@@ -2,12 +2,16 @@
 <%= render('shared/header', subtitle:"Home")%>
 
 <div id="container-cl">
-  <%= link_to('記帳', accounts_path, class:"btn-grad home-option") %>
-  <%= link_to("Excel", excel_path,class:"btn-grad home-option") %>
-  <%= link_to('HTML Color Codes','https://htmlcolorcodes.com/',class:"btn-grad home-option") %>
-  <%= link_to("Yeah", yeah_path,class:"btn-grad home-option") %>
-  <%# <%= link_to('send_post', post_newrecord_path, class:'btn-grad btn-dark')%>
-  <%# <%= link_to('Lists', list_home_path, class:'btn-grad btn-dark')%>
+  <%= link_to('記帳', accounts_path, class:" home-option") %>
+  <%= link_to("Excel", excel_path,class:" home-option") %>
+  <%= link_to('HTML Color Codes','https://htmlcolorcodes.com/',class:"home-option") %>
+
+  <% if current_user.email=="harryuan.65@gmail.com" || current_user.email=="matcha110817@gmail.com" %>
+     <%= link_to("Yeah", yeah_path,class:" home-option") %>
+  <% end %>
+
+  <%# <%= link_to('send_post', post_newrecord_path, class:' btn-dark')%>
+  <%# <%= link_to('Lists', list_home_path, class:' btn-dark')%>
 
 
   <%# <div class="dropdown dropdown-state">

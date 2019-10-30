@@ -1,6 +1,6 @@
 <div id="container-top">
       <div class="txt" id="titles">
-          <span id="title"><%= link_to "Our Workspace",root_path %></span>
+          <span id="title"><%= link_to "OurWorkspace",root_path %></span>
           <% if subtitle!="" %>
               <span class="home"><%= link_to(image_tag("home.png",class:"icon-home"), root_path ,class:"home") %></span>
             <span id="subtitle">
@@ -13,6 +13,9 @@
       </div>
     <%if subtitle!=""%>
       <div id="wrap-user-status">
+        <div class="btn-logout">
+           <%= link_to "Logout",destroy_user_session_path,method:"delete",data:{confirm:"真der要登出嗎？😭"} %>
+         </div>
           <span id="current-username">
              <% if current_user %>
                <%= current_user.email.split('@')[0] %>
@@ -22,9 +25,6 @@
                </script>
              <% end %>
           </span>
-        <div class="btn-logout">
-           <%= link_to "Logout",destroy_user_session_path,method:"delete",data:{confirm:"真der要登出嗎？😭"} %>
-         </div>
       </div>
 
     <% end %>

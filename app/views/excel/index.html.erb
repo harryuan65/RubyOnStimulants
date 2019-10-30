@@ -15,9 +15,9 @@
         <table class="table-file">
           <thead>
             <tr>
-              <th>按這裡下載</th>
-              <th>檔名</th>
-              <th>刪除</th>
+              <th class="file-icon">按這裡下載</th>
+              <th class="file-name">檔名</th>
+              <th class="file-delete">刪除</th>
             </tr>
           </thead>
           <tbody>
@@ -29,8 +29,8 @@
                 <td class="file-name">
                   <%= link_to(path.split('/')[-1], excel_show_csv_path(file_io:path)) %>
                 </td>
-                <td class="file-delete">
-                  <%= link_to(content_tag(:div, "X",class:"wrap-delete"),delete_path(file_path:Rails.root.join(Global::CSV_UPLOAD_PATH, path)),data:{confirm:"真的要刪掉#{path}嗎?"}) %>
+                <td class="file-delete wrap-delete">
+                  <%= link_to(content_tag(:div, "X",class:"delete-icon"),delete_path(file_path:Rails.root.join(Global::CSV_UPLOAD_PATH, path)),data:{confirm:"真的要刪掉#{path}嗎?"}) %>
                 </td>
               </tr>
               <% end %>
@@ -49,9 +49,9 @@
         <table class="table-file">
             <thead>
               <tr>
-                <th>按這裡下載</th>
-                <th>檔名</th>
-                <th>刪除</th>
+                <th class="file-icon">按這裡下載</th>
+                <th class="file-name">檔名</th>
+                <th class="file-delete">刪除</th>
               </tr>
             </thead>
             <tbody>
@@ -63,8 +63,8 @@
                   <td class="file-name">
                     <%= link_to(path.split('/')[-1], excel_show_csv_path(file_io:path)) %>
                   </td>
-                  <td class="file-delete">
-                     <%= link_to(content_tag(:div, "X",class:"wrap-delete"),delete_path(file_path:Rails.root.join(Global::CSV_EXPORT_PATH, path)),data:{confirm:"真的要刪掉#{path}嗎?"}) %>
+                  <td class="file-delete wrap-delete">
+                     <%= link_to(content_tag(:div, "X",class:"delete-icon"),delete_path(file_path:Rails.root.join(Global::CSV_EXPORT_PATH, path)),data:{confirm:"真的要刪掉#{path}嗎?"}) %>
                   </td>
                 </tr>
                 <% end %>

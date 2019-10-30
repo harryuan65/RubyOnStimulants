@@ -35,7 +35,7 @@ class ApplicationController < ActionController::Base
             puts "no"
           end
           puts("Is included in file roots:#{file}")
-          flash[:notice] = "Successfully deleted #{file.split('/')[-1]}"
+          flash[:notice] = "成功刪除 #{file.split('/')[-1]}"
           redirect_to excel_path
         else
           return render 'shared/result',locals:{status:false, error:exception.to_s}

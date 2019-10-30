@@ -1,8 +1,5 @@
 class AccountsController < ApplicationController
     def index
-      # if "#{params[:controller]}##{params[:action]}" == "accounts#index"
-      #    flash[:notice]="Welcome to accounts!"
-      # end
       @new_purchase_history = Account.new
       @user = User.find_by_email(current_user.email)
       if @user

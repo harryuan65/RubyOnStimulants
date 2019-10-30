@@ -15,6 +15,8 @@ class ExcelController < ApplicationController
           @exports.push(file)
         end
       end
+      @exports = @exports.sort_by{|str| str.split('_')[0].to_i}
+
     end
 
     def upload
@@ -70,7 +72,7 @@ class ExcelController < ApplicationController
         @data = @data.select{ |hash| @africa_arr.include?(hash["#{country}"])}
       rescue=>exception
         flash[:alert] = exception.to_s
-        render 'shared/result',locals:{status:false, message:"抱歉姆咪他怪怪的，把下面的貼給姆姆",error: exception.to_s}
+        render 'shared/result',locals:{status:false, message:"抱歉他怪怪的，把下面的貼給我",error: exception.to_s}
       end
     end
 
@@ -90,10 +92,10 @@ class ExcelController < ApplicationController
         @data = @data.select{ |hash| @africa_arr.include?(hash["#{country}"])}
 
         filename = export_africa @data, params[:file_name]
-        flash[:notice] = "Successfully output #{filename}"
+        flash[:notice] = "成功輸出了 #{filename}"
         redirect_to action:'index'
       rescue=>exception
-        return render 'shared/result',locals:{status:false, message:"抱歉姆咪他怪怪的，把下面的貼給姆姆",error: exception.to_s}
+        return render 'shared/result',locals:{status:false, message:"抱歉他怪怪的，把下面的貼給我",error: exception.to_s}
       end
     end
 end

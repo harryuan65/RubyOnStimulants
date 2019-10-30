@@ -1,5 +1,6 @@
 <%= javascript_include_tag("accounts/accounts") %>
 <%= render('shared/header',subtitle:"Accounts") %>
+
 <div id="wrap-dropdown-form">
     <div id="dropdown-form">
           <div class="wrap-form-title">
@@ -16,6 +17,7 @@
           <% end %>
     </div>
 </div>
+
 <div id="container-account">
   <div class="wrap-account-today">
     <span class="table-title">Recent: <%= @purchase_histories.size %></span>
@@ -24,12 +26,12 @@
         <tr>
           <%# <th>Edit📝</th> %>
           <%# <th class="rid">RID 📝</th> %>
-          <th class="time">時間🕘</th>
-          <th class="content">內容❓</t>
-          <th class="price">價格💰</th>
-          <th class="category">類型📚</th>
-          <th class="description">備註 💡</th>
-          <th class="currency">幣種 🚩</th>
+          <th class="time">時間</th>
+          <th class="content">內容</t>
+          <th class="price">價格</th>
+          <th class="category">類型</th>
+          <th class="description">備註 </th>
+          <th class="currency">幣種 </th>
           <th class="delete">刪除</th>
         </tr>
       </thead>

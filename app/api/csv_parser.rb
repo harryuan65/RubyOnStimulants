@@ -29,9 +29,8 @@ module CSVParser
           puts(file_path)
           CSV.foreach(io,headers: true) do |row|
             row.each do |d|
-              if d[1]&&d[1][0]==" "
-                d[1] = d[1][1..-1]
-              end
+              d[0] = d[0].strip if d[0]
+              d[1] = d[1].strip if d[1]
             end
             hsh = createhash row, avoid_nil
             data.push(hsh)

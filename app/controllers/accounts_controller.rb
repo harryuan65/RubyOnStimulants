@@ -1,11 +1,20 @@
 class AccountsController < ApplicationController
     def index
       @new_purchase_history = Account.new
+      day = DateTime.parse(params[:day])
       @user = User.find_by_email(current_user.email)
       if @user
-        @purchase_histories = @user.accounts
-        puts @purchase_histories.size
+        @todays_purchase_histories = @user.accounts.where('created_at >= :t1 AND created_at <= :t2',
+          :t1=>day.beginning_of_day,
+          :t2=>day.end_of_day
+        )
+        puts @todays_purchase_histories.size
       end
+      @time = day.strftime("%m/%d")
+    end
+
+    def show_day
+
     end
 
     def new

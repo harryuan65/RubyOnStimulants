@@ -39,7 +39,7 @@ class HomeController < ApplicationController
 
     def yeah
     end
-    
+
     def list_home
       @data = []
       50.times.each do |d|

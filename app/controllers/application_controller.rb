@@ -2,11 +2,25 @@ class ApplicationController < ActionController::Base
   include CSVParser
   include Global
   before_action :show_info
+  skip_forgery_protection only:[:prod_test]
   def show_info
     puts '========================'
     puts "Request: #{request.method} #{request.path}"
     puts "Controller: #{params[:controller]}##{params[:action]}"
     puts '========================'
+  end
+
+  def post_test
+    puts("==================")
+    request.headers.each do |k,v|
+      puts k.to_s+' '+v.to_s
+    end
+    # puts("X_API_KEY: "+request.headers["HTTP_X_API_KEY"].to_s)
+    params.each do |k,v|
+      puts k.to_s+' '+v.to_s
+    end
+    puts("==================")
+    render json:{message:"Ok"}
   end
 
   def if_user

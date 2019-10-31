@@ -20,7 +20,6 @@
 
 <div id="container-account">
   <div class="wrap-account-today">
-    <span class="table-title">Recent: <%= @purchase_histories.size %></span>
     <table class="table table-account txt">
       <thead>
         <tr>
@@ -36,7 +35,7 @@
         </tr>
       </thead>
       <tbody class="tbody-account">
-        <% @purchase_histories.each do |record| %>
+        <% @todays_purchase_histories.each do |record| %>
           <tr id="tr_<%=record.id%>">
             <%# <td><%= button_tag("✏️",onclick:"edit(this, #{record.id})")</td> %>
             <%# <td class="rid"><%= record.id %></td>
@@ -51,6 +50,8 @@
         <% end %>
       </tbody>
     </table>
+    <span class="table-title"><%= @time %> 有: <%= @todays_purchase_histories.size %>筆</span>
+
   </div>
   <div class="account-options">
     <div class="account-option">

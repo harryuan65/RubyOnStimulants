@@ -9,12 +9,14 @@ Rails.application.routes.draw do
   get 'yeah',controller:'home', action:'yeah'
   get 'download', controller:'application', action:'download'
   get 'delete', controller:'application', action:'delete'
+  post 'post_test', controller:'application', action:'post_test'
   resources :accounts, controller: 'accounts' do
     collection do
       get :index
       get :new
       post :add
       get :all
+      get :show_day
       post :delete
       get :report
     end

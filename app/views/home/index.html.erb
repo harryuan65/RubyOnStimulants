@@ -2,25 +2,26 @@
 <%= render('shared/header', subtitle:"Home")%>
 
 <div id="container-cl">
-  <%= link_to('記帳', accounts_path, class:" home-option") %>
-  <%= link_to("Excel", excel_path,class:" home-option") %>
-  <%= link_to('HTML Color Codes','https://htmlcolorcodes.com/',class:"home-option") %>
+  <div class="wrap-home">
+    <%= link_to('記帳', accounts_path(day: DateTime.now), class:" home-option") %>
+    <%= link_to("Excel", excel_path,class:" home-option") %>
+    <%= link_to('HTML Color Codes','https://htmlcolorcodes.com/',class:"home-option") %>
 
-  <% if current_user.email=="harryuan.65@gmail.com" || current_user.email=="matcha110817@gmail.com" %>
-     <%= link_to("Yeah", yeah_path,class:" home-option") %>
-  <% end %>
+    <% if current_user.email=="harryuan.65@gmail.com" || current_user.email=="matcha110817@gmail.com" %>
+       <%= link_to("Yeah", yeah_path,class:" home-option") %>
+    <% end %>
+    <%# <%= link_to('send_post', post_newrecord_path, class:' btn-dark')%>
+    <%# <%= link_to('Lists', list_home_path, class:' btn-dark')%>
 
-  <%# <%= link_to('send_post', post_newrecord_path, class:' btn-dark')%>
-  <%# <%= link_to('Lists', list_home_path, class:' btn-dark')%>
 
+    <%# <div class="dropdown dropdown-state">
+      <div class="state" style="cursor: pointer" onclick="toggleDropdown(this)">按我 toggle</div>
+      <ul class="dropdown-menu" onmouseleave="disableDropdown(this)">
+        <li onclick="f1()"> Option1 </li>
+        <li onclick="f2()"> Option2 </li>
+      </ul>
+    </div> %>
 
-  <%# <div class="dropdown dropdown-state">
-    <div class="state" style="cursor: pointer" onclick="toggleDropdown(this)">按我 toggle</div>
-    <ul class="dropdown-menu" onmouseleave="disableDropdown(this)">
-      <li onclick="f1()"> Option1 </li>
-      <li onclick="f2()"> Option2 </li>
-    </ul>
-  </div> %>
-
+  </div>
 </div>
 

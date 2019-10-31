@@ -1,5 +1,4 @@
 $(document).ready(function() {
-console.log("DOM fully loaded and parsed");
 $("#form-ph").on('submit',function(e){
     e.preventDefault(); // cancel default submit
     var form = $("#form-ph");
@@ -41,18 +40,15 @@ function delete_history(target){
 }
 function updateTable(){
    $.get(window.location.href, (resText)=>{
-      var find = $('.tbody-account',resText);
-      console.log(find.length)
-      if(find.length>0){
-          console.log("Updating tbody-account");
-          $('.tbody-account').replaceWith(find);
+       var find = $('.tbody-account',resText);
+       console.log(find.length)
+       if(find.length>0){
+           console.log("Updating tbody-account");
+           $('.tbody-account').replaceWith(find);
       }
       var alrt = $('.wrap-alert',resText);
+      $('.wrap-alert').replaceWith(alrt);
       console.log(alrt.length);
-      if(alrt.length>0){
-          console.log("Updating tbody-account");
-          ('.wrap-alert').replaceWith(alrt);
-       }
    })
 }
 

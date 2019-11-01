@@ -499,6 +499,10 @@ a.home-option{
   border:1px solid rgba(92,129,194,0.2);
   background-color: rgba(71,30,84,0.5);
 }
+.table-account {
+  font-size: 20px;
+  padding: 10px;
+}
 .table-account thead, .table-account tbody{
   display: block;
 }
@@ -539,6 +543,32 @@ a.home-option{
 }
 td.delete{
   cursor: pointer;
+}
+.wrap-date{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+#form-date{
+  margin:3px;
+}
+#form-date *{
+  background-color: rgb(245, 245, 111);
+  color: #000;
+  font-size: 20px;
+  margin:5px;
+}
+#form-date .btn-date{
+  background-color: rgb(70, 68, 64);
+  border:1px solid #acacac;
+  border-radius: 10px;
+  padding: 4px 10px 4px 10px;
+  transition: .2s ease-out;
+  &:hover{
+    color: rgb(245, 245, 111);
+    filter: drop-shadow(0px 0px 10px rgba(255, 255, 210,0.7));
+  }
 }
 .wrap-account-today{
   margin:30px 30px 0 30px;
@@ -819,6 +849,10 @@ td.delete{
     #container-top{
       justify-content: center;
     }
+    .wrap-date{
+      justify-content: center;
+      align-items: center;
+    }
     //table
     .wrap-account-today{
       display: flex;
@@ -849,7 +883,7 @@ td.delete{
         bottom: -8%;
       }
       to{
-        bottom: 7%;
+        bottom: 4%;
       }
     }
     .account-options{

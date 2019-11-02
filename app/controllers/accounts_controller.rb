@@ -2,7 +2,8 @@ class AccountsController < ApplicationController
     def index
       @new_purchase_history = Account.new
       begin
-        date = "#{params[:day][:year]}/#{params[:day][:month]}/#{params[:day][:day]}"
+        date = params.fetch(:day)
+        # date = "#{params[:day][:year]}/#{params[:day][:month]}/#{params[:day][:day]}"
         puts date
         @day = Date.parse(date)
       rescue => exception

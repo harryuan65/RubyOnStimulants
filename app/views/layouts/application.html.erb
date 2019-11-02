@@ -25,11 +25,6 @@
         <% end %>
           <%# <p class="txt alert alert-danger animation-forwards" onanimationend="reverseAnimation(this)"><span class="alert-txt">Test abcdefghijadfadsf123</span></p> %>
       </div>
-      <%= image_tag('moon.png',class:'moon',id:'moon') %>
       <%= yield %>
-
-      <% 5.times.each do |i|%>
-        <%= image_tag('star.png',class:"star-"+i.to_s) %>
-      <% end %>
   </body>
 </html>

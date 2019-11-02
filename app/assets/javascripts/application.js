@@ -14,19 +14,11 @@
 //= require turbolinks
 //= require jquery
 //= require jquery_ujs
-//= require_tree ./home
-//= require_tree ./excel
+//= require jquery-easing
 
-$(window).load(function(){
-    // var moon =  document.getElementById("moon");
-    // moon.addEventListener('animationend',function(){
-    //     this.style.animation = "";
-    //     this.style.animation = "moon-shine 3s linear infinite alternate";
-    // })
-    // document.querySelectorAll("[id^='star-']").forEach(e=>{
-    //   console.log(e);
-    //   e.addEventListener('animationend',function(){
-    //       this.style.animation= "moon-shine 3s linear infinite alternate";
-    //   })
-    // })
-})
+function reverseAnimation(this_obj){
+    console.log("Reversing...")
+    setTimeout( ()=>{
+       this_obj.style.animation = "alert-backwards 1s forwards running";
+    }, 2000);
+}

@@ -2,7 +2,7 @@
 <div id="container-cl">
   <h1> 👀 預覽 </h1>
   <div class="count">
-     <h4>🗂檔案名稱：<%= image_tag("excel.png",class:"path-icon",style:"position:relative;top:100px;") %> <%= @file_name %></h4>
+     <h4>🗂檔案名稱：<%= image_tag("excel.png",class:"icon-csv") %> <%= @file_name %></h4>
      <h4>📚資料表共：<%= @data.size %> 列</h4>
   </div>
 
@@ -12,7 +12,7 @@
     <%= button_tag("不能處理","#",class:"btn-report") %>
   <% end %>
 
-  <table class="table">
+  <table class="table-excel">
     <thead>
       <tr>
         <% begin %>

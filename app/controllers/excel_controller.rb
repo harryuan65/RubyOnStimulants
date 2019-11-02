@@ -69,7 +69,10 @@ class ExcelController < ApplicationController
         @data = read_hash_from @file_name, false
         @longest_hash = @data.max_by(&:length)
         country = @longest_hash['country']? "country" : "Country"
-        @data = @data.select{ |hash| @africa_arr.include?(hash["#{country}"])}
+        # @data.each do |hash|
+          # puts hash
+        # end
+        @data = @data.select{ |hash| @africa_arr.include?(hash["country"])}
       rescue=>exception
         flash[:alert] = exception.to_s
         render 'shared/result',locals:{status:false, message:"抱歉他怪怪的，把下面的貼給我",error: exception.to_s}
@@ -89,7 +92,7 @@ class ExcelController < ApplicationController
         @longest_hash = @data.max_by(&:length)
         country = @longest_hash['country']? "country": "Country"
         puts "country ===>  #{country} :#{@data.size}"
-        @data = @data.select{ |hash| @africa_arr.include?(hash["#{country}"])}
+        @data = @data.select{ |hash| @africa_arr.include?(hash["country"])}
 
         filename = export_africa @data, params[:file_name]
         flash[:notice] = "成功輸出了 #{filename}"

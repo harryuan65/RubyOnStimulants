@@ -1,13 +1,13 @@
 <%= render 'shared/header',subtitle: 'CSV' %>
 <div id="container-excel">
   <div id="form-upload">
-    <%= form_tag(excel_upload_path, method:"post",:multipart => true,style:"margin:30px;") %>
+    <%= form_tag(excel_upload_path, method:"post",:multipart => true) %>
     <%= label_tag '檔案'%>
     <%= file_field_tag :csv_file %>
-    <%= button_tag '送出', class:'input submit',style:"font-size:15px;"%>
+    <%= button_tag '送出', class:'input btn-excel',style:"font-size:15px;"%>
   </div>
-  <div class="wrap-two-tables">
-   <div class="wrap-table">
+  <div id="wrap-two-tables">
+   <div id="wrap-table">
    <h2>上傳的</h2>
       <% if @uploads.size==0 %>
         <h4>什麼都沒有，呢呢</h4>
@@ -22,7 +22,7 @@
           </thead>
           <tbody>
               <% @uploads.each do |path|  %>
-              <tr class="tr-data">
+              <tr>
                 <td class="file-icon">
                   <%= link_to("#{image_tag("excel.png",class:"path-icon") }".html_safe, download_path(file_path:Rails.root.join(Global::CSV_UPLOAD_PATH, path)),class:"") %>
                 </td>
@@ -38,8 +38,6 @@
         </table>
     <% end %>
    </div>
-
-   <hr>
 
    <div class="wrap-table">
      <h2>輸出的</h2>

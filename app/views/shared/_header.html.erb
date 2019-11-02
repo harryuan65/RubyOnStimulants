@@ -1,33 +1,23 @@
 <div id="container-top">
-      <div class="txt" id="titles">
-          <span id="title"><%= link_to "OurWorkspace",root_path %></span>
-          <% if subtitle!="" %>
-              <span class="home"><%= link_to(image_tag("home.png",class:"icon-home"), root_path ,class:"home") %></span>
-              <% if subtitle!="Home" %>
-                <%= link_to("⬅",:back ,class:"home-back") %>
-              <% end %>
-            <span id="subtitle">
-              <%= subtitle %>
-            </span>
-          <% end %>
-      </div>
-    <%if subtitle!=""%>
-      <div id="wrap-user-status">
-        <div class="btn-logout">
-           <%= link_to "Logout",destroy_user_session_path,method:"delete",data:{confirm:"真der要登出嗎？😭"} %>
-         </div>
+  <span id="subtitle"><%= link_to image_tag("home.png",class:"icon-inheader icon-home"), root_path %></span>
+
+  <%if subtitle!="Login"%>
+
+    <div id="wrap-user-status">
+          <div class="btn-logout">
+           <%= link_to image_tag("logout.png",class:'icon-inheader'),destroy_user_session_path,method:"delete",data:{confirm:"真der要登出嗎？😭"} %>
+          </div>
+
           <span id="current-username">
              <% if current_user %>
                <%= current_user.email.split('@')[0] %>
              <% else %>
-               <script>
-               window.location = "users/sign_in"
-               </script>
+               <script>window.location = "users/sign_in"</script>
              <% end %>
           </span>
-      </div>
+    </div>
 
-    <% end %>
+  <% end %>
 
 </div>
-
+<%= render("shared/skiers") %>

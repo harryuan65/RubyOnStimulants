@@ -1,0 +1,5 @@
+<%= javascript_include_tag 'moonNstars/moonNstars', 'data-turbolinks-track': 'reload' %>
+<%= image_tag('moon.png',id:'moon') %>
+<% 5.times.each do |i|%>
+  <%= image_tag('star.png',id:"star-"+i.to_s) %>
+<% end %>

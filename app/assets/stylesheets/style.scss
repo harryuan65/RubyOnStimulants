@@ -1,153 +1,22 @@
-//global
-$anim-drop-time: .6s;
-
 @font-face{
   font-family:'Comic Sans MS';
   src: font-url('Comic_Sans_MS.ttf') format('truetype');
 }
 
-@keyframes moon-shine{
-  from{
-    top: 50px;
-    left: 1100px;
-  }
+@keyframes shine{
   to{
-    -webkit-filter: drop-shadow(0px 0px 10px rgba(255, 255, 210,0.7));
-    filter: drop-shadow(0px 0px 10px rgba(255, 255, 210,0.7))
+    -webkit-filter: drop-shadow(0px 0px var(--shadow ,25px) rgba(255, 255, 210,0.7));
+    filter: drop-shadow(0px 0px var(--shadow ,25px) rgba(255, 255, 210,0.7));
   }
 }
-@keyframes star-rotate{
+@keyframes shine-rotate{
   to{
-    transform: rotate(360deg);
+    transform: rotate(var(--d,270deg));
+    -webkit-filter: drop-shadow(0px 0px var(--shadow ,25px) rgba(255, 255, 210,0.7));
+    filter: drop-shadow(0px 0px var(--shadow, 25px) rgba(255, 255, 210,0.7));
   }
-}
-@keyframes m-go-up{
-to{
-  top: 50px;
-  left: 1100px;
-  filter: drop-shadow(0px 0px 10px rgba(255, 255, 210,0.7));
-}
 }
 
-
-// @for $i from 0 through 5 {
-//   $top: 200+random(400);
-//   $left: random(900);
-//   $size: unquote(5+random()*30+'px');
-//   .star-#{$i} {
-//     position: fixed;
-//     z-index: 1;
-//     top: #{$top}px;
-//     left: #{$left}px;
-//     width: $size;
-//     height: $size;
-//     opacity: random() + 0.5;
-//     transform: rotate(random()*360deg);
-//     animation: star-rotate-#{$i} unquote(1+random()+"s") unquote(random()+"s") infinite alternate;
-//   }
-
-//   @keyframes star-rotate-#{$i} {
-//     to {
-//       transform: scale(#{random()});
-//     }
-//   }
-// }
-@keyframes go-up0{
-  to{
-    top: 50px;
-    left: 600px;
-    filter: drop-shadow(0px 0px 10px rgba(255, 255, 210,0.7));
-  }
-}
-@keyframes go-up1{
-  to{
-    top: 110px;
-    left: 700px;
-    filter: drop-shadow(0px 0px 10px rgba(255, 255, 210,0.7));
-  }
-}
-@keyframes go-up2{
-  to{
-    top: 90px;
-    left: 800px;
-    filter: drop-shadow(0px 0px 10px rgba(255, 255, 210,0.7));
-  }
-}
-@keyframes go-up3{
-  to{
-    top: 160px;
-    left: 900px;
-    filter: drop-shadow(0px 0px 10px rgba(255, 255, 210,0.7));
-  }
-}
-@keyframes go-up4{
-  to{
-    top: 201px;
-    left: 1250px;
-    filter: drop-shadow(0px 0px 10px rgba(255, 255, 210,0.7));
-  }
-}
-$m: 4.5s;
-$s0: 4s;
-$s1: 3.2s;
-$s2: 3.4s;
-$s3: 3s;
-$s4: 4.2s;
-.moon{
-  position: absolute;
-  width: 100px;
-  top: 1100px;
-  left: 1100px;
-  height: 100px;
-  // -webkit-filter: drop-shadow(0px 0px 3px rgba(255, 255, 210,0.7));
-  // filter: drop-shadow(0px 0px 3px rgba(255, 255, 210,0.7));
-  animation: m-go-up $m ease forwards;
-}
-.star-0{
-  position: absolute;
-  top: 1200px;
-  left: 600px;
-  width: 40px;
-  height: 40px;
-  transform: rotate(14deg) scale(0.5);
-  animation: go-up0 $s0 ease forwards;
-}
-.star-1{
-  position: absolute;
-  top: 1200px;
-  left: 700px;
-  width: 40px;
-  height: 40px;
-  transform: rotate(35deg) scale(0.8);
-  animation: go-up1 $s1 ease forwards;
-}
-.star-2{
-  position: absolute;
-  top: 1200px;
-  left: 800px;
-  width: 40px;
-  height: 40px;
-  transform: rotate(79deg) scale(0.4);
-  animation: go-up2 $s2 ease forwards;
-}
-.star-3{
-  position: absolute;
-  top: 1200px;
-  left: 900px;
-  width: 40px;
-  height: 40px;
-  transform: rotate(180deg) scale(1);
-  animation: go-up3 $s3 ease forwards;
-}
-.star-4{
-  position: absolute;
-  top: 1200px;
-  left: 1250px;
-  width:40px;
-  height:40px;
-  transform: rotate(50deg) scale(0.7);
-  animation: go-up4 $s4 ease forwards;
-}
 html{
   height: 100%;
   width: 100%;
@@ -157,21 +26,16 @@ body{
   padding: 0px;
   height: 100%;
   background-size: 400%;
-  // background: linear-gradient(180deg, rgba(14,71,115,1) 0%, rgba(22,106,171,1) 50%, rgba(14,71,115,1) 74%);
   background-color:rgba(3, 3, 3, 1);
-  // background-color:rgba(16,49,107,1);
-  // background: linear-gradient(180deg, rgba(16,49,107,1) 0%, rgba(46,91,171,1) 73%, rgba(92,129,194,1) 100%);
 }
 
 *{
   color: #fff;
-}
-
-.txt{
   // font-family: 'Acme', sans-serif;
   // font-family: 'Gotham Rounded Medium';
   font-family: 'Comic Sans MS';
 }
+
 input{
   border-color: #111;
 }
@@ -294,9 +158,8 @@ input:focus, textarea:focus {
   background-color: transparent;
 }
 .icon-csv{
-  padding: 300px;
-  zoom:0.1;
-  margin-left:-40px;
+  width: 40px;
+  height: 40px;
 }
 .icon-wrap{
   display: flex;
@@ -354,24 +217,20 @@ a.login-option{
 
 
 //header
-.icon-home{
-  zoom: .3
-}
-.home-back{
-  display: none;
-}
-.home{
-  display: none;
+.icon-inheader{
+  height: 40px;
+  width: 40px;
 }
 #container-top{
   position:relative;
   padding-top: 20px;
   // border-bottom: 1px solid #FaFaFa;
-  height: 60px;
+  height: auto;
   display: flex;
   flex-direction: row;
   align-items: center;;
   justify-content: space-between;
+  margin: 0 10% 0 10%;
 }
 
 #titles{
@@ -392,28 +251,16 @@ a.login-option{
   }
 }
 
-#title{
-  font-size: 30px;
-}
-
-#subtitle{
-  color: #ffffff;
-  margin-left:20px;
-  font-size: 20px;
-}
 #wrap-user-status{
   display: flex;
   flex-direction: row;
   justify-content: center;
   width: 200px;
-  margin-right: 20px;
 }
 
 #current-username{
-  color: #fff;
-  background-color:#004b91;
+  color: #8a8a8a;
   padding: 5px 10px 5px 10px;
-  border-radius:5px;
 }
 
 .btn-logout{
@@ -453,9 +300,9 @@ a.home-option{
   margin:10px;
   border-radius: 10px;
   transition: .1s ease;
-  background-color: #004b91;
+  background-color: #1a1a1a;
   &:hover{
-    background-color: #307ec7;
+    background-color: rgb(55, 55, 55);
   }
   &:active{
     transform: translate(2px,2px);
@@ -467,112 +314,120 @@ a.home-option{
   height: 80%;
 }
 
-.table{
-  z-index: 2;
+table{
   // border-collapse: collapse; 如果要圓角的話會，必須設為separate，不然collapse會跟樓下的合在一起，變成圓角外面又一個方匡
+  z-index: 2;
+  width: 100%;
   border-collapse: separate;
   border-spacing: 0;
+
+  th,td{
+    border: 1px solid rgba(255,255,255,.5);
+  }
+  td{
+    background-color: rgba(54,54,54,1);
+    word-break: break-all;
+    color: rgba(255,255,255,0.6);
+  }
+  &.table-account {
+    td          {text-align:center;}
+    .time       {width:150px;}
+    .content    {width:100px;}
+    .price      {width:70px;}
+    .category   {width:70px;}
+    .description{width:70px;}
+    .currency   {width:70px;}
+    .delete     {width:60px;}
+    td.delete{
+      cursor: pointer;
+    }
+    thead{
+      display:block;
+      width:100%;
+    }
+    tbody{
+      display: block;
+      height: 300px; //有限制高才會被overflow scroll
+      width:100%;
+      overflow-y:auto;
+    }
+  }
+
+  &.table-file{
+    .file-icon {
+      text-align: center;
+      width: 100px;
+    }
+    .file-name {
+      width: 400px;
+      a, a:hover, a:visited, a:active{
+        text-decoration: none;
+        text-align: left;
+        color: #fff;
+      }
+    }
+    .file-delete {
+      width: 65px;
+      &:hover{
+        background-color:#df4141;
+      }
+      &:active{
+        background-color:#960000;
+        color:#fff;
+      }
+      .delete-icon{
+        text-align: center;
+        color: #fff;
+        color:#cc2222;
+      }
+      a{
+        text-decoration: none;
+      }
+    }
+    .path-icon{
+      height: 30px;
+      width:  30px;
+    }
+  }
+
+
 }
 
-.table th{
-  color: #fff;
-  background-color: #07456f;
-  border:1px solid rgba(92,129,194,0.2);
-  text-align: left;
-  &:first-child{
-    border-radius: 15px 0 0 0;
-  }
-  &:last-child{
-    border-radius: 0 15px 0 0;
-  }
-}
 
-.table tr:last-child td{
-  &:first-child{
-    border-radius: 0 0 0 15px ;
-  }
-  &:last-child{
-    border-radius: 0 0 15px 0;
-  }
-}
-.table td{
-  border:1px solid rgba(92,129,194,0.2);
-  background-color: rgba(71,30,84,0.5);
-}
-.table-account {
-  font-size: 20px;
-  padding: 10px;
-}
-.table-account thead, .table-account tbody{
-  display: block;
-}
-.table-account tbody{
-  height: 300px;
-  overflow: scroll;
-}
-.time{
-  min-width: 85px;
-  max-width: 85px;
-}
-.content{
-  min-width: 88px;
-  max-width: 88px;
-}
-.price{
-  min-width: 50px;
-  max-width: 50px;
-}
-.category{
-  min-width: 50px;
-  max-width: 50px;
-}
-.description{
-  min-width: 88px;
-  max-width: 88px;
-}
-.currency{
-  min-width: 88px;
-  max-width: 88px;
-}
-.delete{
-  min-width: 50px;
-  max-width: 50px;
-}
-.table-account td, .table-account th{
-  text-align:center;
-}
-td.delete{
-  cursor: pointer;
-}
 .wrap-date{
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
 }
+
 #form-date{
   margin:3px;
-}
-#form-date *{
-  background-color: rgb(245, 245, 111);
-  color: #000;
-  font-size: 20px;
-  margin:5px;
-}
-#form-date .btn-date{
-  background-color: rgb(70, 68, 64);
-  border:1px solid #acacac;
-  border-radius: 10px;
-  padding: 4px 10px 4px 10px;
-  transition: .2s ease-out;
-  &:hover{
-    color: rgb(245, 245, 111);
-    filter: drop-shadow(0px 0px 10px rgba(255, 255, 210,0.7));
+  *{
+    font-size: 20px;
+    padding: 0 8px 0 8px;
+  }
+  .input-date{
+    background-color: rgba(218, 218, 218, 0.329);
+    color: #b8b8b8;
+    margin:5px;
+    border-radius: 10px;
+  }
+  .btn-date{
+    background-color: rgb(55,55,55);
+    border:1px solid #acacac;
+    border-radius: 5px;
+    transition: .1s ease-out;
+    &:hover{
+      background-color: rgb(90, 90, 90);
+    }
   }
 }
+
 .wrap-account-today{
-  margin:30px 30px 0 30px;
+  margin: 0 20px 0 20px;
 }
+
 @keyframes load-account-options-web{
   from{
     right: -5%;
@@ -668,7 +523,7 @@ td.delete{
   margin-bottom: 70px;
 }
 #wrap-dropdown-form.in{
-  animation: drop $anim-drop-time normal forwards
+  animation: drop .8s normal forwards
 }
 #wrap-dropdown-form.out{
   animation: fold .2s normal forwards
@@ -743,141 +598,118 @@ td.delete{
 }
 
 
-@media only screen and (max-width:500px){
-  //Moon
-  @keyframes m-go-up{
-    to{
-      top: 45px;
-      filter: drop-shadow(0px 0px 20px rgba(255, 255, 210,0.7));
-    }
-    }
-    .moon{
-      left: 240px;
-      transform: scale(.4);
-      filter: drop-shadow(0px 0px 20px rgba(255, 255, 210,0.7));
-    }
-  //Star
-  @keyframes go-up0{
-    to{
-      top: 80px;
-    filter: drop-shadow(0px 0px 20px rgba(255, 255, 210,0.7));
-  }
-  }
-  @keyframes go-up1{
-    to{
-      top: 125px;
-    filter: drop-shadow(0px 0px 20px rgba(255, 255, 210,0.7));
-  }
-  }
-  @keyframes go-up2{
-    to{
-      top: 90px;
-    filter: drop-shadow(0px 0px 20px rgba(255, 255, 210,0.7));
-  }
-  }
-  @keyframes go-up3{
-    to{
-      top: 118px;
-    filter: drop-shadow(0px 0px 20px rgba(255, 255, 210,0.7));
-  }
-  }
-  @keyframes go-up4{
-    to{
-      top: 97px;
-    filter: drop-shadow(0px 0px 10px rgba(255, 255, 210,0.7));
-  }
-  }
 
-  .star-0{
-    left: 50px;
-    transform: scale(0.2);
+
+//Excel
+.btn-excel{
+  box-shadow: 0 0 5px rgb(201, 201, 201);
+  background-color: #222222;
+  color: rgba(255,255,255,.5);
+  border-radius: 5px;
+  transition: .2s ease-in;
+  &:hover{
+    color: rgba(255,255,255,.8);
+    background-color: #333333;
   }
-  .star-1{
-    left: 90px;
-    transform: scale(0.3);
-  }
-  .star-2{
-    left: 150px;
-    transform: scale(0.2);
-  }
-  .star-3{
-    left: 230px;
-    transform: scale(0.4);
-  }
-  .star-4{
-    left: 300px;
-    transform: scale(0.3);
-  }
-  //Home
-   .home-back{
-     font-size: 20px;
-     margin-left:20px;
-   }
-   .home{
-      display: inline-flex;
-      margin-left:10px;
+}
+.btn-export{
+  margin: 50px 0px 50px 0;
+}
+a.btn-export, a.btn-export:hover, a.btn-export:visited, a.btn-export:active{
+  text-decoration: none;
+  color: #fff;
+  border: 1px solid white;
+  border-radius: 15px;
+  text-align:center;
+  font-size: 30px;
+  float: left;
+  width: 120px;
+  padding: 5px 10px 5px 10px;
+  background-color: #1a1a1a;
+  transition: .2s ease-out;
+  -webkit-transition: .2s ease-out;
+}
+a.btn-export:hover{
+  background-color: #6d6d6d;
+}
+#container-excel{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin: 20px 20px 400px 20px;
+}
+#container-excel .list{
+  height: 100%;
+}
+#wrap-two-tables{
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+#wrap-table{
+  display:flex;
+  flex-direction: column;
+}
+
+//Test list
+// .list{
+//   border: 1px solid black;
+//   width: 100%;
+//   overflow: scroll;
+//   height: 300px;
+// }
+
+@media only screen and (max-width:500px){
+    #wrap-user-status{
+      width: 0;
+      #current-username{
+        display: none;
+      }
+      .btn-logout{
+        margin: 0;
+      }
     }
     .wrap-home{
-      justify-content: center;
-      align-items: center;
-    }
-   #subtitle{
-    display: inline-block;
-    font-size:20px;
-   }
-    #current-username{
-      display: none;
+      margin-top:30px;
     }
     .login-options{
       width:100%
     }
-    .btn-logout{
-      position: fixed;
-      right: 15px;
-      top: 30px;
-      border:1px solid white;
-      border-radius: 15px;
-      background-color: rgba(0,127,249,.5);
-    }
-    #title{
-      display:none;
-    }
-    #subtitle{
-      font-size: 30px;
-      margin-right: 40px;
-    }
-    #container-top{
+    #container-cl{
+      width: auto;
+      height: auto;
+      align-items:center;
       justify-content: center;
-    }
-    .wrap-date{
-      justify-content: center;
-      align-items: center;
     }
     //table
+    .wrap-date{
+      justify-content: flex-start;
+      align-items: flex-start;
+      .input-date{
+        width:60%;
+      }
+    }
     .wrap-account-today{
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-    }
-    #container-account{
-      margin-top: 100px;
-    }
-    .table-account td{
-      color: rgba(255,255,255,0.6);
-    }
-    .table-account .currency, .table-account .description{
-      display: none;
+
+      .table-account .currency, .table-account .description{
+        display: none;
+      }
+      .table-account tbody{
+        height: 250px;
+      }
     }
     //Form
     #dropdown-toggle{
       display: flex;
       flex-direction: row;
     }
-    // #wrap-dropdown-form{
-    //   // height:70%
-    // }
-
+    #dropdown-form{
+      margin-top:-30px;
+    }
     @keyframes load-account-options-mob{
       from{
         bottom: -8%;
@@ -897,136 +729,19 @@ td.delete{
       align-items: flex-end;
       width: 100%;
       animation: load-account-options-mob .6s ease forwards;
-    }
-    .account-option{
-      margin-bottom: 0px;
+      .account-option{
+        margin-bottom: 0px;
+      }
     }
 
     #result{
       width: 80%;
       margin: 30px;
     }
+    //excel
+    #wrap-two-tables{
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
 }
-
-//Excel
-.btn-export{
-  margin: 50px 0px 50px 0;
-}
-a.btn-export, a.btn-export:hover, a.btn-export:visited, a.btn-export:active{
-  text-decoration: none;
-  color: #fff;
-  border: 1px solid white;
-  border-radius: 15px;
-  text-align:center;
-  font-size: 30px;
-  float: left;
-  width: 120px;
-  padding: 5px 10px 5px 10px;
-  background-color: #001d52;
-  transition: .2s ease-out;
-  -webkit-transition: .2s ease-out;
-}
-a.btn-export:hover{
-  background-color: #004b91;
-}
-#container-excel{
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  margin: 20px 20px 400px 20px;
-}
-#container-excel .list{
-  height: 100%;
-}
-.wrap-two-tables{
-  display:flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-.wrap-table{
-  display:flex;
-  flex-direction: column;
-}
-.table-file{
-  border-collapse: collapse;
-}
-
-.tr-data{
-  background-color: #111111;
-  transition: .2s;
-  -webkit-transition: .2s;
-}
-.tr-data:hover{
-  background-color: #222222;
-}
-.table-file th{
-  border:1px solid #555555;
-  background-color: #004b91;
-}
-.table-file td{
-  border:1px solid #555555;
-}
-  //tds
-.table-file .file-icon {
-  width: 121px;
-}
-.table-file .file-name {
-  width: 443px;
-}
-.table-file .file-delete {
-  width: 65px;
-}
-.table-file thead{
-  display: block;
-}
-.table-file tbody{
-  display: block;
-  overflow: scroll;
-  height: 500px;
-}
-.file-icon{
-  text-align: center;
-  width: 100px;
-}
-.file-name a, .file-name a:hover, .file-name a:visited, .file-name a:active{
-  text-decoration: none;
-  text-align: left;
-  color: #fff;
-  width: 400px;
-}
-.wrap-delete{
-  // display: flex;
-  // flex-direction: row;
-  // justify-content: center;
-  // align-items: center;
-  &:hover{
-    background-color:#df4141;
-  }
-  &:active{
-    background-color:#960000;
-    color:#fff;
-  }
-}
-.delete-icon{
-  text-align: center;
-  color: #fff;
-  color:#cc2222;
-  font-size: 20px;
-}
-.file-delete a{
-  text-decoration: none;
-}
-.path-icon{
-  zoom: 0.06;
-}
-
-//Test list
-// .list{
-//   border: 1px solid black;
-//   width: 100%;
-//   overflow: scroll;
-//   height: 300px;
-// }
-
-
-//Test background

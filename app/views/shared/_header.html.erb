@@ -1,10 +1,10 @@
 <div id="container-top">
-  <span id="subtitle"><%= link_to image_tag("home.png",class:"icon-inheader icon-home"), root_path %></span>
+  <span id="btn-subtitle"><%= link_to image_tag("home.png",class:"icon-inheader icon-home"), root_path %></span>
 
   <%if subtitle!="Login"%>
 
     <div id="wrap-user-status">
-          <div class="btn-logout">
+          <div id="btn-logout">
            <%= link_to image_tag("logout.png",class:'icon-inheader'),destroy_user_session_path,method:"delete",data:{confirm:"真der要登出嗎？😭"} %>
           </div>
 
@@ -20,4 +20,3 @@
   <% end %>
 
 </div>
-<%= render("shared/skiers") %>

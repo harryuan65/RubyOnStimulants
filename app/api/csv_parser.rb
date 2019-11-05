@@ -68,4 +68,10 @@ module CSVParser
           return fn
         end
     end
+
+    def get_full_csv_path file_name
+      file_path = File.join(Global::CSV_UPLOAD_PATH,file_name)
+      path = (File.exists?(file_path)? Global::CSV_UPLOAD_PATH : Global::CSV_EXPORT_PATH)
+      return Rails.root.join(path,file_name)
+    end
 end

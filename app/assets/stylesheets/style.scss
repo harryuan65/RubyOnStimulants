@@ -1,8 +1,11 @@
+// @font-face{
+//   font-family:'Comic Sans MS';
+//   src: font-url('Comic_Sans_MS.ttf') format('truetype');
+// }
 @font-face{
-  font-family:'Comic Sans MS';
-  src: font-url('Comic_Sans_MS.ttf') format('truetype');
+  font-family:'Gotham Rounded Med';
+  src: font-url('gothamroundedmedium_21022.ttf') format('truetype');
 }
-
 @keyframes shine{
   to{
     -webkit-filter: drop-shadow(0px 0px var(--shadow ,25px) rgba(255, 255, 210,0.7));
@@ -33,9 +36,9 @@ body{
   color: #fff;
   // font-family: 'Acme', sans-serif;
   // font-family: 'Gotham Rounded Medium';
-  font-family: 'Comic Sans MS';
+  // font-family: 'Comic Sans MS';
+  font-family:'Gotham Rounded Med';
 }
-
 input{
   border-color: #111;
 }
@@ -120,8 +123,7 @@ input:focus, textarea:focus {
   display: flex;
   justify-content: flex-start;
   margin: 20px 20px 50px 20px;
-  width: 90%;
-  margin-top: 80px;
+  width: 100%;
 }
 #container-cl{
   @extend %container;
@@ -217,6 +219,12 @@ a.login-option{
 
 
 //header
+%header-buttons{
+  transition: .2s;
+  &:hover{
+    filter: drop-shadow(0 0 15px rgba(256,256,256,0.7))
+  }
+}
 .icon-inheader{
   height: 40px;
   width: 40px;
@@ -260,10 +268,15 @@ a.login-option{
 
 #current-username{
   color: #8a8a8a;
-  padding: 5px 10px 5px 10px;
+  padding: 18px 10px 5px 10px;
+  vertical-align: middle;
 }
 
-.btn-logout{
+#btn-subtitle{
+  @extend %header-buttons;
+}
+#btn-logout{
+  @extend %header-buttons;
   padding: 5px 10px 5px 10px;
   margin: 0 15px 0 15px;
 }
@@ -317,17 +330,52 @@ a.home-option{
 table{
   // border-collapse: collapse; 如果要圓角的話會，必須設為separate，不然collapse會跟樓下的合在一起，變成圓角外面又一個方匡
   z-index: 2;
-  width: 100%;
   border-collapse: separate;
   border-spacing: 0;
-
+  overflow: scroll;
   th,td{
     border: 1px solid rgba(255,255,255,.5);
   }
+
   td{
-    background-color: rgba(54,54,54,1);
     word-break: break-all;
-    color: rgba(255,255,255,0.6);
+    color: rgba(255, 255, 255, 0.925);
+  }
+  &.table-info{
+    border:1px solid white;
+    td:first-child{
+      background-color: rgb(65, 30, 9);
+    }
+    td:nth-child(2){
+      background-color: rgb(48, 36, 30);
+    }
+  }
+  &.table-excel{
+    display: block;
+    width: 80%;
+    height: 30%;
+    margin: 0 40px 0 40px;
+    border: 5px double #9c9c9c;
+    thead tr{
+      background-color:  rgb(19, 90, 40);
+    }
+    tr:nth-child(5n){
+      background-color:  rgb(28, 65, 39);
+    }
+    td{
+      min-width: 50px;
+    }
+    td:first-child{
+      background-color:  rgb(14, 51, 25);
+      min-width: 200px;
+    }
+    td:not(:first-child){
+      text-align: center;
+      font-size: 10px;
+    }
+    th:first-child ,td:first-child{
+        width:200px;
+    }
   }
   &.table-account {
     td          {text-align:center;}
@@ -601,15 +649,22 @@ table{
 
 
 //Excel
+.wrap-excel{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width:100%;
+}
 .btn-excel{
-  box-shadow: 0 0 5px rgb(201, 201, 201);
-  background-color: #222222;
+  background-color: #1b1b1b;
+  padding: 5px 15px 5px 15px;
   color: rgba(255,255,255,.5);
   border-radius: 5px;
-  transition: .2s ease-in;
+  transition: .1s ease-in;
   &:hover{
+    box-shadow: 0 0 5px rgb(201, 201, 201);
     color: rgba(255,255,255,.8);
-    background-color: #333333;
   }
 }
 .btn-export{
@@ -660,6 +715,9 @@ a.btn-export:hover{
 // }
 
 @media only screen and (max-width:500px){
+    %container{
+      margin-top: 80px;
+    }
     #wrap-user-status{
       width: 0;
       #current-username{

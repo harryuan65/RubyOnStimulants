@@ -6,7 +6,7 @@
   <div class="wrap-home">
     <%= link_to('記帳', accounts_path(), class:" home-option") %>
     <%= link_to("Excel", excel_path,class:" home-option") %>
-    <%= link_to('HTML Color Codes','https://htmlcolorcodes.com/',class:"home-option") %>
+    <%# <%= link_to('HTML Color Codes','https://htmlcolorcodes.com/',class:"home-option") %>
 
     <%# <%= link_to('send_post', post_newrecord_path, class:' btn-dark')%>
     <%# <%= link_to('Lists', list_home_path, class:' btn-dark')%>
@@ -29,3 +29,4 @@
 <% end %>
 
 
+<%= render("shared/skiers") %>

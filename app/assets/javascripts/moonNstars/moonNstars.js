@@ -4,7 +4,7 @@ var star_sizes = [25,30,20,33,18];
 var time = [3400,3000,3100,3200,3300,3500];
 var tops = [120,150,170,131,180,200];
 var x = ['80%','40%','50%','60%','70%','90%'];
-var opacity= .4;
+var opacity= 1;
 $(document).ready(function(){
 
   if (window.matchMedia('screen and (max-width: 500px)').matches) {

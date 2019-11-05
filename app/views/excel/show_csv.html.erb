@@ -1,9 +1,18 @@
 <%= render 'shared/header',subtitle: 'CSV' %>
 <div id="container-cl">
-  <h1> 👀 預覽 </h1>
-  <div class="count">
-     <h4>🗂檔案名稱：<%= image_tag("excel.png",class:"icon-csv") %> <%= @file_name %></h4>
-     <h4>📚資料表共：<%= @data.size %> 列</h4>
+  <h1>預覽</h1>
+  <div style="margin-left:20px;">
+    <table class="table-info">
+    <tr>
+      <td>檔案名稱：</td> <td><%= @file_name %></td>
+    </tr>
+    <tr>
+      <td>資料表共：</td> <td><%= @data.size %> 列</td>
+    </tr>
+    <tr>
+      <td>下載</td> <td><%= link_to(image_tag("excel.png",style:"height:30px;withe:30px;"),download_path(file_path: @file_path)) %></td>
+    </tr>
+    </table>
   </div>
 
   <% if @data.size>0 %>
@@ -12,31 +21,33 @@
     <%= button_tag("不能處理","#",class:"btn-report") %>
   <% end %>
 
-  <table class="table-excel">
-    <thead>
-      <tr>
-        <% begin %>
-            <% @longest_hash.each do |data| %>
-              <th> <%= data[0] %></th>
-            <%end%>
-          <% rescue=>exception %>
-           <%= @data %>
-          <% end %>
-      </tr>
-    </thead>
-    <tbody>
-      <% @data.each do |row| %>
+  <div class="wrap-excel">
+    <table class="table-excel">
+      <thead>
         <tr>
           <% begin %>
-            <% row.each do |data| %>
-              <td> <%= data[1] %></td>
-            <%end%>
-          <% rescue=>exception %>
-            <%= @data %>
-          <% end %>
-
+              <% @longest_hash.each do |data| %>
+                <th> <%= data[0] %></th>
+              <%end%>
+            <% rescue=>exception %>
+             <%= @data %>
+            <% end %>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <% @data.each do |row| %>
+          <tr>
+            <% begin %>
+              <% row.each do |data| %>
+                <td> <%= data[1] %></td>
+              <%end%>
+            <% rescue=>exception %>
+              <%= @data %>
+            <% end %>
+
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>

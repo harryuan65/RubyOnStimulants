@@ -1,5 +1,6 @@
 <%= render 'shared/header',subtitle: 'CSV' %>
 <div id="container-cl">
+  <h1><%= link_to("← 上一頁",excel_path,style:"text-decoration:none;border:1px solid white; background-color:#222222;padding:10px; ") %></h1>
   <h1>預覽</h1>
   <div style="margin-left:20px;">
     <table class="table-info">
@@ -7,7 +8,7 @@
       <td>檔案名稱：</td> <td><%= @file_name %></td>
     </tr>
     <tr>
-      <td>資料表共：</td> <td><%= @data.size %> 列</td>
+      <td>資料表共：</td> <td><%= @hash_arr.size %> 列</td>
     </tr>
     <tr>
       <td>下載</td> <td><%= link_to(image_tag("excel.png",style:"height:30px;withe:30px;"),download_path(file_path: @file_path)) %></td>
@@ -15,34 +16,34 @@
     </table>
   </div>
 
-  <% if @data.size>0 %>
+  <% if @hash_arr.size>0 %>
     <%= link_to("過濾非洲",excel_processed_csv_path(file_io:@file_name),class:"btn-export") %>
   <% else %>
     <%= button_tag("不能處理","#",class:"btn-report") %>
   <% end %>
 
   <div class="wrap-excel">
-    <table class="table-excel">
+    <table class="table-excel show-excel">
       <thead>
         <tr>
           <% begin %>
-              <% @longest_hash.each do |data| %>
-                <th> <%= data[0] %></th>
+              <% @longest_hash.each do |hash_arr| %>
+                <th> <%= hash_arr[0] %></th>
               <%end%>
             <% rescue=>exception %>
-             <%= @data %>
+             <%= @hash_arr %>
             <% end %>
         </tr>
       </thead>
       <tbody>
-        <% @data.each do |row| %>
+        <% @hash_arr.each do |row| %>
           <tr>
             <% begin %>
-              <% row.each do |data| %>
-                <td> <%= data[1] %></td>
+              <% row.each do |hash_arr| %>
+                <td> <%= hash_arr[1] %></td>
               <%end%>
             <% rescue=>exception %>
-              <%= @data %>
+              <%= @hash_arr %>
             <% end %>
 
           </tr>

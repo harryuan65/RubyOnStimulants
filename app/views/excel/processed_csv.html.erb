@@ -1,23 +1,37 @@
 <%= render 'shared/header',subtitle: 'CSV' %>
 <div id="container-cl">
-  <h1> <%= (@data.size>0? "✅":  "❌") %>  處理結果 </h1>
+  <h1> <%= (@hash_arr.size>0? "✅":  "❌") %>  處理結果 </h1>
   <div style="margin-left:20px;">
     <table class="table-info">
       <tr>
-        <td>檔案名稱：</td>      <td><%= @file_name %></td>
+        <td>檔案名稱</td><td><%= @file_name %></td>
       </tr>
       <tr>
-        <td>內含非洲：</td><td><%= @matched.size %> 列</td>
+        <td>檔案列數</td><td><%= @hash_arr.size %> 列</td>
       </tr>
       <tr>
-        <td>檔案列數：</td><td><%= @data.size %> 列</td>
+        <td>內含非洲</td><td><%= @matched.size %>筆</td>
       </tr>
       <tr>
-        <td>hazel提供的非洲表:</td><td><%= @africa.size %>個國家</td>
+        <%# -1 是因 為了找Swaziland = Eswatini%>
+        <td>hazel提供的非洲表</td><td><%= @africa.size-1 %>個國家</td>
+      </tr>
+       <tr>
+        <td class="<%(@missing.size>0? '': "missing")%>">缺少</td><td class="<%(@missing.size>0? '': "missing")%>"><%= @missing.size %>個國家</td>
       </tr>
     </table>
+       <%# Missing table %>
+     <% if @missing.size>0 %>
+    <hr>
+      <table class="table-info">
+        <% @missing.each do |country| %>
+          <tr>
+            <td class="missing"> 沒有 </td><td class="missing"> <%= country %> </td>
+          </tr>
+        <%end%>
+      </table>
+     <% end %>
   </div>
-    <%# <h4>沒有對到的非洲：<%= @missings.size %>
 
   <% if @matched.size>0 %>
     <%= link_to("輸出",excel_export_filter_africa_path(file_io:@file_name),class:"btn-export") %>
@@ -40,19 +54,19 @@
 
       <%# <hr> %>
 
-      <table class="table-excel">
+      <table class="table-excel processed-excel">
         <thead>
           <tr>
-              <% @longest_hash.each do |data| %>
-                <th> <%= data[0] %></th>
+              <% @longest_hash.each do |hash_arr| %>
+                <th> <%= hash_arr[0] %></th>
               <%end%>
           </tr>
         </thead>
         <tbody>
           <% @matched.each do |row| %>
             <tr>
-              <% row.each do |data| %>
-                <td> <%= data[1] %></td>
+              <% row.each do |hash_arr| %>
+                <td> <%= hash_arr[1] %></td>
               <%end%>
             </tr>
           <% end %>

@@ -1,12 +1,23 @@
 require 'csv'
 require_relative './global.rb'
 module CSVParser
-    def createhash row, avoid_nil #(array) row = [["name", "jack"],["goognight_user_id"],["ip", "223.140.238.128"], ["intro", nil], ["id", "2941471"] ,["email", "o8q4@yahoo.com.tw"], ["google_email", nil], ["device_platform", "iOS"]]
+    def createhash row, avoid_nil, exclude_str='' #(array) row = [["name", "jack"],["goognight_user_id"],["ip", "223.140.238.128"], ["intro", nil], ["id", "2941471"] ,["email", "o8q4@yahoo.com.tw"], ["google_email", nil], ["device_platform", "iOS"]]
       if avoid_nil
         row = row.select{
           |d| d[1]!=nil
         }
       end
+
+      if exclude_str!=''
+        row = row.select{
+          |d| d[0]!=nil&&d[1]!= exclude_str
+        }
+      end
+
+      row = row.select{
+        |d| d[0]!=nil
+      }
+
       begin
         r =  Hash[
           row.each do |p|
@@ -27,7 +38,7 @@ module CSVParser
         Dir.chdir(path) do
           print(' ')
           puts(file_path)
-          CSV.foreach(io,headers: true,encoding: "ISO8859-1:utf-8") do |row|
+          CSV.foreach(io,headers: true,encoding: "iso-8859-1:utf-8") do |row|
             row.each do |d|
               if d[0]
                 d[0] = d[0].strip
@@ -35,6 +46,7 @@ module CSVParser
                 d[0] = d[0].gsub('ï»¿','')
               end
               d[1] = d[1].strip if d[1]
+              d[1] = '' if d[1]=='..'
             end
             hsh = createhash row, avoid_nil
             data.push(hsh)

@@ -343,10 +343,13 @@ table{
   }
   &.table-info{
     border:1px solid white;
-    td:first-child{
+    .missing{
+      background-color:rgba(200,0,0,1);
+    }
+    td:first-child:not(.missing){
       background-color: rgb(65, 30, 9);
     }
-    td:nth-child(2){
+    td:nth-child(2):not(.missing){
       background-color: rgb(48, 36, 30);
     }
   }
@@ -365,17 +368,23 @@ table{
     td{
       min-width: 50px;
     }
-    td:first-child{
-      background-color:  rgb(14, 51, 25);
-      min-width: 200px;
+    &.show-excel{
+      td:first-child{
+        min-width: 200px;
+        background-color:  rgb(14, 51, 25);
+      }
     }
-    td:not(:first-child){
-      text-align: center;
-      font-size: 10px;
+    &.processed-excel{
+      td:nth-child(2){
+        background-color:  rgb(14, 51, 25);
+        min-width: 200px;
+      }
+      td:not(:nth-child(2)){
+        text-align: center;
+        font-size: 10px;
+      }
     }
-    th:first-child ,td:first-child{
-        width:200px;
-    }
+
   }
   &.table-account {
     td          {text-align:center;}

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  content: MyString
+  related_people: MyString
+  deadline: 2019-11-19 11:58:25
+  is_urgent: false
+
+two:
+  content: MyString
+  related_people: MyString
+  deadline: 2019-11-19 11:58:25
+  is_urgent: false

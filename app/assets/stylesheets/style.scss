@@ -447,6 +447,11 @@ table{
     }
   }
 
+  &.table-todo{
+    border:1px solid #eee;
+    color:#fff;
+    border-collapse:collapse;
+  }
 
 }
 
@@ -723,6 +728,15 @@ a.btn-export:hover{
 //   height: 300px;
 // }
 
+#form-add-todo{
+  .todo{
+    color:#fff;
+  }
+  .btn-add-todo{
+    background-color: #23a;
+  }
+}
+//RWD
 @media only screen and (max-width:500px){
     %container{
       margin-top: 80px;

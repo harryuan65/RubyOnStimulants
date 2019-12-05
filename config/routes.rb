@@ -3,13 +3,19 @@ Rails.application.routes.draw do
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'home#index'
-  get 'post_newrecord', controller: 'home', action:'post_newrecord'
-  get 'list_home',controller:'home', action:'list_home'
-  post 'post_list',controller:'home', action:'post_list'
-  get 'yeah',controller:'home', action:'yeah'
   get 'download', controller:'application', action:'download'
   get 'delete', controller:'application', action:'delete'
   post 'post_test', controller:'application', action:'post_test'
+
+  scope :controller=>"home",:path=>"/", :as=>"home" do
+    get '/'=>:index
+    get 'post_newrecord'=>:post_newrecord
+    get 'list_home'=>:list_home
+    post 'post_list'=>:post_list
+    get 'yeah'=>:yeah
+    get 'test'=>:test
+  end
+
   resources :accounts, controller: 'accounts' do
     collection do
       get :index
@@ -21,6 +27,13 @@ Rails.application.routes.draw do
       get :report
     end
   end
+  scope :controller=>"to_dos",:path=>"/todos", :as=>"todos" do
+    get '/'=>:index
+    post 'add_todo'=>:add_todo
+    post 'edit_todo'=>:edit_todo
+    post 'delete_todo'=>:delete_todo
+  end
+
   scope :controller => "excel", :path => "/excel", :as => "excel" do
     # get 'meetings/:id' => :show, :as => "meeting"
     get '/' => :index
@@ -28,5 +41,13 @@ Rails.application.routes.draw do
     get '/show_csv' => :show_csv
     get '/processed_csv' => :processed_csv
     get '/export_filter_africa' => :export_filter_africa
+  end
+  scope :controller => "process_test", :path=> "/process_test", :as=>"process_test" do
+    get '/raise_error'=>:raise_error
+  end
+
+  scope :controller => "validator", :path=> "/validator", :as=>"validator" do
+    get '/' => :index
+    post '/see_valid' => :see_valid
   end
 end

@@ -1,0 +1,6 @@
+<%= render('shared/header', subtitle:"Result")%>
+
+<%= form_tag validator_see_valid_path,method:'post' do  %>
+<%= text_field :email, nil,required:true,style:"color:#222" %>
+<%= submit_tag "Check",style:"color:#222" %>
+<% end %>

@@ -27,4 +27,27 @@
       </div>
       <%= yield %>
   </body>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-analytics.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyBEqQtc-4sld3LxcXZNRsN2nF6e9pnOkUw",
+    authDomain: "harrysworkspace.firebaseapp.com",
+    databaseURL: "https://harrysworkspace.firebaseio.com",
+    projectId: "harrysworkspace",
+    storageBucket: "harrysworkspace.appspot.com",
+    messagingSenderId: "257855706500",
+    appId: "1:257855706500:web:c01c3c9dfaf3a22119f9d1",
+    measurementId: "G-FJ25X8T54H"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+</script>
 </html>

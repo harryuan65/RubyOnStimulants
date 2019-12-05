@@ -1,30 +1,20 @@
-<%# <%= javascript_include_tag "home/home" %>
-<% puts(current_user==nil) %>
 <% if current_user %>
-<%= render('shared/header', subtitle:"Home")%>
-<div id="container-cl">
-  <div class="wrap-home">
-    <%= link_to('記帳', accounts_path(), class:" home-option") %>
-    <%= link_to("Excel", excel_path,class:" home-option") %>
-    <%# <%= link_to('HTML Color Codes','https://htmlcolorcodes.com/',class:"home-option") %>
-
-    <%# <%= link_to('send_post', post_newrecord_path, class:' btn-dark')%>
-    <%# <%= link_to('Lists', list_home_path, class:' btn-dark')%>
-
-
-    <%# <div class="dropdown dropdown-state">
-      <div class="state" style="cursor: pointer" onclick="toggleDropdown(this)">按我 toggle</div>
-      <ul class="dropdown-menu" onmouseleave="disableDropdown(this)">
-        <li onclick="f1()"> Option1 </li>
-        <li onclick="f2()"> Option2 </li>
-      </ul>
-    </div> %>
-
+  <%= render('shared/header', subtitle:"Home")%>
+  <div id="container-cl">
+    <div class="wrap-home">
+      <%= link_to('記帳', accounts_path(), class:" home-option") %>
+      <%= link_to("Excel", excel_path,class:" home-option") %>
+      <%= link_to('待辦事項',todos_path,class:"home-option") %>
+      <%= link_to('Test',home_test_path,class:"home-option") %>
+      <%= link_to('Validator',validator_path,class:"home-option") %>
+      <%# <%= link_to('Raise Test Error',process_test_raise_error_path,class:"home-option") %>
+      <%# <%= link_to('send_post', post_newrecord_path, class:' btn-dark')%>
+      <%# <%= link_to('Lists', list_home_path, class:' btn-dark')%>
+    </div>
   </div>
-</div>
 <% else %>
   <script>
-  window.location.href="users/sign_in"
+    window.location.href="users/sign_in"
   </script>
 <% end %>
 

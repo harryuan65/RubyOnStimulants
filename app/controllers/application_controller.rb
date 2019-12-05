@@ -3,8 +3,12 @@ class ApplicationController < ActionController::Base
   include Global
   before_action :show_info
   skip_forgery_protection only:[:prod_test]
+
   def show_info
     puts '========================'
+    puts "Parent pid: #{Process.ppid}"
+    # puts "Group pid: #{Process.groups}"
+    puts "Worker pid: #{Process.pid}"
     puts "Request: #{request.method} #{request.path}"
     puts "Controller: #{params[:controller]}##{params[:action]}"
     puts '========================'
@@ -15,7 +19,6 @@ class ApplicationController < ActionController::Base
     request.headers.each do |k,v|
       puts k.to_s+' '+v.to_s
     end
-    # puts("X_API_KEY: "+request.headers["HTTP_X_API_KEY"].to_s)
     params.each do |k,v|
       puts k.to_s+' '+v.to_s
     end
@@ -28,6 +31,7 @@ class ApplicationController < ActionController::Base
       redirect_to new_user_session_path
     end
   end
+
   def download
     if current_user
       filepath = params[:file_path]

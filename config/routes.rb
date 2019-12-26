@@ -27,6 +27,7 @@ Rails.application.routes.draw do
       get :report
     end
   end
+
   scope :controller=>"to_dos",:path=>"/todos", :as=>"todos" do
     get '/'=>:index
     post 'add_todo'=>:add_todo
@@ -42,12 +43,5 @@ Rails.application.routes.draw do
     get '/processed_csv' => :processed_csv
     get '/export_filter_africa' => :export_filter_africa
   end
-  scope :controller => "process_test", :path=> "/process_test", :as=>"process_test" do
-    get '/raise_error'=>:raise_error
-  end
 
-  scope :controller => "validator", :path=> "/validator", :as=>"validator" do
-    get '/' => :index
-    post '/see_valid' => :see_valid
-  end
 end

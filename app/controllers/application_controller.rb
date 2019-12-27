@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   include Global
   before_action :show_info
   skip_forgery_protection only:[:prod_test]
+  skip_before_action :verify_authenticity_token
 
   def show_info
     puts '========================'

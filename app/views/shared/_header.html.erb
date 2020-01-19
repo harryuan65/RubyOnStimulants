@@ -1,20 +1,22 @@
-<div id="container-top">
-  <span id="btn-subtitle"><%= link_to image_tag("home.png",class:"icon-inheader icon-home"), root_path %></span>
+<div id="container-header">
+  <span id="wrap-title">
+    <%= link_to("#{image_tag("home.png",class:"icon-inheader")}".html_safe, root_path,id:"link-home") %>
+    <%= content_tag(:h2,subtitle,id:"title") %>
+  </span>
 
   <%if subtitle!="Login"%>
-
     <div id="wrap-user-status">
-          <div id="btn-logout">
-           <%= link_to image_tag("logout.png",class:'icon-inheader'),destroy_user_session_path,method:"delete",data:{confirm:"真der要登出嗎？😭"} %>
-          </div>
+      <span id="current-username">
+         <% if current_user %>
+           <%= current_user.email.split('@')[0] %>
+         <% else %>
+           <script>window.location = "users/sign_in"</script>
+         <% end %>
+      </span>
 
-          <span id="current-username">
-             <% if current_user %>
-               <%= current_user.email.split('@')[0] %>
-             <% else %>
-               <script>window.location = "users/sign_in"</script>
-             <% end %>
-          </span>
+      <div id="btn-logout">
+        <%= link_to image_tag("logout.png",class:'icon-inheader'),destroy_user_session_path,method:"delete",data:{confirm:"真der要登出嗎？😭"} %>
+      </div>
     </div>
 
   <% end %>

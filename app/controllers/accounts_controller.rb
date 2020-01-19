@@ -11,10 +11,8 @@ class AccountsController < ApplicationController
       end
       @user = User.find_by_email(current_user.email)
       if @user
-        @todays_purchase_histories = @user.accounts.where('created_at >= :t1 AND created_at <= :t2',
-          :t1=>@day.beginning_of_day,
-          :t2=>@day.end_of_day
-        )
+        @todays_purchase_histories = @user.accounts.today
+        @daily_sum = @todays_purchase_histories.map{|e| e.price}.reduce(:+)
         puts @todays_purchase_histories.size
       end
       @time = @day.strftime("%m/%d")

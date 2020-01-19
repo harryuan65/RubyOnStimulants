@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_19_035825) do
+ActiveRecord::Schema.define(version: 2020_01_19_123005) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,13 +27,18 @@ ActiveRecord::Schema.define(version: 2019_11_19_035825) do
     t.index ["user_id"], name: "index_accounts_on_user_id"
   end
 
-  create_table "to_dos", force: :cascade do |t|
-    t.string "content"
-    t.string "related_people"
+  create_table "to_do_lists", force: :cascade do |t|
+    t.string "thing"
+    t.boolean "done"
+    t.boolean "need_remind"
+    t.integer "remind_type"
+    t.datetime "remind_at"
+    t.string "postscript"
     t.datetime "deadline"
-    t.boolean "is_urgent"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_to_do_lists_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

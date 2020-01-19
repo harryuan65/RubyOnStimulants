@@ -4,21 +4,21 @@
   <div id="form-upload">
     <%= form_tag(excel_upload_path, method:"post",:multipart => true) %>
     <%= label_tag '檔案'%>
-    <%= file_field_tag :csv_file %>
-    <%= button_tag '送出', class:'input btn-excel',style:"font-size:15px;"%>
+    <%= file_field_tag :csv_file,class:"file-input" %>
+    <%= button_tag '送出', class:'input btn-excel'%>
   </div>
   <div id="wrap-two-tables">
    <div id="wrap-table">
-   <h2>上傳的</h2>
+   <h2>Uploaded</h2>
       <% if @uploads.size==0 %>
-        <h4>什麼都沒有，呢呢</h4>
+        <h4>Nothing，呢呢</h4>
       <% else %>
         <table class="table-file">
           <thead>
             <tr>
-              <th class="file-icon">按這裡下載</th>
-              <th class="file-name">檔名</th>
-              <th class="file-delete">刪除</th>
+              <th class="file-icon">Download</th>
+              <th class="file-name">Name</th>
+              <th class="file-delete">Delete</th>
             </tr>
           </thead>
           <tbody>
@@ -41,16 +41,16 @@
    </div>
 
    <div class="wrap-table">
-     <h2>輸出的</h2>
+     <h2>Output</h2>
       <% if @exports.size==0 %>
-        <h4>什麼都沒有，呢呢</h4>
+        <h4>Nothing，呢呢</h4>
       <% else %>
         <table class="table-file">
             <thead>
               <tr>
-                <th class="file-icon">按這裡下載</th>
-                <th class="file-name">檔名</th>
-                <th class="file-delete">刪除</th>
+                <th class="file-icon">Download</th>
+                <th class="file-name">Name</th>
+                <th class="file-delete">Delete</th>
               </tr>
             </thead>
             <tbody>

@@ -1,0 +1,66 @@
+<%= render("shared/header",subtitle:"To-Do List") %>
+<%= javascript_include_tag 'common/form' %>
+
+<button id="dropdown-toggle-todo" onclick=toggleForm()>+</button>
+
+<div id="wrap-dropdown-form">
+  <div id="dropdown-form">
+    <%= form_tag to_do_list_add_todo_path,method:"post",id:"form-add-todo" do %>
+    <%= label_tag("Thing") %>
+    <%= text_field_tag(:thing,nil,required: true,class:"todo content") %>
+
+    <%= label_tag("Remind?") %>
+
+    <div class="wrap-remind">
+      <%= label_tag("是") %>
+      <%= radio_button_tag(:is_urgent,true,true,class:"todo is-urgent") %>
+      <%= label_tag("否") %>
+      <%= radio_button_tag(:is_urgent,false,false,class:"todo is-urgent") %>
+    </div>
+
+    <%= label_tag("Deadline") %>
+    <%= date_field_tag(:deadline,DateTime.now.to_date,class:"todo deadline") %>
+
+    <%= label_tag("Postscript") %>
+    <%= text_field_tag(:related_people,nil,class:"todo related-people") %>
+
+    <%= button_tag("Create",class:"todo btn-add-todo") %>
+    <% end %>
+  </div>
+</div>
+
+
+<div id="container-rw">
+<table class="table-todolist">
+<thead>
+<tr>
+  <td>Done</td>
+  <td>Remind?</td>
+  <td>Thing</td>
+  <td>Postscript</td>
+  <td>Deadline</td>
+  <td>CreatedAt</td>
+</tr>
+</thead>
+<tbody>
+<% if @todos.any? %>
+  <% @todos.each do |todo| %>
+    <tr>
+    </tr>
+  <% end %>
+<% else %>
+  <tr id="none">
+    <td>None</td>
+    <td>None</td>
+    <td>None</td>
+    <td>None</td>
+    <td>None</td>
+    <td>None</td>
+  </tr>
+<% end %>
+</tbody>
+</table>
+</div>
+
+
+

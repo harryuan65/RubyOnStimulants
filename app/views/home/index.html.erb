@@ -1,14 +1,13 @@
 <% if current_user %>
   <%= render('shared/header', subtitle:"Home")%>
   <div id="container-cl">
-    <div class="wrap-home">
-      <%= link_to('記帳', accounts_path(), class:" home-option") %>
-      <%= link_to("Excel", excel_path,class:" home-option") %>
-      <%= link_to('待辦事項',todos_path,class:"home-option") %>
-      <%= link_to('Test',home_test_path,class:"home-option") %>
-      <%# <%= link_to('Raise Test Error',process_test_raise_error_path,class:"home-option") %>
-      <%# <%= link_to('send_post', post_newrecord_path, class:' btn-dark')%>
-      <%# <%= link_to('Lists', list_home_path, class:' btn-dark')%>
+    <div class="" id="container-rw">
+        <div class="wrap-home">
+          <%= link_to("#{content_tag(:span,"記帳",class:"option-text")}".html_safe, accounts_path,class:"home-option") %>
+          <%= link_to("#{content_tag(:span,"Excel",class:"option-text")}".html_safe, excel_path,class:"home-option") %>
+          <%= link_to("#{content_tag(:span,"待辦事項",class:"option-text")}".html_safe,to_do_list_path,class:"home-option") %>
+          <%# <%= link_to("#{content_tag(:span,"Test",class:"option-text")}".html_safe,home_test_path,class:"home-option") %>
+        </div>
     </div>
   </div>
 <% else %>
@@ -18,4 +17,4 @@
 <% end %>
 
 
-<%= render("shared/skiers") %>
+<%# <%= render("shared/skiers") %>

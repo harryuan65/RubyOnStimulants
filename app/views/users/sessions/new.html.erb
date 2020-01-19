@@ -1,7 +1,7 @@
 <%= render('shared/header',subtitle:"Login") %>
 
 <div id="container-rw">
-  <div class="login-options">
+  <div class="wrap-login-options">
   <%- if devise_mapping.omniauthable? %>
     <%- resource_class.omniauth_providers.each do |provider| %>
       <%= link_to "#{image_tag("#{OmniAuth::Utils.camelize(provider)}.png",class:"icon icon-#{OmniAuth::Utils.camelize(provider)}")} #{content_tag(:div, OmniAuth::Utils.camelize(provider), class:"login-option-txt")}".html_safe, omniauth_authorize_path(resource_name, provider),class:"txt login-option" %><br />

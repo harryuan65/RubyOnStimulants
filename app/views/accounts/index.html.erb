@@ -1,18 +1,18 @@
-<%= javascript_include_tag("accounts/accounts") %>
+<%= javascript_include_tag("common/form") %>
 <%= render('shared/header',subtitle:"Accounts") %>
 
 <div id="wrap-dropdown-form">
     <div id="dropdown-form">
+          <span class="x" onclick="toggleForm()">x</span>
           <div class="wrap-form-title">
-            <span class="form-title">New</span>
-            <span class="x" onclick="toggleForm()">x</span>
+            <span class="form-title">Create</span>
           </div>
           <%= form_for @new_purchase_history, url:add_accounts_path(@new_purchase_history),html:{id:"form-ph",name:"form-ph",autocomplete:"off"},remote:true ,method: 'post' do |f| %>
-            <%= f.text_field "content"    , placeholder:"內容物"   , required:true                               , class:"input text-field"%>
-            <%= f.text_field "price"      , placeholder:"$$金額"   ,required:true                               , class:"input text-field"%>
-            <%= f.select "category"       , options_for_select(["正餐","甜點","飲料","免死金牌","生活用品"]) ,{}    , class:"input select"%>
+            <%= f.text_field "content"    , placeholder:"What?"   , required:true                               , class:"input text-field"%>
+            <%= f.text_field "price"      , placeholder:"Price"   ,required:true                               , class:"input text-field"%>
+            <%= f.select "category"       , options_for_select(["Meal","Desert","Drink","Necessity","Other"]) ,{}    , class:"input select"%>
             <%= f.select "currency"       , options_for_select(["NTD","JPY","USD","RMB"]) ,{}                  , class:"input select" %>
-            <%= f.text_field "description", placeholder:"備註"                                                 ,class:"input text-field" %>
+            <%= f.text_field "description", placeholder:"Postscript"                                                 ,class:"input text-field" %>
             <%= f.submit "Submit", class:"input submit" %>
           <% end %>
     </div>
@@ -21,56 +21,62 @@
 <div id="container-account">
   <div class="wrap-account-today">
     <div class="wrap-date">
-      <%= form_tag accounts_path,method:'get',id:"form-date" do%>
+      <%= form_tag accounts_path,method:'get',id:"date-form" do%>
         <%= date_field_tag :day,DateTime.now.to_date,class:"input-date" %>
         <%# <%= select_date @day, prefix: :day, class:"select-date", use_two_digit_numbers: true ,date_separator: '/'%>
         <%= submit_tag "Go",class:"btn-date" %>
       <% end %>
     </div>
-   <% if @todays_purchase_histories.size==0%>
-   <h1 class="empty">沒有紀錄</h1>
-   <% else %>
     <table class="table-account">
       <thead>
         <tr>
-          <th class="time">時間</th>
-          <th class="content">內容</t>
-          <th class="price">價格</th>
-          <th class="category">類型</th>
-          <th class="description">備註 </th>
-          <th class="currency">幣種 </th>
-          <th class="delete">刪除</th>
+          <th class="time">When</th>
+          <th class="content">Content</t>
+          <th class="price">Price</th>
+          <th class="category">Category</th>
+          <th class="description">Description</th>
+          <th class="currency">Currency</th>
+          <th class="delete">Delete</th>
         </tr>
       </thead>
       <tbody class="tbody-account">
-        <% @todays_purchase_histories.each do |record| %>
-          <tr id="tr_<%=record.id%>">
-            <td class="time" id="<%=record.id%>" onclick="details(this)"><%= taipei_time(record.created_at) %></td>
-            <td class="content"><%= record.content %></td>
-            <td class="price"><%= record.price %></td>
-            <td class="category"><%= record.category %></td>
-            <td class="description"><%= record.description %></td>
-            <td class="currency"><%= record.currency %></td>
-            <td class="delete"> <div onclick='delete_history({url:"<%= delete_accounts_path%>", id:"<%= record.id %>"})' > ❌</div></td>
+        <% if @todays_purchase_histories.any?%>
+          <% @todays_purchase_histories.each do |record| %>
+            <tr id="tr_<%=record.id%>">
+              <td class="time" id="<%=record.id%>" onclick="details(this)">
+                <%= taipei_time(record.created_at).split(' ')[1] %>
+              </td>
+              <td class="content"><%= record.content %></td>
+              <td class="price"><span id="dollar-sign" class="light">$ </span><%= record.price %></td>
+              <td class="category"><%= record.category %></td>
+              <td class="description"><%= record.description %></td>
+              <td class="currency"><%= record.currency %></td>
+              <td class="delete"> <div onclick='delete_history({url:"<%= delete_accounts_path%>", id:"<%= record.id %>"})' > ❌</div></td>
+            </tr>
+          <% end %>
+        <% else %>
+          <tr id="none">
+            <td>None</td>
           </tr>
         <% end %>
       </tbody>
     </table>
-   <% end %>
-
+    <div id="wrap-daily-sum">
+      <span class="text">本日支出小計: <span id="dollar-sign">$</span><%= @daily_sum %></span>
+    </div>
   </div>
-  <div class="account-options">
+
+  <div class="wrap-account-options">
     <div class="account-option">
-      <div id="dropdown-toggle" onclick="toggleForm()">
+      <div id="dropdown-toggle-account" onclick="toggleForm()">
         <div class="icon-wrap"><%= image_tag("add.png",class:"icon-add") %></div>
       </div>
     </div>
 
     <div class="account-option">
        <div style="cursor:pointer;" onclick="alert('抱歉姆咪，這還沒有功能')">
-         <div class="icon-wrap"><%= image_tag("report.png",class:"icon icon-report") %></div>
+         <div class="icon-wrap"><%= image_tag("analytics.png",class:"icon icon-report") %></div>
        </div>
     </div>
   </div>
 </div>
-<%= render("shared/skiers") %>

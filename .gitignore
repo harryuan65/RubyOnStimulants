@@ -31,3 +31,4 @@
 /config/master.key
 .env
 /app/assets/images/尚未確認的 791021.crdownload
+/config/credentials.yml.enc

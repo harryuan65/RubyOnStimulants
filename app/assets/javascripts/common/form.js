@@ -1,7 +1,9 @@
 $(document).ready(function() {
-$("table[id^='form']").on('submit',function(e){
+  var formExists = $("form[id^='form']").length>0;
+
+  $("form[id^='form']").on('submit',function(e){
     e.preventDefault(); // cancel default submit
-    var form = $("table[id^='form']");
+    var form = $("form[id^='form']");
     $.post(form.attr('action'), form.serialize(), function() {})
     .done(function() {
         toggleForm();
@@ -11,9 +13,12 @@ $("table[id^='form']").on('submit',function(e){
             alert("Something is wrong!")
     });
     return false;
-
-})
-  console.log("Set form on submit");
+  })
+  if(formExists){
+    console.log("Set form on submit");}
+  else{
+    console.log("Something is wrong!")
+  }
 
 });
 

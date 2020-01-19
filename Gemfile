@@ -78,3 +78,4 @@ gem 'omniauth-google-oauth2'
 gem 'dotenv-rails', groups: [:development, :test]
 gem 'annotate'
 gem 'dalli' #for mem_cached_store for precompile
+gem 'slack-notifier'

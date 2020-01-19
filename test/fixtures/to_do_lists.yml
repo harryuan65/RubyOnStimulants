@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  thing: MyString
+  done: false
+  need_remind: false
+  remind_type: 1
+  remind_at: 2020-01-19 20:30:05
+  postscript: MyString
+  deadline: 2020-01-19 20:30:05
+
+two:
+  thing: MyString
+  done: false
+  need_remind: false
+  remind_type: 1
+  remind_at: 2020-01-19 20:30:05
+  postscript: MyString
+  deadline: 2020-01-19 20:30:05

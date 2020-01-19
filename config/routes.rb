@@ -28,7 +28,7 @@ Rails.application.routes.draw do
     end
   end
 
-  scope :controller=>"to_dos",:path=>"/todos", :as=>"todos" do
+  scope :controller=>"to_do_list",:path=>"/to_do_list", :as=>"to_do_list" do
     get '/'=>:index
     post 'add_todo'=>:add_todo
     post 'edit_todo'=>:edit_todo

@@ -33,6 +33,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # File operations: currently for Excel
   def download
     if current_user
       filepath = params[:file_path]
@@ -67,4 +68,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def taipei_time time
+    time.in_time_zone("Taipei")
+  end
 end

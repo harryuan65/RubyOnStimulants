@@ -1,65 +1,86 @@
 <%= render("shared/header",subtitle:"To-Do List") %>
 <%= javascript_include_tag 'common/form' %>
 
-<button id="dropdown-toggle-todo" onclick=toggleForm()>+</button>
+<button id="dropdown-toggle-todo" onclick=toggleForm()><span id="dropdown-toggle-text">+</span></button>
 
 <div id="wrap-dropdown-form">
-  <div id="dropdown-form">
+  <div id="dropdown-form-add-todo">
     <%= form_tag to_do_list_add_todo_path,method:"post",id:"form-add-todo" do %>
-    <%= label_tag("Thing") %>
-    <%= text_field_tag(:thing,nil,required: true,class:"todo content") %>
+      <%= content_tag(:div,"#{content_tag(:span,"New",class:"title")}".html_safe,class:"wrap-form-title") %>
 
-    <%= label_tag("Remind?") %>
+      <div class="wrap-todo-field">
+        <span class="todo-field">🤷‍♂️Thing</span>
+        <%= text_field_tag(:thing,nil,required: true,class:"content") %>
+      </div>
 
-    <div class="wrap-remind">
-      <%= label_tag("是") %>
-      <%= radio_button_tag(:is_urgent,true,true,class:"todo is-urgent") %>
-      <%= label_tag("否") %>
-      <%= radio_button_tag(:is_urgent,false,false,class:"todo is-urgent") %>
-    </div>
+      <div class="wrap-todo-field">
+        <span class="todo-field">🙋🏼‍♀️Remind?</span>
+        <div class="wrap-remind">
+          <%= label_tag("是") %>
+          <%= radio_button_tag(:need_remind,true,true,class:"need-remind") %>
+          <%= label_tag("否") %>
+          <%= radio_button_tag(:need_remind,false,false,class:"need-remind") %>
+        </div>
+      </div>
 
-    <%= label_tag("Deadline") %>
-    <%= date_field_tag(:deadline,DateTime.now.to_date,class:"todo deadline") %>
+      <div class="wrap-todo-field">
+        <span class="todo-field">☝️Remind At?</span>
+        <%= text_field_tag(:remind_at,DateTime.now.to_date.strftime("%Y/%m/%d"),class:"remind-at") %>
+      </div>
 
-    <%= label_tag("Postscript") %>
-    <%= text_field_tag(:related_people,nil,class:"todo related-people") %>
+      <div class="wrap-todo-field">
+        <span class="todo-field">⏰Deadline</span>
+        <%= date_field_tag(:deadline,DateTime.now.to_date,class:"deadline") %>
+      </div>
 
-    <%= button_tag("Create",class:"todo btn-add-todo") %>
+      <div class="wrap-todo-field">
+        <span class="todo-field">📝Postscript</span>
+        <%= text_field_tag(:postscript,nil,class:"postscript") %>
+      </div>
+
+      <div class="wrap-todo-field">
+        <%= button_tag("Create",class:"btn-add-todo") %>
+      </div>
+
     <% end %>
   </div>
 </div>
 
 
-<div id="container-rw">
-<table class="table-todolist">
-<thead>
-<tr>
-  <td>Done</td>
-  <td>Remind?</td>
-  <td>Thing</td>
-  <td>Postscript</td>
-  <td>Deadline</td>
-  <td>CreatedAt</td>
-</tr>
-</thead>
-<tbody>
-<% if @todos.any? %>
-  <% @todos.each do |todo| %>
-    <tr>
-    </tr>
-  <% end %>
-<% else %>
-  <tr id="none">
-    <td>None</td>
-    <td>None</td>
-    <td>None</td>
-    <td>None</td>
-    <td>None</td>
-    <td>None</td>
-  </tr>
-<% end %>
-</tbody>
-</table>
+<div id="container-cl">
+  <div id="wrap-todo-date">
+    <h2 id="todo-date"><%= @date %></h2>
+  </div>
+  <table class="table-todolist">
+    <thead>
+      <tr>
+        <th>Done</th>
+        <th>Remind?</th>
+        <th>Thing</th>
+        <th>Postscript</th>
+        <th>Deadline</th>
+        <th>CreatedAt</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if @todos.any? %>
+        <% @todos.each do |todo| %>
+          <tr>
+            <td><%= done_text(todo.done) %></td>
+            <td><%= todo.need_remind %></td>
+            <td><%= todo.thing %></td>
+            <td><%= todo.postscript %></td>
+            <td><%= todo.deadline %></td>
+            <td><%= todo.created_at %></td>
+          </tr>
+        <% end %>
+      <% else %>
+        <tr id="none">
+
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
 
 

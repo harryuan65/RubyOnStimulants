@@ -22,11 +22,6 @@ $(document).ready(function() {
 
 });
 
-//暫時沒用
-function details(obj){
-    console.log(obj.id);
-}
-
 function delete_history(target){
     r = confirm("真的要刪掉嗎?");
    if(r){
@@ -116,8 +111,20 @@ function stopAnimation(event){
     e.classList.add("in")
     e.removeEventListener('animationend', stopAnimation)
 }
-function mumi(){
-    var data = require('/Users/harry/Desktop/data.json');
-    console.table(data.result.fields);
-    console.table(data.result.records);
+
+function delete_todo(target){
+    var r = confirm("Are you sure?");
+    if(r){
+       $.ajax({
+               url: target.url,
+               method: 'POST'
+        })
+        .done(data=>{
+            console.log(data);
+            updateTable();
+        })
+        .fail(err=>{
+            console.error(data);
+        })
+    }
 }

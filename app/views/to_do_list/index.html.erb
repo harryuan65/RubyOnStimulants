@@ -1,5 +1,6 @@
 <%= render("shared/header",subtitle:"To-Do List") %>
 <%= javascript_include_tag 'common/form' %>
+<%= javascript_include_tag 'todos/todos' %>
 
 <button id="dropdown-toggle-todo" onclick=toggleForm()><span id="dropdown-toggle-text">+</span></button>
 
@@ -58,8 +59,10 @@
         <th>Remind?</th>
         <th>Thing</th>
         <th>Postscript</th>
+        <th>RemindAt</th>
         <th>Deadline</th>
         <th>CreatedAt</th>
+        <th>Delete</th>
       </tr>
     </thead>
     <tbody>
@@ -70,13 +73,14 @@
             <td><%= todo.need_remind %></td>
             <td><%= todo.thing %></td>
             <td><%= todo.postscript %></td>
+            <td><%= todo.remind_at %></td>
             <td><%= todo.deadline %></td>
             <td><%= todo.created_at %></td>
+            <td><div id="btn-delete-todo" onclick='delete_todo({url:"<%= to_do_list_delete_todo_path(id: todo.id)%>"})'>❌</div></td>
           </tr>
         <% end %>
       <% else %>
         <tr id="none">
-
         </tr>
       <% end %>
     </tbody>

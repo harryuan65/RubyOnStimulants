@@ -57,4 +57,7 @@ class HomeController < ApplicationController
       return render 'shared/result',locals:{status:true,message:"success",data:params}
     end
 
+    def webhook
+       return render json:{message:"webhook"}, status: 200
+    end
 end

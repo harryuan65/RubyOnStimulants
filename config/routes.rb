@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     post 'post_list'=>:post_list
     get 'yeah'=>:yeah
     get 'test'=>:test
+    post 'webhook'=>:webhook
   end
 
   resources :accounts, controller: 'accounts' do

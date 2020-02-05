@@ -10,8 +10,8 @@
       <%= content_tag(:div,"#{content_tag(:span,"New",class:"title")}".html_safe,class:"wrap-form-title") %>
 
       <div class="wrap-todo-field">
-        <span class="todo-field">🤷‍♂️Thing</span>
-        <%= text_field_tag(:thing,nil,required: true,class:"content") %>
+        <span class="todo-field">❓Thing</span>
+        <%= text_field_tag(:thing,nil,required: true,class:"content",required: true) %>
       </div>
 
       <div class="wrap-todo-field">
@@ -25,13 +25,13 @@
       </div>
 
       <div class="wrap-todo-field">
-        <span class="todo-field">☝️Remind At?</span>
-        <%= text_field_tag(:remind_at,DateTime.now.to_date.strftime("%Y/%m/%d"),class:"remind-at") %>
+        <span class="todo-field">⏰Remind At?</span>
+        <%= text_field_tag(:remind_at,(DateTime.now.in_time_zone('Taipei')+ 30.minute).strftime("%Y/%m/%d %H:%m:%S"),class:"remind-at") %>
       </div>
 
       <div class="wrap-todo-field">
-        <span class="todo-field">⏰Deadline</span>
-        <%= date_field_tag(:deadline,DateTime.now.to_date,class:"deadline") %>
+        <span class="todo-field">🤷‍♂️Whom</span>
+        <%= text_field_tag(:who,nil,class:"who",placeholder:"e.g. hazel",required: true) %>
       </div>
 
       <div class="wrap-todo-field">
@@ -60,7 +60,7 @@
         <th>Thing</th>
         <th>Postscript</th>
         <th>RemindAt</th>
-        <th>Deadline</th>
+        <th>Who</th>
         <th>CreatedAt</th>
         <th>Delete</th>
       </tr>
@@ -74,7 +74,7 @@
             <td><%= todo.thing %></td>
             <td><%= todo.postscript %></td>
             <td><%= todo.remind_at %></td>
-            <td><%= todo.deadline %></td>
+            <td><%= todo.who %></td>
             <td><%= todo.created_at %></td>
             <td><div id="btn-delete-todo" onclick='delete_todo({url:"<%= to_do_list_delete_todo_path(id: todo.id)%>"})'>❌</div></td>
           </tr>

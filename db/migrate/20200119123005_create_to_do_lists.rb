@@ -6,8 +6,8 @@ class CreateToDoLists < ActiveRecord::Migration[5.2]
       t.boolean :need_remind
       t.integer :remind_type
       t.datetime :remind_at
+      t.string :who
       t.string :postscript
-      t.datetime :deadline
       t.references :user, index: true
       t.timestamps
     end

@@ -1,10 +1,10 @@
 <div id="container-header">
   <span id="wrap-title">
     <%= link_to("#{image_tag("home.png",class:"icon-inheader")}".html_safe, root_path,id:"link-home") %>
-    <%= content_tag(:h2,subtitle,id:"title") %>
+    <%= content_tag(:h2, title,id:"title") %>
   </span>
 
-  <%if subtitle!="Login"%>
+  <%if title!="Login"%>
     <div id="wrap-user-status">
       <span id="current-username">
          <% if current_user %>

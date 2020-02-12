@@ -79,3 +79,4 @@ gem 'dotenv-rails', groups: [:development, :test]
 gem 'annotate'
 gem 'dalli' #for mem_cached_store for precompile
 gem 'line-bot-api'
+gem 'async'

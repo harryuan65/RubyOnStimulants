@@ -1,4 +1,3 @@
-<%= render("shared/header",subtitle:"To-Do List") %>
 <%= javascript_include_tag 'common/form' %>
 <%= javascript_include_tag 'todos/todos' %>
 
@@ -10,32 +9,17 @@
       <%= content_tag(:div,"#{content_tag(:span,"New",class:"title")}".html_safe,class:"wrap-form-title") %>
 
       <div class="wrap-todo-field">
-        <span class="todo-field">❓Thing</span>
+        <span class="todo-field">Thing</span>
         <%= text_field_tag(:thing,nil,required: true,class:"content",required: true) %>
       </div>
 
       <div class="wrap-todo-field">
-        <span class="todo-field">🙋🏼‍♀️Remind?</span>
-        <div class="wrap-remind">
-          <%= label_tag("是") %>
-          <%= radio_button_tag(:need_remind,true,true,class:"need-remind") %>
-          <%= label_tag("否") %>
-          <%= radio_button_tag(:need_remind,false,false,class:"need-remind") %>
-        </div>
+        <span class="todo-field">Deadline</span>
+        <%= date_field_tag :deadline, DateTime.now.in_time_zone('Taipei'),class:"input-date" %>
       </div>
 
       <div class="wrap-todo-field">
-        <span class="todo-field">⏰Remind At?</span>
-        <%= text_field_tag(:remind_at,(DateTime.now.in_time_zone('Taipei')+ 30.minute).strftime("%Y/%m/%d %H:%m:%S"),class:"remind-at") %>
-      </div>
-
-      <div class="wrap-todo-field">
-        <span class="todo-field">🤷‍♂️Whom</span>
-        <%= text_field_tag(:who,nil,class:"who",placeholder:"e.g. hazel",required: true) %>
-      </div>
-
-      <div class="wrap-todo-field">
-        <span class="todo-field">📝Postscript</span>
+        <span class="todo-field">Postscript</span>
         <%= text_field_tag(:postscript,nil,class:"postscript") %>
       </div>
 
@@ -56,11 +40,8 @@
     <thead>
       <tr>
         <th>Done</th>
-        <th>Remind?</th>
         <th>Thing</th>
         <th>Postscript</th>
-        <th>RemindAt</th>
-        <th>Who</th>
         <th>CreatedAt</th>
         <th>Delete</th>
       </tr>
@@ -70,11 +51,8 @@
         <% @todos.each do |todo| %>
           <tr>
             <td><%= done_text(todo.done) %></td>
-            <td><%= todo.need_remind %></td>
             <td><%= todo.thing %></td>
             <td><%= todo.postscript %></td>
-            <td><%= todo.remind_at %></td>
-            <td><%= todo.who %></td>
             <td><%= todo.created_at %></td>
             <td><div id="btn-delete-todo" onclick='delete_todo({url:"<%= to_do_list_delete_todo_path(id: todo.id)%>"})'>❌</div></td>
           </tr>

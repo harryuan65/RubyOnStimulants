@@ -2,8 +2,13 @@ class ApplicationController < ActionController::Base
   include CSVParser
   include Global
   before_action :show_info
+  before_action :set_title
   skip_forgery_protection only:[:prod_test]
   skip_before_action :verify_authenticity_token
+
+  def set_title
+    @title= params[:action]? params[:action].capitalize : "Untitled"
+  end
 
   def show_info
     puts '========================'
@@ -70,5 +75,9 @@ class ApplicationController < ActionController::Base
 
   def taipei_time time
     time.in_time_zone("Taipei")
+  end
+
+  def route_not_found
+    render 'shared/route_not_found'
   end
 end

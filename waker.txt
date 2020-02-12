@@ -1,0 +1,24 @@
+# require 'rest-client'
+# require 'time'
+# def taipei_now
+#   Time.now.utc.localtime("+08:00")
+# end
+
+# def wake last_update_time
+#     while true do
+#         puts "#{last_update_time.strftime("%k:%M:%S")}:#{taipei_now.strftime("%k:%M:%S")} #{taipei_now.beginning_of_day+22.hours} #{taipei_now.beginning_of_day+1.day+7.hours}"
+#         if !taipei_now.between?(taipei_now.beginning_of_day+22.hours,taipei_now.beginning_of_day+1.day+7.hours)
+#             if taipei_now-last_update_time>2.seconds
+#                 last_update_time=taipei_now
+#                 puts RestClient.get("http://localhost:3005")
+#             end
+#         end
+#         sleep(1)
+#     end
+# end
+# Async do
+#     last_update_time = taipei_now
+#     Async do
+#         wake last_update_time
+#     end
+# end

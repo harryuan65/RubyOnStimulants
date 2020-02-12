@@ -45,4 +45,5 @@ Rails.application.routes.draw do
     get '/export_filter_africa' => :export_filter_africa
   end
 
+  match '*unmatched', to: 'application#route_not_found', via: :all
 end

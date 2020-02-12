@@ -30,11 +30,8 @@ ActiveRecord::Schema.define(version: 2020_01_19_123005) do
   create_table "to_do_lists", force: :cascade do |t|
     t.string "thing"
     t.boolean "done"
-    t.boolean "need_remind"
-    t.integer "remind_type"
-    t.datetime "remind_at"
-    t.string "who"
     t.string "postscript"
+    t.datetime "deadline"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

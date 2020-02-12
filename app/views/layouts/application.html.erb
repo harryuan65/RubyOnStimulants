@@ -25,6 +25,7 @@
         <% end %>
           <%# <p class="txt alert alert-danger animation-forwards" onanimationend="reverseAnimation(this)"><span class="alert-txt">Test abcdefghijadfadsf123</span></p> %>
       </div>
+     <%= render('shared/header', title:@title) %>
       <%= yield %>
   </body>
 </html>

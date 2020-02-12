@@ -42,6 +42,10 @@ class ToDoListController < ApplicationController
     end
 
     def set_user
-      @current_user = User.find_by(email: current_user.email)
+      if current_user
+        @current_user = User.find_by(email: current_user.email)
+      else
+        redirect_to new_user_session_path
+      end
     end
 end

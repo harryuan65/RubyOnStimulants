@@ -805,6 +805,16 @@ a.btn-export:hover{
     padding:10px;
     border:1px solid rgba(54,54,54,.8);
   }
+  .input-date{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    select[id^="to_do_list"]{
+      width: 80px;
+    }
+  }
+  
   .wrap-todo-field{
     display: flex;
     flex-direction: column;

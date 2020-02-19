@@ -15,7 +15,7 @@
 
       <div class="wrap-todo-field">
         <span class="todo-field">Deadline</span>
-        <%= datetime_select :deadline, DateTime.now.utc.localtime('+08:00'),class:"input-date" %>
+        <%= datetime_select :to_do_list, :deadline, prompt: true,class:"input-date" %>
       </div>
 
       <div class="wrap-todo-field">

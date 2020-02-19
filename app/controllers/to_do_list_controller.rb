@@ -11,7 +11,7 @@ class ToDoListController < ApplicationController
         @item = @current_user.to_do_lists.create!(
             thing: todo_params[:thing],
             done: false,
-            deadline: todo_params[:deadline],
+            deadline: todo_params[:deadline],## parse  "to_do_list"=>{"deadline(1i)"=>"2020", "deadline(2i)"=>"2", "deadline(3i)"=>"19", "deadline(4i)"=>"02", "deadline(5i)"=>"05"}
             postscript: todo_params[:postscript]
         )
         if @item.save

@@ -11,10 +11,7 @@ class ToDoListController < ApplicationController
         @item = @current_user.to_do_lists.create!(
             thing: todo_params[:thing],
             done: false,
-            need_remind: todo_params[:need_remind],
-            remind_type: todo_params[:remind_type],
-            who: todo_params[:who],
-            remind_at: (todo_params[:need_remind] ? Time.parse(todo_params[:remind_at]) : nil),
+            deadline: todo_params[:deadline],
             postscript: todo_params[:postscript]
         )
         if @item.save

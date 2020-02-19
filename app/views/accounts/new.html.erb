@@ -1,6 +1,5 @@
 <%# <%= javascript_include_tag("accounts/accounts") %> %>
 
-<%= render("shared/header",title:"New spending") %>
 <div id="container-rw">
   <%= form_for @new_purchase_history, url:add_accounts_path(@new_purchase_history),html:{id:"form-ph",name:"form-ph"},method: 'post' do |f| %>
     <%= f.text_field "content"    , placeholder:"內容物",required:true                               , class:"input-ph"%>

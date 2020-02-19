@@ -10,17 +10,17 @@
 
       <div class="wrap-todo-field">
         <span class="todo-field">Thing</span>
-        <%= text_field_tag(:thing,nil,required: true,class:"content",required: true) %>
+        <%= text_field_tag(:thing,nil,required: true,class:"content",required: true, autocomplete: 'off') %>
       </div>
 
       <div class="wrap-todo-field">
         <span class="todo-field">Deadline</span>
-        <%= date_field_tag :deadline, DateTime.now.in_time_zone('Taipei'),class:"input-date" %>
+        <%= datetime_select :deadline, DateTime.now.utc.localtime('+08:00'),class:"input-date" %>
       </div>
 
       <div class="wrap-todo-field">
         <span class="todo-field">Postscript</span>
-        <%= text_field_tag(:postscript,nil,class:"postscript") %>
+        <%= text_field_tag(:postscript,nil,class:"postscript",autocomplete: 'off') %>
       </div>
 
       <div class="wrap-todo-field">
@@ -42,7 +42,7 @@
         <th>Done</th>
         <th>Thing</th>
         <th>Postscript</th>
-        <th>CreatedAt</th>
+        <th>Deadline</th>
         <th>Delete</th>
       </tr>
     </thead>
@@ -53,7 +53,7 @@
             <td><%= done_text(todo.done) %></td>
             <td><%= todo.thing %></td>
             <td><%= todo.postscript %></td>
-            <td><%= todo.created_at %></td>
+            <td><%= todo.deadline %></td>
             <td><div id="btn-delete-todo" onclick='delete_todo({url:"<%= to_do_list_delete_todo_path(id: todo.id)%>"})'>❌</div></td>
           </tr>
         <% end %>

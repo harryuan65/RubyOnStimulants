@@ -1,16 +1,16 @@
 <div id="container-header">
   <span id="wrap-title">
     <%= link_to("#{image_tag("home.png",class:"icon-inheader")}".html_safe, root_path,id:"link-home") %>
-    <%= content_tag(:h2, title,id:"title") %>
+    <%= content_tag(:h2, @title,id:"title") %>
   </span>
 
-  <%if title!="Login"%>
+  <%if "#{request['controller']}##{request['action']}"!="users/sessions#new"%>
     <div id="wrap-user-status">
       <span id="current-username">
          <% if current_user %>
            <%= current_user.email.split('@')[0] %>
          <% else %>
-           <script>window.location = "users/sign_in"</script>
+           <script>window.location = "/users/sign_in"</script>
          <% end %>
       </span>
 

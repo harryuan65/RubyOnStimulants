@@ -1,0 +1,36 @@
+<div id="container-supplies-page">
+  <div class="wrap-link-form">
+    <%= link_to '查看總覽', supplies_path,class:'supply-link' %>
+    <%= form_for @new_supply, url: supplies_path(@new_supply), html:{id:"form-add-supply",autocomplete:"on"}, remote: false ,method: 'post' do |f| %>
+      <%= f.text_field "name"    , placeholder:"What?"   , required:true                               , class:"input text-field"%>
+      <%= f.text_field "quantity"      , placeholder:"數量"   ,required:true                               , class:"input text-field"%>
+      <div class="custom-select">
+        <%= f.select "category", options_for_select(["正餐", "飲料", "沖泡式", "衛生紙", "餅乾", "水"]) ,{}    , class:"input select"%>
+      </div>
+      <%= f.date_field :earliest_expiration ,class:"input date" %>
+      <%= f.submit "增加", class:"input submit" %>
+    <% end %>
+  </div>
+  <table class="table-supplies">
+    <thead>
+      <th class="name">名稱</th>
+      <th class="category">分類</th>
+      <th class="quantity">數量</th>
+      <th class="earliest_expiration">最快到期日</th>
+      <th class="delete">❌</th>
+    </thead>
+    <tbody>
+    <% if @supplies.any?  %>
+      <% @supplies.each do |supply| %>
+       <tr>
+       <td class="name"><%= supply.name %></td>
+       <td class="category"><%= supply.category_name %></td>
+       <td class="quantity"><%= supply.quantity %></td>
+       <td class="earliest_expiration"><%= supply.earliest_expiration %></td>
+       <td class="delete"><%= link_to "刪除", "/supplies/#{supply.id}", data:{confirm: "真的要刪除嗎？"}, method: :delete, class: 'delete'%></td>
+       </tr>
+      <% end %>
+    <% end %>
+    </tbody>
+  </table>
+</div>

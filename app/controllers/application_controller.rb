@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   skip_before_action :verify_authenticity_token
 
   def set_title
-    @title= params[:action]? params[:action].capitalize : "Untitled"
+    @title = params[:action]? "#{params[:controller].capitalize}/#{params[:action].capitalize}" : "Untitled"
   end
 
   def show_info

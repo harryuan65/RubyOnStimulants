@@ -4,6 +4,7 @@
 # the maximum value specified for Puma. Default is set to 5 threads for minimum
 # and maximum; this matches the default thread size of Active Record.
 #
+workers 1
 threads_count = ENV.fetch("RAILS_MAX_THREADS") { 5 }
 threads threads_count, threads_count
 
@@ -32,3 +33,29 @@ environment ENV.fetch("RAILS_ENV") { "development" }
 
 # Allow puma to be restarted by `rails restart` command.
 plugin :tmp_restart
+
+console do
+  # Worker specific setup for Rails 4.1+
+  # See: https://devcenter.heroku.com/articles/deploying-rails-applications-with-the-puma-web-server#on-worker-boot
+  ActiveRecord::Base.establish_connection
+end
+
+on_worker_boot do
+  t = Thread.new do
+    puts "[Wakeup]Started counter"
+    next_poke_time = (Time.now.utc.localtime("+08:00") + 30.minutes)
+    while true
+      begin
+        sleep(1)
+        if Time.now.utc.localtime("+08:00").strftime("%k:%M:%S") == next_poke_time.strftime("%k:%M:%S")
+          res = RestClient.get 'http://localhost:3005'
+          next_poke_time = (Time.now.utc.localtime("+08:00") + 30.minutes)
+          puts res.code==200? "Wake success, next poke starting at #{next_poke_time.strftime("%k:%M:%S")}" : "Wake failed"
+        end
+      rescue SystemExit, Interrupt
+        puts "關閉中"
+        t.join
+      end
+    end
+  end
+end

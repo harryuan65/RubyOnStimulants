@@ -35,21 +35,21 @@ environment ENV.fetch("RAILS_ENV") { "development" }
 plugin :tmp_restart
 
 on_worker_boot do
-  t = Thread.new do
-    puts "[Wakeup]Started counter"
-    next_poke_time = (Time.now.utc.localtime("+08:00") + 30.minutes)
-    while true
-      begin
-        sleep(1)
-        if Time.now.utc.localtime("+08:00").strftime("%k:%M:%S") == next_poke_time.strftime("%k:%M:%S")
-          res = RestClient.get 'http://localhost:3005'
-          next_poke_time = (Time.now.utc.localtime("+08:00") + 30.minutes)
-          puts res.code==200? "Wake success, next poke starting at #{next_poke_time.strftime("%k:%M:%S")}" : "Wake failed"
-        end
-      rescue SystemExit, Interrupt
-        puts "關閉中"
-        t.join
-      end
-    end
-  end
+  # t = Thread.new do
+  #   puts "[Wakeup]Started counter"
+  #   next_poke_time = (Time.now.utc.localtime("+08:00") + 30.minutes)
+  #   while true
+  #     begin
+  #       sleep(1)
+  #       if Time.now.utc.localtime("+08:00").strftime("%k:%M:%S") == next_poke_time.strftime("%k:%M:%S")
+  #         res = RestClient.get 'http://localhost:3005'
+  #         next_poke_time = (Time.now.utc.localtime("+08:00") + 30.minutes)
+  #         puts res.code==200? "Wake success, next poke starting at #{next_poke_time.strftime("%k:%M:%S")}" : "Wake failed"
+  #       end
+  #     rescue SystemExit, Interrupt
+  #       puts "關閉中"
+  #       t.join
+  #     end
+  #   end
+  # end
 end

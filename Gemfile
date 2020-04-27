@@ -48,6 +48,9 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'faker'
+  gem 'dotenv-rails'
+  gem 'annotate'
 end
 
 group :test do
@@ -66,7 +69,6 @@ gem 'mime-types'
 gem 'netrc'
 gem 'http-accept'
 gem 'http-cookie'
-gem 'faker'
 gem 'pg'
 gem 'pry-rails'
 gem 'jquery-rails'
@@ -75,8 +77,7 @@ gem 'devise'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
-gem 'dotenv-rails', groups: [:development, :test]
-gem 'annotate'
 gem 'dalli' #for mem_cached_store for precompile
 gem 'line-bot-api'
 gem 'async'
+gem 'active_model_serializers', '~> 0.10.0'

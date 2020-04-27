@@ -1,0 +1,17 @@
+zh-TW:
+  title:
+    sign_in: "登入"
+    home: "首頁"
+    accounts: "消費記錄"
+    excel: "非洲之料過濾器"
+    to_do_list: "待辦事項"
+    supplies: "物資紀錄"
+    articles: "文章"
+  articles:
+    omission: "繼續閱讀"
+  datetime:
+    today:
+      minutes_ago: '%{minutes} 分鐘前'
+      hours_ago: '%{hours} 小時前'
+    same_year: '%{month}月%{day}日 %{hour}:%{minute}'
+    long_ago: '%{year}/%{month}/%{day} %{hour}:%{minute}'

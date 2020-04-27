@@ -1,6 +1,6 @@
 @font-face{
-  font-family:'lato';
-  src: font-url('lato/Lato-Light.ttf') format('truetype');
+  font-family:'NotoSansCJKtc-Thin';
+  src: font-url('/NotoSansCJKtc-Thin.otf') format('truetype');
 }
 
 @keyframes shine{
@@ -15,6 +15,22 @@
     -webkit-filter: drop-shadow(0px 0px var(--shadow ,25px) rgba(255, 255, 210,0.7));
     filter: drop-shadow(0px 0px var(--shadow, 25px) rgba(255, 255, 210,0.7));
   }
+}
+
+@mixin flex($fd:row, $jc:flex-start,$ai:flex-start){
+  display: flex;
+  flex-direction: $fd;
+  justify-content: $jc;
+  align-items: $ai;
+}
+@mixin size($w, $h){
+  width: $w;
+  height: $h;
+}
+
+a, a:hover, a:visited, a:active{
+  text-decoration: none;
+  color: #3a3838;
 }
 
 html{
@@ -32,7 +48,7 @@ body{
 }
 
 *{
-  font-family: 'lato';
+  font-family: 'NotoSansCJKtc-Thin';
 }
 input{
   border-color: #111;
@@ -118,6 +134,11 @@ input:focus, textarea:focus {
   justify-content: flex-start;
   margin: 20px 20px 50px 20px;
   width: 100%;
+}
+
+#container-home{
+  @include flex(row, center, center);
+  height: 80%;
 }
 #container-cl{
   @extend %container;
@@ -278,13 +299,19 @@ a.login-option{
   color:#fff;
   font-size: 20px;
 }
-
-//Home Options
-.wrap-home{
+//Home
+#wrap-home{
+  @include flex(column,center,center);
+}
+#home-title{
+  font-weight: lighter;
+}
+.home-options{
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
+  margin: 50px;
 
   a.home-option{
     border: 1px solid rgba(255,255,255,.3);
@@ -314,7 +341,27 @@ a.login-option{
   }
 }
 
+//Articles
+#articles-container{
+  @include flex(column, center, center)
+}
 
+#article-block{
+  @include size(380px, 170px);
+  @include flex(column, space-around, flex-start);
+  background-color: #f3f9de;
+  margin-top: 50px;
+  padding: 15px;
+}
+h3[id*=article_]{
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+}
+.wrap-title{
+  @include flex(row, space-between, center);
+  @include size(100%, auto);
+}
 //Accounts/index
 #container-account{
   height: 80%;
@@ -431,7 +478,6 @@ table{
     .file-name {
       width: 400px;
       a, a:hover, a:visited, a:active{
-        text-decoration: none;
         text-align: left;
         color: #fff;
       }
@@ -1018,7 +1064,7 @@ a.btn-export:hover{
         margin-right: 30px;
       }
     }
-    div.wrap-home{
+    div.home-options{
       flex-direction: column;
       a.home-option{
         color: #fff;
@@ -1030,7 +1076,7 @@ a.btn-export:hover{
     .wrap-login-options{
       width:100%
     }
-    #container-cl{
+    #container-cl, #container-home{
       width: auto;
       height: auto;
       align-items:center;

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_18_165857) do
+ActiveRecord::Schema.define(version: 2020_04_26_064041) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,37 @@ ActiveRecord::Schema.define(version: 2020_03_18_165857) do
     t.string "description"
     t.bigint "user_id"
     t.index ["user_id"], name: "index_accounts_on_user_id"
+  end
+
+  create_table "articles", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "title", null: false
+    t.text "content", null: false
+    t.integer "like_count", default: 0
+    t.integer "view_count", default: 0
+    t.integer "comment_count", default: 0
+    t.integer "privacy", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["comment_count"], name: "index_articles_on_comment_count"
+    t.index ["like_count"], name: "index_articles_on_like_count"
+    t.index ["privacy"], name: "index_articles_on_privacy"
+    t.index ["title"], name: "index_articles_on_title"
+    t.index ["user_id"], name: "index_articles_on_user_id"
+    t.index ["view_count"], name: "index_articles_on_view_count"
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "article_id"
+    t.integer "thread_id"
+    t.text "message", null: false
+    t.integer "likes_count", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["article_id"], name: "index_comments_on_article_id"
+    t.index ["thread_id"], name: "index_comments_on_thread_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "supplies", force: :cascade do |t|

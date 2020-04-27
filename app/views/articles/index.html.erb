@@ -1,0 +1,14 @@
+<div id="articles-container">
+  <% @articles.each do |article| %>
+    <a id="article-block" href="<%= article_path(article.id)%>">
+      <div class="author"><%= article.user.email.split('@')[0] %></div>
+      <div class="wrap-title"><h3 id="article_<%= article.id%>"><%= article.title %></h3><span class="created-at"><%= readable_time(article.created_at) %></span></div>
+      <p class="content"><%= article.trimmed_content %></p>
+      <div class="wrap-summary">
+      <span class="like-count">喜歡 <%= article.like_count %></span>
+      <span class="comment-count">回應 <%= article.comment_count %></span>
+      <span class="view-count">觀看 <%= article.view_count %></span>
+      </div>
+    </a>
+  <% end %>
+</div>

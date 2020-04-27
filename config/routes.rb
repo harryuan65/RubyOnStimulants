@@ -50,5 +50,10 @@ Rails.application.routes.draw do
       get '/all' => :all
     end
   end
+
+  resources :articles, :controller=>'articles' do
+
+  end
+
   match '*unmatched', to: 'application#route_not_found', via: :all
 end

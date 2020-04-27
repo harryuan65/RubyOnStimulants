@@ -1,0 +1,2 @@
+<div class="wrap-title"><h3 id="article_<%= @article.id%>"><%= @article.title %></h3><span class="created-at"><%= readable_time(@article.created_at) %></span></div>
+<p class="content"><%= @article.content.gsub(/\n/, "\<br\>").html_safe %></p>

@@ -1,13 +1,29 @@
 class ApplicationController < ActionController::Base
   include CSVParser
   include Global
+  before_action :set_locale
   before_action :show_info
   before_action :set_title
   skip_forgery_protection only:[:prod_test]
   skip_before_action :verify_authenticity_token
 
   def set_title
-    @title = params[:action]? "#{params[:controller].capitalize}/#{params[:action].capitalize}" : "Untitled"
+    case params[:controller]
+    when "users/sessions" then @title=I18n.t('title.sign_in')
+    when "home"       then @title=I18n.t('title.home')
+    when "accounts"   then @title=I18n.t('title.accounts')
+    when "excel"      then @title=I18n.t('title.excel')
+    when "to_do_list" then @title=I18n.t('title.to_do_list')
+    when "supplies"   then @title=I18n.t('title.supplies')
+    when "articles"   then @title=I18n.t('title.articles')
+    else
+      if "#{params[:controller]}##{params[:action]}" == "application#route_not_found"
+        @title = I18n.t('title.not_found')
+        ## TODO: add not found in locale file
+      else
+        @title = "Untitled"
+      end
+    end
   end
 
   def show_info
@@ -78,6 +94,13 @@ class ApplicationController < ActionController::Base
   end
 
   def route_not_found
-    render 'shared/route_not_found'
+    render 'shared/route_not_found', status: :not_found
   end
+
+  private
+
+  def set_locale
+    I18n.locale = params[:locale]&.to_sym || :'zh-TW'
+  end
+
 end

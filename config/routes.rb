@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get 'download', controller:'application', action:'download'
   get 'delete', controller:'application', action:'delete'
   post 'post_test', controller:'application', action:'post_test'
+  get 'privacy_policy', controller: 'home', action: 'privacy_policy'
 
   scope :controller=>"home",:path=>"/", :as=>"home" do
     get '/'=>:index

@@ -62,4 +62,7 @@ class HomeController < ApplicationController
     def webhook
        return render json:{message:"webhook"}, status: 200
     end
+
+    def privacy_policy
+    end
 end

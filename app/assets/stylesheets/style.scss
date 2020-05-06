@@ -47,6 +47,14 @@ body{
   background-color: #DBDBDB;
 }
 
+#terms-container{
+  @include flex(column, center, center);
+}
+
+#terms-content{
+  width: 60%;
+}
+
 *{
   font-family: 'NotoSansCJKtc-Thin';
 }

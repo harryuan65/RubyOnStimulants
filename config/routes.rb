@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   get 'delete', controller:'application', action:'delete'
   post 'post_test', controller:'application', action:'post_test'
   get 'privacy_policy', controller: 'home', action: 'privacy_policy'
-
+  post 'cancel_fb_authorization', controller: 'application', action: 'dev_cancel_fb'
   scope :controller=>"home",:path=>"/", :as=>"home" do
     get '/'=>:index
     get 'post_newrecord'=>:post_newrecord

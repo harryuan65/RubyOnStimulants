@@ -97,6 +97,15 @@ class ApplicationController < ActionController::Base
     render 'shared/route_not_found', status: :not_found
   end
 
+  def dev_cancel_fb
+    puts "*****************************"
+    puts "cancelled fb authorization"
+    puts params
+    puts "*****************************"
+
+    return render json{success: true}
+  end
+
   private
 
   def set_locale

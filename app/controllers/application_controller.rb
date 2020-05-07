@@ -103,7 +103,7 @@ class ApplicationController < ActionController::Base
     puts params
     puts "*****************************"
 
-    return render json{success: true}
+    return render json:{success: true}
   end
 
   private

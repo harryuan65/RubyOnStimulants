@@ -89,10 +89,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def taipei_time time
-    time.in_time_zone("Taipei")
-  end
-
   def route_not_found
     render 'shared/route_not_found', status: :not_found
   end

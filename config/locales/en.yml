@@ -30,17 +30,21 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  title:
-    sign_in: "Login"
-    hello: "Hello world"
-    home: "Home"
-    accounts: "PurchaseHistory"
-    excel: "African Data Parser"
-    to_do_list: "To-do List"
-    supplies: "Supplies"
-    articles: "Articles"
-  articles:
-    omission: 'continue reading'
+  controller:
+    title:
+      sign_in: "Login"
+      hello: "Hello world"
+      home: "Home"
+      accounts: "PurchaseHistory"
+      excel: "African Data Parser"
+      to_do_list: "To-do List"
+      supplies: "Supplies"
+      articles: "Articles"
+    articles:
+      omission: 'continue reading'
+    line:
+      welcome: "Hello there! We are Omama and Bai.\nThank you for adding me as your friend!\nWe will do our best to help you!"
+      currently_no_services: "Um...Sorry the message parsing funtionalities are still in development"
   datetime:
     today:
       minutes_ago: '%{minutes} minute(s) ago'

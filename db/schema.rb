@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_26_064041) do
+ActiveRecord::Schema.define(version: 2020_05_10_082305) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,19 @@ ActiveRecord::Schema.define(version: 2020_04_26_064041) do
     t.index ["article_id"], name: "index_comments_on_article_id"
     t.index ["thread_id"], name: "index_comments_on_thread_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "onb_line_users", force: :cascade do |t|
+    t.string "line_uid"
+    t.string "display_name"
+    t.string "picture_url"
+    t.string "status_message"
+    t.string "language"
+    t.boolean "archived", default: false
+    t.datetime "blocked_channel_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["line_uid"], name: "index_onb_line_users_on_line_uid", unique: true
   end
 
   create_table "supplies", force: :cascade do |t|

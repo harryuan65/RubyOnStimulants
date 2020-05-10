@@ -9,16 +9,16 @@ class ApplicationController < ActionController::Base
 
   def set_title
     case params[:controller]
-    when "users/sessions" then @title=I18n.t('title.sign_in')
-    when "home"       then @title=I18n.t('title.home')
-    when "accounts"   then @title=I18n.t('title.accounts')
-    when "excel"      then @title=I18n.t('title.excel')
-    when "to_do_list" then @title=I18n.t('title.to_do_list')
-    when "supplies"   then @title=I18n.t('title.supplies')
-    when "articles"   then @title=I18n.t('title.articles')
+    when "users/sessions" then @title=I18n.t('controller.title.sign_in')
+    when "home"       then @title=I18n.t('controller.title.home')
+    when "accounts"   then @title=I18n.t('controller.title.accounts')
+    when "excel"      then @title=I18n.t('controller.title.excel')
+    when "to_do_list" then @title=I18n.t('controller.title.to_do_list')
+    when "supplies"   then @title=I18n.t('controller.title.supplies')
+    when "articles"   then @title=I18n.t('controller.title.articles')
     else
       if "#{params[:controller]}##{params[:action]}" == "application#route_not_found"
-        @title = I18n.t('title.not_found')
+        @title = I18n.t('controller.title.not_found')
         ## TODO: add not found in locale file
       else
         @title = "Untitled"

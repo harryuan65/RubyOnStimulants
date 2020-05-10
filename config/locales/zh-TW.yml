@@ -1,14 +1,18 @@
 zh-TW:
-  title:
-    sign_in: "登入"
-    home: "首頁"
-    accounts: "消費記錄"
-    excel: "非洲之料過濾器"
-    to_do_list: "待辦事項"
-    supplies: "物資紀錄"
-    articles: "文章"
-  articles:
-    omission: "繼續閱讀"
+  controller:
+    title:
+      sign_in: "登入"
+      home: "首頁"
+      accounts: "消費記錄"
+      excel: "非洲之料過濾器"
+      to_do_list: "待辦事項"
+      supplies: "物資紀錄"
+      articles: "文章"
+    articles:
+      omission: "繼續閱讀"
+    line:
+      welcome: "安安尼好！我們是Omama跟小白～\n謝謝尼加入我們的好友，希望我們能在生活上幫到尼喔"
+      currently_no_services: '那個～抱歉目前訊息處理的功能在開發中喔'
   datetime:
     today:
       minutes_ago: '%{minutes} 分鐘前'

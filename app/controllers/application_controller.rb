@@ -97,13 +97,30 @@ class ApplicationController < ActionController::Base
     render 'shared/route_not_found', status: :not_found
   end
 
+  # This is found on https://stackoverflow.com/questions/4709109/base-64-url-decode-with-ruby-rails
+  # when users have used facebook to login, which allows harrysworkspace to register in facebook/settings/application
+  # and decided to revoke, facebook will call this route set in developer settings
   def dev_cancel_fb
-    puts "*****************************"
-    puts "cancelled fb authorization"
-    puts params
-    puts "*****************************"
+    param! :signed_request, String, required: true
 
-    return render json:{success: true}
+    #parsing flow referred to https://developers.facebook.com/docs/games/gamesonfacebook/login#parsingsr
+    signed_request = params[:signed_request]
+    encoded_sig, encoded_payload = signed_request.split('.')
+    secret = ENV['FACEBOOK_APP_SECRET']
+
+    sig = Base64.decode64(encoded_sig.tr('-_','+/')).unpack('H*')[0]
+    data = JSON.parse(Base64.decode64(encoded_payload.tr('-_','+/')))
+
+    expected_sig = OpenSSL::HMAC.hexdigest('SHA256', secret, encoded_payload)
+
+    if expected_sig != sig
+      raise 'Invalid signature'
+    end
+
+    @user = User.find_by!(fb_uid: data["user_id"])
+    @user.update(fb_uid: nil, fb_token: nil)
+
+    return render json: {success: true}
   end
 
   private

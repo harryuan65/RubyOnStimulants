@@ -34,7 +34,7 @@
 
 <div id="container-cl">
   <div id="wrap-todo-date">
-    <h2 id="todo-date"><%= @date %></h2>
+    <h2 id="todo-date"><%= taipei_time(@date).strftime("%Y/%m/%d") %></h2>
   </div>
   <table class="table-todolist">
     <thead>

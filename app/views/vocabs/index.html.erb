@@ -1,0 +1,34 @@
+<div id="container-vocabs">
+  <table class="table vocabs">
+    <thead>
+      <th class="vocab-id">ID</th>
+      <th class="vocab-word">單字</th>
+      <th class="vocab-meaning">意思</th>
+      <th class="vocab-examples">例句</th>
+      <th class="vocab-delete">❌</th>
+    </thead>
+    <tbody>
+
+    <% if @vocabs.any?  %>
+      <% @vocabs.each do |vocab| %>
+       <tr>
+       <td class="vocab-id"><%= vocab.id %></td>
+       <td class="vocab-word"><%= vocab.word %></td>
+       <td class="vocab-meaning"><%= vocab.meaning %></td>
+       <td class="vocab-examples">
+          <% if vocab.examples.any? %>
+            <% vocab.parsed_examples.each do |example_hash|%>
+              <div class="wrap-example">
+                <h4 class="vocab-example"><%= example_hash[:example_sentence] %></h4>
+                <p class="vocab-translation"><%= example_hash[:translation] %></p>
+              </div>
+            <% end %>
+          <% end %>
+       </td>
+       <td class="vocab-delete"><%= link_to "刪除", "/vocabs/#{vocab[:id]}", data:{confirm: "真的要刪除嗎？"}, method: :delete, class: 'vocab-delete'%></td>
+       </tr>
+      <% end %>
+    <% end %>
+    </tbody>
+  </table>
+</div>

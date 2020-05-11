@@ -16,6 +16,7 @@ class ApplicationController < ActionController::Base
     when "to_do_list" then @title=I18n.t('controller.title.to_do_list')
     when "supplies"   then @title=I18n.t('controller.title.supplies')
     when "articles"   then @title=I18n.t('controller.title.articles')
+    when "vocabs"   then @title=I18n.t('controller.title.vocabs')
     else
       if "#{params[:controller]}##{params[:action]}" == "application#route_not_found"
         @title = I18n.t('controller.title.not_found')

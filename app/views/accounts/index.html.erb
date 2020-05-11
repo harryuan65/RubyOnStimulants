@@ -43,7 +43,7 @@
           <% @todays_purchase_histories.each do |record| %>
             <tr id="tr_<%=record.id%>">
               <td class="time" id="<%= record.id %>" onclick="details(this)">
-                <%= taipei_time(record.created_at) %>
+                <%= taipei_time(record.created_at).strftime("%k:%M:%S") %>
               </td>
               <td class="content"><%= record.content %></td>
               <td class="price"><span id="dollar-sign" class="light">$ </span><%= record.price %></td>

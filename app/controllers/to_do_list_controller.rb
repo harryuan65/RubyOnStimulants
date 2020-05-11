@@ -3,7 +3,7 @@ class ToDoListController < ApplicationController
 
     def index
       @todos = ToDoList.all
-      @date = taipei_time(Time.now.to_date).strftime("%Y/%m/%d")
+      @date = Time.now.to_date
     end
 
     def add_todo

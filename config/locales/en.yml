@@ -40,15 +40,19 @@ en:
       to_do_list: "To-do List"
       supplies: "Supplies"
       articles: "Articles"
+      vocabs: "VocabBook"
     articles:
       omission: 'continue reading'
     line:
       welcome: "Hello there! We are Omama and Bai.\nThank you for adding me as your friend!\nWe will do our best to help you!"
       currently_no_services: "Um...Sorry the message parsing funtionalities are still in development"
-  datetime:
+  date:
     today:
       minutes_ago: '%{minutes} minute(s) ago'
       hours_ago: '%{hours} hour(s) ago'
     same_year: '%{hour}:%{minute} %{month}, %{day}'
     long_ago: '%{hour}:%{minute} %{month}, %{day}, %{year}'
-
+    order:
+      - :day
+      - :month
+      - :year

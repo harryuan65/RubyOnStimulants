@@ -1,5 +1,2 @@
 module AccountsHelper
-    def taipei_time time
-      time.in_time_zone("Taipei").strftime("%k:%M:%S")
-    end
 end

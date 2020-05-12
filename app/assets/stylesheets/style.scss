@@ -1,5 +1,6 @@
-$background-color: #F3E8D7;
+$background-color: rgb(255, 255, 255);
 $link-color: #3a3838;
+$header-background-color: none;
 $header-height: 80px;
 @font-face{
   font-family:'NotoSansCJKtc-Thin';
@@ -163,18 +164,13 @@ input:focus, textarea:focus {
     width: 200px;
   }
 }
-// tables TODO: should make every use this
-.table{
+.tableold{
   // border-collapse: collapse; 如果要圓角的話會，必須設為separate，不然collapse會跟樓下的合在一起，變成圓角外面又一個方匡
   z-index: 2;
   border-collapse: separate;
   border-spacing: 0;
   overflow: scroll;
-  background-color: rgba(54,54,54,.7);
-
-  th, td{
-    border: 1px solid rgba(255,255,255,.4);
-  }
+  // background-color: rgba(54,54,54,.7);
 
   td{
     word-break: break-all;
@@ -317,32 +313,6 @@ input:focus, textarea:focus {
     }
   }
 }
-//terms
-#terms-container{
-  @include flex(column, center, center);
-}
-#terms-content{
-  width: 60%;
-}
-//result page
-.wrap-result{
-  @include flex(column,flex-start,auto);
-  margin: 20px 20px 0 20px;
-  justify-content: flex-start;
-  width: 400px;
-}
-.wrap-message{
-  border:1px solid rgba(230, 13, 58, 0.7);
-  border-radius: 15px;
-  padding: 20px;
-  box-sizing: border-box;
-}
-.wrap-result .error{
-  background-color:rgba(199, 13, 58, 0.7);
-  color: #fff;
-}
-
-
 //components
 %container{
   display: flex;
@@ -408,51 +378,20 @@ input:focus, textarea:focus {
 .icon-Facebook{
   zoom: 0.05;
 }
-
 //header
-.icon-inheader{
-  height: 40px;
-  width: 40px;
+a#site-name{
+  font-size: 40px;
+  font-weight: 200;
+  color: $link-color;
 }
 #container-header{
-  @include flex(row, space-around, center);
-  background-color: #a0855b;
-  width: 100%;
-  height: $header-height;
+  @include flex(row ,space-between, center);
+  padding: 10px 30px 0 30px;
 }
-.back{
-  &:visited, &:active{
-    text-decoration: none;
-  }
-  text-decoration: none;
-  border:1px solid white;
-  padding: 10px;
+#home-title{
+  font-size: 30px;
+  padding-left: 80px;
 }
-#wrap-title{
-  @include flex(row, center, center);
-  #title{
-    color: rgb(240,240,240);
-    font-size: 30px;
-    margin-left: 30px;
-    display: inline-block;
-  }
-  #icon-home{
-  }
-}
-
-#wrap-user-status{
-  @include flex(row, space-evenly, center);
-  position: absolute;
-  right: 20px;
-  width: 200px;
-  height: $header-height;
-  #current-username{
-    color: #fff;
-    vertical-align: middle;
-  }
-}
-
-
 //login
 .wrap-login-options{
   display: flex;
@@ -489,7 +428,6 @@ input:focus, textarea:focus {
     }
   }
 }
-
 a.login-option{
   text-decoration: none;
   color:#fff;
@@ -536,12 +474,34 @@ a.login-option{
     }
   }
 }
-
+//terms
+#terms-container{
+  @include flex(column, center, center);
+}
+#terms-content{
+  width: 60%;
+}
+//result page
+.wrap-result{
+  @include flex(column,flex-start,auto);
+  margin: 20px 20px 0 20px;
+  justify-content: flex-start;
+  width: 400px;
+}
+.wrap-message{
+  border:1px solid rgba(230, 13, 58, 0.7);
+  border-radius: 15px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+.wrap-result .error{
+  background-color:rgba(199, 13, 58, 0.7);
+  color: #fff;
+}
 //Articles
 #articles-container{
   @include flex(column, center, center)
 }
-
 #article-block{
   @include size(380px, 170px);
   @include flex(column, space-around, flex-start);
@@ -562,7 +522,6 @@ h3[id*=article_]{
 #container-vocabs{
   @include flex(row, center, center);
 }
-
 //Accounts/index
 #container-account{
   height: 80%;
@@ -969,6 +928,7 @@ a.btn-export:hover{
   color: #fff;
   font-size: 30px;
 }
+// tables TODO: should make every use this
 .table{
   //These two lines allows thead/tbody:display:block to have their th width percentaged
   table-layout: fixed;
@@ -976,13 +936,15 @@ a.btn-export:hover{
     padding: 10px 20px 10px 20px;
   }
   th{
-    background-color: #3e3e3e;
+    // background-color: #3e3e3e;
+    background-color: #83b582;
     color: white;
     position: relative;
   }
   td{
-    background-color: #666666;
-    color: #eee;
+    // background-color: #666666;
+    background-color: transparent;
+    color: rgba(54, 54, 54,.8);
   }
   thead, tbody{
     display: block;

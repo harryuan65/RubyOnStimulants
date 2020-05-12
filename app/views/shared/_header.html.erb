@@ -1,23 +1,17 @@
 <div id="container-header">
-  <span id="wrap-title">
-    <%= link_to("#{image_tag("home.png",class:"icon-inheader")}".html_safe, root_path,id:"icon-home") %>
-    <%= content_tag(:h2, @title,id:"title") %>
-  </span>
+  <%= link_to("Harry & Hazel", root_path, id: 'site-name') %>
 
   <%if "#{request['controller']}##{request['action']}"!="users/sessions#new"%>
-    <div id="wrap-user-status">
-      <span id="current-username">
-         <% if current_user %>
-           <%= current_user.email.split('@')[0] %>
-         <% else %>
-           <script>window.location = "/users/sign_in"</script>
-         <% end %>
-      </span>
-
-      <div id="btn-logout">
-        <%= link_to image_tag("logout.png",class:'icon-inheader'),destroy_user_session_path,method:"delete",data:{confirm:"真der要登出嗎？😭"} %>
-      </div>
-    </div>
+  <div id="wrap-user-status">
+    <span id="current-username">
+       <% if current_user %>
+         <%= current_user.email.split('@')[0] %>
+       <% else %>
+         <script>window.location = "/users/sign_in"</script>
+       <% end %>
+    </span>
+    <%= link_to "Logout", destroy_user_session_path, method:"delete", data:{confirm:"真der要登出嗎？😭"} %>
+  </div>
 
   <% end %>
 

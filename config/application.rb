@@ -13,7 +13,7 @@ module HarrysWorkspace
     config.paths.add File.join('app', 'api'), glob: File.join('**', '*.rb')
     config.autoload_paths += Dir[Rails.root.join('app','api','*')]
     config.i18n.load_path += Dir[Rails.root.join('config','locales','*.yml')]
-    config.i18n.default_locale = :'zh-TW'
+    config.i18n.default_locale = :en
     config.time_zone = 'Taipei'
     config.active_record.default_timezone = :local
     # Settings in config/environments/* take precedence over those specified here.

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_10_155527) do
+ActiveRecord::Schema.define(version: 2020_05_13_070745) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,29 @@ ActiveRecord::Schema.define(version: 2020_05_10_155527) do
     t.index ["article_id"], name: "index_comments_on_article_id"
     t.index ["thread_id"], name: "index_comments_on_thread_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "examples", force: :cascade do |t|
+    t.bigint "word_id"
+    t.bigint "meaning_id"
+    t.string "sentence", null: false
+    t.string "translation", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["meaning_id"], name: "index_examples_on_meaning_id"
+    t.index ["word_id", "meaning_id"], name: "index_examples_on_word_id_and_meaning_id"
+    t.index ["word_id"], name: "index_examples_on_word_id"
+  end
+
+  create_table "meanings", force: :cascade do |t|
+    t.bigint "word_id"
+    t.string "mean", null: false
+    t.string "mean_en", null: false
+    t.string "part_of_speech", null: false
+    t.index ["mean"], name: "index_meanings_on_mean"
+    t.index ["part_of_speech"], name: "index_meanings_on_part_of_speech"
+    t.index ["word_id", "part_of_speech"], name: "index_meanings_on_word_id_and_part_of_speech", unique: true
+    t.index ["word_id"], name: "index_meanings_on_word_id"
   end
 
   create_table "onb_line_users", force: :cascade do |t|
@@ -108,12 +131,11 @@ ActiveRecord::Schema.define(version: 2020_05_10_155527) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table "vocabs", force: :cascade do |t|
-    t.string "word"
-    t.string "meaning"
+  create_table "words", force: :cascade do |t|
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.text "examples", default: [], array: true
+    t.index ["name"], name: "index_words_on_name", unique: true
   end
 
 end

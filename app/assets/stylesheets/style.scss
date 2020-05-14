@@ -2,10 +2,12 @@ $background-color: rgb(255, 255, 255);
 $link-color: #3a3838;
 $header-background-color: none;
 $header-height: 80px;
-@font-face{
-  font-family:'NotoSansCJKtc-Thin';
-  src: font-url('/NotoSansCJKtc-Thin.otf') format('truetype');
-}
+$mobile-site-name-color: $link-color;
+$mobile-header-height: 80px;
+// @font-face{
+//   font-family:'NotoSansCJKtc-Thin';
+//   src: font-url('/NotoSansCJKtc-Thin.otf') format('truetype');
+// }
 
 @keyframes shine{
   to{
@@ -48,9 +50,9 @@ body{
 a, a:hover, a:visited, a:active{
   text-decoration: none;
 }
-*{
-  font-family: 'NotoSansCJKtc-Thin';
-}
+// *{
+//   font-family: 'NotoSansCJKtc-Thin';
+// }
 input{
   border-color: #111;
 }
@@ -379,17 +381,18 @@ input:focus, textarea:focus {
   zoom: 0.05;
 }
 //header
-a#site-name{
-  font-size: 40px;
-  font-weight: 200;
-  color: $link-color;
-}
 #container-header{
   @include flex(row ,space-between, center);
   padding: 10px 30px 0 30px;
+  a#site-name{
+    font-size: 40px;
+    font-weight: 200;
+    color: $link-color;
+  }
 }
 #home-title{
   font-size: 30px;
+  font-weight: lighter;
   padding-left: 80px;
 }
 //login
@@ -437,9 +440,6 @@ a.login-option{
 #wrap-home{
   @include flex(column,center,center);
 }
-#home-title{
-  font-weight: lighter;
-}
 .home-options{
   display: flex;
   flex-direction: row;
@@ -457,6 +457,8 @@ a.login-option{
     transition: .3s ease;
     background-color: rgba(0, 103, 104, 0.4);
     color: rgba(255,255,255,.4);
+    // color: $link-color;
+    // background-color: #d6e4aa;
     &::before{
       content:'';
       height:100%;
@@ -521,6 +523,52 @@ h3[id*=article_]{
 //Vocabs
 #container-vocabs{
   @include flex(row, center, center);
+}
+
+.card{
+  width: 320px;// mobile width
+  box-sizing: border-box;
+  border: 1px solid black;
+  .word, .meanings,.example,.translation{
+    margin: 0;
+  }
+  .word{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    .part-of-speech{
+      font-weight: lighter;
+    }
+  }
+  .wrap{
+    padding: 10px;
+    &.wrap-word{
+      background-color: #83b582;
+      color: #eee;
+    }
+    &.wrap-examples{
+      background-color: #fcf8e8;
+      .example{
+        line-height: 1.2;
+        &:not(:first-child){
+          margin-top: 15px;
+        }
+        &::before{
+          content: '';
+          display: inline-block;
+          border-radius: 50%;
+          height: 7px;
+          width: 7px;
+          border: 1px solid black;
+          background-color: black;
+          vertical-align: middle;
+        }
+      }
+      .translation{
+        margin-top: 10px;
+      }
+    }
+  }
 }
 //Accounts/index
 #container-account{
@@ -973,28 +1021,6 @@ a.btn-export:hover{
     text-decoration: none;
     color: #fff;
   }
-  //vocabs#tables
-  &.vocabs{
-    margin-top: 30px;
-  }
-  .vocab-id{
-    width: 51px;
-  }
-  .vocab-word{
-    width: 138px;
-    font-weight: bold;
-    font-size: 25px;
-  }
-  .vocab-meaning{
-    width: 74px;
-  }
-  .vocab-examples{
-    width: 600px;
-  }
-  .vocab-delete{
-    color: #fff;
-    width: 92px;
-  }
 }
 //RWD
 @media only screen and (max-width:500px){
@@ -1003,24 +1029,46 @@ a.btn-export:hover{
       margin: 0px;
       padding: 0px;
     }
-    #wrap-title{
-      #title{
-        font-size: 20px;
+    #container-header{
+      position: fixed;
+      box-sizing: border-box;
+      padding: 0;
+      width: 100%;
+      height: $mobile-header-height;
+      @include flex(row ,center, center);
+      // background-color: #83b582;
+      background-color: #d6e4aa;
+      a#site-name{
+        font-size: 30px;
+        font-weight: 200;
+        color: $mobile-site-name-color;
       }
     }
+    #page-title{
+      display: none;
+    }
     #wrap-user-status{
+      position: fixed;
       width: 0;
       #current-username{
         display: none;
       }
       #btn-logout{
-        margin-right: 30px;
+        right: 11px;
+        top: 30px;
+        position: fixed;
       }
+    }
+    .container{
+      margin-top: $mobile-header-height+20px;
+    }
+    //home
+    #container-home #home-title{
+      padding: 0;
     }
     div.home-options{
       flex-direction: column;
       a.home-option{
-        color: #fff;
         &:not(:first-child){
            margin: 0 0 0 0;
         }

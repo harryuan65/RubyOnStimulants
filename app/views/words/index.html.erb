@@ -1,0 +1,20 @@
+<div id="container-words" class="container">
+<% if @words.any? %>
+  <%@words.each do |word| %>
+    <div class="card">
+      <div class="wrap wrap-word">
+        <h1 class="word">Instruction<span class="part-of-speech">n. [c]</span></h1>
+        <h4 class="meanings">指示、命令</h4>
+      </div>
+      <div class="wrap wrap-examples">
+      <% if word.examples.any? %>
+        <% word.parsed_examples.each do |ex| %>
+          <h4 class="example"><%= ex[:example_sentence] %></h4>
+          <p class="translation"><%= ex[:translation] %></p>
+        <% end %>
+      <% end %>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+</div>

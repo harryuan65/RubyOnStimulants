@@ -1,6 +1,6 @@
-class VocabsController < ApplicationController
+class WordsController < ApplicationController
     def index
-      @vocabs = Vocab.all
+      # @vocabs = Vocab.all
     end
 
     def create

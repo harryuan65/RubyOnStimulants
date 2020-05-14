@@ -1,14 +1,14 @@
 <% if current_user %>
-  <div id="container-home">
+  <div id="container-home" class="container">
       <div id="wrap-home">
         <h2 id="home-title">想做點什麼？</h2>
         <div class="home-options">
           <%= link_to("#{content_tag(:span,"單字本",class:"option-text")}".html_safe, vocabs_path(locale: 'zh-TW'),class:"home-option") %>
           <%= link_to("#{content_tag(:span,"寫文章",class:"option-text")}".html_safe, articles_path(locale: 'zh-TW'),class:"home-option") %>
-          <%= link_to("#{content_tag(:span,"物資",class:"option-text")}".html_safe, supplies_path,class:"home-option") %>
+          <%# <%= link_to("#{content_tag(:span,"物資",class:"option-text")}".html_safe, supplies_path,class:"home-option") %> %>
           <%= link_to("#{content_tag(:span,"待辦事項",class:"option-text")}".html_safe,to_do_list_path,class:"home-option") %>
           <%= link_to("#{content_tag(:span,"記帳",class:"option-text")}".html_safe, accounts_path,class:"home-option") %>
-          <%= link_to("#{content_tag(:span,"Excel",class:"option-text")}".html_safe, excel_path,class:"home-option") %>
+          <%# <%= link_to("#{content_tag(:span,"Excel",class:"option-text")}".html_safe, excel_path,class:"home-option") %> %>
         </div>
       </div>
   </div>

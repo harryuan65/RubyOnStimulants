@@ -60,7 +60,7 @@ Rails.application.routes.draw do
 
   end
 
-  resources :vocabs, :controller=>'vocabs' do
+  resources :words, :controller=>'words' do
 
   end
   match '*unmatched', to: 'application#route_not_found', via: :all

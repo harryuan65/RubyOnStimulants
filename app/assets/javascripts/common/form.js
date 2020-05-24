@@ -4,10 +4,15 @@ $(document).ready(function() {
   $("form[id^='form']").on('submit',function(e){
     e.preventDefault(); // cancel default submit
     var form = $("form[id^='form']");
-    $.post(form.attr('action'), form.serialize(), function() {})
-    .done(function() {
+    $.post(form.attr('action'), form.serialize(), function(res) {console.log(JSON.stringify(res,null,2))})
+    .done(function(res) {
         toggleForm();
-        updateTable();
+        if(res.success){
+          updateTable();
+        }
+        else{
+          alert(`❌錯誤：${res.error}`);
+        }
     })
         .fail(function() {
             alert("Something is wrong!")
@@ -40,23 +45,24 @@ function delete_history(target){
 }
 function updateTable(){
    $.get(window.location.href, (resText)=>{
-       var find = $('tbody',resText);
-       console.log(find.length)
-       if(find.length>0){
-           console.log("Updating tbody");
-           $('tbody').replaceWith(find);
-      }
-      else{
-        // words
-        var find = $('.card-wrap',resText);
-        if(find.length>0){
-            console.log("Updating card-wrap");
-           $('.card-wrap').replaceWith(find);
+        var find = $('tbody',resText);
+        console.log(JSON.stringify(resText,null,2))
+        if(find.length>0 && words.length===0){
+          console.log("Updating tbody");
+          $('tbody').replaceWith(find);
         }
-      }
+        // words
+        if(find.length==0){
+           window.location.reload();
+        }
+        var words = $('#container-words',resText);
+        if(words.length>0){
+            console.log("Updating container-words ");
+           $('#container-words').replaceWith(words);
+        }
       var alrt = $('.wrap-alert',resText);
       $('.wrap-alert').replaceWith(alrt);
-      console.log(alrt.length);
+    //   console.log(alrt.length);
    })
 }
 

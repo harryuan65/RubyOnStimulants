@@ -6,8 +6,8 @@ class WordsController < ApplicationController
     end
 
     def create
-      if word_params[:word]
-        result = Word.document_word(word_params[:word])
+      if word_params[:name]
+        result = Word.document_word(word_params[:name])
         if result[:success]
           flash[:notice] = I18n.t('controller.word.create_success', word: result[:word].name)
           return render json:result

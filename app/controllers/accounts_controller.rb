@@ -38,7 +38,7 @@ class AccountsController < ApplicationController
         flash[:notice] = "成功新增 #{record.content} #{record.price}"
       end
       respond_to do |format|
-        format.json { render json:{message:"Success", data:params.fetch(:account)} }
+        format.json { render json:{success: true, data: params.fetch(:account)} }
       end
     end
 

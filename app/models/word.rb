@@ -76,6 +76,12 @@ class Word < ApplicationRecord
                 translation: example['translation']
               )
             end
+          else
+            new_definition.examples.create!(
+              word: new_word,
+              sentence: '沒有例句QQ',
+              translation: '沒有例句QQ'
+            )
           end
         end
         return {success: true, word: new_word}

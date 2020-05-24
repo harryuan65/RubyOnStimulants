@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
     when "to_do_list" then @title=I18n.t('controller.title.to_do_list')
     when "supplies"   then @title=I18n.t('controller.title.supplies')
     when "articles"   then @title=I18n.t('controller.title.articles')
-    when "vocabs"   then @title=I18n.t('controller.title.vocabs')
+    when "words"   then @title=I18n.t('controller.title.words')
     else
       if "#{params[:controller]}##{params[:action]}" == "application#route_not_found"
         @title = I18n.t('controller.title.not_found')
@@ -92,6 +92,10 @@ class ApplicationController < ActionController::Base
 
   def route_not_found
     render 'shared/route_not_found', status: :not_found
+  end
+
+  def render_error(msg)
+    return render json:{message: msg}, status: 400
   end
 
   # This is found on https://stackoverflow.com/questions/4709109/base-64-url-decode-with-ruby-rails

@@ -40,7 +40,7 @@ en:
       to_do_list: "To-do List"
       supplies: "Supplies"
       articles: "Articles"
-      vocabs: "VocabBook"
+      words: "FlashCards"
     articles:
       omission: 'continue reading'
     line:

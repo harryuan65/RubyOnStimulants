@@ -17,23 +17,15 @@
     </div>
 </div>
 
-<div id="container-account">
-  <div class="wrap-account-today">
-    <div class="wrap-date">
-      <%= form_tag accounts_path,method:'get',id:"date-form" do%>
-        <%= date_field_tag :day,DateTime.now.in_time_zone('Taipei'),class:"input-date" %>
-        <%# <%= select_date @day, prefix: :day, class:"select-date", use_two_digit_numbers: true ,date_separator: '/'%>
-        <%= submit_tag "Go",class:"btn-date" %>
-      <% end %>
-    </div>
-    <table class="table-account">
+<div id="container-account" class="container">
+  <table class="table-account">
       <thead>
         <tr>
           <th class="time">When</th>
           <th class="content">Content</t>
           <th class="price">Price</th>
           <th class="category">Category</th>
-          <th class="description">Description</th>
+          <th class="desc">Desc</th>
           <th class="currency">Currency</th>
           <th class="delete">Delete</th>
         </tr>
@@ -43,12 +35,12 @@
           <% @todays_purchase_histories.each do |record| %>
             <tr id="tr_<%=record.id%>">
               <td class="time" id="<%= record.id %>" onclick="details(this)">
-                <%= taipei_time(record.created_at).strftime("%k:%M:%S") %>
+                <%= taipei_time(record.created_at).strftime("%k:%M") %>
               </td>
               <td class="content"><%= record.content %></td>
               <td class="price"><span id="dollar-sign" class="light">$ </span><%= record.price %></td>
               <td class="category"><%= record.category %></td>
-              <td class="description"><%= record.description %></td>
+              <td class="desc"><%= record.description %></td>
               <td class="currency"><%= record.currency %></td>
               <td class="delete"> <div onclick='delete_history({url:"<%= delete_accounts_path%>", id:"<%= record.id %>"})' > ❌</div></td>
             </tr>
@@ -59,23 +51,29 @@
           </tr>
         <% end %>
       </tbody>
-    </table>
-    <div id="wrap-daily-sum">
-      <span class="text">本日支出小計: <span id="dollar-sign">$</span><%= @daily_sum %></span>
+  </table>
+  <div class="wrap-date-and-sum">
+    <div class="wrap-date-form">
+      <span class="date-text">找日期</span>
+      <%= form_tag accounts_path,method:'get',id:"form-date" do%>
+        <%= date_field_tag :day,DateTime.now.in_time_zone('Taipei'),class:"input-date account-date" %>
+        <%# <%= select_date @day, prefix: :day, class:"select-date", use_two_digit_numbers: true ,date_separator: '/'%>
+        <%= submit_tag "Go",class:"btn-date account-date" %>
+      <% end %>
     </div>
+    <span class="daily-sum-text">本日小計: <span id="dollar-sign">$</span><%= @daily_sum %></span>
   </div>
+</div>
 
-  <div class="wrap-account-options">
-    <div class="account-option">
-      <div id="dropdown-toggle-account" onclick="toggleForm()">
-        <div class="icon-wrap"><%= image_tag("add.png",class:"icon-add") %></div>
-      </div>
-    </div>
-
-    <div class="account-option">
-       <div style="cursor:pointer;" onclick="alert('抱歉姆咪，這還沒有功能')">
-         <div class="icon-wrap"><%= image_tag("report.png",class:"icon icon-report") %></div>
-       </div>
+<div class="wrap-account-options">
+  <div class="account-option">
+     <div style="cursor:pointer;" onclick="alert('抱歉，這還沒有功能')">
+       <div class="icon-wrap"><%= image_tag("report.png",class:"icon icon-report") %></div>
+     </div>
+  </div>
+  <div class="account-option">
+    <div id="dropdown-toggle-account" onclick="toggleForm()">
+      <div class="icon-wrap"><%= image_tag("add.png",class:"icon-add") %></div>
     </div>
   </div>
 </div>

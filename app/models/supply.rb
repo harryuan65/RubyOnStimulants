@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: supplies
+#
+#  id                  :bigint           not null, primary key
+#  name                :string
+#  category            :integer
+#  quantity            :integer
+#  earliest_expiration :datetime
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#
+
 class Supply < ApplicationRecord
   enum category: [:meal, :drink, :powdered_drink, :tissue_paper, :cookies, :water]
 

@@ -1,0 +1,29 @@
+<div id="container-words" class="container document">
+  <%= link_to '回單字本', words_path, class:'btn-back' %>
+  <div id="wrap-document">
+    <h1 class="word-name"><%= @word.name %></h1>
+    <hr>
+
+    <% @word.definitions.each_with_index do |defin, i| %>
+      <div class="def-block">
+        <div class="wrap-definition">
+          <%= i+1 %>.
+           <span class="word-pos <%=defin.part_of_speech%>"><%= defin.part_of_speech %></span>
+           <% if defin.tag!="" %>
+             <span class="word-tag">[<%= defin.tag%>]</span>
+           <% end %>
+           <span class="word-zh"><%= defin.zh_tw_translation %></span>
+        </div>
+        <div class="wrap-def-org-examples">
+          <div class="word-def-org"><%= defin.def_org.capitalize %></div>
+          <% defin.examples.each do |example| %>
+            <div class="ex-pair">
+              <h4 class="word-ex-sentence"><%= example.sentence %></h4>
+              <h4 class="word-ex-zh word-zh"><%= example.translation %></h4>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

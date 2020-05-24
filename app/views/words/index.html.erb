@@ -1,20 +1,42 @@
-<div id="container-words" class="container">
+<%= javascript_include_tag("common/form") %>
+<%= javascript_include_tag('words/words') %>
+<div id="container-words" class="container cards">
 <% if @words.any? %>
   <%@words.each do |word| %>
-    <div class="card">
-      <div class="wrap wrap-word">
-        <h1 class="word">Instruction<span class="part-of-speech">n. [c]</span></h1>
-        <h4 class="meanings">指示、命令</h4>
-      </div>
-      <div class="wrap wrap-examples">
-      <% if word.examples.any? %>
-        <% word.parsed_examples.each do |ex| %>
-          <h4 class="example"><%= ex[:example_sentence] %></h4>
-          <p class="translation"><%= ex[:translation] %></p>
-        <% end %>
-      <% end %>
-      </div>
+  <div class="card-wrap">
+     <div class="card">
+        <div class="card-content" onclick="toggleRotate(this)">
+        <div class="front">
+          <h1 class="word"><%= word.name %></h1>
+          <h4 class="definition"><span class="zh"><%= word.first_definition.zh_tw_translation %></span><span class="part-of-speech">&nbsp;<%= word.first_definition.part_of_speech%></span></h4>
+        </div>
+        <div class="back">
+          <h4 class="definition-org"><%= word.first_definition.def_org.capitalize %></h4>
+          <hr>
+          <h4 class="example"><%= word.first_definition.first_example&.sentence || "(No example)" %></h4>
+          <p class="translation"><%= word.first_definition.first_example&.translation || ""%></p>
+        </div>
+        </div>
+        <%= link_to "詳細", word_path(word.id), class:"btn-details" %>
     </div>
+  </div>
   <% end %>
 <% end %>
+</div>
+
+<div id="wrap-dropdown-form">
+    <div id="dropdown-form">
+          <span class="x" onclick="toggleForm()">x</span>
+          <div class="wrap-form-title">
+            <span class="form-title">Create</span>
+          </div>
+          <%= form_for @new_word, url:words_path, html:{id:"form-ph",name:"form-ph",autocomplete:"off"},remote:true ,method: 'post' do |f| %>
+            <%= f.text_field :name    , placeholder:"New word"   , required:true  , class:"input text-field"%>
+            <%= f.submit "Submit", class:"input submit" %>
+          <% end %>
+    </div>
+</div>
+
+<div id="dropdown-toggle" onclick="toggleForm()">
+  <div class="icon-wrap"><%= image_tag("add.png",class:"icon-add") %></div>
 </div>

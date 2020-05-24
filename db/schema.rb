@@ -58,27 +58,30 @@ ActiveRecord::Schema.define(version: 2020_05_13_070745) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
+  create_table "definitions", force: :cascade do |t|
+    t.bigint "word_id"
+    t.string "def_org", null: false
+    t.string "tag"
+    t.string "zh_tw_translation", null: false
+    t.string "part_of_speech", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["def_org"], name: "index_definitions_on_def_org"
+    t.index ["part_of_speech"], name: "index_definitions_on_part_of_speech"
+    t.index ["word_id", "def_org", "zh_tw_translation", "part_of_speech"], name: "index_on_definition_fields", unique: true
+    t.index ["word_id"], name: "index_definitions_on_word_id"
+  end
+
   create_table "examples", force: :cascade do |t|
     t.bigint "word_id"
-    t.bigint "meaning_id"
+    t.bigint "definition_id"
     t.string "sentence", null: false
     t.string "translation", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["meaning_id"], name: "index_examples_on_meaning_id"
-    t.index ["word_id", "meaning_id"], name: "index_examples_on_word_id_and_meaning_id"
+    t.index ["definition_id"], name: "index_examples_on_definition_id"
+    t.index ["word_id", "definition_id"], name: "index_examples_on_word_id_and_definition_id"
     t.index ["word_id"], name: "index_examples_on_word_id"
-  end
-
-  create_table "meanings", force: :cascade do |t|
-    t.bigint "word_id"
-    t.string "mean", null: false
-    t.string "mean_en", null: false
-    t.string "part_of_speech", null: false
-    t.index ["mean"], name: "index_meanings_on_mean"
-    t.index ["part_of_speech"], name: "index_meanings_on_part_of_speech"
-    t.index ["word_id", "part_of_speech"], name: "index_meanings_on_word_id_and_part_of_speech", unique: true
-    t.index ["word_id"], name: "index_meanings_on_word_id"
   end
 
   create_table "onb_line_users", force: :cascade do |t|

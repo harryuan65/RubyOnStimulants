@@ -8,12 +8,15 @@ zh-TW:
       to_do_list: "待辦事項"
       supplies: "物資紀錄"
       articles: "文章"
-      vocabs: "單字本"
+      words: "單字本"
     articles:
       omission: "繼續閱讀"
     line:
       welcome: "安安尼好！我們是Omama跟小白～\n謝謝尼加入我們的好友，希望我們能在生活上幫到尼喔"
       currently_no_services: '那個～抱歉目前訊息處理的功能在開發中喔'
+    word:
+      empty_query: "沒有關鍵字"
+      create_success: "成功新增 %{word}"
   date:
     today:
       minutes_ago: '%{minutes} 分鐘前'

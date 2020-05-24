@@ -80,4 +80,3 @@ gem 'omniauth-google-oauth2'
 gem 'dalli' #for mem_cached_store for precompile
 gem 'line-bot-api'
 gem 'async'
-gem 'active_model_serializers', '~> 0.10.0'

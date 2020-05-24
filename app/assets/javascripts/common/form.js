@@ -46,6 +46,14 @@ function updateTable(){
            console.log("Updating tbody");
            $('tbody').replaceWith(find);
       }
+      else{
+        // words
+        var find = $('.card-wrap',resText);
+        if(find.length>0){
+            console.log("Updating card-wrap");
+           $('.card-wrap').replaceWith(find);
+        }
+      }
       var alrt = $('.wrap-alert',resText);
       $('.wrap-alert').replaceWith(alrt);
       console.log(alrt.length);

@@ -85,6 +85,7 @@ input:focus, textarea:focus {
 }
 .wrap-alert{
   @include flex(column,center,flex-end);
+  width: 100%;
 }
 .alert-txt{
   background-color:transparent;
@@ -277,13 +278,16 @@ input:focus, textarea:focus {
   }
 }
 //components
+
 %container{
   display: flex;
   justify-content: flex-start;
   margin: 20px 20px 50px 20px;
   width: 100%;
 }
-
+.container{
+  margin-bottom: 200px;
+}
 #container-home{
   @include flex(row, center, center);
   height: 80%;
@@ -1093,11 +1097,6 @@ a.btn-export:hover{
 }
 //RWD
 @media only screen and (max-width:576px){
-    %container{
-      justify-content: center;
-      margin: 0px;
-      padding: 0px;
-    }
     #container-header{
       position: fixed;
       top: 0;
@@ -1130,7 +1129,6 @@ a.btn-export:hover{
     }
     .container{
       margin-top: $mobile-header-height;
-      margin-bottom: 200px;
     }
     //home
     #container-home #home-title{

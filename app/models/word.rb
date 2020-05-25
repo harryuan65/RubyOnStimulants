@@ -13,10 +13,19 @@ class Word < ApplicationRecord
   has_many :definitions, dependent: :destroy
   has_many :examples, dependent: :destroy
   has_one :first_definition, ->{ order(id: :asc).limit(1) }, class_name: 'Definition'
-  def self.document_word(word_to_query)
+  def self.document_word(current_user=nil, word_to_query)
     begin
+      return {success: false, error: "No User"} if !current_user
       word_to_query = word_to_query.strip.downcase
-      return {success: false, error: "#{word_to_query} already exists"} unless !Word.exists?(name: word_to_query)
+      find_word = Word.where(name: word_to_query).first
+      if find_word
+        if UserWordShip.exists?(word_id: find_word.id)
+          return {success: false, error: "#{word_to_query} already exists"}
+        else
+          UserWordShip.create!(user_id: current_user.id, word_id: find_word.id)
+          return {success: true, word: find_word}
+        end
+      end
       doc = Nokogiri::HTML(
         RestClient.get("https://dictionary.cambridge.org/zht/%E8%A9%9E%E5%85%B8/%E8%8B%B1%E8%AA%9E-%E6%BC%A2%E8%AA%9E-%E7%B9%81%E9%AB%94/#{word_to_query}",
         {:user_agent=>"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.61 Safari/537.36"})
@@ -84,6 +93,7 @@ class Word < ApplicationRecord
             )
           end
         end
+        UserWordShip.create!(user_id: current_user.id, word_id: new_word.id)
         return {success: true, word: new_word}
       end
     rescue => exception

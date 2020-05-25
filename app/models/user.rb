@@ -22,6 +22,8 @@ class User < ApplicationRecord
   has_many :to_do_lists, dependent: :destroy
   has_many :articles
   has_many :comments
+  has_many :user_word_ships, dependent: :destroy
+  has_many :words, through: :user_word_ships, source: :word
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,

@@ -47,7 +47,7 @@ function updateTable(){
    $.get(window.location.href, (resText)=>{
         var find = $('tbody',resText);
         console.log(JSON.stringify(resText,null,2))
-        if(find.length>0 && words.length===0){
+        if(find.length>0){
           console.log("Updating tbody");
           $('tbody').replaceWith(find);
         }

@@ -505,7 +505,6 @@ h3[id*=article_]{
   }
   padding: 0 40px 0 40px;
   flex-wrap: wrap;
-  margin-bottom: 200px;
 }
 .card-wrap{
   margin-top: 50px;
@@ -1131,6 +1130,7 @@ a.btn-export:hover{
     }
     .container{
       margin-top: $mobile-header-height;
+      margin-bottom: 200px;
     }
     //home
     #container-home #home-title{

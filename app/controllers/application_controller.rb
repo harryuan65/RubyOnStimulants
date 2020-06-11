@@ -32,7 +32,8 @@ class ApplicationController < ActionController::Base
     puts "Parent pid: #{Process.ppid}"
     # puts "Group pid: #{Process.groups}"
     puts "Worker pid: #{Process.pid}"
-    puts "Request: #{request.method} #{request.path}"
+    puts "Request IP: #{request.remote_ip}"
+    puts "Path: #{request.method} #{request.path}"
     puts "Controller: #{params[:controller]}##{params[:action]}"
     puts '========================'
   end

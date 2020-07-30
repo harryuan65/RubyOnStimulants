@@ -5,6 +5,7 @@ class ArticlesController < ApplicationController
     end
 
     def create
+
     end
 
     def show
@@ -15,4 +16,8 @@ class ArticlesController < ApplicationController
     def edit
     end
 
+    private
+    def article_params
+      params.permit(:title, :content, :privacy)
+    end
 end

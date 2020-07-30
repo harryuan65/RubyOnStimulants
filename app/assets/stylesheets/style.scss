@@ -286,7 +286,7 @@ input:focus, textarea:focus {
   width: 100%;
 }
 .container{
-  margin-bottom: 200px;
+  // margin-bottom: 200px;
 }
 #container-home{
   @include flex(row, center, center);

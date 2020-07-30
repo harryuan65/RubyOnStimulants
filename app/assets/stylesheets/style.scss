@@ -84,7 +84,7 @@ input:focus, textarea:focus {
   }
 }
 .wrap-alert{
-  @include flex(column,center,flex-end);
+  @include flex(column, center, center);
   width: 100%;
 }
 .alert-txt{

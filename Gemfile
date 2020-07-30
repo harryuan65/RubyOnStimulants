@@ -79,4 +79,4 @@ gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem 'dalli' #for mem_cached_store for precompile
 gem 'line-bot-api'
-gem 'async'
+gem 'rails_param'

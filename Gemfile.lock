@@ -50,10 +50,6 @@ GEM
     archive-zip (0.12.0)
       io-like (~> 0.3.0)
     arel (9.0.0)
-    async (1.23.0)
-      console (~> 1.0)
-      nio4r (~> 2.3)
-      timers (~> 4.1)
     bcrypt (3.1.13)
     bcrypt (3.1.13-java)
     bindex (0.8.1)
@@ -85,7 +81,6 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.1.5)
-    console (1.5.0)
     crass (1.0.4)
     dalli (2.7.10)
     devise (4.7.1)
@@ -218,6 +213,7 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.2.0)
       loofah (~> 2.2, >= 2.2.2)
+    rails_param (0.11.0)
     railties (5.2.3)
       actionpack (= 5.2.3)
       activesupport (= 5.2.3)
@@ -288,7 +284,6 @@ GEM
     thread_safe (0.3.6)
     thread_safe (0.3.6-java)
     tilt (2.0.9)
-    timers (4.3.0)
     turbolinks (5.2.0)
       turbolinks-source (~> 5.2)
     turbolinks-source (5.2.0)
@@ -326,7 +321,6 @@ PLATFORMS
 
 DEPENDENCIES
   annotate
-  async
   bootsnap (>= 1.1.0)
   byebug
   capybara (>= 2.15)
@@ -351,6 +345,7 @@ DEPENDENCIES
   pry-rails
   puma (~> 3.11)
   rails (~> 5.2.3)
+  rails_param
   rest-client
   sass-rails (~> 5.0)
   selenium-webdriver
@@ -365,4 +360,4 @@ RUBY VERSION
    ruby 2.6.3p62
 
 BUNDLED WITH
-   2.0.2
+   2.1.4

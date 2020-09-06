@@ -1,24 +1,12 @@
-<% if status %>
-  <div class="txt">
-    <h2 class="txt"> <strong>Success</strong> </h2>
-    <p> <%= message%> </p>
-    <div class="alert alert-dark">
-      <% if data %>
-       <div class="txt">
-         <%= data %>
-       </div>
-       <%end%>
-    </div>
-  </div>
-<% else %>
+<%= stylesheet_link_tag('result') %>
+<main>
   <div class="wrap-result">
-    <h2 class="txt"> <strong>Error</strong> </h2>
-      <% if defined?(message) %>
-        <h4 class="txt"> <%= message%> </h4>
+    <h1 class="txt"><%= @success ? "Success" : "Error"  %> <%= @status %></h1>
+      <h2 class="subtitle"><%= t("controller.general.#{@success ? "success" : "error" }") %></h2>
+      <% if @data.presence %>
+        <h4 class="txt"> <%= @data%> </h4>
       <% end %>
-      <p class="wrap-message txt error"><%= error %></p>
+      <p class="wrap-message txt error"><%= @message %></p>
+      <%= link_to(t('controller.general.go_home'), root_path) %>
   </div>
-<% end %>
-
-
-</div>
+</main>

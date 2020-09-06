@@ -4,8 +4,15 @@ class ApplicationController < ActionController::Base
   before_action :set_locale
   before_action :show_info
   before_action :set_title
+  before_action :set_current_user
   skip_forgery_protection only:[:prod_test]
   skip_before_action :verify_authenticity_token
+
+  def set_current_user
+    puts "User:#{current_user}"
+    puts "params[:controller]=#{params[:controller]}"
+    render_error I18n.t('controller.general.not_logged_in') if !["home", "users/sessions", "users/omniauth_callbacks"].include?(params[:controller]) && !current_user
+  end
 
   def set_title
     case params[:controller]
@@ -50,12 +57,6 @@ class ApplicationController < ActionController::Base
     render json:{message:"Ok"}
   end
 
-  def if_user
-    if params[:controller]!="devise/sessions#new" && params[:controller]!="home#index" && !current_user
-      redirect_to new_user_session_path
-    end
-  end
-
   # File operations: currently for Excel
   def download
     if current_user
@@ -96,7 +97,10 @@ class ApplicationController < ActionController::Base
   end
 
   def render_error(msg)
-    return render json:{message: msg}, status: 400
+    @success = false
+    @status = 403
+    @message = msg
+    return render "shared/result", layout: false
   end
 
   # This is found on https://stackoverflow.com/questions/4709109/base-64-url-decode-with-ruby-rails

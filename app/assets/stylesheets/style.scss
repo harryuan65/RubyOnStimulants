@@ -50,9 +50,9 @@ body{
 a, a:hover, a:visited, a:active{
   text-decoration: none;
 }
-// *{
-//   font-family: 'NotoSansCJKtc-Thin';
-// }
+*{
+  font-family: 'NotoSansCJKtc-Thin';
+}
 input{
   border-color: #111;
 }
@@ -303,26 +303,6 @@ input:focus, textarea:focus {
 .round{
   border-radius: 50%;
 }
-.btn-grad {
-  background-size: 300% auto; //imp
-  background-image: linear-gradient(90deg, rgb(41, 52, 98 ) 0%, rgb(77, 91, 146) 50%, rgb(41, 52, 98 ) 100%);
-  background-position: left center;
-  box-shadow: 3px 3px 10px #333333;
-
-  text-decoration: none;
-  margin: 0 15px 0 15px;
-  padding: 15px;
-  text-align:center;
-  transition: .5s ease;
-  -webkit-transition: .5s ease;
-  &:hover{
-    background-position: right center;
-    transform: translate3d(-3px,-3px,0);
-  }
-  &:active{
-    transform: translate3d(-2px,2px,0);
-  }
-}
 .icon{
   background-color: transparent;
 }
@@ -458,33 +438,19 @@ a#btn-logout{
 #terms-content{
   width: 60%;
 }
-//result page
-.wrap-result{
-  @include flex(column,flex-start,auto);
-  margin: 20px 20px 0 20px;
-  justify-content: flex-start;
-  width: 400px;
-}
-.wrap-message{
-  border:1px solid rgba(230, 13, 58, 0.7);
-  border-radius: 15px;
-  padding: 20px;
-  box-sizing: border-box;
-}
-.wrap-result .error{
-  background-color:rgba(199, 13, 58, 0.7);
-  color: #fff;
-}
 //Articles
 #articles-container{
   @include flex(column, center, center)
 }
-#article-block{
+a.article-block{
   @include size(380px, 170px);
   @include flex(column, space-around, flex-start);
   background-color: #f3f9de;
   margin-top: 50px;
   padding: 15px;
+  &:link, &:active, &:visited{
+    color: black;
+  }
 }
 h3[id*=article_]{
   display: inline-block;
@@ -783,7 +749,7 @@ div[id*="dropdown-toggle"]{
   }
 }
 #dropdown-form {
-  background-color: rgb(140, 117, 79);
+  background-color: #7fa998;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -805,17 +771,10 @@ div[id*="dropdown-toggle"]{
 
   .x{
     font-size: 20px;
-    background-color: #7fa998;
-    top: 8px;
+    top: 0px;
     right: 10px;
     position: absolute;
-    padding: 0px 10px 4px 10px;
-    border:1px solid white;
-    transition: .2s ease-out;
     cursor: pointer;
-    &:hover{
-      box-shadow: 0px 0px 5px #eeeeee;
-    }
   }
 }
 #form-ph {

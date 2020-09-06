@@ -31,6 +31,11 @@
 
 en:
   controller:
+    general:
+      success: "Action done successfully!"
+      error: "Oops... something is wrong!"
+      not_logged_in: "You are not logged in."
+      go_home: "Return to homepage"
     title:
       sign_in: "Login"
       hello: "Hello world"

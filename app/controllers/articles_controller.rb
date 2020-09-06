@@ -4,8 +4,17 @@ class ArticlesController < ApplicationController
       @articles = Article.includes(:user).all
     end
 
-    def create
+    def new
+      @article = Article.new
+    end
 
+    def create
+     @article = Article.create!(article_params)
+     if @article.save!
+      return render json:{success: true}
+     else
+      render_error "Failed to create article!"
+     end
     end
 
     def show

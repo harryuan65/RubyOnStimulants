@@ -1,0 +1,109 @@
+@mixin flex($fd:row, $jc:flex-start,$ai:flex-start){
+  display: flex;
+  flex-direction: $fd;
+  justify-content: $jc;
+  align-items: $ai;
+}
+@mixin size($w, $h){
+  width: $w;
+  height: $h;
+}
+//remove above if set layout
+//Accounts/index
+#container-account{
+  @include flex(column, space-between, center);
+  height: 374px;
+  padding: 40px 40px 0 40px;
+}
+.wrap-date-and-sum{
+  @include flex(column, flex-start, center);
+}
+.account-date{
+  font-size: 20px;
+  background-color: #58D68D;
+  &.input-date{
+    width: 53px;
+  }
+  &.btn-date{
+    padding: 4px;
+  }
+  margin-bottom: 30px;
+}
+.table-account{
+  border-collapse: collapse;
+  thead{
+    border-top: 1px solid #CCD1D1;
+    border-bottom: 1px solid #CCD1D1;
+  }
+  th{
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-weight: normal;
+    color: #99A3A4;
+  }
+  td{
+    min-width: 64px;
+    text-align: center;
+  }
+}
+#dollar-sign{
+  color: #55946A;
+  &.light{
+    color:#2ECC71;
+  }
+}
+.daily-sum-text{
+  font-size: 30px;
+}
+//Account options(create/ statistics)
+@keyframes load-account-options-web{
+  from{
+    right: -5%;
+    bottom: -5%;
+  }
+  to{
+    right: 3%;
+    bottom:3%;
+  }
+}
+.wrap-account-options{
+  right: 0%;
+  bottom:0%;
+  position: fixed;
+  z-index: 100;
+  animation: load-account-options-web .6s ease forwards;
+}
+.wrap-account-options .link{
+  text-decoration: none;
+  color:#fff;
+}
+.account-option{
+  margin-bottom: 20px;
+  position: relative;
+  height: 90px;
+  width: 90px;
+  // border: 1px solid #666666;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: .3s ease-out;
+  -webkit-transition: .3s ease-out;
+  // background-color:rgba(255, 223, 116, 0.9); //=#f6d365;
+  // background-color: #a0855b;
+  background-color: #76D7C4;
+  // background-color: rgb(54 ,105, 105);
+  box-shadow: 0 0 20px rgba(121, 121, 121,.5);
+  transition: .2s ease;
+  &:hover{
+    box-shadow: 5px 5px 20px rgba(121, 121, 121,.5);
+  }
+  &:active{
+    transform: translate3d(4px,4px,0) rotate3d(0,1,1,5deg);
+  }
+}
+.btn-report{
+   display:flex;
+   justify-content: center;
+  }

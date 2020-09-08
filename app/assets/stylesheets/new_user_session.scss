@@ -1,0 +1,119 @@
+//login
+@font-face{
+  font-family: 'Noto Sans';
+  src: font-url('/NotoSans-Regular.ttf') format('truetype');
+}
+@font-face{
+  font-family: 'Noto Sans CJK TC';
+  src: font-url('/NotoSansCJKtc-Regular.otf') format('opentype');
+}
+*{
+  box-sizing: border-box;
+}
+*:not(.tc){
+  font-family: 'Noto Sans';
+}
+.tc{
+  font-family: 'Noto Sans CJK TC';
+}
+a{
+  text-decoration: none;
+}
+a:link, a:hover, a:active, a:visited{
+  color: #5B5858;
+}
+@mixin flex($fd:row, $jc:flex-start,$ai:flex-start){
+  display: flex;
+  flex-direction: $fd;
+  justify-content: $jc;
+  align-items: $ai;
+}
+@mixin size($w, $h){
+  width: $w;
+  height: $h;
+}
+body{
+  display: grid;
+  justify-content: center;
+  align-content: center;
+}
+#container-signin{
+  @include flex(column, flex-start, center);
+  @include size(630px, 760px);
+  border-radius: 6px;
+  background-color: white;
+  border: 1px solid #5B5858;
+  border-radius: 15px;
+}
+#txt-signin{
+  font-size: 48px;
+  color: #636363;
+  font-weight: normal;
+}
+.wrap{
+  margin-top: 50px;
+  &.oauth{
+    @include flex(column, center, center);
+  }
+  &.line{
+    @include flex(row, space-between, center);
+  }
+  &.inputs{
+    @include flex(column, center, center);
+  }
+}
+.txt{
+  color: #979797;
+  font-size: 22px;
+}
+hr{
+  display: inline-block;
+  width: 230px;
+}
+.signin-option{
+  @include flex(row, center, center);
+  @include size(290px, 50px);
+  border-radius: 6px;
+  &:not(.input){ //facebook and google
+    margin-top: 10px;
+    font-family: 'Noto Sans CJK TC';
+  }
+  &.facebook{
+    background-color: #3C5999;
+    color: rgba(255,255,255, .8);
+  }
+  &.google{
+    background-color: white;
+    border: 1px solid #979797;
+    // color: #5B5858;
+    color: black;
+  }
+  &.input{
+    background-color: #F7F7F7;
+    color: #5B5858;
+    padding: 5px;
+    border: 1px solid #979797;
+    font-size: 16px;
+  }
+  &.submit{
+    background-color: #36A44F;
+    font-size: 20px;
+    border: 1px solid #979797;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 40px;
+  }
+}
+.signin-label{
+  color: rgba(91, 91, 91, .6);
+  font-size: 18px;
+}
+#facebook{
+  @include size(17px, auto);
+  margin-right: 10px;
+}
+.icon-google{
+  @include size(20px, 20px);
+  margin-right: 10px;
+}

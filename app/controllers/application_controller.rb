@@ -2,11 +2,15 @@ class ApplicationController < ActionController::Base
   include CSVParser
   include Global
   before_action :set_locale
-  before_action :show_info
+  # before_action :show_info
+  before_action :show_req_env_dev
   before_action :set_title
   before_action :set_current_user
   skip_forgery_protection only:[:prod_test]
   skip_before_action :verify_authenticity_token
+  def show_req_env_dev
+    # puts request.env.to_h.keys
+  end
 
   def set_current_user
     puts "User:#{current_user}"

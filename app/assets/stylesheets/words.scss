@@ -1,0 +1,167 @@
+// Place all the styles related to the vocabs controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+//Words
+@mixin flex($fd:row, $jc:flex-start,$ai:flex-start){
+  display: flex;
+  flex-direction: $fd;
+  justify-content: $jc;
+  align-items: $ai;
+}
+@mixin size($w, $h){
+  width: $w;
+  height: $h;
+}
+#container-words{
+  &.cards{
+    @include flex(row, center, center);
+  }
+  &.document{
+    @include flex(column ,flex-start, center);
+  }
+  h1,h2,h3,h4,h5{
+    margin: 0;
+    font-weight: normal;
+  }
+  padding: 0 40px 0 40px;
+  flex-wrap: wrap;
+}
+.card-wrap{
+  margin-top: 50px;
+  width: 400px;
+}
+.card{
+  width: 320px;// mobile width
+  height: 230px;
+  max-height: 280px;
+  box-sizing: border-box;
+  perspective: 1000px;
+ .card-content.rotate{
+    transform: rotateY(180deg);
+  }
+  .card-content{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+    border: 1px solid black;
+  }
+  .front, .back{
+    position: absolute;
+    backface-visibility: hidden;
+    width: 100%;
+    height:100%;
+  }
+  .front{
+    @include flex(column, center, center);
+    background-color: #83b582;
+    color: #eee;
+    .word{
+      @include flex(row, space-between, center);
+      font-size: 35px;
+    }
+    .definition{
+      text-align: center;
+    }
+    .zh{
+      display: inline-block;
+      max-width: 200px;
+      word-wrap: wrap;
+      font-size: 18px;
+    }
+  }
+  .back{
+      background-color: #fcf8e8;
+      transform: rotateY(180deg);
+      .definition-org{
+        width: inherit;
+        height: auto;
+        box-sizing: border-box;
+        padding: 10px;
+      }
+      .example, .translation{
+        padding-left: 10px;
+      }
+      .example{
+        line-height: 1.2;
+        &::before{
+          content: '';
+          display: inline-block;
+          border-radius: 50%;
+          height: 4px;
+          width: 4px;
+          border: 1px solid black;
+          margin-right: 10px;
+          background-color: black;
+          vertical-align: middle;
+        }
+      }
+      .translation{
+        margin-top: 10px;
+      }
+  }
+  a.btn-details{
+    &:link, &:visited{
+      text-decoration: none;
+      color: black;
+    }
+    position: absolute;
+    right: -55px;
+    top: 110px;
+  }
+}
+#wrap-document{
+  max-width: 900px;
+}
+.def-block{
+  margin-top: 40px;
+  // border: 1px solid black;
+  padding: 10px;
+}
+.wrap-def-org-examples{
+  padding-left: 60px;
+  margin-top: 30px;
+}
+.word-def-org{
+  margin-top: 30px;
+}
+.word-pos{
+  padding: 5px;
+  border-radius: 5px;
+  color: #fff;
+  &.noun{
+    background-color: #2E4053;
+  }
+  &.verb{
+    // background-color: #117A65;
+    background-color: #1AB899;
+  }
+  &.adjective{
+    background-color: #2471A3;
+  }
+}
+.word-zh{
+  color: #3390CF;
+}
+.ex-pair{
+  padding: 5px;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: #FEF9E7;
+  &:not(:first-child){
+    margin-top: 10px;
+  }
+}
+#dropdown-toggle{
+  position: fixed;
+  right: 9px;
+  top: 101px;
+  z-index: 999;
+  background-color: #2E4053;
+  padding: 5px;
+  border-radius: 5px;
+  .icon-add{
+    zoom: .4;
+  }
+}

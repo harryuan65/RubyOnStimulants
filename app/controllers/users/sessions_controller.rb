@@ -1,6 +1,11 @@
 class Users::SessionsController < Devise::OmniauthCallbacksController
   def new
     @user = User.new
+    render "users/sessions/new", layout: false
+  end
+
+  def create
+    # TODO: Manual Sign In
   end
 
   def destroy

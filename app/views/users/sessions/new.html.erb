@@ -1,9 +1,49 @@
-<div id="container-rw">
-  <div class="wrap-login-options">
-  <%- if devise_mapping.omniauthable? %>
-    <%- resource_class.omniauth_providers.each do |provider| %>
-      <%= link_to "#{image_tag("#{OmniAuth::Utils.camelize(provider)}.png",class:"icon icon-#{OmniAuth::Utils.camelize(provider)}")} #{content_tag(:div, OmniAuth::Utils.camelize(provider), class:"login-option-txt")}".html_safe, omniauth_authorize_path(resource_name, provider),class:"txt login-option" %><br />
-    <% end %>
-  <% end %>
-  </div>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In - TechPod</title>
+  <%= stylesheet_link_tag "new_user_session" %>
+</head>
+<body>
+    <div id="container-signin">
+        <div class="wrap oauth">
+        <h1 id="txt-signin">Sign In</h1>
+          <%- if devise_mapping.omniauthable? %>
+            <%- resource_class.omniauth_providers.each do |provider| %>
+              <% case provider.to_s %>
+              <% when "facebook" %>
+                <%= link_to "#{svg('facebook')} Sign In via Facebook".html_safe, omniauth_authorize_path(resource_name, provider), class:"signin-option facebook" %>
+              <% when "google_oauth2" %>
+                <%= link_to "#{image_tag('google.png', class: "icon-google")} Sign In via Google".html_safe, omniauth_authorize_path(resource_name, provider),class:"signin-option google" %>
+              <% else %>
+              <% end %>
+            <% end %>
+          <% end %>
+        </div>
+        <div class="wrap middle">
+            <hr>
+            <span class="txt">or</span>
+            <hr>
+        </div>
+        <div class="wrap inputs">
+          <%= form_tag user_session_path do%>
+            <div class="signin-pair">
+              <%= label_tag "username", "username", class: 'signin-label tc' %>
+              <%= text_field_tag(:email, nil, required: true, class: "signin-option input",required: true, autocomplete: 'on') %>
+            </div>
+
+            <div class="signin-pair">
+              <%= label_tag "password", "password", class: 'signin-label tc' %>
+              <%= text_field_tag(:password, nil, required: true, class: "signin-option input",required: true, autocomplete: 'on') %>
+            </div>
+
+            <div class="signin-pair">
+              <%= submit_tag "Sign In", class:"signin-option submit tc" %>
+            </div>
+          <% end %>
+        </div>
+    </div>
+</body>
+</html>

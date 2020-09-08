@@ -1,3 +1,131 @@
 // Place all the styles related to the ToDos controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+//ToDo List
+#dropdown-toggle-todo{
+  position: absolute;
+  right: 20px;
+  bottom: 50px;
+  background-color: #a0855b;
+  color: #eee;
+  font-size: 60px;
+  width: 80px;
+  height: 80px;
+  z-index: 100;
+  &:focus{
+    outline: 0;
+  }
+  &:hover{
+    background-color: #9e8b6c;
+  }
+  &:active{
+    background-color: #746142;
+    color: #3e3e3e;
+  }
+}
+#dropdown-form-add-todo{
+  background-color: rgba(54,54,54,.9);
+  border:1px solid rgba(250,250,250,.5)
+}
+#wrap-todo-date{
+  text-align: center;
+}
+#form-add-todo{
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  padding: 40px 30px 40px 30px;
+  .wrap-form-title{
+    text-align: center;
+    font-size: 30px;
+  }
+  input{
+    padding:10px;
+    border:1px solid rgba(54,54,54,.8);
+  }
+  .input-date{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    select[id^="to_do_list"]{
+      width: 80px;
+    }
+  }
+  .wrap-todo-field{
+    display: flex;
+    flex-direction: column;
+    color:#fff;
+    margin-top: 30px;
+    .wrap-remind{
+      margin-left: 20px;
+    }
+  }
+  .btn-add-todo{
+    background-color: #38470b;
+    margin-top:30px;
+    font-size: 20px;
+    color: #fff;
+    padding: 10px 0 10px 0;
+    transition: .2s ease;
+    &:hover{
+      background-color: #4b5e12;
+    }
+  }
+}
+#btn-delete-todo{
+  text-decoration: none;
+}
+#container-supplies-page{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  padding: 50px 0 0 50px;
+  &.state{
+    justify-content: center;
+  }
+}
+.wrap-link-form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 100px;
+}
+.wrap-cal{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 60px;
+  background-color:  rgba(54,54,54,.7);
+  border-radius: 5px;
+  .wrap-cal-item{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 300px;
+    padding: 0 5px 0 5px;
+    .label-cal{
+      font-size: 22px;
+      color: #ddd;
+    }
+    .input-cal{
+      font-size: 20px;
+      color: #eee;
+      background-color: #52432a;
+      border: 1px solid #444444;
+      border-radius: 5px;
+      margin-top: 10px;
+      padding: 5px;
+      width: 50px;
+      &::placeholder{
+        color: #888;
+      }
+    }
+  }
+}
+#live{
+  color: #fff;
+  font-size: 30px;
+}

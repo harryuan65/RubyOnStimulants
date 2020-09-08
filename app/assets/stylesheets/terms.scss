@@ -1,0 +1,17 @@
+//terms
+@mixin flex($fd:row, $jc:flex-start,$ai:flex-start){
+  display: flex;
+  flex-direction: $fd;
+  justify-content: $jc;
+  align-items: $ai;
+}
+@mixin size($w, $h){
+  width: $w;
+  height: $h;
+}
+#terms-container{
+  @include flex(column, center, center);
+}
+#terms-content{
+  width: 60%;
+}

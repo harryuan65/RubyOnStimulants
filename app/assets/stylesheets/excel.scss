@@ -1,0 +1,72 @@
+//Excel
+@mixin flex($fd:row, $jc:flex-start,$ai:flex-start){
+  display: flex;
+  flex-direction: $fd;
+  justify-content: $jc;
+  align-items: $ai;
+}
+@mixin size($w, $h){
+  width: $w;
+  height: $h;
+}
+#form-upload{
+  .file-input{
+     font-size:18px;
+  }
+}
+.wrap-excel{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width:100%;
+}
+.btn-excel{
+  background-color: #1b1b1b;
+  padding: 5px 15px 5px 15px;
+  color: rgba(255,255,255,.5);
+  font-size: 20px;
+  transition: .1s ease-in;
+  &:hover{
+    box-shadow: 0 0 5px rgb(201, 201, 201);
+    color: rgba(255,255,255,.8);
+  }
+}
+.btn-export{
+  margin: 50px 0px 50px 0;
+}
+a.btn-export, a.btn-export:hover, a.btn-export:visited, a.btn-export:active{
+  text-decoration: none;
+  color: #fff;
+  border: 1px solid white;
+  border-radius: 15px;
+  text-align:center;
+  font-size: 30px;
+  float: left;
+  width: 120px;
+  padding: 5px 10px 5px 10px;
+  background-color: #1a1a1a;
+  transition: .2s ease-out;
+  -webkit-transition: .2s ease-out;
+}
+a.btn-export:hover{
+  background-color: #6d6d6d;
+}
+#container-excel{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin: 20px 20px 400px 20px;
+}
+#container-excel .list{
+  height: 100%;
+}
+#wrap-two-tables{
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+#wrap-table{
+  display:flex;
+  flex-direction: column;
+}

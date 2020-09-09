@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sign In - TechPod</title>
   <%= stylesheet_link_tag "new_user_session" %>
+  <%= javascript_include_tag "signin" %>
 </head>
 <body>
     <div id="container-signin">
@@ -14,9 +15,9 @@
             <%- resource_class.omniauth_providers.each do |provider| %>
               <% case provider.to_s %>
               <% when "facebook" %>
-                <%= link_to "#{svg('facebook')} Sign In via Facebook".html_safe, omniauth_authorize_path(resource_name, provider), class:"signin-option facebook" %>
+                <%= link_to "#{svg('facebook', id: "facebook", class: "icon-signin facebook")} Sign In via Facebook".html_safe, omniauth_authorize_path(resource_name, provider), class:"signin-option facebook" %>
               <% when "google_oauth2" %>
-                <%= link_to "#{image_tag('google.png', class: "icon-google")} Sign In via Google".html_safe, omniauth_authorize_path(resource_name, provider),class:"signin-option google" %>
+                <%= link_to "#{image_tag('google.png', class: "icon-signin google")} Sign In via Google".html_safe, omniauth_authorize_path(resource_name, provider),class:"signin-option google" %>
               <% else %>
               <% end %>
             <% end %>
@@ -31,12 +32,13 @@
           <%= form_tag user_session_path do%>
             <div class="signin-pair">
               <%= label_tag "username", "username", class: 'signin-label tc' %>
-              <%= text_field_tag(:email, nil, required: true, class: "signin-option input",required: true, autocomplete: 'on') %>
+              <% #text_field_tag(:email, nil, required: true, class: "signin-option input",required: true, autocomplete: 'on') %>
+              <%= email_field_tag(:email, nil, required: true, class: "signin-option input username",required: true, autocomplete: 'off') %>
             </div>
 
             <div class="signin-pair">
               <%= label_tag "password", "password", class: 'signin-label tc' %>
-              <%= text_field_tag(:password, nil, required: true, class: "signin-option input",required: true, autocomplete: 'on') %>
+              <%= password_field_tag(:password, nil, required: true, class: "signin-option input",required: true, autocomplete: 'off') %>
             </div>
 
             <div class="signin-pair">

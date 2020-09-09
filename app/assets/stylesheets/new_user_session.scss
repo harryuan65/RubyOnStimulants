@@ -1,26 +1,42 @@
 //login
 @font-face{
   font-family: 'Noto Sans';
-  src: font-url('/NotoSans-Regular.ttf') format('truetype');
+  src: font-url('NotoSans-Regular.ttf') format('truetype');
 }
 @font-face{
   font-family: 'Noto Sans CJK TC';
-  src: font-url('/NotoSansCJKtc-Regular.otf') format('opentype');
+  src: font-url('NotoSansCJKtc-Regular.otf') format('opentype');
 }
-*{
-  box-sizing: border-box;
+@font-face {
+  font-family: 'fontello';
+  src: font-url('asterisk/fontello.eot?27015240');
+  src: font-url('asterisk/fontello.eot?27015240#iefix') format('embedded-opentype'),
+       font-url('asterisk/fontello.woff2?27015240') format('woff2'),
+       font-url('asterisk/fontello.woff?27015240') format('woff'),
+       font-url('asterisk/fontello.ttf?27015240') format('truetype'),
+       font-url('asterisk/fontello.svg?27015240#fontello') format('svg');
+  font-weight: normal;
+  font-style: normal;
 }
-*:not(.tc){
-  font-family: 'Noto Sans';
-}
-.tc{
-  font-family: 'Noto Sans CJK TC';
-}
-a{
-  text-decoration: none;
-}
-a:link, a:hover, a:active, a:visited{
-  color: #5B5858;
+input[type="password"] {
+	font-family: 'fontello' !important;
+	font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+	speak: none;
+
+	/* For safety - reset parent styles, that can break glyph codes*/
+	font-variant: normal;
+	text-transform: none;
+
+	/* Font smoothing. That was taken from TWBS */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	/* Uncomment for 3D effect */
+	/* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+
+	/* add spacing to better separate each image */
+	letter-spacing: 2px;
 }
 @mixin flex($fd:row, $jc:flex-start,$ai:flex-start){
   display: flex;
@@ -32,14 +48,34 @@ a:link, a:hover, a:active, a:visited{
   width: $w;
   height: $h;
 }
+*{
+  box-sizing: border-box;
+}
+*:not(.tc){
+  font-family: 'Noto Sans';
+}
+html, body{
+  margin: 0;
+  padding: 0;
+  @include size(100%, 100%);
+}
 body{
   display: grid;
   justify-content: center;
   align-content: center;
 }
+.tc{
+  font-family: 'Noto Sans CJK TC';
+}
+a{
+  text-decoration: none;
+}
+a:link, a:hover, a:active, a:visited{
+  color: #5B5858;
+}
 #container-signin{
   @include flex(column, flex-start, center);
-  @include size(630px, 760px);
+  @include size(580px, 645px);
   border-radius: 6px;
   background-color: white;
   border: 1px solid #5B5858;
@@ -51,7 +87,7 @@ body{
   font-weight: normal;
 }
 .wrap{
-  margin-top: 50px;
+  margin-top: 21px;
   &.oauth{
     @include flex(column, center, center);
   }
@@ -68,7 +104,7 @@ body{
 }
 hr{
   display: inline-block;
-  width: 230px;
+  width: 189px;
 }
 .signin-option{
   @include flex(row, center, center);
@@ -91,8 +127,16 @@ hr{
   &.input{
     background-color: #F7F7F7;
     color: #5B5858;
-    padding: 5px;
+    padding: 12px;
     border: 1px solid #979797;
+    //signin.js focus
+    transition: outline-color .2s ease;
+    &.focus{ //signin.js focus
+      outline-color: #5B5959;
+      transition: .2s ease;
+    }
+  }
+  &.input.username{
     font-size: 16px;
   }
   &.submit{
@@ -105,15 +149,25 @@ hr{
     margin-top: 40px;
   }
 }
-.signin-label{
+.icon-signin{
+  position: relative;
+  &.facebook{
+    @include size(17px, auto);
+    margin-right: 10px;
+    left: -20px;
+  }
+  &.google{
+    @include size(20px, 20px);
+    margin-right: 10px;
+    left: -30px;
+  }
+}
+.signin-label{  // for username/password
   color: rgba(91, 91, 91, .6);
+  transition: .2s ease;
   font-size: 18px;
-}
-#facebook{
-  @include size(17px, auto);
-  margin-right: 10px;
-}
-.icon-google{
-  @include size(20px, 20px);
-  margin-right: 10px;
+  &.focus{ //signin.js focus
+    transition: .2s ease;
+    color: #5B5B5B;
+  }
 }

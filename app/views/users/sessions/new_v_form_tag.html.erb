@@ -4,27 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sign In - TechPod</title>
-  <%= stylesheet_link_tag "shared" %>
-  <%= javascript_include_tag "shared" %>
-  <%= stylesheet_link_tag "users/signin_and_register" %>
-  <%= javascript_include_tag "users/signin_and_register" %>
+  <%= stylesheet_link_tag "users/new_user_session" %>
+  <%= javascript_include_tag "signin" %>
 </head>
 <body>
-    <div class="wrap-alert" id="wrap-alert">
-      <% if notice %>
-        <p class="alert alert-success" onanimationend="reverseAnimation(this)">
-         <span class="alert-txt"><%= notice %></span>
-        </p>
-      <% end %>
-      <% if alert %>
-         <p class="alert alert-danger" onanimationend="reverseAnimation(this)">
-         <span class="alert-txt"> <%= alert %></span>
-        </p>
-      <% end %>
-        <%# <p class="txt alert alert-danger animation-forwards" onanimationend="reverseAnimation(this)"><span class="alert-txt">Test abcdefghijadfadsf123</span></p> %>
-    </div>
     <div id="container-signin">
-        <div class="wrap oauth signin">
+        <div class="wrap oauth">
         <h1 id="txt-signin">Sign In</h1>
           <%- if devise_mapping.omniauthable? %>
             <%- resource_class.omniauth_providers.each do |provider| %>
@@ -44,22 +29,23 @@
             <hr>
         </div>
         <div class="wrap inputs">
-          <%= form_for @user, url: user_session_path(@user)  do |f| %>
+          <%= form_tag user_session_path do%>
             <div class="signin-pair">
-              <%= f.label "username", "username", class: 'signin-label tc' %>
+              <%= label_tag "username", "username", class: 'signin-label tc' %>
               <% #text_field_tag(:email, nil, required: true, class: "signin-option input",required: true, autocomplete: 'on') %>
-              <%= f.email_field(:email, required: true, class: "signin-option input username",required: true, autocomplete: 'off') %>
+              <%= email_field_tag(:email, nil, required: true, class: "signin-option input username",required: true, autocomplete: 'off') %>
             </div>
 
             <div class="signin-pair">
-              <%= f.label "password", "password", class: 'signin-label tc' %>
-              <%= f.password_field(:password, required: true, class: "signin-option input",required: true, autocomplete: 'off') %>
+              <%= label_tag "password", "password", class: 'signin-label tc' %>
+              <%= password_field_tag(:password, nil, required: true, class: "signin-option input",required: true, autocomplete: 'off') %>
             </div>
 
+
             <div class="signin-pair">
-              <%= f.submit "Sign In", class:"signin-option submit tc signin" %>
+              <%= submit_tag "Sign In", class:"signin-option submit tc signin" %>
             </div>
-            <%= link_to "Don't have an account?", new_user_registration_path, class: "link-signup"%>
+            <%= link_to "sign up", new_user_registration_path, class: "link-signup"%>
           <% end %>
         </div>
     </div>

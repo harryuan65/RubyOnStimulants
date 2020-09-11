@@ -7,7 +7,8 @@ class ApplicationController < ActionController::Base
   before_action :set_title
   before_action :set_current_user
   skip_forgery_protection only:[:prod_test]
-  skip_before_action :verify_authenticity_token
+  # skip_before_action :verify_authenticity_token
+  before_action :configure_permitted_parameters, if: :devise_controller?
   def show_req_env_dev
     # puts request.env.to_h.keys
   end
@@ -15,7 +16,7 @@ class ApplicationController < ActionController::Base
   def set_current_user
     puts "User:#{current_user}"
     puts "params[:controller]=#{params[:controller]}"
-    render_error I18n.t('controller.general.not_logged_in') if !["home", "users/sessions", "users/omniauth_callbacks"].include?(params[:controller]) && !current_user
+    # render_error I18n.t('controller.general.not_logged_in') if !["home", "users/sessions", "users/omniauth_callbacks"].include?(params[:controller]) && !current_user
   end
 
   def set_title
@@ -133,10 +134,18 @@ class ApplicationController < ActionController::Base
     return render json: {success: true}
   end
 
+  protected
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_in, keys: [:username, :password])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:username, :password, :password_confirmation])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:username, :password])
+  end
+
   private
 
   def set_locale
-    I18n.locale = params[:locale]&.to_sym || :'zh-TW'
+    I18n.locale = params[:locale]&.to_sym || :'en'
   end
 
 end

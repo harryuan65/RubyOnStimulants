@@ -1,4 +1,5 @@
 class WordsController < ApplicationController
+    before_action :authenticate_user!
     def index
       # 不分user
       # @words = Word.joins(first_definition:[:first_example]).includes(first_definition:[:first_example]).order(id: :desc).all

@@ -8,30 +8,61 @@
   <%= javascript_include_tag "shared" %>
   <%= stylesheet_link_tag "users/signin_and_register" %>
   <%= javascript_include_tag "users/signin_and_register" %>
+  <script>
+    document.addEventListener('DOMContentLoaded',()=>{
+      let signupForm = document.getElementById('form-signup');
+      if (signupForm){
+        signupForm.addEventListener('submit',(event)=>{
+          event.preventDefault();
+          let pwd = signupForm.querySelector('#user_password').value;
+          let pwdConfirmation = signupForm.querySelector('#user_password_confirmation').value;
+          if (pwd!==pwdConfirmation){
+            let alert = document.createElement("div");
+            let alertText = document.createElement("span");
+            alert.classList.add("alert");
+            alert.classList.add("alert-danger");
+            alert.setAttribute("onanimationend", "reverseAnimation(this)");
+            alertText.innerText = "<%= I18n.t('devise.registrations.password_inconsistent') %>";
+            alert.animationPlayState = "running";
+            alert.appendChild(alertText);
+            document.getElementById('wrap-alert').appendChild(alert);
+            let inputs = document.querySelectorAll('.signin-option.input');
+            inputs.forEach(e=>e.value = "");
+            inputs[0].focus();
+          }
+          else{
+            signupForm.submit();
+          }
+        });
+      }
+    })
+
+  </script>
+
 </head>
 <body>
     <div class="wrap-alert" id="wrap-alert">
       <% if notice %>
         <p class="alert alert-success" onanimationend="reverseAnimation(this)">
-         <span class="alert-txt"><%= notice %></span>
+         <span class="alert-txt" id="alert-text"><%= notice %></span>
         </p>
       <% end %>
       <% if alert %>
          <p class="alert alert-danger" onanimationend="reverseAnimation(this)">
-         <span class="alert-txt"> <%= alert %></span>
+         <span class="alert-txt" id="alert-text"> <%= alert %></span>
         </p>
       <% end %>
         <%# <p class="txt alert alert-danger animation-forwards" onanimationend="reverseAnimation(this)"><span class="alert-txt">Test abcdefghijadfadsf123</span></p> %>
     </div>
     <div id="container-signin">
       <h1 id="txt-signin">Sign Up</h1>
-      <%= form_for(@user, as: :user, url: registration_path(@user)) do |f| %>
+      <%= form_for(@user, as: :user, url: registration_path(@user), html: {id: 'form-signup'}) do |f| %>
         <%= render "devise/shared/error_messages", resource: resource %>
 
         <div class="signin-pair">
             <!-- second arg is display text, or it'll find devise I18n-->
             <%= f.label "email", "username", class: 'signin-label tc' %>
-            <%= f.email_field(:email, required: true, class: "signin-option input username", autocomplete: 'off') %>
+            <%= f.email_field(:email, required: true, class: "signin-option input username", autofocus: true, autocomplete: 'off') %>
         </div>
 
         <div class="signin-pair">
@@ -48,7 +79,7 @@
         </div>
 
         <div class="signin-pair">
-          <%= f.submit "Sign up", class: "signin-option submit tc signup"%>
+          <%= f.submit "Sign up", class: "signin-option submit tc signup", id: "btn-signup"%>
         </div>
       <% end %>
       <%= render "users/shared/links" %>

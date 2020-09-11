@@ -1,0 +1,18 @@
+<script>
+  function reverseAnimation(this_obj){
+    console.log("Reversing...")
+    setTimeout( ()=>{
+       this_obj.style.animation = "alert-backwards 1s forwards running";
+    }, 3000);
+  }
+</script>
+<% if notice %>
+  <p class="alert alert-success" onanimationend="reverseAnimation(this)">
+   <span class="alert-txt" id="alert-txt"><%= notice %></span>
+  </p>
+<% end %>
+<% if alert %>
+   <p class="alert alert-danger" onanimationend="reverseAnimation(this)">
+   <span class="alert-txt" id="alert-txt"> <%= alert %></span>
+  </p>
+<% end %>

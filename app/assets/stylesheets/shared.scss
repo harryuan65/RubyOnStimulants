@@ -41,12 +41,6 @@ input{
 // }
 
 //alerts (currently login page only)
-.alert:before{
-  content:'';
-  height:100%;
-  display:inline-block;
-  vertical-align: middle;
-}
 @keyframes alert-forwards{
    0%{
     top:-130px;
@@ -72,8 +66,8 @@ input{
   margin-bottom: 15px;
 }
 .alert{
-  @include flex(column,center,flex-end);
-  padding: 0 15px 0 15px;
+  @include flex(column, flex-end, center);
+  padding: 0 15px 10px 15px;
   position: fixed;
   height: 90px;
   font-weight: bold;

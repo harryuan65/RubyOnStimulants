@@ -40,6 +40,60 @@ nav#nav-top{
   @include flex(row, space-between, center);
   padding: 0 30px 0 30px;
 }
+.nav-side-toggle{
+  position: absolute;
+  left: 30px;
+  font-size: 55px;
+  cursor: pointer;
+  z-index: 999;
+  user-select: none;
+}
+$nav-side-toggle-duration: .5s;
+.nav-side-toggle.idle{
+  color: #7d7d7d;
+  transition: width $nav-side-toggle-duration ease-out;
+  &:hover{
+    color: #585858;
+    transition: width $nav-side-toggle-duration ease-out;
+  }
+}
+.nav-side-toggle.active{
+  color: white;
+  transition: width $nav-side-toggle-duration ease-out;
+  &:hover{
+    color: rgb(220, 220, 220);
+    transition: width $nav-side-toggle-duration ease-out;
+  }
+}
+nav#nav-side{
+  position: absolute;
+  height: 100%;
+  width: 0px;
+  // width: 250px; //dev
+  background-color: #2D3047;
+  z-index: 2;
+  transition: width $nav-side-toggle-duration ease-out;
+  &.active{
+    transition: width $nav-side-toggle-duration ease-out;
+    width: 260px;
+  }
+  overflow: hidden;
+}
+#nav-side-menu-container{
+  position: relative;
+  height: inherit;
+  margin: 90px 0 0 0;
+}
+.nav-side-block{
+  width: 180px;
+  margin-left: 30px;
+  &:not(:first-child){
+    margin-top: 30px;
+  }
+}
+.nav-side-block h2, .nav-side-block h3{
+  margin: 7px 0 7px 0;
+}
 .techpod{
   font-size: 35px;
   color: #666666;
@@ -72,6 +126,9 @@ a, a:hover, a:visited, a:active{
 }
 .text-7e{
   color: #7e7e7e;
+}
+.text-d3{
+  color: #d3d3d3;
 }
 main{
   position: relative;

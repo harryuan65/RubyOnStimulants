@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home - TechPod</title>
     <link rel="stylesheet" href="./style.css">
+    <script>
+      function toggleSideNav(thisToggleBtn){
+        let navSide = document.getElementById('nav-side');
+        navSide.classList.toggle('active');
+        thisToggleBtn.classList.toggle('active');
+      }
+    </script>
 </head>
 <body>
   <nav id="nav-top">
@@ -14,8 +21,40 @@
       <a href="javascript:void(0)" class="user-stat text-5b notosans-light signup">Sign Up</a>
     </div>
   </nav>
-  <nav id="nav-side">
+  <div class="nav-side-toggle idle" onclick="toggleSideNav(this)">&#x2630;</div>
 
+  <nav id="nav-side">
+    <div id="nav-side-menu-container">
+     <div class="nav-side-block">
+       <h2 class="nav-side-block-title notosans-light text-d3">Browse</h2>
+       <hr class="nav-side-block-hr">
+       <div class="nav-side-block-content-container">
+         <h3 class="nav-side-block-content"><a class="notosans-light text-d3" href="javascript:void(0)">🗞News</a></h3>
+         <h3 class="nav-side-block-content"><a class="notosans-light text-d3" href="javascript:void(0)">✎  Articles</a></h3>
+         <h3 class="nav-side-block-content"><a class="notosans-light text-d3" href="javascript:void(0)">✎  ShortNotes</a></h3>
+       </div>
+     </div>
+
+    <div class="nav-side-block">
+      <h2 class="nav-side-block-title notosans-light text-d3">Tools</h2>
+      <hr class="nav-side-block-hr">
+      <div class="nav-side-block-content-container">
+        <h3 class="nav-side-block-content"><a class="notosans-light text-d3" href="javascript:void(0)">🔧ColorPicker</a></h3>
+        <h3 class="nav-side-block-content"><a class="notosans-light text-d3" href="javascript:void(0)">&#x2630;  WordCards</a></h3>
+        <h3 class="nav-side-block-content"><a class="notosans-light text-d3" href="javascript:void(0)">&#x2630;  MyPurchases</a></h3>
+      </div>
+     </div>
+    </div>
+
+    <div class="nav-side-block">
+      <h2 class="nav-side-block-title notosans-light text-d3">About</h2>
+      <hr class="nav-side-block-hr">
+      <div class="nav-side-block-content-container">
+        <h3 class="nav-side-block-content"><a class="notosans-light text-d3" href="javascript:void(0)">&#x1f464;Author</a></h3>
+        <h3 class="nav-side-block-content"><a class="notosans-light text-d3" href="javascript:void(0)">&#x2630;  WordCards</a></h3>
+      </div>
+     </div>
+    </div>
   </nav>
   <main>
     <div class="container">

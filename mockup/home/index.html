@@ -6,10 +6,11 @@
     <title>Home - TechPod</title>
     <link rel="stylesheet" href="./style.css">
     <script>
-      function toggleSideNav(thisToggleBtn){
+      function toggleSideNav(){
         let navSide = document.getElementById('nav-side');
         navSide.classList.toggle('active');
-        thisToggleBtn.classList.toggle('active');
+        let toggle = document.getElementById('nav-side-toggle');
+        toggle.classList.toggle('active');
       }
     </script>
 </head>
@@ -17,11 +18,12 @@
   <nav id="nav-top">
     <a href="javascript:void(0)" class="techpod notosans-bold">TECHPOD</a>
     <div class="wrap-user-stats">
-      <a href="javascript:void(0)" class="user-stat text-5b notosans-light signin">Sign In</a>
+      <a href="javascript:void(0)" class="user-stat text-5b notosans-light username">harryuan.65</a>
+      <!-- <a href="javascript:void(0)" class="user-stat text-5b notosans-light signin">Sign In</a> -->
       <a href="javascript:void(0)" class="user-stat text-5b notosans-light signup">Sign Up</a>
     </div>
   </nav>
-  <div class="nav-side-toggle idle" onclick="toggleSideNav(this)">&#x2630;</div>
+  <div class="nav-side-toggle idle" id="nav-side-toggle" onclick="toggleSideNav()">&#x2630;</div>
 
   <nav id="nav-side">
     <div id="nav-side-menu-container">
@@ -57,7 +59,7 @@
     </div>
   </nav>
   <main>
-    <div class="container">
+    <div id="container">
       <p class="welcome-txt text-5b notosans-light">Welcome to TechPod! Here you can find some tech notes and<br/> some tools created by Harry, who is a small web developer.</p>
       <section class="news">
         <h2 class="section-h2 text-7e notosans-light">News</h2>

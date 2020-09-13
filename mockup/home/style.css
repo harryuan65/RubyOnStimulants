@@ -90,11 +90,14 @@ a, a:hover, a:visited, a:active {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
-  width: 150px; }
+  align-items: center; }
 
 .user-stat {
   font-size: 18px; }
+  .user-stat.signin {
+    margin-right: 15px; }
+  .user-stat.username {
+    margin-right: 15px; }
 
 .notosans {
   font-family: 'Noto Sans'; }
@@ -125,7 +128,7 @@ main {
   justify-content: center;
   align-items: center; }
 
-.container {
+#container {
   min-width: 600px;
   min-height: 600px; }
 

@@ -104,10 +104,16 @@ a, a:hover, a:visited, a:active{
 }
 .wrap-user-stats{
   @include flex(row, space-between, center);
-  width: 150px;
+  // width: 200px;
 }
 .user-stat{
   font-size: 18px;
+  &.signin{
+    margin-right: 15px;
+  }
+  &.username{
+    margin-right: 15px;
+  }
 }
 .notosans{
   font-family: 'Noto Sans';
@@ -135,7 +141,7 @@ main{
   min-height: 625px;
   @include flex(row, center, center);
 }
-.container{
+#container{
   min-width: 600px;
   min-height: 600px;
 }

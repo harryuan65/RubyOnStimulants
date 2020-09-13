@@ -1,22 +1,41 @@
-<% if current_user %>
-  <div id="container-home" class="container">
-      <div id="wrap-home">
-        <h2 id="home-title">想做點什麼？</h2>
-        <div class="home-options">
-          <%= link_to("#{content_tag(:span,"單字本",class:"option-text")}".html_safe, words_path(locale: 'zh-TW'),class:"home-option") %>
-          <%= link_to("#{content_tag(:span,"寫文章",class:"option-text")}".html_safe, articles_path(locale: 'zh-TW'),class:"home-option") %>
-          <%# <%= link_to("#{content_tag(:span,"物資",class:"option-text")}".html_safe, supplies_path,class:"home-option") %>
-          <%#<%= link_to("#{content_tag(:span,"待辦事項",class:"option-text")}".html_safe,to_do_list_path,class:"home-option") %>
-          <%= link_to("#{content_tag(:span,"記帳",class:"option-text")}".html_safe, accounts_path,class:"home-option") %>
-          <%# <%= link_to("#{content_tag(:span,"Excel",class:"option-text")}".html_safe, excel_path,class:"home-option") %>
-        </div>
-      </div>
+<%= stylesheet_link_tag 'home', media: 'all', 'data-turbolinks-track': 'reload'%>
+
+<p class="welcome-txt text-5b notosans-light">Welcome to TechPod! Here you can find some tech notes and<br/> some tools created by Harry, who is a small web developer.</p>
+<section class="news">
+  <h2 class="section-h2 text-7e notosans-light">News</h2>
+  <hr class="section-hr">
+  <div class="section-content-container">
+    <div class="article-container" id="article-1">
+      <a href="" class="article-link">
+       <h3 class="article-title notosans-bold">Update: Mon, 07 Sep 2020</h3>
+       <span class="article-description notosans-light text-5b">Fixed a bug as well as add a ColorPicker</span>
+      </a>
+      <span class="article-author notosans-light text-5b">harry</span>
+      <span class="article-created-at notosans-light text-5b">Sep 07</span>
+    </div>
+    <div class="article-container" id="article-2">
+      <a href="" class="article-link">
+       <h3 class="article-title notosans-bold">Update: Mon, 05 Sep 2020</h3>
+       <span class="article-description notosans-light text-5b">Change all style into a new theme! Finally it’s here.</span>
+      </a>
+      <span class="article-author notosans-light text-5b">harry</span>
+      <span class="article-created-at notosans-light text-5b">Sep 05</span>
+    </div>
+    <div class="article-container" id="article-3">
+      <a href="" class="article-link">
+       <h3 class="article-title notosans-bold">Update: Mon, 30 Aug 2020</h3>
+       <span class="article-description notosans-light text-5b">Day of site creation.</span>
+      </a>
+      <span class="article-author notosans-light text-5b">harry</span>
+      <span class="article-created-at notosans-light text-5b">Aug 30</span>
+    </div>
   </div>
-<% else %>
-  <script>
-    // window.location.href="users/sign_in"
-  </script>
-<% end %>
+</section>
 
-
-<%# <%= render("shared/skiers") %>
+<%# legacy %>
+<%# <%= link_to("#{content_tag(:span,"單字本",class:"option-text")}".html_safe, words_path(locale: 'zh-TW'),class:"home-option") %>
+<%# <%= link_to("#{content_tag(:span,"寫文章",class:"option-text")}".html_safe, articles_path(locale: 'zh-TW'),class:"home-option") %>
+<%# <%= link_to("#{content_tag(:span,"物資",class:"option-text")}".html_safe, supplies_path,class:"home-option") %>
+<%#<%= link_to("#{content_tag(:span,"待辦事項",class:"option-text")}".html_safe,to_do_list_path,class:"home-option") %>
+<%# <%= link_to("#{content_tag(:span,"記帳",class:"option-text")}".html_safe, accounts_path,class:"home-option") %>
+<%# <%= link_to("#{content_tag(:span,"Excel",class:"option-text")}".html_safe, excel_path,class:"home-option") %>

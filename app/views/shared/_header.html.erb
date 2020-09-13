@@ -1,18 +1,48 @@
-<div id="container-header">
-  <%= link_to("Home", root_path, id: 'site-name') %>
+<nav id="nav-top">
+  <a href="javascript:void(0)" class="techpod notosans-bold">TECHPOD</a>
+  <div class="wrap-user-stats">
+  <% if current_user %>
+  <%= link_to username(current_user.email), "javascript:void(0)" , class: "user-stat text-5b notosans-light username" %>
+  <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "user-stat text-5b notosans-light" %>
+  <% else %>
+  <%= link_to "Sign In", new_user_session_path, class: "user-stat text-5b notosans-light signin" %>
+  <%= link_to "Sign Up", new_user_registration_path, class: "user-stat text-5b notosans-light signup" %>
+  <% end %>
+  </div>
+</nav>
+<div class="nav-side-toggle idle" id="nav-side-toggle" onclick="toggleSideNav(this)">&#x2630;</div>
 
-  <%if "#{request['controller']}##{request['action']}"!="users/sessions#new"%>
-  <div id="wrap-user-status">
-    <span id="current-username">
-       <% if current_user %>
-         <%= current_user.email.split('@')[0] %>
-       <% else %>
-         <script>//window.location = "/users/sign_in"</script>
-       <% end %>
-    </span>
-    <%= link_to "Logout", destroy_user_session_path, method:"delete", data:{confirm:"真der要登出嗎？😭"}, id:'btn-logout' %>
+<nav id="nav-side">
+  <div id="nav-side-menu-container">
+   <div class="nav-side-block">
+     <h2 class="nav-side-block-title notosans-light text-d3">Browse</h2>
+     <hr class="nav-side-block-hr">
+     <div class="nav-side-block-content-container">
+       <h3 class="nav-side-block-content"><%= link_to "🗞News", root_path, class: "notosans-light text-d3" %></h3>
+       <h3 class="nav-side-block-content"><%= link_to "✎  Articles", articles_path(locale: 'zh-TW'), class: "notosans-light text-d3" %></h3>
+       <h3 class="nav-side-block-content"><%= link_to "✎  ShortNotes", "javascript:void(0)", class: "notosans-light text-d3" %></h3>
+     </div>
+   </div>
+
+  <div class="nav-side-block">
+    <h2 class="nav-side-block-title notosans-light text-d3">Tools</h2>
+    <hr class="nav-side-block-hr">
+    <div class="nav-side-block-content-container">
+      <h3 class="nav-side-block-content"><%= link_to "🔧ColorPicker", "javascript:void(0)", class: "notosans-light text-d3" %></h3>
+      <h3 class="nav-side-block-content"><%= link_to "&#x2630;  WordCards".html_safe, "javascript:void(0)", class: "notosans-light text-d3" %></h3>
+      <h3 class="nav-side-block-content"><%= link_to "&#x2630;  MyPurchases".html_safe, "javascript:void(0)", class: "notosans-light text-d3" %></h3>
+    </div>
+   </div>
   </div>
 
-  <% end %>
-
-</div>
+  <div class="nav-side-block">
+    <h2 class="nav-side-block-title notosans-light text-d3">About</h2>
+    <hr class="nav-side-block-hr">
+    <div class="nav-side-block-content-container">
+      <h3 class="nav-side-block-content"><%= link_to "🔧ColorPicker", "javascript:void(0)", class: "notosans-light text-d3" %></h3>
+      <h3 class="nav-side-block-content"><%= link_to "&#x1f464; Author".html_safe, "javascript:void(0)", class: "notosans-light text-d3" %></h3>
+      <h3 class="nav-side-block-content"><%= link_to "&#x2630;  WordCards".html_safe, "javascript:void(0)", class: "notosans-light text-d3" %></h3>
+    </div>
+   </div>
+  </div>
+</nav>

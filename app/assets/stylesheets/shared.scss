@@ -1,10 +1,14 @@
-// @font-face{
-//   font-family:'NotoSansCJKtc-Thin';
-//   src: font-url('/NotoSansCJKtc-Thin.otf') format('truetype');
-// }
 @font-face{
   font-family: 'Noto Sans';
   src: font-url('NotoSans-Regular.ttf') format('truetype');
+}
+@font-face{
+  font-family: 'Noto Sans Light';
+  src: font-url('NotoSans-Light.ttf') format('truetype');
+}
+@font-face{
+  font-family: 'Noto Sans Bold';
+  src: font-url('NotoSans-Bold.ttf') format('truetype');
 }
 @font-face{
   font-family: 'Noto Sans CJK TC';
@@ -20,33 +24,126 @@
   width: $w;
   height: $h;
 }
-
-//general
-html{
-  height: 100%;
-  width: 100%;
+html, body{
+  margin: 0;
+  padding: 0;
+  @include size(100%, 100%);
 }
-body{
-  margin: 0px;
-  padding: 0px;
+*{
+  box-sizing: border-box;
+}
+nav#nav-top{
+  position: relative;
+  width: 100%;
+  height: 90px;
+  border-bottom: solid 1px #585858;
+  @include flex(row, space-between, center);
+  padding: 0 30px 0 30px;
+}
+.nav-side-toggle{
+  position: absolute;
+  left: 30px;
+  font-size: 55px;
+  cursor: pointer;
+  z-index: 999;
+  user-select: none;
+}
+$nav-side-toggle-duration: .5s;
+.nav-side-toggle.idle{
+  color: #7d7d7d;
+  transition: width $nav-side-toggle-duration ease-out;
+  &:hover{
+    color: #585858;
+    transition: width $nav-side-toggle-duration ease-out;
+  }
+}
+.nav-side-toggle.active{
+  color: white;
+  transition: width $nav-side-toggle-duration ease-out;
+  &:hover{
+    color: rgb(220, 220, 220);
+    transition: width $nav-side-toggle-duration ease-out;
+  }
+}
+nav#nav-side{
+  position: absolute;
   height: 100%;
-  background-size: 400%;
-  // background-color: #2c7873;
-  // background-color: #7fa998;
-  background-color: #fff;
+  width: 0px;
+  // width: 250px; //dev
+  background-color: #2D3047;
+  z-index: 2;
+  transition: width $nav-side-toggle-duration ease-out;
+  &.active{
+    transition: width $nav-side-toggle-duration ease-out;
+    width: 260px;
+  }
+  overflow: hidden;
+}
+#nav-side-menu-container{
+  position: relative;
+  height: inherit;
+  margin: 90px 0 0 0;
+}
+.nav-side-block{
+  width: 180px;
+  margin-left: 30px;
+  &:not(:first-child){
+    margin-top: 30px;
+  }
+}
+.nav-side-block h2, .nav-side-block h3{
+  margin: 7px 0 7px 0;
+}
+.techpod{
+  font-size: 35px;
+  color: #666666;
+  font-weight: bolder;
 }
 a, a:hover, a:visited, a:active{
   text-decoration: none;
 }
-*{
-  font-family: 'NotoSansCJKtc-Thin';
+.wrap-user-stats{
+  @include flex(row, space-between, center);
 }
-input{
-  border-color: #111;
+.user-stat{
+  font-size: 18px;
+  &.signin{
+    margin-right: 15px;
+  }
+  &.username{
+    margin-right: 15px;
+  }
 }
-// input:focus, textarea:focus {
-//   outline: none;
-// }
+.notosans{
+  font-family: 'Noto Sans';
+}
+.notosans-light{
+  font-family: 'Noto Sans Light';
+}
+.notosans-bold{
+  font-family: 'Noto Sans Bold';
+}
+.notosans-ct{
+  font-family: 'Noto Sans CJK TC';
+}
+.text-5b{
+  color: #5B5858;
+}
+.text-7e{
+  color: #7e7e7e;
+}
+.text-d3{
+  color: #d3d3d3;
+}
+main{
+  position: relative;
+  min-height: 625px;
+  @include flex(row, center, center);
+}
+#container{
+  min-width: 600px;
+  min-height: 600px;
+}
 
 //alerts (currently login page only)
 @keyframes alert-forwards{
@@ -70,7 +167,7 @@ input{
   width: 100%;
 }
 .alert-txt{
-  background-color:transparent;
+  background-color: transparent;
   margin-bottom: 15px;
 }
 .alert{
@@ -91,96 +188,11 @@ input{
   background-color:rgba(199, 13, 58, 0.7)
 }
 
-// general btns, forms
-.link-btn{
-  &::before{
-    display: inline-block;
-    content: '';
-    height: 0;
-    vertical-align: middle;
-    width: 0;
-    border-style: solid none solid solid;
-    border-width: 10px 0 10px 15px;
-    border-color: transparent transparent transparent rgb(211, 211, 211);
-    margin: 0 10px 3px 5px;
-  }
-  &:hover{
-    transition: background-color .2s ease;
-    background-color: #a0855b;
-  }
-  transition: background-color .2s ease;
-  width: 160px;
-  color: rgb(211, 211, 211);
-  text-decoration: none;
-  font-size: 20px;
-  background-color: #a0855b;
-  padding: 5px;
-  border-radius: 5px;
-}
-.form-new{
-  display: flex;
-  flex-direction: column;
-  .input {
-    background-color: #222222;
-    color: #fff;
-    border: 1px solid rgb(87, 87, 87);
-    border-radius: 5px;
-    padding: 7px 7px 7px 10px;
-    font-size: 18px;
-    width: 180px;
-    margin: 5px;
-    &.submit{
-      background-color: #55946A;
-      transition: .1s ease;
-      width: 200px;
-      &:hover{
-        background-color: rgb(109, 138, 119);
-        color: #fff6f6;
-        box-shadow: 1px 1px 5px grey;
-      }
-    }
-  }
-  .custom-select{
-    width: 200px;
-  }
-  .select {
-    // display: none;
-    height: 40px;
-    width: 200px;
-  }
-}
-//components
 
-%container{
-  display: flex;
-  justify-content: flex-start;
-  margin: 20px 20px 50px 20px;
-  width: 100%;
-}
 
-.icon{
-  background-color: transparent;
-}
-.icon-csv{
-  width: 40px;
-  height: 40px;
-}
-.icon-wrap{
-  @include flex(column, center, center);
-}
-.icon-add{
-  zoom: 0.47;
-}
-.icon-report{
-  zoom: 0.24;
-}
-.icon-GoogleOauth2{
-  zoom: 0.04;
-}
-.icon-Facebook{
-  zoom: 0.05;
-}
 
+
+//legacy
 //Form
 @keyframes drop{
   from {opacity: 0;}

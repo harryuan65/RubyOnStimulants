@@ -1,0 +1,134 @@
+@font-face{
+  font-family: 'Noto Sans';
+  src: url('../../app/assets/fonts/NotoSans-Regular.ttf') format('truetype');
+}
+@font-face{
+  font-family: 'Noto Sans Light';
+  src: url('../../app/assets/fonts/NotoSans-Light.ttf') format('truetype');
+}
+@font-face{
+  font-family: 'Noto Sans Bold';
+  src: url('../../app/assets/fonts/NotoSans-Bold.ttf') format('truetype');
+}
+@font-face{
+  font-family: 'Noto Sans CJK TC';
+  src: url('../../app/assets/fonts/NotoSansCJKtc-Regular.otf') format('opentype');
+}
+@mixin flex($fd:row, $jc:flex-start,$ai:flex-start){
+  display: flex;
+  flex-direction: $fd;
+  justify-content: $jc;
+  align-items: $ai;
+}
+@mixin size($w, $h){
+  width: $w;
+  height: $h;
+}
+html, body{
+  margin: 0;
+  padding: 0;
+  @include size(100%, 100%);
+}
+*{
+  box-sizing: border-box;
+}
+nav#nav-top{
+  position: relative;
+  width: 100%;
+  height: 90px;
+  border-bottom: solid 1px #585858;
+  @include flex(row, space-between, center);
+  padding: 0 30px 0 30px;
+}
+.techpod{
+  font-size: 35px;
+  color: #666666;
+  font-weight: bolder;
+}
+a, a:hover, a:visited, a:active{
+  text-decoration: none;
+}
+.wrap-user-stats{
+  @include flex(row, space-between, center);
+  width: 150px;
+}
+.user-stat{
+  font-size: 18px;
+}
+.notosans{
+  font-family: 'Noto Sans';
+}
+.notosans-light{
+  font-family: 'Noto Sans Light';
+}
+.notosans-bold{
+  font-family: 'Noto Sans Bold';
+}
+.notosans-ct{
+  font-family: 'Noto Sans CJK TC';
+}
+.text-5b{
+  color: #5B5858;
+}
+.text-7e{
+  color: #7e7e7e;
+}
+main{
+  position: relative;
+  min-height: 625px;
+  @include flex(row, center, center);
+}
+.container{
+  min-width: 600px;
+  min-height: 600px;
+}
+.welcome-txt{
+  font-size: 20px;
+  margin-top: 30px;
+}
+.section-h2{
+  margin: 0 0 3px 0;
+  font-size: 30px;
+  font-weight: normal;
+}
+.section-hr{
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+.section-content-container{
+  margin-top: 30px;
+  a {
+    color: #515151;
+  }
+}
+section.news{
+  margin-top: 60px;
+}
+.article-container{
+  display: grid;
+  grid-template-columns: 80% 20%;
+  grid-template-rows: repeat(2, 36px);
+  align-content: center;
+  &:not(:first-child){
+    margin-top: 32px;
+  }
+}
+.article-link{
+  grid-row: 1/3;
+  @include flex(column, space-between, flex-start);
+  h3.article-title{
+    font-size: 26px;
+    margin: 0;
+  }
+  .article-description{
+    font-size: 18px;
+  }
+}
+.article-author{
+  font-size: 18px;
+  @include flex(row, flex-end, center);
+}
+.article-created-at{
+  font-size: 15px;
+  @include flex(row, flex-end, flex-end);
+}

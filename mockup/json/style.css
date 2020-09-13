@@ -1,0 +1,6 @@
+.output{
+  height: 700px;
+  width: 900px;
+  overflow: scroll;
+  border: solid 1px black;
+}

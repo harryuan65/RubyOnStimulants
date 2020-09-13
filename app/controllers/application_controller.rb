@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   before_action :set_title
   before_action :set_current_user
   skip_forgery_protection only:[:prod_test]
-  # skip_before_action :verify_authenticity_token
+  skip_before_action :verify_authenticity_token, only:[:post_test]
   before_action :configure_permitted_parameters, if: :devise_controller?
   def show_req_env_dev
     # puts request.env.to_h.keys
@@ -52,12 +52,10 @@ class ApplicationController < ActionController::Base
 
   def post_test
     puts("==================")
-    request.headers.each do |k,v|
-      puts k.to_s+' '+v.to_s
-    end
-    params.each do |k,v|
-      puts k.to_s+' '+v.to_s
-    end
+    puts "Headers:"
+    request.headers.each{|k,v| puts k.to_s+': '+v.to_s}
+    puts "\nParameters:"
+    params.each{|k,v| puts k.to_s+': '+v.to_s}
     puts("==================")
     render json:{message:"Ok"}
   end

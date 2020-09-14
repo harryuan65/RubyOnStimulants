@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" >
     <%# <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'nav', media: 'all', 'data-turbolinks-track': 'reload'%>
     <%# <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> %>
     <%# <link href='https://fonts.googleapis.com/css?family=Acme' rel='stylesheet' type='text/css'> %>
   </head>
@@ -14,19 +15,19 @@
   <body>
     <div class="wrap-alert" id="wrap-alert">
       <% if notice %>
-        <p class="alert alert-success" onanimationend="reverseAnimation(this)">
+        <p class="alert alert-success notosans-light" onanimationend="foldAlert(this)">
          <span class="alert-txt"><%= notice %></span>
         </p>
       <% end %>
       <% if alert %>
-         <p class="alert alert-danger" onanimationend="reverseAnimation(this)">
+         <p class="alert alert-danger notosans-light" onanimationend="foldAlert(this)">
          <span class="alert-txt"> <%= alert %></span>
         </p>
       <% end %>
-        <%# <p class="txt alert alert-danger animation-forwards" onanimationend="reverseAnimation(this)"><span class="alert-txt">Test abcdefghijadfadsf123</span></p> %>
+        <%# <p class="txt alert alert-danger animation-forwards" onanimationend="foldAlert(this)"><span class="alert-txt">Test abcdefghijadfadsf123</span></p> %>
     </div>
-    <%= render('shared/header') %>
-    <main>
+    <%= render('shared/nav') %>
+    <main id="main">
       <div id="container">
         <%= yield %>
       </div>

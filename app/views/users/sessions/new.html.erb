@@ -12,16 +12,16 @@
 <body>
     <div class="wrap-alert" id="wrap-alert">
       <% if notice %>
-        <p class="alert alert-success" onanimationend="reverseAnimation(this)">
+        <p class="alert alert-success" onanimationend="foldAlert(this)">
          <span class="alert-txt"><%= notice %></span>
         </p>
       <% end %>
       <% if alert %>
-         <p class="alert alert-danger" onanimationend="reverseAnimation(this)">
+         <p class="alert alert-danger" onanimationend="foldAlert(this)">
          <span class="alert-txt"> <%= alert %></span>
         </p>
       <% end %>
-        <%# <p class="txt alert alert-danger animation-forwards" onanimationend="reverseAnimation(this)"><span class="alert-txt">Test abcdefghijadfadsf123</span></p> %>
+        <%# <p class="txt alert alert-danger animation-forwards" onanimationend="foldAlert(this)"><span class="alert-txt">Test abcdefghijadfadsf123</span></p> %>
     </div>
     <div id="container-signin">
         <div class="wrap oauth signin">

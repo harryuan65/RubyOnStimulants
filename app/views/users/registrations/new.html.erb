@@ -21,7 +21,7 @@
             let alertText = document.createElement("span");
             alert.classList.add("alert");
             alert.classList.add("alert-danger");
-            alert.setAttribute("onanimationend", "reverseAnimation(this)");
+            alert.setAttribute("onanimationend", "foldAlert(this)");
             alertText.innerText = "<%= I18n.t('devise.registrations.password_inconsistent') %>";
             alert.animationPlayState = "running";
             alert.appendChild(alertText);
@@ -43,16 +43,16 @@
 <body>
     <div class="wrap-alert" id="wrap-alert">
       <% if notice %>
-        <p class="alert alert-success" onanimationend="reverseAnimation(this)">
+        <p class="alert alert-success" onanimationend="foldAlert(this)">
          <span class="alert-txt" id="alert-text"><%= notice %></span>
         </p>
       <% end %>
       <% if alert %>
-         <p class="alert alert-danger" onanimationend="reverseAnimation(this)">
+         <p class="alert alert-danger" onanimationend="foldAlert(this)">
          <span class="alert-txt" id="alert-text"> <%= alert %></span>
         </p>
       <% end %>
-        <%# <p class="txt alert alert-danger animation-forwards" onanimationend="reverseAnimation(this)"><span class="alert-txt">Test abcdefghijadfadsf123</span></p> %>
+        <%# <p class="txt alert alert-danger animation-forwards" onanimationend="foldAlert(this)"><span class="alert-txt">Test abcdefghijadfadsf123</span></p> %>
     </div>
     <div id="container-signin">
       <h1 id="txt-signin">Sign Up</h1>

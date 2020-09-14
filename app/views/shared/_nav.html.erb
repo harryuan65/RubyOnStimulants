@@ -1,8 +1,8 @@
 <nav id="nav-top">
-  <a href="javascript:void(0)" class="techpod notosans-bold">TECHPOD</a>
+  <%= link_to "TECHPOD", root_path ,class:"techpod notosans-bold" %>
   <div class="wrap-user-stats">
   <% if current_user %>
-  <%= link_to username(current_user.email), "javascript:void(0)" , class: "user-stat text-5b notosans-light username" %>
+  <%= link_to username(current_user), "javascript:void(0)" , class: "user-stat text-5b notosans-light username" %>
   <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "user-stat text-5b notosans-light" %>
   <% else %>
   <%= link_to "Sign In", new_user_session_path, class: "user-stat text-5b notosans-light signin" %>
@@ -10,7 +10,7 @@
   <% end %>
   </div>
 </nav>
-<div class="nav-side-toggle idle" id="nav-side-toggle" onclick="toggleSideNav(this)">&#x2630;</div>
+<div class="nav-side-toggle idle" id="nav-side-toggle" onclick="toggleSideNav()">&#x2630;</div>
 
 <nav id="nav-side">
   <div id="nav-side-menu-container">

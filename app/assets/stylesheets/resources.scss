@@ -1,0 +1,26 @@
+@font-face{
+  font-family: 'Noto Sans';
+  src: font-url('NotoSans-Regular.ttf') format('truetype');
+}
+@font-face{
+  font-family: 'Noto Sans Light';
+  src: font-url('NotoSans-Light.ttf') format('truetype');
+}
+@font-face{
+  font-family: 'Noto Sans Bold';
+  src: font-url('NotoSans-Bold.ttf') format('truetype');
+}
+@font-face{
+  font-family: 'Noto Sans CJK TC';
+  src: font-url('NotoSansCJKtc-Regular.otf') format('opentype');
+}
+@mixin flex($fd:row, $jc:flex-start,$ai:flex-start){
+  display: flex;
+  flex-direction: $fd;
+  justify-content: $jc;
+  align-items: $ai;
+}
+@mixin size($w, $h){
+  width: $w;
+  height: $h;
+}

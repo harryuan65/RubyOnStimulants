@@ -1,5 +1,7 @@
 <%= stylesheet_link_tag 'articles', media: 'all', 'data-turbolinks-track': 'reload'%>
 <%# 所以只要那個resource.scss裡面import shared，之後都可以在resource.scss上面做更改局部css即可！ %>
+<%# legacy %>
+<!--
 <div id="articles-container">
   <% @articles.each do |article| %>
     <a id="article-block-<%=article.id%>" class="article-block" href="<%= article_path(article.id)%>">
@@ -14,3 +16,20 @@
     </a>
   <% end %>
 </div>
+-->
+<section class="articles">
+  <h2 class="section-h2 notosans-light text-7e">Articles</h2>
+  <hr class="section-hr">
+  <div class="section-content-container">
+    <% @articles.each do |article| %>
+      <div class="article-container" id="article-<%=article.id%>">
+        <a href="<%= article_path(article.id)%>" class="article-link">
+          <h3 class="article-title notosans-bold"><%= article.title %></h3>
+          <span class="article-description notosans-light text-5b"><%= article.trimmed_content %></span>
+        </a>
+        <span class="article-author notosans-light text-5b"><%= username(article.user) %></span>
+        <span class="article-created-at notosans-light text-5b"><%= article.created_at.strftime("%B") %> <%= article.created_at.day %></span>
+      </div>
+    <% end %>
+  </div>
+</section>

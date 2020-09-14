@@ -12,8 +12,8 @@ module ApplicationHelper
       '(not found)'
     end
   end
-  def username(email)
-    email.split('@')[0]
+  def username(user)
+    user.email.split('@')[0]
   end
   def taipei_time time
       time.in_time_zone("Taipei")

@@ -1,5 +1,5 @@
 <script>
-  function reverseAnimation(this_obj){
+  function foldAlert(this_obj){
     console.log("Reversing...")
     setTimeout( ()=>{
        this_obj.style.animation = "alert-backwards 1s forwards running";
@@ -7,12 +7,12 @@
   }
 </script>
 <% if notice %>
-  <p class="alert alert-success" onanimationend="reverseAnimation(this)">
+  <p class="alert alert-success" onanimationend="foldAlert(this)">
    <span class="alert-txt" id="alert-txt"><%= notice %></span>
   </p>
 <% end %>
 <% if alert %>
-   <p class="alert alert-danger" onanimationend="reverseAnimation(this)">
+   <p class="alert alert-danger" onanimationend="foldAlert(this)">
    <span class="alert-txt" id="alert-txt"> <%= alert %></span>
   </p>
 <% end %>

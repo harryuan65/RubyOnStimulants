@@ -1,0 +1,24 @@
+@import './resources';
+.wrap-article{
+  margin: 90px 0 90px 0 ;
+}
+.wrap-title{
+  display: grid;
+  grid-template-columns: 85% 20%;
+  align-content: center;
+  max-width: 670px;
+}
+.article-show-author{
+  @include flex(row,flex-end,center);
+}
+.article-show-created-at{
+  @include flex(row,flex-end,center);
+}
+.article-show-title{
+  font-size: 30px;
+}
+.article-show-content{
+  margin-top: 60px;
+  font-size: 20px;
+  max-width: 600px;
+}

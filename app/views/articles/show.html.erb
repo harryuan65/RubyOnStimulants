@@ -1,2 +1,11 @@
-<div class="wrap-title"><h3 id="article_<%= @article.id%>"><%= @article.title %></h3><span class="created-at"><%= readable_time(@article.created_at) %></span></div>
-<p class="content"><%= @article.content.gsub(/\n/, "\<br\>").html_safe %></p>
+<%#=readable_time(@article.created_at) %>
+<%= stylesheet_link_tag "article-show"%>
+<div class="wrap-article">
+  <div class="wrap-title">
+    <h1 id="article_<%= @article.id%>" class="article-show-title notosans-bold text-5b"><%= @article.title %></h1>
+    <span class="article-show-author notosans-light text-5b"><%= username(@article.user) %></span>
+    <span class="subtitle notosans-light text-7e">This should be subtitle</span>
+    <span class="article-show-created-at notosans-light text-7e"><%= @article.created_at.strftime("%a, %d %b %Y") %></span>
+  </div>
+  <p class="article-show-content notosans-light text-5b"><%= @article.content.gsub(/\n/, "\<br\>").html_safe %></p>
+</div>

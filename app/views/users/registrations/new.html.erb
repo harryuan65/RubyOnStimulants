@@ -4,8 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sign Up - TechPod</title>
-  <%= stylesheet_link_tag "shared" %>
-  <%= javascript_include_tag "shared" %>
   <%= stylesheet_link_tag "users/signin_and_register" %>
   <%= javascript_include_tag "users/signin_and_register" %>
   <script>
@@ -43,12 +41,12 @@
 <body>
     <div class="wrap-alert" id="wrap-alert">
       <% if notice %>
-        <p class="alert alert-success" onanimationend="foldAlert(this)">
+        <p class="alert alert-success notosans-light" onanimationend="foldAlert(this)">
          <span class="alert-txt" id="alert-text"><%= notice %></span>
         </p>
       <% end %>
       <% if alert %>
-         <p class="alert alert-danger" onanimationend="foldAlert(this)">
+         <p class="alert alert-danger notosans-light" onanimationend="foldAlert(this)">
          <span class="alert-txt" id="alert-text"> <%= alert %></span>
         </p>
       <% end %>

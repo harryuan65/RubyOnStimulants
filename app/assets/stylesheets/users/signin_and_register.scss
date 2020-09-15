@@ -1,4 +1,29 @@
-//login
+@font-face{
+  font-family: 'Noto Sans';
+  src: font-url('NotoSans-Regular.ttf') format('truetype');
+}
+@font-face{
+  font-family: 'Noto Sans Light';
+  src: font-url('NotoSans-Light.ttf') format('truetype');
+}
+@font-face{
+  font-family: 'Noto Sans Bold';
+  src: font-url('NotoSans-Bold.ttf') format('truetype');
+}
+@font-face{
+  font-family: 'Noto Sans CJK TC';
+  src: font-url('NotoSansCJKtc-Regular.otf') format('opentype');
+}
+@mixin flex($fd:row, $jc:flex-start,$ai:flex-start){
+  display: flex;
+  flex-direction: $fd;
+  justify-content: $jc;
+  align-items: $ai;
+}
+@mixin size($w, $h){
+  width: $w;
+  height: $h;
+}
 @font-face {
   font-family: 'fontello';
   src: font-url('asterisk/fontello.eot?27015240');
@@ -29,16 +54,6 @@ input[type="password"] {
 
 	/* add spacing to better separate each image */
 	letter-spacing: 2px;
-}
-@mixin flex($fd:row, $jc:flex-start,$ai:flex-start){
-  display: flex;
-  flex-direction: $fd;
-  justify-content: $jc;
-  align-items: $ai;
-}
-@mixin size($w, $h){
-  width: $w;
-  height: $h;
 }
 *{
   box-sizing: border-box;

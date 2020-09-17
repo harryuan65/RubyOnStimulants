@@ -14,6 +14,6 @@
 
 class Comment < ApplicationRecord
   belongs_to :user
-  belongs_to :article
+  belongs_to :article, counter_cache: true
   has_many :comment_replies, foreign_key: 'thread_id', class_name: 'CommentReply'
 end

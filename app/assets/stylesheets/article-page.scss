@@ -4,21 +4,32 @@
 }
 .wrap-title{
   display: grid;
-  grid-template-columns: 85% 20%;
   align-content: center;
   max-width: 670px;
+  &.readonly{
+    grid-template-columns: 85% 20%;
+  }
+  &.can-edit{
+    grid-template-columns: 85% 20%;
+
+  }
 }
-.article-show-author{
+.article-page-author{
   @include flex(row,flex-end,center);
 }
-.article-show-created-at{
+.article-page-created-at{
   @include flex(row,flex-end,center);
+  grid-column: 2/3;
 }
-.article-show-title{
+.article-page-title{
   font-size: 30px;
 }
-.article-show-content{
+.article-page-content{
   margin-top: 60px;
   font-size: 20px;
   max-width: 600px;
+}
+.article-page-edit{
+  @include flex(row,flex-end,center);
+  font-size: 28px;
 }

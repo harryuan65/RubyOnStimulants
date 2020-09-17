@@ -1,0 +1,348 @@
+//resources.scss
+@font-face{
+  font-family: 'Noto Sans';
+  src: url('../../app/assets/fonts/NotoSans-Regular.ttf') format('truetype');
+}
+@font-face{
+  font-family: 'Noto Sans Light';
+  src: url('../../app/assets/fonts/NotoSans-Light.ttf') format('truetype');
+}
+@font-face{
+  font-family: 'Noto Sans Bold';
+  src: url('../../app/assets/fonts/NotoSans-Bold.ttf') format('truetype');
+}
+@font-face{
+  font-family: 'Noto Sans CJK TC';
+  src: url('../../app/assets/fonts/NotoSansCJKtc-Regular.otf') format('opentype');
+}
+@mixin flex($fd:row, $jc:flex-start,$ai:flex-start){
+  display: flex;
+  flex-direction: $fd;
+  justify-content: $jc;
+  align-items: $ai;
+}
+@mixin size($w, $h){
+  width: $w;
+  height: $h;
+}
+
+//nav.scss
+html, body{
+  margin: 0;
+  padding: 0;
+  @include size(100%, 100%);
+}
+*{
+  box-sizing: border-box;
+}
+nav#nav-top{
+  position: relative;
+  width: 100%;
+  height: 90px;
+  border-bottom: solid 1px #585858;
+  @include flex(row, space-between, center);
+  padding: 0 30px 0 30px;
+}
+.nav-side-toggle{
+  position: absolute;
+  left: 30px;
+  font-size: 55px;
+  cursor: pointer;
+  z-index: 999;
+  user-select: none;
+}
+$nav-side-toggle-duration: .5s;
+.nav-side-toggle.idle{
+  color: #7d7d7d;
+  transition: width $nav-side-toggle-duration ease-out;
+  &:hover{
+    color: #585858;
+    transition: width $nav-side-toggle-duration ease-out;
+  }
+}
+.nav-side-toggle.active{
+  color: white;
+  transition: width $nav-side-toggle-duration ease-out;
+  &:hover{
+    color: rgb(220, 220, 220);
+    transition: width $nav-side-toggle-duration ease-out;
+  }
+}
+nav#nav-side{
+  position: absolute;
+  height: 100%;
+  width: 0px;
+  // width: 250px; //dev
+  background-color: #2D3047;
+  z-index: 2;
+  transition: width $nav-side-toggle-duration ease-out;
+  &.active{
+    transition: width $nav-side-toggle-duration ease-out;
+    width: 260px;
+  }
+  overflow: hidden;
+}
+#nav-side-menu-container{
+  position: relative;
+  height: inherit;
+  margin: 90px 0 0 0;
+}
+.nav-side-block{
+  width: 180px;
+  margin-left: 30px;
+  &:not(:first-child){
+    margin-top: 30px;
+  }
+}
+.nav-side-block h2, .nav-side-block h3{
+  margin: 7px 0 7px 0;
+}
+.techpod{
+  font-size: 35px;
+  color: #666666;
+  font-weight: bolder;
+}
+a, a:hover, a:visited, a:active{
+  text-decoration: none;
+}
+.wrap-user-stats{
+  @include flex(row, space-between, center);
+}
+.user-stat{
+  font-size: 18px;
+  &.signin{
+    margin-right: 15px;
+  }
+  &.username{
+    margin-right: 15px;
+  }
+}
+.notosans{
+  font-family: 'Noto Sans';
+}
+.notosans-light{
+  font-family: 'Noto Sans Light';
+}
+.notosans-bold{
+  font-family: 'Noto Sans Bold';
+}
+.notosans-ct{
+  font-family: 'Noto Sans CJK TC';
+}
+.text-5b{
+  color: #5B5858;
+}
+.text-7e{
+  color: #7e7e7e;
+}
+.text-d3{
+  color: #d3d3d3;
+}
+main{
+  position: relative;
+  min-height: 625px;
+  @include flex(row, center, center);
+}
+#container{
+  min-width: 600px;
+  max-width: 800px;
+  min-height: 600px;
+}
+
+//alerts (currently login page only)
+@keyframes alert-forwards{
+   0%{
+    top:-130px;
+   }
+   100%{
+    top:-50px;
+   }
+}
+@keyframes alert-backwards{
+  0%{
+   top:-50px;
+  }
+  100%{
+   top:-130px;
+  }
+}
+.wrap-alert{
+  @include flex(column, center, center);
+  width: 100%;
+}
+.alert-txt{
+  background-color: transparent;
+  margin-bottom: 15px;
+}
+.alert{
+  @include flex(column, flex-end, center);
+  padding: 0 15px 10px 15px;
+  position: fixed;
+  height: 90px;
+  font-weight: bold;
+  z-index: 999;
+  color: #fff;
+  text-shadow: -1px 0 #222222, 0 1px #222222, 1px 0 #222222, 0 -1px #222222;
+  animation: alert-forwards .8s ease normal forwards;
+}
+.alert.alert-success{
+  background-color: rgba(2, 168, 77, 0.7);
+}
+.alert.alert-danger{
+  background-color:rgba(199, 13, 58, 0.7)
+}
+
+
+
+
+
+//legacy
+//Form
+@keyframes drop{
+  from {opacity: 0;}
+  to{opacity: 1;}
+}
+@keyframes fold{
+  from {opacity: 1;}
+  to{opacity: 0;}
+}
+div[id*="dropdown-toggle"]{
+  cursor: copy;
+}
+#wrap-dropdown-form{
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width:100%;
+  height: 100%;
+  z-index: 99;
+  animation: drop .3s normal forwards;
+  &.in{
+    animation: drop .5s normal forwards
+  }
+  &.out{
+    animation: fold .2s normal forwards
+  }
+  &.show{
+    display: flex;
+  }
+}
+#dropdown-form {
+  background-color: #7fa998;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+  border: 1px solid grey;
+  margin-bottom: 70px;
+  width: 250px;
+
+  .form-title{
+    font-size: 30px;
+    color: white;
+  }
+
+  .wrap-form-title{
+    position: relative;
+    margin: 15px 0 15px 0;
+  }
+
+  .x{
+    font-size: 20px;
+    top: 0px;
+    right: 10px;
+    position: absolute;
+    cursor: pointer;
+  }
+}
+#form-ph {
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 230px;
+
+  .input{
+    border: 1px solid;
+    font-size: 20px;
+    margin: 0 20px 15px 20px;
+  }
+
+  .text-field{
+    background-color: #222222;
+    padding: 5px 0px 5px 20px;
+    color: #eee;
+    &::placeholder{
+      color: #fff;
+      opacity: 0.5;
+    }
+  }
+
+  .submit{
+    background-color: #c7e4ff;
+    height: 40px;
+    &:active, &:focus, &:visited{
+      background-color: #4a8ee2;
+      outline: none;
+    }
+  }
+
+  .select{
+    height:35px;
+    color: #000;
+    padding-left: 10px;
+  }
+
+  .btn-ph{
+    padding: 10px 15px 10px 15px;
+    margin-top:20px;
+  }
+
+}
+
+//RWD
+@media only screen and (max-width:576px){
+
+}
+
+//article-show
+.wrap-article{
+  margin: 90px 0 90px 0 ;
+}
+.wrap-title{
+  display: grid;
+  align-content: center;
+  max-width: 670px;
+  &.readonly{
+    grid-template-columns: 85% 20%;
+  }
+  &.can-edit{
+    grid-template-columns: 85% 20%;
+
+  }
+}
+.article-page-author{
+  @include flex(row,flex-end,center);
+}
+.article-page-created-at{
+  @include flex(row,flex-end,center);
+  grid-column: 2/3;
+}
+.article-page-title{
+  font-size: 30px;
+}
+.article-page-content{
+  margin-top: 60px;
+  font-size: 20px;
+  max-width: 600px;
+}
+.article-page-edit{
+  @include flex(row,flex-end,center);
+  font-size: 28px;
+}

@@ -20,9 +20,11 @@ class ArticlesController < ApplicationController
     def show
       @article = Article.find(params[:id])
       @article.increment!(:view_count)
+      @is_author = current_user && current_user.email == @article.user.email
     end
 
     def edit
+      @article = Article.find(params[:id])
     end
 
     private

@@ -175,7 +175,7 @@ main{
 }
 .alert-txt{
   background-color: transparent;
-  margin-bottom: 15px;
+  margin-bottom: 6px;
 }
 .alert{
   @include flex(column, flex-end, center);
@@ -356,7 +356,7 @@ div[id*="dropdown-toggle"]{
     margin-top: 30px;
   }
   &.content{
-    margin-top: 60px;
+    margin-top: 50px;
   }
 }
 input[class^=article-page-],textarea[class^=article-page-]{
@@ -365,6 +365,9 @@ input[class^=article-page-],textarea[class^=article-page-]{
   border: solid 1px #585858;
   padding: 5px;
   border-radius: 6px;
+  &:focus{
+    outline: 2px solid #5b5b5b;
+  }
 }
 input.article-page-title{
   white-space: pre-wrap;
@@ -415,7 +418,7 @@ textarea.article-page-content{
   }
 }
 .confirm-bkg{
-  position: absolute;
+  position: fixed;
   @include size(100%, 100%);
   @include flex(row, center, center);
   z-index: 1000;

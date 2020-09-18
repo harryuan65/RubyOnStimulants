@@ -21,6 +21,8 @@ class ArticlesController < ApplicationController
       @article = Article.find(params[:id])
       @article.increment!(:view_count)
       @is_author = current_user && current_user.email == @article.user.email
+      # @markdown = Redcarpet::Markdown.new(renderer, extensions = {})
+      @markdown = Redcarpet::Markdown.new(ArticleRender, fenced_code_blocks: true)
     end
 
     def edit

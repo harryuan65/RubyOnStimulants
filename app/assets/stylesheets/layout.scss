@@ -3,6 +3,7 @@ html, body{
   margin: 0;
   padding: 0;
   @include size(100%, 100%);
+  background: #eeeeee;
 }
 *{
   box-sizing: border-box;
@@ -110,6 +111,9 @@ a, a:hover, a:visited, a:active{
 .text-d3{
   color: #d3d3d3;
 }
+.text-e7{
+  color: #e7e7e7;
+}
 main{
   position: relative;
   min-height: 625px;
@@ -144,7 +148,7 @@ main{
 }
 .alert-txt{
   background-color: transparent;
-  margin-bottom: 15px;
+  margin-bottom: 6px;
 }
 .alert{
   @include flex(column, flex-end, center);
@@ -163,6 +167,45 @@ main{
 .alert.alert-danger{
   background-color:rgba(199, 13, 58, 0.7)
 }
+.confirm-bkg{
+  position: fixed;
+  @include size(100%, 100%);
+  @include flex(row, center, center);
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: none;
+  &.show{
+    display: flex;
+  }
+}
+.confirm-container{
+  background-color: white;
+  @include size(580px, 320px);
+  @include flex(column, space-between, flex-start);
+}
+.wrap-confirm-text-all{ //container of title, message & x
+  @include flex(row, space-between, start);
+  @include size(100%, auto);
+}
+.wrap-confirm-text{ //title, message
+  position: relative;
+  left: 30px;
+}
+.contirm-title{
+  font-size: 37px;
+}
+.contirm-message{
+  font-size: 20px;
+}
+.x{
+  font-size: 37px;
+  position: relative;
+  top: 28px;
+  right: 28px;
+  cursor: pointer;
+}
+
+
 
 
 
@@ -281,4 +324,10 @@ div[id*="dropdown-toggle"]{
 //RWD
 @media only screen and (max-width:576px){
 
+}
+.dark-mode{
+  filter: invert(100%) hue-rotate(180deg);
+}
+.invert-again{
+  filter: invert(100%) hue-rotate(180deg);
 }

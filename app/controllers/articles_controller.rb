@@ -27,8 +27,21 @@ class ArticlesController < ApplicationController
       @article = Article.find(params[:id])
     end
 
+    def update
+      @article = Article.find(params[:id])
+      puts "----"
+      puts article_params
+      if @article
+        @article.update!(article_params)
+        if @article.save!
+          return redirect_to article_path(@article), notice: I18n.t('controller.articles.update_success')
+        end
+      end
+    end
+
     private
     def article_params
-      params.permit(:title, :content, :privacy)
+      # params.permit(:title, :subtitle, :content, :privacy)
+      params.require(:article).permit(:title, :subtitle, :content, :privacy)
     end
 end

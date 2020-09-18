@@ -16,20 +16,109 @@
 }
 .article-page-author{
   @include flex(row,flex-end,center);
+  &.show{
+    grid-row: 2/3;
+    grid-column: 2/3;
+  }
 }
 .article-page-created-at{
   @include flex(row,flex-end,center);
   grid-column: 2/3;
+  &.show{
+    grid-row: 3/4;
+  }
 }
 .article-page-title{
   font-size: 30px;
 }
+.article-page-subtitle{
+  &.show{
+    grid-row: 3/4;
+  }
+}
 .article-page-content{
-  margin-top: 60px;
+  &.show{
+    margin-top: 60px;
+  }
   font-size: 20px;
   max-width: 600px;
 }
 .article-page-edit{
   @include flex(row,flex-end,center);
   font-size: 28px;
+}
+
+//edit
+.wrap-label-input{
+  @include flex(column, flex-start, flex-start);
+  &.subtitle{
+    margin-top: 30px;
+  }
+  &.content{
+    margin-top: 50px;
+  }
+}
+
+$input-transition-delay: .1s;
+input[class^=article-page-],textarea[class^=article-page-]{
+  @include size(600px, auto);
+  background-color: #f7f7f7;
+  border: solid 1px #585858;
+  padding: 5px;
+  border-radius: 6px;
+  transition: border $input-transition-delay ease-out;
+  &:focus{
+    transition: border $input-transition-delay ease-out;
+    outline: none;
+    border: 2px solid #5b5b5b;
+    border-radius: 6px;
+  }
+}
+input.article-page-title{
+  white-space: pre-wrap;
+  height: 50px;
+  font-size: 22px;
+}
+input.article-page-subtitle{
+  white-space: pre-wrap;
+  font-size: 20px;
+}
+textarea.article-page-content{
+  white-space: pre-wrap;
+  display: block;
+  @include size(600px, 600px);
+}
+.wrap-edit-btns{
+  @include flex(row, flex-end,center);
+  &.edit{
+    margin-top: 30px;
+  }
+  &.confirm{
+    position: relative;
+    @include size(100%, auto);
+    right: 30px;
+    bottom: 20px;
+  }
+}
+.article-edit-btn{
+  @include size(100px, 45px);
+  @include flex(row, center, center);
+  border: solid 1px #585858;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  &:focus{
+    outline: none;
+  }
+  &.yes{
+    background-color: #2D3047;
+  }
+  &.save{
+    background-color: #2D3047;
+    padding-bottom: 3px;
+  }
+  &.cancel{
+    background-color: #737373;
+    margin-right: 25px;
+  }
 }

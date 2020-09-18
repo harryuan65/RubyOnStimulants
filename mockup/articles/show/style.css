@@ -152,7 +152,7 @@ main {
 
 .alert-txt {
   background-color: transparent;
-  margin-bottom: 15px; }
+  margin-bottom: 6px; }
 
 .alert {
   display: flex;
@@ -278,6 +278,9 @@ div[id*="dropdown-toggle"] {
   flex-direction: row;
   justify-content: flex-end;
   align-items: center; }
+  .article-page-author.show {
+    grid-row: 2/3;
+    grid-column: 2/3; }
 
 .article-page-created-at {
   display: flex;
@@ -285,6 +288,8 @@ div[id*="dropdown-toggle"] {
   justify-content: flex-end;
   align-items: center;
   grid-column: 2/3; }
+  .article-page-created-at.show {
+    grid-row: 3/4; }
 
 .article-page-title {
   font-size: 30px; }

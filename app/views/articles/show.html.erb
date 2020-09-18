@@ -7,10 +7,10 @@
     <% if @is_author%>
       <a href="<%= edit_article_path(@article)%>" class="article-page-edit text-7e">&#x270E;</a>
     <% end %>
-    <span class="subtitle notosans-light text-7e">This should be subtitle</span>
-    <span class="article-page-author notosans-light text-5b"><%= username(@article.user) %></span>
+    <span class="article-page-subtitle show notosans-light text-7e"><%= @article.subtitle %></span>
+    <span class="article-page-author show notosans-light text-5b"><%= username(@article.user) %></span>
     <span class="article-page-created-at notosans-light text-7e"><%= @article.created_at.strftime("%a, %d %b %Y") %></span>
 
   </div>
-  <p class="article-page-content notosans-light text-5b"><%= @article.content.gsub(/\n/, "\<br\>").html_safe %></p>
+  <p class="article-page-content show notosans-light text-5b"><%= @article.content.gsub(/\n/, "\<br\>").html_safe %></p>
 </div>

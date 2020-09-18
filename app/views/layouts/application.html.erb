@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" >
     <%# <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= stylesheet_link_tag    'nav', media: 'all', 'data-turbolinks-track': 'reload'%>
+    <%= stylesheet_link_tag    'layout', media: 'all', 'data-turbolinks-track': 'reload'%>
     <%# <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> %>
     <%# <link href='https://fonts.googleapis.com/css?family=Acme' rel='stylesheet' type='text/css'> %>
   </head>
@@ -25,6 +25,21 @@
         </p>
       <% end %>
         <%# <p class="txt alert alert-danger animation-forwards" onanimationend="foldAlert(this)"><span class="alert-txt">Test abcdefghijadfadsf123</span></p> %>
+    </div>
+    <div id="confirm-bkg" class="confirm-bkg">
+      <div class="confirm-container">
+          <div class="wrap-confirm-text-all">
+            <div class="wrap-confirm-text">
+              <h1 class="contirm-title notosans text-5b">Are You Sure?</h1>
+              <h4 class="confirm-message notosans-light text-5b">All you changes will be lost.</h4>
+            </div>
+            <div class="x notosans-bold text-5b" onclick="closeConfirm()">&#x2715;</div>
+          </div>
+          <div class="wrap-edit-btns confirm">
+            <button id="no" class="article-edit-btn cancel notosans-light text-e7" onclick="closeConfirm()">&#x2715; No</button>
+            <input id="yes" type="submit" class="article-edit-btn yes notosans-light text-e7" onclick="history.go(-1);return false;" value="&#x25EF; Yes">
+          </div>
+      </div>
     </div>
     <%= render('shared/nav') %>
     <main id="main">

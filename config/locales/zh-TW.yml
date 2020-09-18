@@ -227,6 +227,7 @@ zh-TW:
       words: "單字本"
     articles:
       omission: "繼續閱讀"
+      update_success: '更新成功'
     line:
       welcome: "安安尼好！我們是Omama跟小白～\n謝謝尼加入我們的好友，希望我們能在生活上幫到尼喔"
       currently_no_services: '那個～抱歉目前訊息處理的功能在開發中喔'

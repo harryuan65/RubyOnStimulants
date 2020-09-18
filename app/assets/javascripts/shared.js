@@ -1,11 +1,14 @@
-document.addEventListener('DOMContentLoaded',()=>{
-  let a = document.getElementById('#container')
-  console.log(a)
-  // document.getElementById('#container').addEventListener('click', (event)=>{
-  //   toggleSideNav(true);
-  // })
+document.addEventListener('DOMContentLoaded', ()=>{
+  document.onkeypress = (e)=>{
+    e = e || window.event;
+    if(e.key==="Enter"){
+      document.documentElement.classList.toggle('dark-mode');
+      document.querySelectorAll('.no-dark').forEach(e=>{
+        e.classList.toggle('invert-again');
+      })
+    }
+  }
 })
-
 function foldAlert(this_obj){
     console.log("Reversing...")
     setTimeout( ()=>{
@@ -23,6 +26,13 @@ function toggleSideNav(forceClose=false){
     navSide.classList.toggle('active');
     toggle.classList.toggle('active');
   }
+}
+function openConfirm(event){
+  event.preventDefault();
+  document.getElementById('confirm-bkg').classList.toggle('show');
+}
+function closeConfirm(){
+  document.getElementById('confirm-bkg').classList.remove('show');
 }
 function changePage(event){
   // TODO

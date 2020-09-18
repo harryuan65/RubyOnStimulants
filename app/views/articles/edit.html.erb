@@ -1,12 +1,30 @@
 <%= stylesheet_link_tag "article-page"%>
 
-<div class="wrap-article">
-  <div class="wrap-title">
-    <h1 id="article_<%= @article.id%>" class="article-page-title notosans-bold text-5b"><%= @article.title %></h1>
-    <span class="article-page-author notosans-light text-5b"><%= username(@article.user) %></span>
-    <span class="subtitle notosans-light text-7e">This should be subtitle</span>
-    <span class="article-page-created-at notosans-light text-7e"><%= @article.created_at.strftime("%a, %d %b %Y") %></span>
-  </div>
-  <p class="article-page-content notosans-light text-5b"><%= @article.content.gsub(/\n/, "\<br\>").html_safe %></p>
-</div>
+<%= form_for @article, url: article_path(@article), method: 'PUT' do |f|  %>
+  <div class="wrap-article">
+    <div class="wrap-title">
+      <div class="wrap-label-input">
+        <label for="title" class="notosans-light text-7e">Title</label>
+        <%= f.text_field :title, {value: @article.title, class: "article-page-title notosans-bold text-5b"} %>
+        <%# <input type="text" name="title" class="article-page-title notosans-bold text-5b" value="<%= @article.title %>
+      </div>
+      <div class="wrap-label-input subtitle">
+        <label for="subtitle" class="notosans-light text-7e">Subtitle</label>
+        <%= f.text_field :subtitle, {value: @article.subtitle, class: "article-page-subtitle notosans-light text-7e"} %>
+        <!-- <input type="text" name="subtitle" class="article-page-subtitle notosans-light text-7e" value=""></input>-->
+      </div>
+    </div>
+    <div class="wrap-label-input content">
+      <label for="content" class="notosans-light text-7e">Content</label>
+        <%= f.text_area :content, {value: @article.content.html_safe, class: "article-page-content notosans-light text-5b"} %>
+      <!--<textarea type="text" name="content" class="article-page-content notosans-light text-5b"> @article.content.gsub(/\n/, "&#10;").html_safe
+      </textarea> -->
+    </div>
 
+    <div class="wrap-edit-btns edit">
+      <a href="javascript:void(0)" id="cancel" class="article-edit-btn cancel notosans-light text-e7" onclick="openConfirm(event)">&#x2715; Cancel</a>
+      <%= f.submit "&#x1F4BE; Save".html_safe, class: "article-edit-btn save notosans-light text-e7" %>
+      <!-- <input id="submit" type="submit" class="article-edit-btn save notosans-light text-e7" value="&#x1F4BE; Save">-->
+    </div>
+  </div>
+<% end %>

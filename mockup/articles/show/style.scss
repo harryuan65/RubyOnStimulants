@@ -172,7 +172,7 @@ main{
 }
 .alert-txt{
   background-color: transparent;
-  margin-bottom: 15px;
+  margin-bottom: 6px;
 }
 .alert{
   @include flex(column, flex-end, center);
@@ -329,10 +329,17 @@ div[id*="dropdown-toggle"]{
 }
 .article-page-author{
   @include flex(row,flex-end,center);
+  &.show{
+    grid-row: 2/3;
+    grid-column: 2/3;
+  }
 }
 .article-page-created-at{
   @include flex(row,flex-end,center);
   grid-column: 2/3;
+  &.show{
+    grid-row: 3/4;
+  }
 }
 .article-page-title{
   font-size: 30px;

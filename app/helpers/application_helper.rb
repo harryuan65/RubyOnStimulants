@@ -16,6 +16,10 @@ module ApplicationHelper
     user.email.split('@')[0]
   end
   def taipei_time time
-      time.in_time_zone("Taipei")
+    time.in_time_zone("Taipei")
+  end
+  def markdown(text)
+    options = [:fenced_code_blocks, :no_intra_emphasis, :strikethrough, :underline, :highlight, :quote]
+    Markdown.new(text, *options).to_html.html_safe
   end
 end

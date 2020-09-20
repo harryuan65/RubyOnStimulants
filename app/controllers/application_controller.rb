@@ -132,6 +132,15 @@ class ApplicationController < ActionController::Base
     return render json: {success: true}
   end
 
+  def preview_markdown
+    if current_user
+      options = [:fenced_code_blocks, :no_intra_emphasis, :strikethrough, :underline, :highlight, :quote]
+      output = Markdown.new(params[:content], *options).to_html.html_safe
+      return render html: output
+    else
+      return render text: "Yee"
+    end
+  end
   protected
 
   def configure_permitted_parameters

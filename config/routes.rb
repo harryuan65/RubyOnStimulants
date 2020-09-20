@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get 'download', controller:'application', action:'download'
   get 'delete', controller:'application', action:'delete'
   post 'post_test', controller:'application', action:'post_test'
+  post 'preview_markdown', controller:'application', action:'preview_markdown'
   get 'privacy_policy', controller: 'home', action: 'privacy_policy'
   post 'cancel_fb_authorization', controller: 'application', action: 'dev_cancel_fb'
   scope :controller=>"home",:path=>"/", :as=>"home" do
@@ -57,7 +58,9 @@ Rails.application.routes.draw do
   end
 
   resources :articles, :controller=>'articles' do
-
+    collection do
+      get :serialize_users
+    end
   end
 
   resources :words, :controller=>'words' do

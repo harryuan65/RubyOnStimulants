@@ -204,7 +204,13 @@ main{
   right: 28px;
   cursor: pointer;
 }
-
+.wrap-confirm-btns{
+  position: relative;
+  @include flex(row, flex-end,center);
+  @include size(100%, auto);
+  right: 30px;
+  bottom: 20px;
+}
 
 
 

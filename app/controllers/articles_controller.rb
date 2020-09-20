@@ -1,7 +1,7 @@
 class ArticlesController < ApplicationController
 
     def index
-      @articles = Article.includes(:user).all
+      @articles = Article.includes(:user, :last_comment).all
     end
 
     def new
@@ -22,7 +22,6 @@ class ArticlesController < ApplicationController
       @article.increment!(:view_count)
       @is_author = current_user && current_user.email == @article.user.email
       # @markdown = Redcarpet::Markdown.new(renderer, extensions = {})
-      @markdown = Redcarpet::Markdown.new(ArticleRender, fenced_code_blocks: true)
     end
 
     def edit
@@ -39,6 +38,11 @@ class ArticlesController < ApplicationController
           return redirect_to article_path(@article), notice: I18n.t('controller.articles.update_success')
         end
       end
+    end
+
+    def serialize_users
+      @users = User.all
+      render json: @users, each_serializer: UsersSerializer
     end
 
     private

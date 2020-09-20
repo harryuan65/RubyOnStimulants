@@ -2,6 +2,9 @@
   <%= link_to "TECHPOD", root_path ,class:"techpod notosans-bold" %>
   <div class="wrap-user-stats">
   <% if current_user %>
+  <% if !["articles#new", "articles#edit"].include?("#{params[:controller]}##{params[:action]}") %>
+  <%= link_to "&#x270e;".html_safe, new_article_path, class: "user-stat text-5b notosans-light new-article" %>
+  <% end %>
   <%= link_to username(current_user), "javascript:void(0)" , class: "user-stat text-5b notosans-light username" %>
   <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "user-stat text-5b notosans-light" %>
   <% else %>

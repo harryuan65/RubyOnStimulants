@@ -14,8 +14,8 @@ class ApplicationController < ActionController::Base
   end
 
   def set_current_user
-    puts "User:#{current_user}"
     puts "params[:controller]=#{params[:controller]}"
+    puts "params[:controller]=#{params[:action]}"
     # render_error I18n.t('controller.general.not_logged_in') if !["home", "users/sessions", "users/omniauth_callbacks"].include?(params[:controller]) && !current_user
   end
 

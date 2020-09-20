@@ -4,6 +4,6 @@ task :poke => :environment do
   puts "Poke: #{res.code}"
 end
 
-# task :send_reminders => :environment do
-#   User.send_reminders
-# end
+task :shell_hello do
+  sh "echo 'hello'"
+end

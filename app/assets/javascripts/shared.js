@@ -1,15 +1,28 @@
 var fetchPage = true;
+var map = {};
 document.addEventListener('DOMContentLoaded', ()=>{
-  document.onkeypress = (e)=>{
+  document.onkeyup = (e)=>{
     e = e || window.event;
-    if(e.key==="Enter"){
-      document.documentElement.classList.toggle('dark-mode');
-      document.querySelectorAll('.no-dark').forEach(e=>{
-        e.classList.toggle('invert-again');
-      })
+    map[e.key] = e.type == "keydown";
+    map = {}
+  }
+  document.onkeydown = (e)=>{
+    e = e || window.event;
+    map[e.key] = e.type == "keydown";
+    console.log(e.type)
+    console.log(e.altKey)
+    console.log(map)
+    if (map["Alt"] && map["∂"]){
+      toggleDarkMode();
     }
   }
 })
+function toggleDarkMode(){
+  document.documentElement.classList.toggle('dark-mode');
+  document.querySelectorAll('.no-dark').forEach(e=>{
+    e.classList.toggle('invert-again');
+  })
+}
 function foldAlert(this_obj){
     console.log("Reversing...")
     setTimeout( ()=>{
@@ -69,7 +82,7 @@ function togglePreviewMarkdown(togglePreview, raw=null){
     previewToggle.classList.add('active');
     // TODO
     var previewMarkdownDiv = document.getElementById('preview-markdown');
-    if(fetchPage){
+    if(fetchPage && raw.length>0){
       $.ajax({
           type: "POST",
           beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},

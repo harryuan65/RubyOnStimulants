@@ -5,17 +5,17 @@
 .wrap-title{
   display: grid;
   align-content: center;
-  max-width: 670px;
   &.readonly{
-    grid-template-columns: 85% 20%;
+    grid-template-columns: 85% 25%;
   }
   &.can-edit{
-    grid-template-columns: 85% 20%;
+    grid-template-columns: 85% 25%;
 
   }
 }
 .article-page-author{
   @include flex(row,flex-end,center);
+  font-size: 18px;
   &.show{
     grid-row: 2/3;
     grid-column: 2/3;
@@ -24,14 +24,17 @@
 .article-page-created-at{
   @include flex(row,flex-end,center);
   grid-column: 2/3;
+  font-size: 18px;
+  // min-width: 125px;
   &.show{
     grid-row: 3/4;
   }
 }
 .article-page-title{
-  font-size: 30px;
+  font-size: 40px;
 }
 .article-page-subtitle{
+  font-size: 23px;
   &.show{
     grid-row: 3/4;
   }
@@ -41,24 +44,33 @@
     margin-top: 60px;
   }
   font-size: 20px;
-  max-width: 600px;
+  max-width: 800px;
 }
 .article-page-edit{
   @include flex(row,flex-end,center);
   font-size: 28px;
 }
-
 //edit
 .wrap-label-input{
   @include flex(column, flex-start, flex-start);
   &.subtitle{
     margin-top: 30px;
   }
+  &.state{
+    margin-top: 30px;
+  }
   &.content{
     margin-top: 50px;
   }
 }
-
+.wrap-state{
+  @include flex(row, flex-start center);
+  position: relative;
+  width: 100%;
+  :not(:first-child){
+    margin-left: 30px;
+  }
+}
 $input-transition-delay: .1s;
 input[class^=article-page-],textarea[class^=article-page-]{
   @include size(600px, auto);
@@ -89,17 +101,20 @@ input.article-page-subtitle{
 textarea.article-page-content{
   white-space: pre-wrap;
   display: block;
-  @include size(600px, 600px);
+  width: 800px;
+  min-height: 600px;
 }
 .content-base{
   @include flex(row, space-between, flex-start);
-  @include size(600px, 640px);
+  width: 800px;
+  height: 640px;
   position: relative;
   overflow: visible;
 }
 .content-page{
   position: absolute;
-  @include size(600px, 640px);
+  width: 800px;
+  height: 640px;
   &.preview{
     background-color: rgba(238, 238, 238, 0.95);
     color: #e7e7e7;
@@ -167,5 +182,20 @@ textarea.article-page-content{
   }
   &.preview{
     background-color: #0a245e;
+  }
+}
+
+.markdown{
+  h1, h2, h3, h4, h5, h6, strong{
+    font-family: 'Noto Sans Bold';
+  }
+  font-family: 'Noto Sans Light';
+  p{
+    margin:0;
+  }
+  br{
+    display: block;
+    content: "";
+    margin-top: 35px;
   }
 }

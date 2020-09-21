@@ -9,12 +9,12 @@ class ArticlesController < ApplicationController
     end
 
     def create
-     @article = Article.create!(article_params)
-     if @article.save!
-      return render json:{success: true}
-     else
-      render_error "Failed to create article!"
-     end
+      @article = Article.create!(article_params)
+      if @article.save!
+        return redirect_to article_path(@article), notice: I18n.t()
+      else
+        render_error "Failed to create article!"
+      end
     end
 
     def show
@@ -40,14 +40,9 @@ class ArticlesController < ApplicationController
       end
     end
 
-    def serialize_users
-      @users = User.all
-      render json: @users, each_serializer: UsersSerializer
-    end
-
     private
     def article_params
       # params.permit(:title, :subtitle, :content, :privacy)
-      params.require(:article).permit(:title, :subtitle, :content, :privacy)
+      params.require(:article).permit(:user_id, :title, :subtitle, :content, :state)
     end
 end

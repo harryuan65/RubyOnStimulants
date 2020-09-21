@@ -13,18 +13,31 @@
         <%= f.text_field :subtitle, {value: @article.subtitle, class: "article-page-subtitle notosans-light text-5b"} %>
         <!-- <input type="text" name="subtitle" class="article-page-subtitle notosans-light text-7e" value=""></input>-->
       </div>
+      <div class="wrap-label-input state">
+        <label for="state" class="notosans-light text-7e">State</label>
+        <div class="wrap-state">
+        <div class="state-pair">
+          <span class="notosans-light text-7e">Draft</span>
+          <%= f.radio_button :state, "draft", class: "notosans text-5b" %>
+        </div>
+        <div class="state-pair">
+          <span class="notosans-light text-7e">Published</span>
+          <%= f.radio_button :state, "published", class: "notosans text-5b" %>
+        </div>
+        </div>
+      </div>
     </div>
     <div class="wrap-label-input content">
       <label for="content" class="notosans-light text-7e">Content</label>
       <div class="content-base">
         <div id="preview-page" class="content-page preview">
           <div id="preview-toggle" class="page-toggle notosans-light text-5b" onclick="togglePreviewMarkdown(true, document.getElementById('article_content').value)">PREVIEW</div>
-          <div id="preview-markdown" class="notosans-light text-5b"></div>
+          <div id="preview-markdown" class="markdown text-5b"></div>
         </div>
         <div id="edit-page" class="content-page edit">
           <!-- edit page is active by default -->
           <div id="edit-toggle" class="page-toggle notosans-light text-5b active" onclick="togglePreviewMarkdown(false)">EDIT</div>
-          <%= f.text_area :content, {value: @article.content, class: "article-page-content notosans-light text-5b"} %>
+          <%= f.text_area :content, {value: @article.content, class: "article-page-content markdown text-5b"} %>
         </div>
       </div>
     </div>

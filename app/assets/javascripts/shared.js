@@ -1,4 +1,6 @@
 var fetchPage = true;
+var previewLength = 0;
+var contentChanged = false;
 var map = {};
 document.addEventListener('DOMContentLoaded', ()=>{
   document.onkeyup = (e)=>{
@@ -9,9 +11,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
   document.onkeydown = (e)=>{
     e = e || window.event;
     map[e.key] = e.type == "keydown";
-    console.log(e.type)
-    console.log(e.altKey)
-    console.log(map)
+    // console.log(e.type)
+    // console.log(e.altKey)
+    // console.log(map)
     if (map["Alt"] && map["∂"]){
       toggleDarkMode();
     }
@@ -66,6 +68,8 @@ function changePage(event){
   })
 }
 function togglePreviewMarkdown(togglePreview, raw=null){
+  contentChanged = raw ? previewLength!=raw.length : false;
+  previewLength = raw ? raw.length : previewLength;
   previewPage = document.getElementById('preview-page');
   previewToggle = document.getElementById('preview-toggle');
   editPage = document.getElementById('edit-page');
@@ -80,9 +84,8 @@ function togglePreviewMarkdown(togglePreview, raw=null){
     editToggle.classList.remove('active');
     previewPage.classList.add('display');
     previewToggle.classList.add('active');
-    // TODO
     var previewMarkdownDiv = document.getElementById('preview-markdown');
-    if(fetchPage && raw.length>0){
+    if(fetchPage && raw && contentChanged){ // only fetch preview when there is a difference
       $.ajax({
           type: "POST",
           beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
@@ -91,7 +94,7 @@ function togglePreviewMarkdown(togglePreview, raw=null){
       // success: (e)=>{console.log(e)},
       dataType: "html"})
       .done(function(data){
-        console.log(data);
+        console.log("Fetches");
         previewMarkdownDiv.innerHTML = data;
       }).fail(function(err){
         console.error(err);
@@ -99,16 +102,16 @@ function togglePreviewMarkdown(togglePreview, raw=null){
         //note that data type doesnot match also triggers fail, event if status==200
       })
     }else{
-      let data = `
-        <h3>Lorem ipsum dolor sit amet!</h3>
-        Consectetur adipisicing elit.
+      // let data = `
+      //   <h3>Lorem ipsum dolor sit amet!</h3>
+      //   Consectetur adipisicing elit.
 
-        Ipsam <b>exercitationem</b> optio enim beatae tempore esse.
+      //   Ipsam <b>exercitationem</b> optio enim beatae tempore esse.
 
-        Recusandae dolorem ullam <u>debitis</u> officia in nemo. A excepturi at laudantium molestiae repellendus ipsam repudiandae.
-      `
-      let previewMarkdownDiv = document.getElementById('preview-markdown');
-      previewMarkdownDiv.innerHTML = data;
+      //   Recusandae dolorem ullam <u>debitis</u> officia in nemo. A excepturi at laudantium molestiae repellendus ipsam repudiandae.
+      // `
+      // let previewMarkdownDiv = document.getElementById('preview-markdown');
+      // previewMarkdownDiv.innerHTML = data;
     }
   }
   else if(!togglePreview && previewIsOn){

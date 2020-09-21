@@ -134,8 +134,13 @@ class ApplicationController < ActionController::Base
 
   def preview_markdown
     if current_user
+      # options = [:fenced_code_blocks, :no_intra_emphasis, :strikethrough, :underline, :highlight, :quote]
+      # output = Markdown.new(params[:content], *options).to_html.html_safe
       options = [:fenced_code_blocks, :no_intra_emphasis, :strikethrough, :underline, :highlight, :quote]
-      output = Markdown.new(params[:content], *options).to_html.html_safe
+      options = options.inject({}){|res, d| res.merge({d=>true})}
+      render = Redcarpet::Render::HTML.new(hard_wrap: true)
+      markdown = Redcarpet::Markdown.new(render, options)
+      output = markdown.render(params[:content]).gsub(/\<\/p\>/, "</p><br>").html_safe
       return render html: output
     else
       return render text: "Yee"

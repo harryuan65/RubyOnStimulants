@@ -20,6 +20,11 @@ module ApplicationHelper
   end
   def markdown(text)
     options = [:fenced_code_blocks, :no_intra_emphasis, :strikethrough, :underline, :highlight, :quote]
-    Markdown.new(text, *options).to_html.html_safe
+    # options = options.map(&->(e){{e=>true}})
+    options = options.inject({}){|res, d| res.merge({d=>true})}
+    render = Redcarpet::Render::HTML.new(hard_wrap: true)
+    markdown = Redcarpet::Markdown.new(render, options)
+    # Markdown.new(text, *options).to_html.html_safe
+    markdown.render(text).gsub(/\<\/p\>/, "</p><br>").html_safe
   end
 end

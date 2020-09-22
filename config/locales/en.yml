@@ -261,8 +261,10 @@ en:
       words: "FlashCards"
     articles:
       omission: 'continue reading'
-      update_success: 'Article updated Successfully'
-      create_success: 'Article created Successfully'
+      update_success: 'Article updated successfully'
+      create_success: 'Article created successfully'
+      delete_success: 'Article deleted successfully'
+      confirm_delete: 'Confirm delete article?'
     line:
       welcome: "Hello there! We are Omama and Bai.\nThank you for adding me as your friend!\nWe will do our best to help you!"
       currently_no_services: "Um...Sorry the message parsing funtionalities are still in development"

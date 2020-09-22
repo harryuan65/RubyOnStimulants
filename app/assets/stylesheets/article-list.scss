@@ -5,8 +5,9 @@
   grid-template-columns: 80% 20%;
   grid-template-rows: repeat(2, 36px);
   align-content: center;
+  padding-right: 14px; // or scroll bar overlaps
   &:not(:first-child){
-    margin-top: 32px;
+    margin-top: 45px;
   }
 }
 .article-link{
@@ -17,8 +18,15 @@
     cursor: default;
   }
   h3.article-title{
+    display: inline-block;
     font-size: 26px;
     margin: 0;
+  }
+  span.draft{
+    background-color: #EED415;
+    border: solid 1px #5b5b5b;
+    font-size: 12px;
+    padding: 0 5px 0 5px;
   }
   .article-description{
     font-size: 18px;

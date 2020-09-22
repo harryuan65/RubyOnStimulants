@@ -51,16 +51,25 @@
   font-size: 28px;
 }
 //edit
+.wrap-title-and-delete{
+  @include flex(row, space-between, center);
+}
+.article-destroy{
+  font-size: 25px;
+}
 .wrap-label-input{
   @include flex(column, flex-start, flex-start);
   &.subtitle{
-    margin-top: 30px;
+    margin-top: 20px;
   }
   &.state{
     margin-top: 30px;
   }
   &.content{
     margin-top: 50px;
+  }
+  & > label{
+    font-size: 15px;
   }
 }
 .wrap-state{
@@ -186,6 +195,9 @@ textarea.article-page-content{
 }
 
 .markdown{
+  h1, h2, h3, h4, h5, h6{
+    margin-top: 30px;
+  }
   h1, h2, h3, h4, h5, h6, strong{
     font-family: 'Noto Sans Bold';
   }
@@ -197,5 +209,11 @@ textarea.article-page-content{
     display: block;
     content: "";
     margin-top: 35px;
+  }
+  pre{
+    background-color: #3b3b3b;
+    color: #ccc;
+    padding: 10px;
+    font-size: 18px;
   }
 }

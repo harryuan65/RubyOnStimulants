@@ -64,7 +64,7 @@ Rails.application.routes.draw do
   end
 
   resources :words, :controller=>'words' do
-
   end
+
   match '*unmatched', to: 'application#route_not_found', via: :all
 end

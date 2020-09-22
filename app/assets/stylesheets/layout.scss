@@ -122,7 +122,7 @@ main{
   position: relative;
   min-height: 625px;
   @include flex(row, center, center);
-  line-height: 170%;
+  padding-bottom: 50px;
 }
 #container{
   min-width: 600px;

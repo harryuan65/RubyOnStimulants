@@ -20,6 +20,6 @@ class Article < ApplicationRecord
   has_one :last_comment, ->{order("id desc")}, class_name: "Comment", foreign_key: :article_id
   enum state: [:draft, :published, :archived]
   def trimmed_content
-    self.content.truncate(28, omission: "...(#{I18n.t('controller.articles.omission')})")
+    self.content.truncate(50, omission: "...(#{I18n.t('controller.articles.omission')})")
   end
 end

@@ -211,6 +211,7 @@ textarea.article-page-content{
     margin-top: 35px;
   }
   pre{
+    white-space: pre-wrap; //break lines when too long
     background-color: #3b3b3b;
     color: #ccc;
     padding: 10px;

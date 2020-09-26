@@ -34,7 +34,7 @@
       <label for="content" class="notosans-light text-7e">Content</label>
       <div class="content-base">
         <div id="preview-page" class="content-page preview">
-          <div id="preview-toggle" class="page-toggle notosans-light text-5b" onclick="togglePreviewMarkdown(true, document.getElementById('article_content').value)">PREVIEW</div>
+          <div id="preview-toggle" class="page-toggle notosans-light text-5b" onclick="togglePreviewMarkdown(true, document.getElementById('article_content').value, <%=Rails.env.production?%>)">PREVIEW</div>
           <div id="preview-markdown" class="markdown text-5b"></div>
         </div>
         <div id="edit-page" class="content-page edit">

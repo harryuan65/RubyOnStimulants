@@ -67,14 +67,14 @@ function changePage(event){
     }
   })
 }
-function togglePreviewMarkdown(togglePreview, raw=null){
+function togglePreviewMarkdown(togglePreview, raw=null, prod=false){
   contentChanged = raw ? previewLength!=raw.length : false;
   previewLength = raw ? raw.length : previewLength;
   previewPage = document.getElementById('preview-page');
   previewToggle = document.getElementById('preview-toggle');
   editPage = document.getElementById('edit-page');
   editToggle =  document.getElementById('edit-toggle');
-
+  console.log(prod);
   //only toggles to preview and ajax when necessary(don't poke server when smashing preview toggle)
   let previewIsOn = previewToggle.classList.contains('active');
 
@@ -89,7 +89,7 @@ function togglePreviewMarkdown(togglePreview, raw=null){
       $.ajax({
           type: "POST",
           beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
-          url: "http://localhost:3005/preview_markdown",
+          url: prod ? "/preview_markdown" : "http://localhost:3005/preview_markdown",
         data: {content: raw},
       // success: (e)=>{console.log(e)},
       dataType: "html"})

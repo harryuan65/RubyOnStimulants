@@ -1,7 +1,7 @@
 <%#=readable_time(@article.created_at) %>
 <%= stylesheet_link_tag "article-page"%>
 
-<div class="wrap-article">
+<div class="wrap-article show">
   <div class="wrap-title <%= @is_author ? "can-edit" : "readonly"%>">
     <h1 id="article_<%= @article.id%>" class="article-page-title notosans-bold text-5b"><%= @article.title %></h1>
     <% if @is_author%>

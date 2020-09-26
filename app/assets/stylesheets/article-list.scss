@@ -17,6 +17,9 @@
   &.news{
     cursor: default;
   }
+  .wrap-article-title{
+    @include flex(row, flex-start, center);
+  }
   h3.article-title{
     display: inline-block;
     font-size: 26px;
@@ -27,6 +30,7 @@
     border: solid 1px #5b5b5b;
     font-size: 12px;
     padding: 0 5px 0 5px;
+    margin-left: 5px;
   }
   .article-description{
     font-size: 18px;

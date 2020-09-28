@@ -12,14 +12,11 @@ steps:
   - echo "Backend building"
 - name: notify
   image: plugins/slack
-  environment:
-    WEBHOOK_URL:
-      from_secret: webhook_url
-    SLACK_CHANNEL:
-      from_secret: slack_channel
   settings:
-    webhook: ${WEBHOOK_URL}
-    channel: ${SLACK_CHANNEL}
+    webhook:
+      from_secret: webhook_url
+    channel:
+      from_secret: slack_channel
     template: >
       {{#success build.status}}
         Successful [{{build.event}}], <{{build.link}}|#{{build.number}}> used time {{since build.started}}

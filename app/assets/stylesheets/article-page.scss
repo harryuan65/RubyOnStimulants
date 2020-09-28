@@ -198,10 +198,12 @@ textarea.article-page-content{
 }
 
 .markdown{
+  font-family: 'Noto Sans';
   h1, h2, h3, h4, h5, h6{
     margin-top: 30px;
   }
   h1, h2, h3, h4, h5, h6, strong{
+    margin-top: 70px;
     font-family: 'Noto Sans Bold';
   }
   font-family: 'Noto Sans Light';
@@ -216,8 +218,20 @@ textarea.article-page-content{
   pre{
     white-space: pre-wrap; //break lines when too long
     background-color: #3b3b3b;
-    color: #ccc;
-    padding: 10px;
+    color: #bbb;
+    padding: 15px;
     font-size: 18px;
+    border-radius: 4px;
+  }
+  p > code{
+    color: #e8912e;
+    background-color: rgba(33, 33, 33, 0.8);
+    padding: 5px 7px 5px 7px;
+    border-radius: 7px;
+    font-family: 'Noto Sans Light';
+  }
+  code, pre{
+    font-family: 'Noto Sans Light';
+    letter-spacing: 0.2px;
   }
 }

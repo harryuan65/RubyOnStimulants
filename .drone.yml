@@ -19,7 +19,7 @@ steps:
       from_secret: slack_channel
     template: >
       {{#success build.status}}
-        Successful [{{build.event}}], <{{build.link}}|#{{build.number}}> used time {{since build.started}}
+        Successful [{{build.event}}], <{{build.link}}|#{{build.number}}>. used time {{since build.started}}
       {{else}}
         Failed [{{build.event}}], <{{build.link}}|#{{build.number}}>
       {{/success}}

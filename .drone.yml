@@ -1,0 +1,28 @@
+kind: pipeline
+type: docker
+name: pipe1
+steps:
+- name: build
+  image: alpine:latest
+  commands:
+  - echo "Frontend building"
+- name: backend
+  image: alpine:latest
+  commands:
+  - echo "Backend building"
+- name: notify
+  image: plugins/slack
+  environment:
+    WEBHOOK_URL:
+      from_secret: webhook_url
+    SLACK_CHANNEL:
+      from_secret: slack_channel
+  settings:
+    webhook: ${WEBHOOK_URL}
+    channel: ${SLACK_CHANNEL}
+    template: >
+      {{#success build.status}}
+        Successful [{{build.event}}], <{{build.link}}|#{{build.number}}> used time {{since build.started}}
+      {{else}}
+        Failed [{{build.event}}], <{{build.link}}|#{{build.number}}>
+      {{/success}}

@@ -4,7 +4,7 @@ module ApplicationHelper
     if File.exists?(file_path)
       svg_element = File.read(file_path)
       if options.any?
-        option_str = options.reduce(""){|res, (k,v)| res = res + "#{k.to_s}=\"#{v.to_s}\""+ " " }
+        option_str = options.reduce(""){|res, (k,v)| res = res + "#{k}=\"#{v.to_s}\""+ " " }
         svg_element = svg_element.gsub(/^\<svg/, "<svg " + option_str)
       end
       return svg_element.html_safe

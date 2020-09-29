@@ -32,17 +32,17 @@ class SuppliesController < ApplicationController
   end
 
   def destroy
-   if params[:id]
-    sup = Supply.where(id: params[:id]).destroy_all
-    if sup&.first
-      flash[:notice] = "成功刪除 id = #{sup.first.id} #{sup.first.name}"
-      redirect_to action: 'index'
+    if params[:id]
+      sup = Supply.where(id: params[:id]).destroy_all
+      if sup&.first
+        flash[:notice] = "成功刪除 id = #{sup.first.id} #{sup.first.name}"
+        redirect_to action: 'index'
+      else
+        return render json:{success: false, reason: "#{params[:id]} Not found"}
+      end
     else
-     return render json:{success: false, reason: "#{params[:id]} Not found"}
+      return render json:{success: false}
     end
-   else
-     return render json:{success: false}
-   end
   end
 
   private

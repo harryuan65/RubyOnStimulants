@@ -1,0 +1,110 @@
+require: rubocop-rails
+
+AllCops:
+  DisabledByDefault: true
+  TargetRubyVersion: 2.6.6
+
+Rails:
+  Enabled: true
+
+Rails/TimeZone:
+  Enabled: false
+
+Rails/FilePath:
+  Enabled: false
+
+Rails/Output:
+  Enabled: false
+
+Rails/DynamicFindBy:
+  Enabled: false
+
+Rails/SkipsModelValidations:
+  Enabled: false
+
+Rails/ReadWriteAttribute:
+  Enabled: false
+
+Rails/HasManyOrHasOneDependent:
+  Enabled: false
+
+Rails/InverseOf:
+  Enabled: false
+
+Rails/EnumHash:
+  Enabled: false
+
+Rails/FindBy:
+  Enabled: false
+
+Rails/Validation:
+  Enabled: true
+
+Rails/OutputSafety:
+  Enabled: false
+
+Rails/FindEach:
+  Enabled: false
+
+Rails/Date:
+  Enabled: false
+
+Rails/Delegate:
+  Enabled: false
+
+Rails/HelperInstanceVariable:
+  Enabled: true
+
+Rails/ActionFilter:
+  Enabled: false
+
+Rails/ApplicationController:
+  Enabled: false
+
+Layout/TrailingWhitespace:
+  Enabled: true
+
+Layout/IndentationWidth:
+  Enabled: true
+
+Layout/IndentationConsistency:
+  Enabled: true
+
+Layout/InitialIndentation:
+  Enabled: true
+
+Layout/IndentationStyle:
+  Enabled: true
+
+Lint:
+  Enabled: true
+
+Lint/UnusedBlockArgument:
+  Enabled: false
+
+Lint/UselessAssignment:
+  Enabled: false
+
+Lint/UselessAccessModifier:
+  Enabled: false
+
+Lint/SuppressedException:
+  Enabled: true
+  Exclude:
+    - test/*
+  AllowComments: true
+
+Lint/UnusedMethodArgument:
+  Enabled: false
+
+Lint/DuplicateMethods:
+  Enabled: false
+
+Lint/DeprecatedClassMethods:
+  Enabled: false
+
+Lint/UnderscorePrefixedVariableName:
+  Enabled: false
+
+Rails/RakeEnvironment:
+  Enabled: false

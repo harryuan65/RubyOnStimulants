@@ -10,5 +10,4 @@ module Global
     puts("Global: Path = "+current_root)
     return FILE_ROOTS.include?(current_root)
   end
-
 end

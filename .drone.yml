@@ -2,10 +2,10 @@ kind: pipeline
 type: docker
 name: pipe1
 steps:
-- name: build
-  image: alpine:latest
+- name: lint
+  image: harryuan65/rubocop-docker
   commands:
-  - echo "Frontend building"
+  - rubocop -v
 - name: backend
   image: alpine:latest
   commands:

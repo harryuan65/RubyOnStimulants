@@ -9,7 +9,7 @@ class AccountsController < ApplicationController
     rescue => exception
       @day = DateTime.now.to_date
     end
-    @user = User.find_by_email(current_user.email)
+    @user = User.find_by(email: current_user.email)
     if @user
       @todays_purchase_histories = @user.accounts.today
       @daily_sum = @todays_purchase_histories.map{|e| e.price}.reduce(:+)
@@ -26,7 +26,7 @@ class AccountsController < ApplicationController
 
   def add
     ActiveRecord::Base.transaction do
-      u = User.find_by_email(current_user.email)
+      u = User.find_by(email: current_user.email)
       record = u.accounts.create!(
         content:account_params[:content],
         price: account_params[:price],

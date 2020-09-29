@@ -18,6 +18,8 @@ steps:
       from_secret: webhook_url
     channel:
       from_secret: slack_channel
+    when:
+      status: [ success, failure ]
     template: >
       {{#success build.status}}
         Successful [{{build.event}}], <{{build.link}}|#{{build.number}}>. used time {{since build.started}}

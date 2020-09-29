@@ -6,6 +6,7 @@ steps:
   image: harryuan65/rubocop-docker
   commands:
   - rubocop -v
+  - rubocop
 - name: backend
   image: alpine:latest
   commands:

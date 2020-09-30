@@ -59,12 +59,12 @@
 
         <div class="signin-pair">
             <!-- second arg is display text, or it'll find devise I18n-->
-            <%= f.label "email", "username", class: 'signin-label tc' %>
+            <%= f.label "email", "username", class: 'signin-label' %>
             <%= f.email_field(:email, required: true, class: "signin-option input username", autofocus: true, autocomplete: 'off') %>
         </div>
 
         <div class="signin-pair">
-            <%= f.label "password", "password", class: 'signin-label tc' %>
+            <%= f.label "password", "password", class: 'signin-label' %>
             <% if @minimum_password_length %>
             <em>(<%= @minimum_password_length %> characters minimum)</em>
             <% end %><br />
@@ -72,12 +72,12 @@
         </div>
 
         <div class="signin-pair">
-          <%= f.label "password_confirmation", "confirm password" , class: 'signin-label tc' %><br />
+          <%= f.label "password_confirmation", "confirm password" , class: 'signin-label' %><br />
           <%= f.password_field :password_confirmation, class: "signin-option input password",autocomplete: "new-password" %>
         </div>
 
         <div class="signin-pair">
-          <%= f.submit "Sign up", class: "signin-option submit tc signup", id: "btn-signup"%>
+          <%= f.submit "Sign up", class: "signin-option submit signup", id: "btn-signup"%>
         </div>
       <% end %>
       <%= render "users/shared/links" %>

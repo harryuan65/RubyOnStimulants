@@ -44,18 +44,18 @@
         <div class="wrap inputs">
           <%= form_for @user, url: user_session_path(@user)  do |f| %>
             <div class="signin-pair">
-              <%= f.label "username", "username", class: 'signin-label tc' %>
+              <%= f.label "username", "username", class: 'signin-label' %>
               <% #text_field_tag(:email, nil, required: true, class: "signin-option input",required: true, autocomplete: 'on') %>
               <%= f.email_field(:email, required: true, class: "signin-option input username",required: true, autocomplete: 'off') %>
             </div>
 
             <div class="signin-pair">
-              <%= f.label "password", "password", class: 'signin-label tc' %>
+              <%= f.label "password", "password", class: 'signin-label' %>
               <%= f.password_field(:password, required: true, class: "signin-option input",required: true, autocomplete: 'off') %>
             </div>
 
             <div class="signin-pair">
-              <%= f.submit "Sign In", class:"signin-option submit tc signin" %>
+              <%= f.submit "Sign In", class:"signin-option submit signin" %>
             </div>
             <%= link_to "Don't have an account?", new_user_registration_path, class: "link-signup"%>
           <% end %>

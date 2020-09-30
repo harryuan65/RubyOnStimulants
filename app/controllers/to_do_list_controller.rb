@@ -35,7 +35,7 @@ class ToDoListController < ApplicationController
   private
 
   def todo_params
-      params.permit(ToDoList.column_names.map{|c| c.to_sym})
+    params.permit(ToDoList.column_names.map{|c| c.to_sym})
   end
 
   def set_user

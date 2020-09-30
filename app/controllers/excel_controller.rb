@@ -53,14 +53,14 @@ class ExcelController < ApplicationController
 
   def processed_csv
     # begin
-      @file_name = params[:file_io]
-      @hash_arr = read_hash_from @file_name, false
-      @africa = africa_arr
-      @matched = filter_af @hash_arr
-      @longest_hash = @matched.max_by(&:length)
-      @missing = find_missing @matched
-      @matched = fill_empty @matched
-      @matched = @matched.sort_by{|hash| hash["country_code"]}
+    @file_name = params[:file_io]
+    @hash_arr = read_hash_from @file_name, false
+    @africa = africa_arr
+    @matched = filter_af @hash_arr
+    @longest_hash = @matched.max_by(&:length)
+    @missing = find_missing @matched
+    @matched = fill_empty @matched
+    @matched = @matched.sort_by{|hash| hash["country_code"]}
     # rescue=>exception
     #   flash[:alert] = exception.to_s
     #   render 'shared/result',locals:{status:false, message:"抱歉，把下面的貼給我",error: exception.to_s}

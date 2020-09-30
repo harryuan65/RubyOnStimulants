@@ -3,111 +3,149 @@ require: rubocop-rails
 AllCops:
   DisabledByDefault: true
   TargetRubyVersion: 2.6.6
-
+  NewCops: enable
 Rails:
   Enabled: true
-
 Rails/TimeZone:
   Enabled: false
-
 Rails/FilePath:
   Enabled: false
-
 Rails/Output:
   Enabled: false
-
 Rails/DynamicFindBy:
   Enabled: true
-
 Rails/IndexBy:
   Enabled: true
-
 Rails/SkipsModelValidations:
   Enabled: false
-
 Rails/ReadWriteAttribute:
   Enabled: false
-
 Rails/HasManyOrHasOneDependent:
   Enabled: false
-
 Rails/InverseOf:
   Enabled: false
-
 Rails/EnumHash:
   Enabled: false
-
 Rails/FindBy:
   Enabled: false
-
 Rails/Validation:
   Enabled: true
-
 Rails/OutputSafety:
   Enabled: false
-
 Rails/FindEach:
   Enabled: false
-
 Rails/Date:
   Enabled: false
-
 Rails/Delegate:
   Enabled: false
-
 Rails/HelperInstanceVariable:
   Enabled: true
-
 Rails/ActionFilter:
   Enabled: false
-
 Rails/ApplicationController:
   Enabled: false
-
 Layout/TrailingWhitespace:
   Enabled: true
-
 Layout/IndentationWidth:
   Enabled: true
-
 Layout/IndentationConsistency:
   Enabled: true
-
 Layout/InitialIndentation:
   Enabled: true
-
 Layout/IndentationStyle:
   Enabled: true
-
 Lint:
   Enabled: true
-
 Lint/UnusedBlockArgument:
   Enabled: false
-
 Lint/UselessAssignment:
   Enabled: false
-
 Lint/UselessAccessModifier:
   Enabled: false
-
 Lint/SuppressedException:
   Enabled: true
   Exclude:
     - test/*
   AllowComments: true
-
 Lint/UnusedMethodArgument:
   Enabled: false
-
 Lint/DuplicateMethods:
   Enabled: false
-
 Lint/DeprecatedClassMethods:
   Enabled: false
-
 Lint/UnderscorePrefixedVariableName:
   Enabled: false
-
 Rails/RakeEnvironment:
   Enabled: false
+Lint/BinaryOperatorWithIdenticalOperands: # (new in 0.89)
+  Enabled: true
+Lint/ConstantDefinitionInBlock: # (new in 0.91)
+  Enabled: true
+Lint/DeprecatedOpenSSLConstant: # (new in 0.84)
+  Enabled: true
+Lint/DuplicateElsifCondition: # (new in 0.88)
+  Enabled: true
+Lint/DuplicateRequire: # (new in 0.90)
+  Enabled: true
+Lint/DuplicateRescueException: # (new in 0.89)
+  Enabled: true
+Lint/EmptyConditionalBody: # (new in 0.89)
+  Enabled: true
+Lint/EmptyFile: # (new in 0.90)
+  Enabled: true
+Lint/FloatComparison: # (new in 0.89)
+  Enabled: true
+Lint/IdentityComparison: # (new in 0.91)
+  Enabled: true
+Lint/MissingSuper: # (new in 0.89)
+  Enabled: true
+Lint/MixedRegexpCaptureTypes: # (new in 0.85)
+  Enabled: true
+Lint/OutOfRangeRegexpRef: # (new in 0.89)
+  Enabled: true
+Lint/RaiseException: # (new in 0.81)
+  Enabled: true
+Lint/SelfAssignment: # (new in 0.89)
+  Enabled: true
+Lint/StructNewOverride: # (new in 0.81)
+  Enabled: true
+Lint/TopLevelReturnWithArgument: # (new in 0.89)
+  Enabled: true
+Lint/TrailingCommaInAttributeDeclaration: # (new in 0.90)
+  Enabled: true
+Lint/UnreachableLoop: # (new in 0.89)
+  Enabled: true
+Lint/UselessMethodDefinition: # (new in 0.90)
+  Enabled: true
+Lint/UselessTimes: # (new in 0.91)
+  Enabled: true
+Rails/ActiveRecordCallbacksOrder: # (new in 2.7)
+  Enabled: true
+Rails/AfterCommitOverride: # (new in 2.8)
+  Enabled: true
+Rails/FindById: # (new in 2.7)
+  Enabled: true
+Rails/Inquiry: # (new in 2.7)
+  Enabled: true
+Rails/MailerName: # (new in 2.7)
+  Enabled: true
+Rails/MatchRoute: # (new in 2.7)
+  Enabled: true
+Rails/NegateInclude: # (new in 2.7)
+  Enabled: true
+Rails/Pluck: # (new in 2.7)
+  Enabled: true
+Rails/PluckInWhere: # (new in 2.7)
+  Enabled: true
+Rails/RenderInline: # (new in 2.7)
+  Enabled: true
+Rails/RenderPlainText: # (new in 2.7)
+  Enabled: true
+Rails/ShortI18n: # (new in 2.7)
+  Enabled: true
+Rails/SquishedSQLHeredocs: # (new in 2.8)
+  Enabled: true
+Rails/WhereExists: # (new in 2.7)
+  Enabled: true
+Rails/WhereNot: # (new in 2.8)
+  Enabled: true

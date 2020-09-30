@@ -47,13 +47,13 @@ class AccountsController < ApplicationController
         record = Account.find(params[:id])
         confirm = record
         record.destroy!
-          respond_to do |format|
-            format.json { render json:{message:"Success: Delete", data:confirm} }
-          end
-        else
-          respond_to do |format|
-            format.json { render json:{message:"Unauthorized"} }
-          end
+        respond_to do |format|
+          format.json { render json:{message:"Success: Delete", data:confirm} }
+        end
+      else
+        respond_to do |format|
+          format.json { render json:{message:"Unauthorized"} }
+        end
       end
     end
   end

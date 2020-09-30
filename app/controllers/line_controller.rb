@@ -6,7 +6,7 @@ class LineController < ApplicationController
 
     signature = request.env['HTTP_X_LINE_SIGNATURE']
     unless $client.validate_signature(body, signature)
-     return render plain: 'Bad request', status: :bad_request
+      return render plain: 'Bad request', status: :bad_request
     end
 
     events = $client.parse_events_from(body)

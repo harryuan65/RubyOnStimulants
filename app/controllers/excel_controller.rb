@@ -129,7 +129,7 @@ class ExcelController < ApplicationController
   def fill_empty hash_arr
     current_codes = hash_arr.map{|hash| hash["country_code"]}
     africa_arr().each do |e|
-      if !current_codes.include?(e[1])
+      if current_codes.exclude?(e[1])
         hash = {"no"=>e[2], "country"=>e[0].gsub('.*',' '), "country_code"=>e[1],"empty"=>"這個資料沒有這個國家"}
         hash_arr.push(hash)
         puts hash

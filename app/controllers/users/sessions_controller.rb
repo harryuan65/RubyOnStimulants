@@ -29,7 +29,8 @@ class Users::SessionsController < Devise::OmniauthCallbacksController
   def destroy
     sign_out current_user
     reset_session
-    redirect_to new_user_session_path
+    # redirect_to :back # <- deprecated
+    redirect_back(fallback_location: root_path)
   end
 
   private

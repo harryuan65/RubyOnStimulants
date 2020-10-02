@@ -1,24 +1,27 @@
 @import './resources';
 html, body{
   margin: 0;
-  padding: 0;
-  @include size(100%, 100%);
+  padding: 0 0 50px 0;
+  width: 100%;
+  min-height: 120%;
   background: #eeeeee;
 }
 *{
   box-sizing: border-box;
 }
 nav#nav-top{
-  position: relative;
+  position: fixed;
   width: 100%;
   height: 90px;
   // border-bottom: solid 1px rgba(88, 88, 88, 0.3);
   @include flex(row, space-between, center);
+  z-index: 999;
   padding: 0 30px 0 30px;
 }
 .nav-side-toggle{
-  position: absolute;
+  position: fixed;
   left: 30px;
+  top: 5px;
   font-size: 55px;
   cursor: pointer;
   z-index: 999;
@@ -41,19 +44,20 @@ $nav-side-toggle-transition: .2s;
     transition: color $nav-side-toggle-transition ease-out;
   }
 }
-$nav-side-toggle-duration: .5s;
+$nav-side-toggle-duration: .4s;
 nav#nav-side{
-  position: absolute;
+  position: fixed;
   height: 100%;
+  top: 0;
   width: 0px;
   // width: 250px; //dev
   // background-color: #2D3047;
-  background-color: rgba(45, 42, 44, .8);
+  background-color: rgb(45, 42, 44);
   z-index: 2;
   transition: width $nav-side-toggle-duration ease-out;
   &.active{
     transition: width $nav-side-toggle-duration ease-out;
-    width: 260px;
+    width: 280px;
   }
   overflow: hidden;
 }
@@ -78,6 +82,7 @@ nav#nav-side{
   font-size: 35px;
   color: #666666;
   font-weight: bolder;
+  margin-left: 70px;
 }
 a, a:hover, a:visited, a:active{
   text-decoration: none;
@@ -116,6 +121,9 @@ a, a:hover, a:visited, a:active{
 .text-7e{
   color: #7e7e7e;
 }
+.text-a9{
+  color: #a9a9a9;
+}
 .text-d3{
   color: #d3d3d3;
 }
@@ -125,6 +133,7 @@ a, a:hover, a:visited, a:active{
 main{
   position: relative;
   min-height: 625px;
+  margin-top: 5%;
   @include flex(row, center, center);
 }
 #container{

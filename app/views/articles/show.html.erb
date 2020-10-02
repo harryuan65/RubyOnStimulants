@@ -5,7 +5,9 @@
   <div class="wrap-title <%= @is_author ? "can-edit" : "readonly"%>">
     <h1 id="article_<%= @article.id%>" class="article-page-title notosans-bold text-5b"><%= @article.title %></h1>
     <% if @is_author%>
-      <a href="<%= edit_article_path(@article)%>" class="article-page-edit text-7e">&#x270E;</a>
+    <div class="wrap-pen">
+      <a href="<%= edit_article_path(@article)%>" class="article-page-edit text-7e pen">&#x270E;</a>
+    </div>
     <% end %>
     <span class="article-page-subtitle show notosans-light text-7e"><%= @article.subtitle %></span>
     <span class="article-page-author show notosans-light text-5b"><%= username(@article.user) %></span>

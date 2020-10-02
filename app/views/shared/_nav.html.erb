@@ -3,10 +3,10 @@
   <div class="wrap-user-stats">
   <% if current_user %>
   <% if !["articles#new", "articles#edit"].include?("#{params[:controller]}##{params[:action]}") %>
-  <%= link_to "&#x270e;".html_safe, new_article_path, class: "user-stat text-5b notosans-light new-article" %>
+  <%= link_to "&#x270e;".html_safe, new_article_path, class: "user-stat text-5b notosans-light new-article pen" %>
   <% end %>
   <%= link_to username(current_user), "javascript:void(0)" , class: "user-stat text-5b notosans-light username" %>
-  <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "user-stat text-5b notosans-light" %>
+  <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "user-stat text-5b notosans-light", data: {confirm: t("devise.sessions.confirm_sign_out")} %>
   <% else %>
   <%= link_to "Sign In", new_user_session_path, class: "user-stat text-5b notosans-light signin" %>
   <%= link_to "Sign Up", new_user_registration_path, class: "user-stat text-5b notosans-light signup" %>
@@ -18,7 +18,7 @@
 <nav id="nav-side" class="no-dark">
   <div id="nav-side-menu-container">
    <div class="nav-side-block">
-     <h2 class="nav-side-block-title notosans-light text-d3">Browse</h2>
+     <h2 class="nav-side-block-title notosans-light text-a9">Browse</h2>
      <hr class="nav-side-block-hr">
      <div class="nav-side-block-content-container">
        <h3 class="nav-side-block-content"><%= link_to "News", root_path, class: "notosans-light text-d3" %></h3>
@@ -28,7 +28,7 @@
    </div>
 
   <div class="nav-side-block">
-    <h2 class="nav-side-block-title notosans-light text-d3">Tools</h2>
+    <h2 class="nav-side-block-title notosans-light text-a9">Tools</h2>
     <hr class="nav-side-block-hr">
     <div class="nav-side-block-content-container">
       <h3 class="nav-side-block-content"><%= link_to "ColorPicker", "javascript:void(0)", class: "notosans-light text-d3" %></h3>
@@ -39,7 +39,7 @@
   </div>
 
   <div class="nav-side-block">
-    <h2 class="nav-side-block-title notosans-light text-d3">About</h2>
+    <h2 class="nav-side-block-title notosans-light text-a9">About</h2>
     <hr class="nav-side-block-hr">
     <div class="nav-side-block-content-container">
       <h3 class="nav-side-block-content"><%= link_to "Author", "javascript:void(0)", class: "notosans-light text-d3" %></h3>

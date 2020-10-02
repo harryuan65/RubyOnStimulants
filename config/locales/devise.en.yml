@@ -53,6 +53,7 @@ en:
       already_signed_out: "Signed out successfully."
       user_not_found: "User not found"
       info_incorrect: "Incorrect username or password"
+      confirm_sign_out: "Confirm sign out ?"
     unlocks:
       send_instructions: "You will receive an email with instructions for how to unlock your account in a few minutes."
       send_paranoid_instructions: "If your account exists, you will receive an email with instructions for how to unlock it in a few minutes."

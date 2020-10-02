@@ -118,6 +118,7 @@ zh-TW:
       signed_out: 成功登出了。
       user_not_found: 無此用戶
       info_incorrect: 帳號或密碼輸入錯誤
+      confirm_sign_out: 真的要登出嗎？
     shared:
       links:
         back: 返回

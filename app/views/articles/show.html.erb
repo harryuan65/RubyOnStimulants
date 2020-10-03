@@ -1,5 +1,11 @@
 <%#=readable_time(@article.created_at) %>
 <%= stylesheet_link_tag "article-page"%>
+<%= stylesheet_link_tag "markdown/tomorrow-night-bright.css" %>
+<script>
+  document.querySelectorAll('pre code').forEach(e=>{
+    hljs.highlightBlock(e);
+  })
+</script>
 
 <div class="wrap-article show">
   <div class="wrap-title <%= @is_author ? "can-edit" : "readonly"%>">

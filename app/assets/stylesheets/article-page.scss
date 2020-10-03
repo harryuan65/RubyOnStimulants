@@ -218,11 +218,11 @@ textarea.article-page-content{
   }
   pre{
     white-space: pre-wrap; //break lines when too long
-    background-color: #3b3b3b;
-    color: #bbb;
-    padding: 15px;
-    font-size: 18px;
-    border-radius: 4px;
+    // use this when hljs is not available
+    // background-color: #3b3b3b;
+    // color: #bbb;
+    // padding: 15px;
+    // font-size: 18px;
   }
   li:not(:first-child){
     margin-top: 10px;
@@ -233,21 +233,14 @@ textarea.article-page-content{
     background-color: rgba(33, 33, 33, 0.8);
     padding: 1px 7px 2px 7px;
     border-radius: 7px;
-    font-family: 'Noto Sans Light';
+    // font-family: 'Noto Sans Light';
   }
   code, pre{
-    font-family: 'Noto Sans Light';
-    letter-spacing: 0.2px;
+    // font-family: 'Noto Sans';
+    letter-spacing: 1px;
+    font-size: 16px;
   }
-}
-
-
-//show only
-.pen{
-  opacity: 0.4;
-  transition: .3s ease;
-  &:hover{
-    opacity: 1;
-    transition: .3s ease;
+  pre > code{
+    border-radius: 4px;
   }
 }

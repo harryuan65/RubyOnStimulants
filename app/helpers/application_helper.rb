@@ -27,7 +27,7 @@ module ApplicationHelper
     # Markdown.new(text, *options).to_html.html_safe
     markdown.render(text).gsub(/\<\/p\>/, "</p><br>").html_safe
   end
-  def should_add_article_show_class
-    "#{params[:controller]}##{params[:action]}" == "articles#show" ? "article-show" : ""
+  def is_article_page
+    ["articles#show", "articles#edit"].include?("#{params[:controller]}##{params[:action]}")
   end
 end

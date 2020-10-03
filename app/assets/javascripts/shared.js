@@ -74,7 +74,7 @@ function togglePreviewMarkdown(togglePreview, raw=null, prod=false){
   previewToggle = document.getElementById('preview-toggle');
   editPage = document.getElementById('edit-page');
   editToggle =  document.getElementById('edit-toggle');
-  console.log(prod);
+  // console.log(prod);
   //only toggles to preview and ajax when necessary(don't poke server when smashing preview toggle)
   let previewIsOn = previewToggle.classList.contains('active');
 
@@ -96,6 +96,10 @@ function togglePreviewMarkdown(togglePreview, raw=null, prod=false){
       .done(function(data){
         console.log("Fetches");
         previewMarkdownDiv.innerHTML = data;
+        console.log(hljs);
+        document.querySelectorAll('pre code').forEach(e=>{
+          hljs.highlightBlock(e);
+        })
       }).fail(function(err){
         console.error(err);
         alert("Something is wrong with server")

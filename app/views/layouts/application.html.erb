@@ -10,6 +10,12 @@
     <%= stylesheet_link_tag    'layout', media: 'all', 'data-turbolinks-track': 'reload'%>
     <%# <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> %>
     <%# <link href='https://fonts.googleapis.com/css?family=Acme' rel='stylesheet' type='text/css'> %>
+    <% if is_article_page %>
+      <%= javascript_include_tag "highlight/highlight" %>
+      <script>
+        hljs.initHighlightingOnLoad();
+      </script>
+    <% end %>
   </head>
 
   <body>

@@ -1,11 +1,6 @@
 <%#=readable_time(@article.created_at) %>
 <%= stylesheet_link_tag "article-page"%>
 <%= stylesheet_link_tag "markdown/tomorrow-night.css" %>
-<script>
-  document.querySelectorAll('pre code').forEach(e=>{
-    hljs.highlightBlock(e);
-  })
-</script>
 
 <div class="wrap-article show">
   <div class="wrap-title <%= @is_author ? "can-edit" : "readonly"%>">
@@ -25,3 +20,9 @@
    <%= markdown(@article.content) %>
   </div>
 </div>
+
+<script>
+  document.querySelectorAll('pre code').forEach(e=>{
+    hljs.highlightBlock(e);
+  })
+</script>

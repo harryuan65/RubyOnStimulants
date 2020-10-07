@@ -1,5 +1,6 @@
 <%= stylesheet_link_tag "article-page"%>
 <%= javascript_include_tag "highlight/highlight" %>
+<%= stylesheet_link_tag "markdown/tomorrow-night.css" %>
 
 <%= form_with model: @article do |f|  %>
   <div class="wrap-article">
@@ -22,7 +23,7 @@
         <div class="wrap-state">
         <div class="state-pair">
           <span class="notosans-light text-7e">Draft</span>
-          <%= f.radio_button :state, "draft", class: "notosans text-5b" %>
+          <%= f.radio_button :state, "draft", class: "notosans text-5b", checked: true %>
         </div>
         <div class="state-pair">
           <span class="notosans-light text-7e">Published</span>

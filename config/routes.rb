@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks", sessions:"users/sessions", registrations: "users/registrations" }
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  root 'home#index'
+  root 'articles#index'
   get 'download', controller:'application', action:'download'
   get 'delete', controller:'application', action:'delete'
   post 'post_test', controller:'application', action:'post_test'
@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   get 'privacy_policy', controller: 'home', action: 'privacy_policy'
   post 'cancel_fb_authorization', controller: 'application', action: 'dev_cancel_fb'
   scope :controller=>"home",:path=>"/", :as=>"home" do
-    get '/'=>:index
+    get 'news'=>:index
     get 'post_newrecord'=>:post_newrecord
     get 'list_home'=>:list_home
     post 'post_list'=>:post_list

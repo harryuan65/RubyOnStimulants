@@ -26,7 +26,7 @@ function toggleDarkMode(){
   })
 }
 function foldAlert(this_obj){
-    console.log("Reversing...")
+    // console.log("Reversing...")
     setTimeout( ()=>{
        this_obj.style.animation = "alert-backwards 1s forwards running";
     }, 3000);
@@ -94,9 +94,9 @@ function togglePreviewMarkdown(togglePreview, raw=null, prod=false){
       // success: (e)=>{console.log(e)},
       dataType: "html"})
       .done(function(data){
-        console.log("Fetches");
+        // console.log("Fetches");
         previewMarkdownDiv.innerHTML = data;
-        console.log(hljs);
+        // console.log(hljs);
         document.querySelectorAll('pre code').forEach(e=>{
           hljs.highlightBlock(e);
         })

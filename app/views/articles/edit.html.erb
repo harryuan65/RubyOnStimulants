@@ -1,22 +1,5 @@
 <%= stylesheet_link_tag "article-page"%>
-<%= stylesheet_link_tag "markdown/tomorrow-night.css" %>
-<%= javascript_include_tag "highlight/highlight" %>
-<script>hljs.initHighlightingOnLoad();</script>
-<script>
-  document.addEventListener('DOMContentLoaded', (e)=>{
-    var prevData = document.getElementById('article_content').value;
-    window.onbeforeunload = (event)=>{
-      var currentData = document.getElementById('article_content').value;
 
-      var diff = currentData.split(prevData).join('');
-      if (diff.length > 0){
-        (event || window.event).returnValue = "ask";
-      }
-      console.log(diff);
-    }
-  });
-
-</script>
 <%= form_for @article, url: article_path(@article), method: 'PUT' do |f|  %>
   <div class="wrap-article">
     <div class="wrap-title">

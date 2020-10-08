@@ -15,6 +15,8 @@
 #
 
 class Article < ApplicationRecord
+  validates :title, presence: true
+
   belongs_to :user
   has_many :comments
   has_one :last_comment, ->{order("id desc")}, class_name: "Comment", foreign_key: :article_id

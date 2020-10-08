@@ -51,7 +51,7 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
     begin
       @article.destroy
-      return redirect_to articles_path, notice: I18n.t('controller.articles.delete_success') + "error: " + exception.to_s
+      return redirect_to articles_path, notice: I18n.t('controller.articles.delete_success')
     rescue => exception
       return redirect_to article_path(@article), alert: I18n.t('controller.articles.delete_failed') + "error: " + exception.to_s
     end

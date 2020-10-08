@@ -12,22 +12,31 @@ module ApplicationHelper
       '(not found)'
     end
   end
+
   def username(user)
     user.email.split('@')[0]
   end
+
   def taipei_time time
     time.in_time_zone("Taipei")
   end
+
   def markdown(text)
-    options = [:fenced_code_blocks, :no_intra_emphasis, :strikethrough, :underline, :highlight, :quote]
-    # options = options.map(&->(e){{e=>true}})
-    options = options.inject({}){|res, d| res.merge({d=>true})}
-    render = Redcarpet::Render::HTML.new(hard_wrap: true)
-    markdown = Redcarpet::Markdown.new(render, options)
+    # options = [:fenced_code_blocks, :no_intra_emphasis, :strikethrough, :underline, :highlight, :quote]
+    # # options = options.map(&->(e){{e=>true}})
+    # options = options.inject({}){|res, d| res.merge({d=>true})}
+    # render = Redcarpet::Render::HTML.new(hard_wrap: true)
+    # markdown = Redcarpet::Markdown.new(render, options)
     # Markdown.new(text, *options).to_html.html_safe
-    markdown.render(text).gsub(/\<\/p\>/, "</p><br>").html_safe
+    # markdown.render(text).gsub(/\<\/p\>/, "</p><br>").html_safe
+    $markdown.render(text).html_safe
   end
-  def is_article_page
-    ["articles#show", "articles#edit"].include?("#{params[:controller]}##{params[:action]}")
+
+  def should_load_hightlight_js
+    ["articles#new", "articles#show", "articles#edit"].include?("#{params[:controller]}##{params[:action]}")
+  end
+
+  def is_article_editing_page
+    ["articles#new", "articles#edit"].include?("#{params[:controller]}##{params[:action]}")
   end
 end

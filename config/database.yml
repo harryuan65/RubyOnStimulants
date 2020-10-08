@@ -31,9 +31,10 @@ test:
 
 production:
   adapter: postgresql
-  database: harrysworkspace
+  host: <%= ENV['PG_HOST']%>
+  database: <%= ENV['PG_DB']%>
   port: 5432
   encode: unicode
   pool: 5
-  username:
-  password:
+  username: <%= ENV['PG_USERNAME']%>
+  password: <%= ENV['PG_PASSWORD']%>

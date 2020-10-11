@@ -21,17 +21,6 @@ module ApplicationHelper
     time.in_time_zone("Taipei")
   end
 
-  def markdown(text)
-    # options = [:fenced_code_blocks, :no_intra_emphasis, :strikethrough, :underline, :highlight, :quote]
-    # # options = options.map(&->(e){{e=>true}})
-    # options = options.inject({}){|res, d| res.merge({d=>true})}
-    # render = Redcarpet::Render::HTML.new(hard_wrap: true)
-    # markdown = Redcarpet::Markdown.new(render, options)
-    # Markdown.new(text, *options).to_html.html_safe
-    # markdown.render(text).gsub(/\<\/p\>/, "</p><br>").html_safe
-    $markdown.render(text).html_safe
-  end
-
   def should_load_hightlight_js
     ["articles#new", "articles#show", "articles#edit"].include?("#{params[:controller]}##{params[:action]}")
   end

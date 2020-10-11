@@ -24,4 +24,12 @@ class Article < ApplicationRecord
   def trimmed_content
     self.content.truncate(50, omission: "...(#{I18n.t('controller.articles.omission')})")
   end
+
+  def self.to_markdown(text)
+    options = [:fenced_code_blocks, :no_intra_emphasis, :strikethrough, :underline, :highlight, :quote]
+    options = options.inject({}){|res, d| res.merge({d=>true})}
+    render = Redcarpet::Render::HTML.new(hard_wrap: true)
+    markdown = Redcarpet::Markdown.new(render, options)
+    markdown.render(text).gsub(/\<\/p\>/, "</p><br>").html_safe
+  end
 end

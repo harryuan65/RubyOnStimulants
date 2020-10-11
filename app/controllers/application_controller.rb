@@ -136,11 +136,7 @@ class ApplicationController < ActionController::Base
     if current_user
       # options = [:fenced_code_blocks, :no_intra_emphasis, :strikethrough, :underline, :highlight, :quote]
       # output = Markdown.new(params[:content], *options).to_html.html_safe
-      options = [:fenced_code_blocks, :no_intra_emphasis, :strikethrough, :underline, :highlight, :quote]
-      options = options.inject({}){|res, d| res.merge({d=>true})}
-      render = Redcarpet::Render::HTML.new(hard_wrap: true)
-      markdown = Redcarpet::Markdown.new(render, options)
-      output = markdown.render(params[:content]).gsub(/\<\/p\>/, "</p><br>").html_safe
+      output = Article.to_markdown(params[:content])
       return render html: output
     else
       return render text: "Yee"

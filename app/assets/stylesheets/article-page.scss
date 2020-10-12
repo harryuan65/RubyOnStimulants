@@ -230,8 +230,8 @@ textarea.article-page-content{
   p > code, li > code{
     // color: #e8912e;
     // color: #E07700;
-    color: #F0EE00;
-    background-color: rgba(33, 33, 33, 1);
+    color: #ccc;
+    background-color:#212121;
     padding: 1px 7px 1px 7px;
     border-radius: 4px;
     // font-family: 'Noto Sans Light';
@@ -243,5 +243,19 @@ textarea.article-page-content{
   }
   pre > code{
     border-radius: 4px;
+  }
+  table{
+    border-collapse: collapse;
+    margin-left: 30px;
+    th{
+      background-color: rgba(22, 22, 22, .2)
+    }
+    td{
+      background-color: rgba(100, 100, 100, .1)
+    }
+    td, th{
+      text-align: center;
+      padding: 0 7px 0 7px;
+    }
   }
 }

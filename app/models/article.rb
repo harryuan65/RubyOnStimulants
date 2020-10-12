@@ -26,10 +26,12 @@ class Article < ApplicationRecord
   end
 
   def self.to_markdown(text)
-    options = [:fenced_code_blocks, :no_intra_emphasis, :strikethrough, :underline, :highlight, :quote]
+    options = [:fenced_code_blocks, :no_intra_emphasis, :strikethrough, :underline, :highlight, :quote, :tables, :lax_spacing, :footnotes]
     options = options.inject({}){|res, d| res.merge({d=>true})}
     render = Redcarpet::Render::HTML.new(hard_wrap: true)
     markdown = Redcarpet::Markdown.new(render, options)
-    markdown.render(text).gsub(/\<\/p\>/, "</p><br>").html_safe
+    output = markdown.render(text)
+    output = output.gsub(/\<\/p\>/, "</p><br>")
+    output.html_safe
   end
 end

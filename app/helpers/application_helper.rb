@@ -21,11 +21,19 @@ module ApplicationHelper
     time.in_time_zone("Taipei")
   end
 
+  def current_position
+    "#{params[:controller]}##{params[:action]}"
+  end
+
   def should_load_hightlight_js
-    ["articles#new", "articles#show", "articles#edit"].include?("#{params[:controller]}##{params[:action]}")
+    ["articles#new", "articles#show", "articles#edit"].include?(current_position)
   end
 
   def is_article_editing_page
-    ["articles#new", "articles#edit"].include?("#{params[:controller]}##{params[:action]}")
+    ["articles#new", "articles#edit"].include?(current_position)
+  end
+
+  def doc_title
+    current_position=="articles#show" ? @article.title + " - TechPod" : "TechPod - A Place with Tech Notes and Tools"
   end
 end

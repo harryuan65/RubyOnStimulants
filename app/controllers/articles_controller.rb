@@ -6,11 +6,10 @@ class ArticlesController < ApplicationController
     if current_user
       @articles = Article.includes(:user, :last_comment).where(state: :published).or(
                     Article.includes(:user, :last_comment).where(state: :draft, user_id: current_user.id)
-                  ).limit(50).offset(@offset)
+                  ).order(id: :desc).limit(50).offset(@offset)
     else
-      @articles = Article.includes(:user, :last_comment).where(state: :published).limit(50).offset(@offset)
+      @articles = Article.includes(:user, :last_comment).where(state: :published).order(id: :desc).limit(50).offset(@offset)
     end
-    @markdown = Redcarpet::Markdown.new(Redcarpet::Render::StripDown)
   end
 
   def new

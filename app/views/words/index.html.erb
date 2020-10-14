@@ -1,6 +1,8 @@
 <%= javascript_include_tag("common/form") %>
 <%= javascript_include_tag('words/words') %>
-<div id="container-words" class="container cards">
+<%= stylesheet_link_tag("words") %>
+
+<div id="container-words" class="container cards notosans">
 <% if @words.any? %>
   <%@words.each do |word| %>
   <div class="card-wrap">

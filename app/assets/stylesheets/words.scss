@@ -1,7 +1,7 @@
 // Place all the styles related to the vocabs controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-//Words
+@import './resources.scss';
 @mixin flex($fd:row, $jc:flex-start,$ai:flex-start){
   display: flex;
   flex-direction: $fd;
@@ -18,6 +18,7 @@
   }
   &.document{
     @include flex(column ,flex-start, center);
+    margin-top: 90px;
   }
   h1,h2,h3,h4,h5{
     margin: 0;
@@ -45,7 +46,7 @@
     height: 100%;
     transition: transform 0.8s;
     transform-style: preserve-3d;
-    border: 1px solid black;
+    // border: 1px solid black;
   }
   .front, .back{
     position: absolute;
@@ -55,7 +56,8 @@
   }
   .front{
     @include flex(column, center, center);
-    background-color: #83b582;
+    // background-color: #83b582;
+    background-color: #117864;
     color: #eee;
     .word{
       @include flex(row, space-between, center);

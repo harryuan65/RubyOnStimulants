@@ -1,22 +1,25 @@
 class ApplicationController < ActionController::Base
   include CSVParser
   include Global
-  before_action :set_locale
+  # before_action :set_locale_by_api
   # before_action :show_info
+  around_action {|controller, action| switch_locale(&action)}
   before_action :show_req_env_dev
   before_action :set_title
-  before_action :set_current_user
   skip_forgery_protection only:[:prod_test]
   skip_before_action :verify_authenticity_token, only:[:post_test]
   before_action :configure_permitted_parameters, if: :devise_controller?
-  def show_req_env_dev
-    # puts request.env.to_h.keys
+
+  def switch_locale(&action)
+    logger.debug "* Accept-Language: #{request.env['HTTP_ACCEPT_LANGUAGE']}"
+    locale = extract_locale_from_accept_language_header
+    logger.debug "* Locale set to '#{locale}'"
+    I18n.with_locale(locale, &action)
   end
 
-  def set_current_user
-    puts "params[:controller]=#{params[:controller]}"
-    puts "params[:controller]=#{params[:action]}"
-    # render_error I18n.t('controller.general.not_logged_in') if !["home", "users/sessions", "users/omniauth_callbacks"].include?(params[:controller]) && !current_user
+  def show_req_env_dev
+    # puts request.env.to_h.keys
+    # puts request.env['HTTP_ACCEPT_LANGUAGE']
   end
 
   def set_title
@@ -152,8 +155,11 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def set_locale
-    I18n.locale = params[:locale]&.to_sym || :'en'
-  end
+  # def set_locale_by_api
+  #   I18n.locale = params[:locale]&.to_sym || :'en'
+  # end
 
+  def extract_locale_from_accept_language_header
+    request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
+  end
 end

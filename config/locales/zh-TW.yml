@@ -237,6 +237,7 @@ zh-TW:
     word:
       empty_query: "沒有關鍵字"
       create_success: "成功新增 %{word}"
+      back_to_words: "回單字本"
   date:
     today:
       minutes_ago: '%{minutes} 分鐘前'

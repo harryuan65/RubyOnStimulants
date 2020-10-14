@@ -1,5 +1,7 @@
-<div id="container-words" class="container document">
-  <%= link_to '回單字本', words_path, class:'btn-back' %>
+<%= stylesheet_link_tag "words" %>
+
+<div id="container-words" class="container document notosans">
+  <%= link_to t('controller.word.back_to_words'), words_path, class:'btn-back text-5b' %>
   <div id="wrap-document">
     <h1 class="word-name"><%= @word.name %></h1>
     <hr>

@@ -268,6 +268,10 @@ en:
     line:
       welcome: "Hello there! We are Omama and Bai.\nThank you for adding me as your friend!\nWe will do our best to help you!"
       currently_no_services: "Um...Sorry the message parsing funtionalities are still in development"
+    word:
+      empty_query: "Search keyword is empty!"
+      create_success: "Successfully added \"%{word}\""
+      back_to_words: "Back to WordBook"
   date:
     today:
       minutes_ago: '%{minutes} minute(s) ago'

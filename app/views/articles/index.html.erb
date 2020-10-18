@@ -1,6 +1,6 @@
 <%= stylesheet_link_tag 'articles', media: 'all', 'data-turbolinks-track': 'reload'%>
 <%# 所以只要那個resource.scss裡面import shared，之後都可以在resource.scss上面做更改局部css即可！ %>
-<p class="welcome-txt text-5b notosans-light">Welcome to TechPod! Here you can find some tech notes and<br/> some tools created by Harry, who is a small web developer.</p>
+<p class="welcome-txt text-dk notosans-light">Welcome to TechPod! Here you can find some tech notes and<br/> some tools created by Harry, who is a small web developer.</p>
 <section class="articles">
   <h2 class="section-h2 notosans-light text-7e">Articles</h2>
   <hr class="section-hr">
@@ -12,15 +12,15 @@
             <h3 class="article-title notosans-bold"><%= article.title %></h3>
             <% case article.state %>
             <% when "draft"%>
-              <%= article.draft?? '<span class="draft notosans-light text-5b">draft</span>'.html_safe : "" %>
+              <%= article.draft?? '<span class="draft notosans-light text-dk">draft</span>'.html_safe : "" %>
             <% when "not_public"%>
-              <%= article.not_public?? '<span class="private notosans-light text-5b">private</span>'.html_safe : "" %>
+              <%= article.not_public?? '<span class="private notosans-light text-dk">private</span>'.html_safe : "" %>
             <% end %>
           </div>
-          <span class="article-description notosans-light text-5b"><%= article.subtitle %></span>
+          <span class="article-description notosans-light text-dk"><%= article.subtitle %></span>
         </a>
-        <span class="article-author notosans-light text-5b"><%= username(article.user) %></span>
-        <span class="article-created-at notosans-light text-5b"><%= article.created_at.strftime("%B") %> <%= article.created_at.day %></span>
+        <span class="article-author notosans-light text-dk"><%= username(article.user) %></span>
+        <span class="article-created-at notosans-light text-dk"><%= article.created_at.strftime("%B") %> <%= article.created_at.day %></span>
       </div>
     <% end %>
   </div>

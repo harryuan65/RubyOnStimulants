@@ -116,19 +116,17 @@
 $input-transition-delay: .1s;
 input[class^=article-page-],textarea[class^=article-page-]{
   @include size(600px, auto);
-  // background-color: #f7f7f7;
-  // border: solid 1px #585858;
-  background-color: transparent;
   border: none;
 
   padding: 5px;
-  // border-radius: 6px;
   transition: border $input-transition-delay ease-out;
   &:focus{
     transition: border $input-transition-delay ease-out;
     outline: none;
-    // border: 2px solid #5b5b5b;
-    // border-radius: 6px;
+  }
+  &::placeholder{
+    color: #cccccc;
+    font-style: italic;
   }
 }
 input.article-page-title{
@@ -149,20 +147,17 @@ textarea.article-page-content{
 .content-base{
   @include flex(row, space-between, flex-start);
   width: 800px;
-  height: 640px;
+  height: 600px;
   position: relative;
   overflow: visible;
 }
 .content-page{
   position: absolute;
   width: 800px;
-  height: 640px;
+  height: 600px;
   &.preview{
-    background-color: rgba(238, 238, 238, 0.95);
+    background-color: rgba(255, 255, 255, 0.95);
     color: #e7e7e7;
-  }
-  &.edit{
-    background-color: #eeeeee; // same as body
   }
   &.display{
     z-index: 1;
@@ -181,12 +176,13 @@ textarea.article-page-content{
   color: #5b5b5b;
   writing-mode: vertical-rl;
   cursor: pointer;
-  &#preview-toggle{
-    top: 50px;
-    right: -24px;
-  }
+  font-size: 24px;
   &#edit-toggle{
-    right: -24px;
+    right: -28px;
+  }
+  &#preview-toggle{
+    top: 67px;
+    right: -28px;
   }
   &.active{
     font-family: 'Noto Sans Bold';
@@ -207,6 +203,8 @@ textarea.article-page-content{
   border: solid 1px #585858;
   border-radius: 6px;
   font-size: 16px;
+  transition: .1s;
+  box-shadow: 1px 1px 5px gray;
   cursor: pointer;
   &:focus{
     outline: none;
@@ -225,6 +223,16 @@ textarea.article-page-content{
   &.preview{
     background-color: #0a245e;
   }
+  &:hover{
+    opacity: .8;
+    transition: .1s;
+  }
+  &:active{
+    transition: .1s;
+    border: solid 2px #222222;
+    transform: translate(2px, 2px);
+    box-shadow: none;
+  }
 }
 
 .markdown{
@@ -232,7 +240,7 @@ textarea.article-page-content{
     margin-top: 30px;
   }
   h1, h2, h3, h4, h5, h6, strong{
-    margin-top: 70px;
+    // margin-top: 70px;
     font-family: 'Noto Sans';
   }
   font-family: 'Noto Sans Light';

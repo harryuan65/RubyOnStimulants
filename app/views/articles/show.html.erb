@@ -3,19 +3,19 @@
 
 <div class="wrap-article show">
   <div class="wrap-title <%= @is_author ? "can-edit" : "readonly"%>">
-    <h1 id="article_<%= @article.id%>" class="article-page-title notosans-bold text-5b"><%= @article.title %></h1>
+    <h1 id="article_<%= @article.id%>" class="article-page-title notosans-bold text-dk"><%= @article.title %></h1>
     <% if @is_author%>
     <div class="wrap-pen">
       <a href="<%= edit_article_path(@article)%>" class="article-page-edit text-7e pen">&#x270E;</a>
     </div>
     <% end %>
     <span class="article-page-subtitle show notosans-light text-7e"><%= @article.subtitle %></span>
-    <span class="article-page-author show notosans-light text-5b"><%= username(@article.user) %></span>
+    <span class="article-page-author show notosans-light text-dk"><%= username(@article.user) %></span>
     <span class="article-page-created-at notosans-light text-7e"><%= @article.created_at.strftime("%a, %d %b %Y") %></span>
 
   </div>
-  <!-- <p class="article-page-content show notosans-light text-5b"><%= @article.content.gsub(/\n/, "\<br\>").html_safe %></p>-->
-  <div class="article-page-content show markdown text-5b">
+  <!-- <p class="article-page-content show notosans-light text-dk"><%= @article.content.gsub(/\n/, "\<br\>").html_safe %></p>-->
+  <div class="article-page-content show markdown text-dk">
    <%= Article.to_markdown(@article.content) %>
   </div>
 </div>

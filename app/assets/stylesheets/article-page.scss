@@ -263,21 +263,19 @@ textarea.article-page-content{
   li:not(:first-child){
     margin-top: 10px;
   }
-  p > code, li > code{
-    // color: #e8912e;
-    // color: #E07700;
-    color: #ccc;
-    background-color:#212121;
+  p > code, li > code{ // `this`
+    color: #282828;
+    background-color:#DDDDDD;
     padding: 1px 7px 1px 7px;
     border-radius: 4px;
     // font-family: 'Noto Sans Light';
   }
   code, pre{
-    font-family: 'Noto Sans Light';
+    font-family: 'Noto Sans';
     letter-spacing: 1px;
     font-size: 18px;
   }
-  pre > code{
+  pre > code{ //```
     border-radius: 4px;
   }
   table{
@@ -293,5 +291,23 @@ textarea.article-page-content{
       text-align: center;
       padding: 0 7px 0 7px;
     }
+  }
+  blockquote {
+    background: #f9f9f9;
+    border-left: 10px solid #2FBB90;
+    margin: 1.5em 10px;
+    padding: 0.5em 10px;
+    quotes: "\201C""\201D""\2018""\2019";
+  }
+  blockquote:before {
+    color: #2FBB90;
+    content: open-quote;
+    font-size: 4em;
+    line-height: 0.1em;
+    margin-right: 0.25em;
+    vertical-align: -0.4em;
+  }
+  blockquote p {
+    display: inline;
   }
 }

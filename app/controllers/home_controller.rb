@@ -68,22 +68,22 @@ class HomeController < ApplicationController
       {
         title: "Set \"order by\" in articles index",
         description: "feat: order article by id desc",
-        date: "Oct 1,42020"
+        date: "Oct 14, 2020"
       },
       {
         title: "Feature: Re-expose WordBook functionality",
         description: "feat: activate words again with new style",
-        date: "Oct 1,42020"
+        date: "Oct 14, 2020"
       },
       {
         title: "Switch from showing part of the content to subtitle",
         description: "feat: use subtitle in articles list",
-        date: "Oct 1,42020"
+        date: "Oct 14, 2020"
       },
       {
         title: "Markdown style and call method",
         description: "feat: generalize markdown, change pre inline code style",
-        date: "Oct ,12020"
+        date: "Oct 1 ,2020"
       },
       {
         title: "Feature: Expose ColorPicker",
@@ -138,7 +138,7 @@ class HomeController < ApplicationController
      {
         title: "feat: Changed some styles",
         description: "Change container margin top to 0, and overflow scroll",
-        date: "Oct 1,42020"
+        date: "Oct 14, 2020"
       },
       {
         title: "feat: Changed some styles",
@@ -178,7 +178,7 @@ class HomeController < ApplicationController
       {
         title: "feat: Create side nav bar",
         description: "As well as its transition using js",
-        date: "Sep 1,42020"
+        date: "Sep 14, 2020"
       },
       {
         title: "feat: Home page in rails",

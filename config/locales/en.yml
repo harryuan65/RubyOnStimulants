@@ -249,6 +249,7 @@ en:
       error: "Oops... something is wrong!"
       not_logged_in: "You are not logged in."
       go_home: "Return to homepage"
+      route_not_found: "Page not found"
     title:
       sign_in: "Login"
       hello: "Hello world"

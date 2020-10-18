@@ -216,6 +216,7 @@ zh-TW:
       error: "呃...似乎出了點差錯！"
       not_logged_in: "沒有登入"
       go_home: "回首頁"
+      route_not_found: "頁面不存在"
     title:
       sign_in: "登入"
       home: "首頁"

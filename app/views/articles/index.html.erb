@@ -10,7 +10,12 @@
         <a href="<%= article_path(article.id)%>" class="article-link">
           <div class="wrap-article-title">
             <h3 class="article-title notosans-bold"><%= article.title %></h3>
-            <%= article.draft?? '<span class="draft notosans-light text-5b">draft</span>'.html_safe : "" %>
+            <% case article.state %>
+            <% when "draft"%>
+              <%= article.draft?? '<span class="draft notosans-light text-5b">draft</span>'.html_safe : "" %>
+            <% when "not_public"%>
+              <%= article.not_public?? '<span class="private notosans-light text-5b">private</span>'.html_safe : "" %>
+            <% end %>
           </div>
           <span class="article-description notosans-light text-5b"><%= article.subtitle %></span>
         </a>

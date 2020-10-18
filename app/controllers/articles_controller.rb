@@ -5,7 +5,7 @@ class ArticlesController < ApplicationController
     @offset = params[:offset] || 0
     if current_user
       @articles = Article.includes(:user, :last_comment).where(state: :published).or(
-                    Article.includes(:user, :last_comment).where(state: :draft, user_id: current_user.id)
+                    Article.includes(:user, :last_comment).where(state: [:draft, :not_public], user_id: current_user.id)
                   ).order(id: :desc).limit(50).offset(@offset)
     else
       @articles = Article.includes(:user, :last_comment).where(state: :published).order(id: :desc).limit(50).offset(@offset)
@@ -27,8 +27,11 @@ class ArticlesController < ApplicationController
 
   def show
     @article = Article.find(params[:id])
-    @article.increment!(:view_count)
     @is_author = current_user && current_user.email == @article.user.email
+    if !@is_author && @article.not_public?
+      return render "shared/route_not_found"
+    end
+    @article.increment!(:view_count)
     # @markdown = Redcarpet::Markdown.new(renderer, extensions = {})
   end
 

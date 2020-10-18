@@ -1,5 +1,23 @@
 <%= stylesheet_link_tag "article-page"%>
-
+<script>
+  $("main").ready(()=>{
+    $('input[type="radio"]:checked').parent().addClass("selected");
+    $(".state-pair input[type='radio']:checked").addClass("selected");
+  })
+  function select(event){
+    let otherRadios = $('input[type="radio"]');
+    // otherRadios.prop('checked', false);
+    otherRadios.parent().removeClass("selected");
+    if(event.target.nodeName==="SPAN"){
+      var radio = $('input[type="radio"]', event.target.parentNode);
+    }
+    else{
+      var radio = $('input[type="radio"]', event.target);
+    }
+    radio.prop('checked', true); //event.target = pair
+    radio.parent().addClass("selected"); //event.target = pair
+  }
+</script>
 <%= form_with model: @article do |f|  %>
   <div class="wrap-article">
     <div class="wrap-title">
@@ -19,14 +37,18 @@
       <div class="wrap-label-input state">
         <label for="state" class="notosans-light text-7e">State</label>
         <div class="wrap-state">
-        <div class="state-pair">
-          <span class="notosans-light text-7e">Draft</span>
-          <%= f.radio_button :state, "draft", class: "notosans text-5b", checked: true %>
-        </div>
-        <div class="state-pair">
-          <span class="notosans-light text-7e">Published</span>
-          <%= f.radio_button :state, "published", class: "notosans text-5b" %>
-        </div>
+          <div class="state-pair" onclick="select(event)">
+            <span class="notosans-light text-7e">Draft</span>
+            <%= f.radio_button :state, "draft", class: "notosans text-5b" %>
+          </div>
+          <div class="state-pair" onclick="select(event)">
+            <span class="notosans-light text-7e">Published</span>
+            <%= f.radio_button :state, "published", class: "notosans text-5b" %>
+          </div>
+          <div class="state-pair" onclick="select(event)">
+            <span class="notosans-light text-7e">Private</span>
+            <%= f.radio_button :state, "not_public", class: "notosans text-5b" %>
+          </div>
         </div>
       </div>
     </div>

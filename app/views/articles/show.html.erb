@@ -14,6 +14,8 @@
     <span class="article-page-created-at notosans-light text-7e"><%= @article.created_at.strftime("%a, %d %b %Y") %></span>
 
   </div>
+
+  <hr>
   <!-- <p class="article-page-content show notosans-light text-dk"><%= @article.content.gsub(/\n/, "\<br\>").html_safe %></p>-->
   <div class="article-page-content show markdown text-dk">
    <%= Article.to_markdown(@article.content) %>

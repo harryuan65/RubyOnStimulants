@@ -18,6 +18,8 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.create!(article_params)
+    @article.state = :draft if @article.state.nil?
+
     if @article.save!
       return redirect_to article_path(@article), notice: I18n.t("controller.articles.create_success")
     else

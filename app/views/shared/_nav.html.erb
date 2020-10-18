@@ -5,6 +5,12 @@
   <% if !["articles#new", "articles#edit"].include?("#{params[:controller]}##{params[:action]}") %>
   <%= link_to "&#x270e;".html_safe, new_article_path, class: "user-stat text-dk notosans-light new-article pen" %>
   <% end %>
+
+  <% if current_user.image_url %>
+    <img src="<%= current_user.image_url%>" alt="img" class="nav-profile-img">
+  <% else %>
+  <% end %>
+
   <%= link_to username(current_user), "javascript:void(0)" , class: "user-stat text-dk notosans-light username" %>
   <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "user-stat text-dk notosans-light", data: {confirm: t("devise.sessions.confirm_sign_out")} %>
   <% else %>

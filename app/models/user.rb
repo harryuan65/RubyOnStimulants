@@ -32,6 +32,7 @@ class User < ApplicationRecord
 
   def self.find_for_google_oauth2(access_token, signed_in_resource=nil)
     data = access_token.info
+
     user = User.where(:google_token => access_token.credentials.token, :google_uid => access_token.uid ).first
     if user
       return user
@@ -40,6 +41,7 @@ class User < ApplicationRecord
       if  existing_user
         existing_user.google_uid = access_token.uid
         existing_user.google_token = access_token.credentials.token
+        existing_user.image_url = data["image"] if existing_user.image_url.nil?
         existing_user.save!
         return existing_user
       else
@@ -47,6 +49,7 @@ class User < ApplicationRecord
         user = User.create(
             name: data["name"],
             email: data["email"],
+            image_url: data["image"],
             password: Devise.friendly_token[0,20],
             google_token: access_token.credentials.token,
             google_uid: access_token.uid

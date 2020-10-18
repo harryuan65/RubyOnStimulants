@@ -103,6 +103,11 @@ a, a:hover, a:visited, a:active{
     transition: .3s ease;
   }
 }
+.nav-profile-img{
+  clip-path: circle(50% at 50% 50%);
+  width: 38px;
+  margin: 0 20px 0 20px;
+}
 .user-stat{
   font-size: 18px;
   &.new-article{

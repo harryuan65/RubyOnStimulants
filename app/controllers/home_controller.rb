@@ -66,6 +66,11 @@ class HomeController < ApplicationController
   def news_list
     [
       {
+        title: "Add private state for article, update UI state style",
+        description: "feat: Update state in articles new and edit",
+        date: "Oct 18, 2020"
+      },
+      {
         title: "Set \"order by\" in articles index",
         description: "feat: order article by id desc",
         date: "Oct 14, 2020"

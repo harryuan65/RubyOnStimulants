@@ -20,6 +20,14 @@
   <div class="article-page-content show markdown text-dk">
    <%= Article.to_markdown(@article.content) %>
   </div>
+
+  <footer>
+    <img src="<%= @article.user.image_url%>" alt="<%@article.user.name%>" class="crop-circle">
+    <div class="wrap-author-info">
+      <h1 class="author-name notosans text-5b"><%= @article.user.name %></h1>
+      <p class="author-desc notosans text-7e"><%= @article.user.name=="Harry Yuan" ? "Rails Developer" : "" %></p>
+    </div>
+  </footer>
 </div>
 
 <script>

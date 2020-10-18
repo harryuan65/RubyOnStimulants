@@ -317,3 +317,11 @@ textarea.article-page-content{
     display: inline;
   }
 }
+footer{
+  @include flex(row, space-around, center);
+  margin-top: 80px;
+  border-top: 1px solid #5b5b5b;
+}
+.wrap-author-info{
+  @include flex(column, center, center);
+}

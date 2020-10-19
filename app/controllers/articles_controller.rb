@@ -10,6 +10,11 @@ class ArticlesController < ApplicationController
     else
       @articles = Article.includes(:user, :last_comment).where(state: :published).order(id: :desc).limit(50).offset(@offset)
     end
+
+    if params[:category]
+      @category = params[:category]
+      @articles = @articles.where(category: @category)
+    end
   end
 
   def new
@@ -19,6 +24,7 @@ class ArticlesController < ApplicationController
   def create
     @article = Article.create!(article_params)
     @article.state = :draft if @article.state.nil?
+    @article.category = "general" if @article.category.nil?
 
     if @article.save!
       return redirect_to article_path(@article), notice: I18n.t("controller.articles.create_success")
@@ -63,6 +69,6 @@ class ArticlesController < ApplicationController
   private
   def article_params
     # params.permit(:title, :subtitle, :content, :privacy)
-    params.require(:article).permit(:user_id, :title, :subtitle, :content, :state)
+    params.require(:article).permit(:user_id, :title, :subtitle, :content, :state, :category)
   end
 end

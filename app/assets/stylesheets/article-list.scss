@@ -41,7 +41,15 @@
     margin-left: 5px;
   }
   .article-description{
-    font-size: 18px;
+    &.subtitle{
+      font-size: 18px;
+    }
+    &.category{
+      color: #282828;
+      background-color:#DDDDDD;
+      padding: 1px 7px 1px 7px;
+      border-radius: 4px;
+    }
   }
 }
 .article-author{

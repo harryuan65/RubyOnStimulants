@@ -153,7 +153,7 @@ a, a:hover, a:visited, a:active{
 main{
   position: relative;
   min-height: 625px;
-  margin-top: 5%;
+  // margin-top: 5%;
   @include flex(row, center, center);
 }
 #container{

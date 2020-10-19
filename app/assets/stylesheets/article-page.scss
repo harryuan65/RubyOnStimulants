@@ -44,6 +44,18 @@
     grid-row: 3/4;
   }
 }
+.article-page-category{
+  font-size: 19px;
+  &.show{
+    grid-row: 3/4;
+  }
+  .category-text{ //same as `` in markdown pre code
+    color: #282828;
+    background-color:#DDDDDD;
+    padding: 1px 7px 1px 7px;
+    border-radius: 4px;
+  }
+}
 .article-page-content{
   &.show{
     margin-top: 60px;
@@ -64,6 +76,9 @@
 }
 .wrap-label-input{
   @include flex(column, flex-start, flex-start);
+  &.category{
+    margin: 20px 0 20px 0;
+  }
   &.subtitle{
     margin-top: 20px;
   }

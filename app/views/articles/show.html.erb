@@ -9,7 +9,8 @@
       <a href="<%= edit_article_path(@article)%>" class="article-page-edit text-7e pen">&#x270E;</a>
     </div>
     <% end %>
-    <span class="article-page-subtitle show notosans-light text-7e"><%= @article.subtitle %></span>
+    <!-- <span class="article-page-subtitle show notosans-light text-7e"><%= @article.subtitle %></span>-->
+    <span class="article-page-category show notosans-light text-7e">category: <span class="category-text"><%= @article.category %></span></span>
     <span class="article-page-author show notosans-light text-dk"><%= username(@article.user) %></span>
     <span class="article-page-created-at notosans-light text-7e"><%= @article.created_at.strftime("%a, %d %b %Y") %></span>
 

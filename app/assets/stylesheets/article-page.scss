@@ -44,12 +44,12 @@
     grid-row: 3/4;
   }
 }
-.article-page-category{
+.article-page-tag{
   font-size: 19px;
   &.show{
     grid-row: 3/4;
   }
-  .category-text{ //same as `` in markdown pre code
+  .tag-text{ //same as `` in markdown pre code
     color: #282828;
     background-color:#DDDDDD;
     padding: 1px 7px 1px 7px;

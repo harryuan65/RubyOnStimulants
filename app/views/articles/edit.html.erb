@@ -29,8 +29,8 @@
         <%= link_to "&#x1f5d1;".html_safe, article_path(@article), method: :delete, class: "article-destroy", data: {confirm: t('controller.articles.confirm_delete')}%>
       </div>
       <div class="wrap-label-input category">
-        <label for="subtitle" class="notosans-light text-7e">Category</label>
-        <%= f.text_field :category, {value: @article.category, class: "article-page-subtitle notosans-light text-dk"} %>
+        <label for="tags" class="notosans-light text-7e">Tags</label>
+        <%= f.text_field :tags, {value: @article.tag_names.join(", "), class: "article-page-subtitle notosans-light text-dk"} %>
       </div>
       <!--
       <div class="wrap-label-input subtitle">

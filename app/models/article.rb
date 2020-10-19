@@ -15,6 +15,8 @@
 #
 
 class Article < ApplicationRecord
+  Gutentag::ActiveRecord.call self
+
   validates :title, presence: true
 
   belongs_to :user

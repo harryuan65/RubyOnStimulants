@@ -10,7 +10,14 @@
     </div>
     <% end %>
     <!-- <span class="article-page-subtitle show notosans-light text-7e"><%= @article.subtitle %></span>-->
-    <span class="article-page-category show notosans-light text-7e">category: <span class="category-text"><%= @article.category %></span></span>
+    <span class="article-page-tag show notosans-light text-7e">tags:
+      <% @article.tag_names.each_with_index do |tag, i| %>
+        <span class="tag-text"><%= tag %></span>
+      <% if i!=@article.tag_names.size-1 %>
+        <span class="notosans">,</span>
+      <% end %>
+    <% end %>
+    </span>
     <span class="article-page-author show notosans-light text-dk"><%= username(@article.user) %></span>
     <span class="article-page-created-at notosans-light text-7e"><%= @article.created_at.strftime("%a, %d %b %Y") %></span>
 

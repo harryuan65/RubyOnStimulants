@@ -23,7 +23,14 @@
             <% end %>
           </div>
           <!-- <span class="article-description subtitle notosans-light text-dk"><%= article.subtitle %></span>-->
-          <span class="article-description category notosans-light text-dk"><%= article.category %></span>
+          <div class="wrap-tags">
+            <% article.tag_names.each_with_index do |tag, i| %>
+                <span class="article-description tag notosans-light text-dk"><%= tag %></span>
+              <% if i!=article.tag_names.size-1 %>
+                <span class="notosans-light text-dk">,</span>
+              <% end %>
+            <% end %>
+          </div>
         </a>
         <span class="article-author notosans-light text-dk"><%= username(article.user) %></span>
         <span class="article-created-at notosans-light text-dk"><%= article.created_at.strftime("%B") %> <%= article.created_at.day %></span>

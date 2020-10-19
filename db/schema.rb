@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_18_163838) do
+ActiveRecord::Schema.define(version: 2020_10_19_072545) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,8 +39,6 @@ ActiveRecord::Schema.define(version: 2020_10_18_163838) do
     t.integer "state"
     t.string "subtitle"
     t.integer "comments_count"
-    t.string "category"
-    t.index ["category"], name: "index_articles_on_category"
     t.index ["comment_count"], name: "index_articles_on_comment_count"
     t.index ["like_count"], name: "index_articles_on_like_count"
     t.index ["state"], name: "index_articles_on_state"
@@ -86,6 +84,26 @@ ActiveRecord::Schema.define(version: 2020_10_18_163838) do
     t.index ["definition_id"], name: "index_examples_on_definition_id"
     t.index ["word_id", "definition_id"], name: "index_examples_on_word_id_and_definition_id"
     t.index ["word_id"], name: "index_examples_on_word_id"
+  end
+
+  create_table "gutentag_taggings", id: :serial, force: :cascade do |t|
+    t.integer "tag_id", null: false
+    t.integer "taggable_id", null: false
+    t.string "taggable_type", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tag_id"], name: "index_gutentag_taggings_on_tag_id"
+    t.index ["taggable_type", "taggable_id", "tag_id"], name: "unique_taggings", unique: true
+    t.index ["taggable_type", "taggable_id"], name: "index_gutentag_taggings_on_taggable_type_and_taggable_id"
+  end
+
+  create_table "gutentag_tags", id: :serial, force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "taggings_count", default: 0, null: false
+    t.index ["name"], name: "index_gutentag_tags_on_name", unique: true
+    t.index ["taggings_count"], name: "index_gutentag_tags_on_taggings_count"
   end
 
   create_table "onb_line_users", force: :cascade do |t|

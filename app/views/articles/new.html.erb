@@ -1,4 +1,5 @@
 <%= stylesheet_link_tag "article-page"%>
+<%= javascript_include_tag "articles/articles" %>
 <script>
   $("main").ready(()=>{
     $('input[type="radio"]:checked').parent().addClass("selected");

@@ -1,23 +1,5 @@
 <%= stylesheet_link_tag "article-page"%>
-<script>
-  $("main").ready(()=>{
-    $('input[type="radio"]:checked').parent().addClass("selected");
-    $(".state-pair input[type='radio']:checked").addClass("selected");
-  })
-  function select(event){
-    let otherRadios = $('input[type="radio"]');
-    // otherRadios.prop('checked', false);
-    otherRadios.parent().removeClass("selected");
-    if(event.target.nodeName==="SPAN"){
-      var radio = $('input[type="radio"]', event.target.parentNode);
-    }
-    else{
-      var radio = $('input[type="radio"]', event.target);
-    }
-    radio.prop('checked', true); //event.target = pair
-    radio.parent().addClass("selected"); //event.target = pair
-  }
-</script>
+<%= javascript_include_tag "articles/articles" %>
 <%= form_for @article, url: article_path(@article), method: 'PUT' do |f|  %>
   <div class="wrap-article">
     <div class="wrap-title">

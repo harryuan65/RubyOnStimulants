@@ -8,28 +8,6 @@
     <%# <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_link_tag    'layout', media: 'all', 'data-turbolinks-track': 'reload'%>
-
-    <% if should_load_hightlight_js %>
-      <%= javascript_include_tag "highlight/highlight" %>
-      <%= stylesheet_link_tag "markdown/tomorrow-night.css" %>
-      <script>
-        window.onload = ()=>{
-          hljs.initHighlightingOnLoad();
-          if("<%= is_article_editing_page %>" == "true"){
-            var prevData = document.getElementById('article_content').value;
-            window.onbeforeunload = (event)=>{
-              var currentData = document.getElementById('article_content').value;
-
-              var diff = currentData.split(prevData).join('');
-              if (diff.length > 0){
-                (event || window.event).returnValue = "ask";
-              }
-              // console.log(diff);
-            }
-          }
-        }
-      </script>
-    <% end %>
   </head>
 
   <body>

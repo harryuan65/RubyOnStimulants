@@ -13,11 +13,23 @@ var mappings = {
   "'": "''",
   "<":">"
 }
+window.onload = ()=>{
+  var prevData = document.getElementById('article_content').value;
+  window.onbeforeunload = (event)=>{
+    var currentData = document.getElementById('article_content').value;
+    var diff = currentData.split(prevData).join('');
+    if (diff.length > 0){
+      (event || window.event).returnValue = "ask";
+    }
+  }
+}
 $("main").ready(()=>{
   //load current state's style
   $('input[type="radio"]:checked').parent().addClass("selected");
   $(".state-pair input[type='radio']:checked").addClass("selected");
-
+  $('pre code').each(e=>{
+    hljs.highlightBlock(this);
+  })
   //markdown autocomplete support
   $("#article_content").on('keydown', (e)=>{
     if(Object.keys(mappings).includes(e.key)){

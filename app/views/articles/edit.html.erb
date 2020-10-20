@@ -1,3 +1,5 @@
+<%= javascript_include_tag "highlight/highlight" %>
+<%= stylesheet_link_tag "markdown/tomorrow-night.css" %>
 <%= stylesheet_link_tag "article-page"%>
 <%= javascript_include_tag "articles/articles" %>
 <%= form_for @article, url: article_path(@article), method: 'PUT' do |f|  %>

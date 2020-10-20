@@ -10,11 +10,6 @@ class ArticlesController < ApplicationController
     else
       @articles = Article.includes(:user, :last_comment, :tags).where(state: :published).order(id: :desc).limit(50).offset(@offset)
     end
-
-    if params[:category]
-      @category = params[:category]
-      @articles = @articles.where(category: @category)
-    end
   end
 
   def new

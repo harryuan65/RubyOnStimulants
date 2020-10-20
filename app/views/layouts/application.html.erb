@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= doc_title %></title>
+    <title><%= @article && current_position=="articles#show" ? @article.title + " - TechPod"  : "TechPod - A Place with Tech Notes and Tools" %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" >

@@ -33,7 +33,4 @@ module ApplicationHelper
     ["articles#new", "articles#edit"].include?(current_position)
   end
 
-  def doc_title
-    current_position=="articles#show" ? @article.title + " - TechPod" : "TechPod - A Place with Tech Notes and Tools"
-  end
 end

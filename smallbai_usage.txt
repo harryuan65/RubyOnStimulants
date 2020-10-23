@@ -1,5 +1,0 @@
-打的方式就是這樣
-
-SlackNotifier::CLIENT.ping "🎉 尼好我是你們家小白，我很孤單🎉"
-
-新增controller＋input測試

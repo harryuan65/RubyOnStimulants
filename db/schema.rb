@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_19_072545) do
+ActiveRecord::Schema.define(version: 2020_10_23_143722) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -126,17 +126,6 @@ ActiveRecord::Schema.define(version: 2020_10_19_072545) do
     t.datetime "earliest_expiration"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "to_do_lists", force: :cascade do |t|
-    t.string "thing"
-    t.boolean "done"
-    t.string "postscript"
-    t.datetime "deadline"
-    t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_to_do_lists_on_user_id"
   end
 
   create_table "user_word_ships", force: :cascade do |t|

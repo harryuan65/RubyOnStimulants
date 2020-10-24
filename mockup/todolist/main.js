@@ -90,7 +90,7 @@ var tasks = ["Lorem ipsum",
 var userActions = [];
 
 document.addEventListener('DOMContentLoaded',()=>{
-  list = document.getElementById('list')
+  listBody = document.getElementById('list-body')
   // customNums = shuffle(nums);
   renderItems(customNums);
 })
@@ -100,7 +100,7 @@ const shuffle = (numbers) => {
 }
 
 const renderItems = (data) =>{
-  list.innerText = ''
+  listBody.innerText = '';
   data.forEach(num=>{
     var listRow = document.createElement("div");
     listRow.classList.add("list-row");
@@ -140,7 +140,7 @@ const renderItems = (data) =>{
     listRow.appendChild(itemName);
     listRow.appendChild(itemSelect);
 
-    list.appendChild(listRow)
+    listBody.appendChild(listRow)
 
     //this is so convenient
     //https://api.jqueryui.com/draggable/

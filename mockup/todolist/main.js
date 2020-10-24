@@ -107,7 +107,6 @@ const renderItems = (data) =>{
   data.forEach(num=>{
     var listRow = document.createElement("div");
     listRow.classList.add("list-row");
-    listRow.draggable = true;//test
 
     var itemDrag = document.createElement("span");
     itemDrag.classList.add("item-drag");
@@ -131,10 +130,10 @@ const renderItems = (data) =>{
     var itemSelect = document.createElement("span");
     itemSelect.classList.add("item-show-toggle");
 
-    itemDrag.draggable = true
-    itemDrag.addEventListener('drag', setDragging)
-    itemDrag.addEventListener('dragover', allowDrop)
-    itemDrag.addEventListener('drop', compare)
+    // itemDrag.draggable = true
+    // itemDrag.addEventListener('drag', setDragging)
+    // itemDrag.addEventListener('dragover', draggingOver)
+    // itemDrag.addEventListener('drop', compare)
     itemDrag.addEventListener('mousedown', showGrabbingcursor)
     itemDrag.addEventListener('mouseup', hideGrabbingcursor)
 
@@ -145,6 +144,21 @@ const renderItems = (data) =>{
     listRow.appendChild(itemSelect);
 
     list.appendChild(listRow)
+
+    //this is so convenient
+    //https://api.jqueryui.com/draggable/
+    $(listRow).draggable({
+      drag: setDragging,
+      stop: function(ev){
+        renderItems(customNums)
+      },
+      cancel: '.list-row > .item-check, .list-row > .item-name, .list-row > .item-show-toggle', // use this to keep children from being dragged and disabled(cannot select, etc.)
+    })
+    $(listRow).droppable({
+      over: draggingOver,
+      out: draggingOut,
+      drop: compare
+    });
   })
   dragging = null
   draggedOver = null
@@ -162,13 +176,32 @@ const compare = (e) =>{
   renderItems(customNums)
 };
 
-function allowDrop(ev) {
+function draggingOver(ev) {
   ev.preventDefault();
-  draggedOver = parseInt(ev.target.parentNode.querySelector('.item-num').innerText)
-}
+  var listRowBeingOver = ev.target;
+  draggedOver = parseInt(listRowBeingOver.querySelector('.item-num').innerText)
+  listRowBeingOver.classList.add("covering")
 
+  //add the border while dragging over something
+  if (customNums.indexOf(draggedOver) < customNums.indexOf(dragging)){
+    listRowBeingOver.classList.add("will-insert-before")
+  }
+  else{
+    listRowBeingOver.classList.add("will-insert-after")
+  }
+}
+function draggingOut(ev){
+  var listRowOuting = ev.target;
+
+  //remove transparency on the listRow leaving
+  listRowOuting.classList.remove("covering");
+
+  //remove all borders on the listRow leaving
+  listRowOuting.classList.remove("will-insert-before");
+  listRowOuting.classList.remove("will-insert-after");
+}
 const setDragging = (e) =>{
-  dragging = parseInt(e.target.parentNode.querySelector('.item-num').innerText)
+  dragging = parseInt(e.target.querySelector('.item-num').innerText)
 }
 
 const showGrabbingcursor = (ev) =>{

@@ -81,3 +81,4 @@ gem 'dalli' #for mem_cached_store for precompile
 gem 'line-bot-api'
 gem 'rails_param'
 gem 'gutentag'
+gem "jquery-ui-rails", "~> 6.0"

@@ -382,9 +382,8 @@ div[id*="dropdown-toggle"] {
   justify-content: center;
   align-items: center;
   width: 300px;
-  padding: 5px 0 5px 0; }
-  .list-row :not(.item-drag) {
-    pointer-events: none; }
+  padding: 5px 0 5px 0;
+  transition: border .2s ease-out; }
   .list-row .item-drag {
     font-size: 24px;
     vertical-align: middle;
@@ -409,5 +408,14 @@ div[id*="dropdown-toggle"] {
     .list-row .item-show-toggle.selected {
       border-color: transparent transparent #5b5b5b transparent;
       border-width: 0 7px 10px 7px; }
+
+.covering {
+  opacity: .7; }
+
+.will-insert-before {
+  border-top: solid 1px #fa2525; }
+
+.will-insert-after {
+  border-bottom: solid 1px #fa2525; }
 
 /*# sourceMappingURL=style.css.map */

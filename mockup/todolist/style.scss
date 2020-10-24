@@ -422,9 +422,9 @@ div[id*="dropdown-toggle"]{
   @include flex(row, center, center);
   width: 300px;
   padding: 5px 0 5px 0;
-  :not(.item-drag){
-    pointer-events: none;
-  }
+  // & > :not(.item-drag){
+  //   pointer-events: none;
+  // }
   & .item-drag{
     font-size: 24px;
     vertical-align: middle;
@@ -454,4 +454,14 @@ div[id*="dropdown-toggle"]{
       border-width: 0 7px 10px 7px;
     }
   }
+  transition: border .2s ease-out;
+}
+.covering{
+  opacity: .7;
+}
+.will-insert-before{
+  border-top: solid 1px #fa2525;
+}
+.will-insert-after{
+  border-bottom: solid 1px #fa2525;
 }

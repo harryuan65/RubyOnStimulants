@@ -128,6 +128,29 @@ ActiveRecord::Schema.define(version: 2020_10_23_143722) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "to_do_items", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "state", default: 0
+    t.string "description"
+    t.datetime "due_date"
+    t.bigint "user_id"
+    t.bigint "to_do_list_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_to_do_items_on_name"
+    t.index ["to_do_list_id"], name: "index_to_do_items_on_to_do_list_id"
+    t.index ["user_id"], name: "index_to_do_items_on_user_id"
+  end
+
+  create_table "to_do_lists", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id", "name"], name: "index_to_do_lists_on_user_id_and_name", unique: true
+    t.index ["user_id"], name: "index_to_do_lists_on_user_id"
+  end
+
   create_table "user_word_ships", force: :cascade do |t|
     t.integer "user_id"
     t.integer "word_id"

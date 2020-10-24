@@ -72,9 +72,6 @@ function changePage(event){
 
 
 //mockup todolist
-
-
-// drag and append list
 var list = null;
 var nums = [0, 1, 2, 3, 4, 5, 6];
 var dragging, draggedOver;
@@ -147,6 +144,15 @@ const renderItems = (data) =>{
 
     //this is so convenient
     //https://api.jqueryui.com/draggable/
+
+    // listRow.draggable = true
+    // listRow.addEventListener('drag', setDragging)
+    // listRow.addEventListener('dragend', (ev)=>{renderItems(customNums)})
+
+    // listRow.addEventListener('dragover', draggingOver)
+    // listRow.addEventListener('dragenter', draggingOver)
+    // listRow.addEventListener('dragleave', draggingOut)
+    // listRow.addEventListener('drop', compare)
     $(listRow).draggable({
       drag: setDragging,
       stop: function(ev){

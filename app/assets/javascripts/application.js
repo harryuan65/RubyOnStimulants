@@ -16,3 +16,5 @@
 //= require jquery_ujs
 //= require jquery-easing
 //= require shared
+//= require jquery-ui/widgets/draggable
+//= require jquery-ui/widgets/droppable

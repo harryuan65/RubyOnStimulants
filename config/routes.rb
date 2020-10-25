@@ -31,11 +31,9 @@ Rails.application.routes.draw do
     end
   end
 
-  scope :controller=>"to_do_list",:path=>"/to_do_list", :as=>"to_do_list" do
-    get '/'=>:index
-    post 'add_todo'=>:add_todo
-    post 'edit_todo'=>:edit_todo
-    post 'delete_todo'=>:delete_todo
+  resources :to_do_lists do
+    resources :to_do_items do
+    end
   end
 
   scope :controller => "excel", :path => "/excel", :as => "excel" do

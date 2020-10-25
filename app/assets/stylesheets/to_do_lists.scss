@@ -1,0 +1,61 @@
+@import './resources.scss';
+
+.list-container{
+  @include flex(row, center, center);
+}
+.list{
+  @include flex(column, flex-start, center);
+  border: solid 1px #eee;
+  background-color: rgb(255, 241, 164);
+  width: 350px;
+  height: 500px;
+  box-sizing: border-box;
+  padding: 4px 0 4px 0;
+}
+.list-row{
+  @include flex(row, center, center);
+  width: 300px;
+  padding: 5px 0 5px 0;
+  // & > :not(.item-drag){
+  //   pointer-events: none;
+  // }
+  & .item-drag{
+    font-size: 24px;
+    vertical-align: middle;
+    height: inherit;
+    cursor: pointer;
+    &.grabbing{
+      cursor: grabbing;
+    }
+  }
+  & .item-check{
+    @include size(24px, 24px);
+    max-height: inherit;
+  }
+  & .item-name{
+    font-size: 20px;
+    border-bottom: #5b5b5b 1px solid;
+    width: 215px;
+    height: inherit;
+  }
+  & .item-show-toggle{
+    cursor: pointer;
+    border-style: solid;
+    border-color: #5b5b5b transparent transparent transparent;
+    border-width: 10px 7px 0 7px;
+    &.selected{
+      border-color: transparent transparent #5b5b5b transparent;
+      border-width: 0 7px 10px 7px;
+    }
+  }
+  transition: border .2s ease-out;
+}
+.covering{
+  opacity: .7;
+}
+.will-insert-before{
+  border-top: solid 1px #fa2525;
+}
+.will-insert-after{
+  border-bottom: solid 1px #fa2525;
+}

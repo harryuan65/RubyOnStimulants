@@ -14,6 +14,7 @@
 
 class ToDoList < ApplicationRecord
   belongs_to :user
+  has_many :items, class_name: "ToDoItem"
   scope :today, ->{
       where('created_at >= :t1 AND created_at <= :t2',
       :t1=>Time.now.in_time_zone("Taipei").beginning_of_day,

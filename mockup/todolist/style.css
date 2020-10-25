@@ -389,8 +389,7 @@ div[id*="dropdown-toggle"] {
     margin: 0;
     transition: .3s ease-in-out; }
   .list.loading {
-    justify-content: center;
-    animation: fade-in .3s ease-in-out forwards; }
+    justify-content: center; }
   .list #list-body #loading-body {
     width: 30px;
     height: 30px;

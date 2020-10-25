@@ -441,7 +441,7 @@ div[id*="dropdown-toggle"]{
 
   &.loading{
     justify-content: center;
-    animation: fade-in .3s ease-in-out forwards;
+    // animation: fade-in .3s ease-in-out forwards;
   }
   #list-body #loading-body{
     width: 30px;

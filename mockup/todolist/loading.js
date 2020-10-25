@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   list = document.getElementById('list');
   listBody = document.getElementById('list-body');
   listBodyLoading = document.getElementById('loading-body');
-  list.classList.add("loading");
+  if(list){list.classList.add("loading");}
 })
 const devLoaded = ()=>{
   if (!list){

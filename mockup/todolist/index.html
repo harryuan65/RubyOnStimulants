@@ -7,7 +7,7 @@
   <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
   <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
   <link rel="stylesheet" href="./style.css">
-  <!-- <script src="./main.js"></script> -->
+  <script src="./loading.js"></script>
 </head>
 <body>
   <nav id="nav-top">
@@ -80,7 +80,7 @@
         i++;
 
         let h3 = document.createElement('h3')
-        h3.classList.add('list-name');
+        h3.classList.add('list-name', 'notosans');
         h3.innerText = list.name;
 
         let dummyList = document.createElement('ul');
@@ -97,26 +97,82 @@
         container.appendChild(newlist);
       })
     }
+    var dragging, draggedOver;
+    var listBody = null;
+    var list = null;
+    var customNums = [0, 1, 2, 3, 4, 5, 6];
+    var tasks = ["Lorem ipsum",
+              "Dolorum",
+              "Ut voluptates",
+              "Adipisci",
+              "Dolore",
+              "Id omnis",
+              "Accusantium",
+              "Quam laborum",
+              "Iste molestias",
+              "Corporis"
+            ]
     document.addEventListener('DOMContentLoaded',()=>{
       setUpLists();
       $(".list").on('click', function(){
         let selectedList = $(this);
+        list = selectedList; //use loading.js
         let dummyList = $(selectedList).find(".dummy-list");
+
+        //turn off transform via add show class
         selectedList.addClass('show');
+        //fade out others
         $(".list:not(.show)").addClass("fade-out");
 
+        // wait for fading out;
+        let fadeOutTime = 500;
+        let waitTime = fadeOutTime;
         setTimeout(function(){
           $(".list:not(.show)").remove();
-        }, 500);
+        }, fadeOutTime);
 
+        // create list-body, loading-body, append loading-body into list-body
+        listBody = document.createElement('div');
+        listBody.id = 'list-body';
+
+        loadingBody = document.createElement('div');
+        loadingBody.id = "loading-body";
+
+        listBody.append(loadingBody);
+
+        // fade out the dummy list
+        waitTime+=fadeOutTime;
         setTimeout(function(){
-          dummyList.addClass('fade-out')
-        }, 1000)
+          dummyList.addClass('fade-out');
+        }, waitTime)
 
+        // after dummylist fade out, make list's justify content to center by adding "loading" class
+        waitTime+=fadeOutTime;
         setTimeout(function(){
           dummyList.remove();
           selectedList.addClass("loading");
-        }, 1100)
+
+          // append listBody, will show its loading-body spinning
+          selectedList.append(listBody);
+        }, waitTime);
+
+        let fakeLoadDataTime = 600;
+        waitTime+=fakeLoadDataTime;
+        setTimeout(function(){
+          selectedList.addClass("loading");
+          listBody.classList.add("fade-out");
+
+          setTimeout(function(){
+            loadingBody.remove();
+            renderItems(customNums);
+            listBody.classList.remove("fade-out");
+            listBody.classList.add("fade-in");
+          }, 1500);
+
+          setTimeout(function(){
+            selectedList.removeClass("loading");
+          }, 1500);
+        }, waitTime);
       })
     })
   </script>

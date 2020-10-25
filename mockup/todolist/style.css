@@ -380,30 +380,42 @@ div[id*="dropdown-toggle"] {
   position: relative;
   cursor: pointer;
   margin-left: -120px; }
-  .list:hover {
+  .list:not(.show):hover {
     transform: translateY(-80px); }
   .list.show {
     transform: none;
     cursor: default;
     width: 350px;
-    margin: 0; }
+    margin: 0;
+    transition: .3s ease-in-out; }
   .list.loading {
-    justify-content: center; }
-    .list.loading::before {
-      content: "";
-      width: 30px;
-      height: 30px;
-      border-width: 7px;
-      border-style: solid;
-      border-color: #a6bedd gray gray gray;
-      border-radius: 50%;
-      animation: list-loading .6s linear infinite; }
+    justify-content: center;
+    animation: fade-in .3s ease-in-out forwards; }
+  .list #list-body #loading-body {
+    width: 30px;
+    height: 30px;
+    border-width: 7px;
+    border-style: solid;
+    border-color: #a6bedd gray gray gray;
+    border-radius: 50%;
+    animation: list-loading .6s linear infinite; }
 
 @keyframes list-loading {
   from {
     transform: rotate(0deg); }
   to {
     transform: rotate(360deg); } }
+.fade-in {
+  animation: fade-in .5s forwards; }
+
+.fade-out {
+  animation: fade-out .5s forwards; }
+
+@keyframes fade-out {
+  from {
+    opacity: 1; }
+  to {
+    opacity: 0; } }
 .dummy-list {
   display: flex;
   flex-direction: column;

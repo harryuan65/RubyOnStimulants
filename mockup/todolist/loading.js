@@ -91,13 +91,10 @@ var tasks = ["Lorem ipsum",
 var userActions = [];
 
 document.addEventListener('DOMContentLoaded',()=>{
-  list = document.getElementById('list')
-  list.innerHTML = '';
+  list = document.getElementById('list');
+  listBody = document.getElementById('list-body');
+  listBodyLoading = document.getElementById('loading-body');
   list.classList.add("loading");
-  // append listName and listBody after loaded
-  // listBody = document.getElementById('list-body')
-
-  // renderItems(customNums);
 })
 const devLoaded = ()=>{
   if (!list){
@@ -105,20 +102,20 @@ const devLoaded = ()=>{
     return;
   }
 
-  list.id = parseInt(Math.random() * 20); // dummy id
+  list.id = `list-${parseInt(Math.random() * 20)}`; // dummy id
 
-  listName = document.createElement("h3")
-  listName.classList.add("list-name");
-  listName.classList.add("notosans");
-  listName.innerText = "My Loaded Title"; // dummy title
+  listBody.classList.add("fade-out");
 
-  listBody = document.createElement("div");
-  listBody.id = "list-body";
+  setTimeout(function(){
+    listBodyLoading.remove();
+    renderItems(customNums);
+    listBody.classList.remove("fade-out");
+    listBody.classList.add("fade-in");
+  }, 1500);
 
-  list.classList.remove("loading");
-  list.appendChild(listName);
-  list.appendChild(listBody);
-  renderItems(customNums);
+  setTimeout(function(){
+    list.classList.remove("loading");
+  }, 1500);
 }
 const shuffle = (numbers) => {
   return numbers.sort(() => Math.random() - 0.5)

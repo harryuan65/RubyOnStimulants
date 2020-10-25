@@ -58,7 +58,7 @@
     </div>
   </nav>
   <script>
-    document.addEventListener('DOMContentLoaded',()=>{
+    function setUpLists(){
       var container = document.getElementById('container');
       let i = 0;
       let lists = [
@@ -95,6 +95,28 @@
         newlist.appendChild(h3);
         newlist.appendChild(dummyList);
         container.appendChild(newlist);
+      })
+    }
+    document.addEventListener('DOMContentLoaded',()=>{
+      setUpLists();
+      $(".list").on('click', function(){
+        let selectedList = $(this);
+        let dummyList = $(selectedList).find(".dummy-list");
+        selectedList.addClass('show');
+        $(".list:not(.show)").addClass("fade-out");
+
+        setTimeout(function(){
+          $(".list:not(.show)").remove();
+        }, 500);
+
+        setTimeout(function(){
+          dummyList.addClass('fade-out')
+        }, 1000)
+
+        setTimeout(function(){
+          dummyList.remove();
+          selectedList.addClass("loading");
+        }, 1100)
       })
     })
   </script>

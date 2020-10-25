@@ -2,7 +2,7 @@
 <%= stylesheet_link_tag "to_do_lists" %>
 
 <% @lists.each_with_index do |list, i| %>
-  <div id="list-<%= list.id%>" class="list notosans" style="background-color: <%= @bg_mapping[i%5]%>; z-index: <%= @z_index_count%>;">
+  <div id="<%= list.id%>" class="list notosans" style="background-color: <%= @bg_mapping[i%5]%>; z-index: <%= @z_index_count%>;">
     <h3 class="list-name"><%= list.name %></h3>
     <ul class="dummy-list">
       <% list.items.each do |item| %>

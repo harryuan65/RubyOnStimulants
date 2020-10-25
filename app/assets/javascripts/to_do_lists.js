@@ -2,24 +2,96 @@ var list = null;
 var listBody = null;
 var items = null;
 var dragging, draggedOver;
+var loadedData = [];
 var userActions = [];
 
 $(document).on('turbolinks:load', async ()=>{
   $('#list-container').ready(function(){
-    // buildListAndShowLoading();
-    // on ajax success
-    // loadedAndBuildList();
-    // renderItems(items);
+    setUpListener();
   })
 })
+function setUpListener(){
+  $(".list").on('click', function(){
+    let selectedList = $(this);
+    list = selectedList; //use loading.js
+    let dummyList = $(selectedList).find(".dummy-list");
 
-function buildListAndShowLoading(id){
-  list = document.createElement('div');
-  list.classList.add('list');
-  list.id = id;
-  list.innerHTML = '';
-  list.classList.add("loading");
+    //turn off transform via add show class
+    selectedList.addClass('show');
+    //fade out others
+    $(".list:not(.show)").addClass("fade-out");
+
+    // wait for fading out;
+    let fadeOutTime = 500;
+    let waitTime = fadeOutTime;
+    setTimeout(function(){
+      $(".list:not(.show)").remove();
+    }, fadeOutTime);
+
+    // create list-body, loading-body, append loading-body into list-body
+    listBody = document.createElement('div');
+    listBody.id = 'list-body';
+
+    loadingBody = document.createElement('div');
+    loadingBody.id = "loading-body";
+
+    listBody.append(loadingBody);
+
+    // fade out the dummy list
+    waitTime+=fadeOutTime;
+    setTimeout(function(){
+      dummyList.addClass('fade-out');
+    }, waitTime)
+
+    // after dummylist fade out, make list's justify content to center by adding "loading" class
+    waitTime+=fadeOutTime;
+    setTimeout(function(){
+      dummyList.remove();
+      selectedList.addClass("loading");
+
+      // append listBody, will show its loading-body spinning
+      selectedList.append(listBody);
+    }, waitTime);
+
+    let fakeLoadDataTime = 600;
+    waitTime+=fakeLoadDataTime;
+    setTimeout(function(){
+      $.ajax({
+        url: `/to_do_lists/${selectedList.attr('id')}`,
+        contentType: 'application/json',
+        dataType: 'script'
+      }).done(function(data){
+        selectedList.addClass("loading");
+        listBody.classList.add("fade-out");
+
+        setTimeout(function(){
+          loadingBody.remove();
+          data = JSON.parse(data);
+          loadedData = data;
+          console.log(data)
+          console.log(JSON.stringify(data, null ,2))
+          renderItems(data);
+          listBody.classList.remove("fade-out");
+          listBody.classList.add("fade-in");
+        }, 1500);
+
+        setTimeout(function(){
+          selectedList.removeClass("loading");
+        }, 1500);
+      }).fail(function(err){
+        alert(err);
+      })
+    }, waitTime);
+  })
 }
+//dev
+// function buildListAndShowLoading(id){
+//   list = document.createElement('div');
+//   list.classList.add('list');
+//   list.id = id;
+//   list.innerHTML = '';
+//   list.classList.add("loading");
+// }
 
 function renderItems(data){
   listBody.innerText = '';
@@ -60,21 +132,10 @@ function renderItems(data){
 
     listBody.appendChild(listRow)
 
-    //this is so convenient
-    //https://api.jqueryui.com/draggable/
-
-    // listRow.draggable = true
-    // listRow.addEventListener('drag', setDragging)
-    // listRow.addEventListener('dragend', (ev)=>{renderItems(customNums)})
-
-    // listRow.addEventListener('dragover', draggingOver)
-    // listRow.addEventListener('dragenter', draggingOver)
-    // listRow.addEventListener('dragleave', draggingOut)
-    // listRow.addEventListener('drop', compare)
     $(listRow).draggable({
       drag: setDragging,
       stop: function(ev){
-        renderItems(customNums)
+        renderItems(loadedData)
       },
       cancel: '.list-row > .item-check, .list-row > .item-name, .list-row > .item-show-toggle', // use this to keep children from being dragged and disabled(cannot select, etc.)
     })
@@ -87,7 +148,7 @@ function renderItems(data){
   dragging = null
   draggedOver = null
 
-  console.log("Current numbers:", customNums);
+  // console.log("Current numbers:", loadedData);
 }
 
 function compare(e){

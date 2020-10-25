@@ -9,6 +9,11 @@ class ToDoListsController < ApplicationController
 
   def show
     @list = ToDoList.includes(:items).find params[:id]
+    # respond_to do |format|
+    #   format.html {render json:{message: "Unauthorized"}}
+    #   format.js {render json: @list.items}
+    # end
+    render json: @list.items
   end
   # def add_todo
   #   begin

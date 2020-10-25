@@ -7,7 +7,7 @@
   <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
   <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
   <link rel="stylesheet" href="./style.css">
-  <script src="./main.js"></script>
+  <!-- <script src="./main.js"></script> -->
 </head>
 <body>
   <nav id="nav-top">
@@ -57,20 +57,69 @@
      </div>
     </div>
   </nav>
+  <script>
+    document.addEventListener('DOMContentLoaded',()=>{
+      var container = document.getElementById('container');
+      let i = 0;
+      let lists = [
+        {id: 1, name: 'Lorem', bgColor: "rgb(255, 241, 164)"},
+        {id: 2, name: "Ipsum", bgColor: "#daf7a6"},
+        {id: 3, name: "Dolor", bgColor: "#F0B27A"},
+        {id: 4, name: "Sit", bgColor: "#AED6F1"},
+        {id: 5, name: "Amet", bgColor: "#F5B7B1"},
+      ];
+      let indexSeq = lists.length;
+
+      lists.forEach(list=>{
+        let newlist = document.createElement('div');
+        newlist.id = `list-${list.id}`;
+        newlist.classList.add('list');
+        newlist.style.backgroundColor = list.bgColor;
+        newlist.style.zIndex = indexSeq;
+        indexSeq--;
+        i++;
+
+        let h3 = document.createElement('h3')
+        h3.classList.add('list-name');
+        h3.innerText = list.name;
+
+        let dummyList = document.createElement('ul');
+        dummyList.classList.add('dummy-list');
+        dummyList.innerHTML = `
+          <li><span class="dummy-item-drag">&#x2630;</span><input type="checkbox" name="" id=""><span class="dummy-item-name"></span></li>
+          <li><span class="dummy-item-drag">&#x2630;</span><input type="checkbox" name="" id=""><span class="dummy-item-name"></span></li>
+          <li><span class="dummy-item-drag">&#x2630;</span><input type="checkbox" name="" id=""><span class="dummy-item-name"></span></li>
+          <li><span class="dummy-item-drag">&#x2630;</span><input type="checkbox" name="" id=""><span class="dummy-item-name"></span></li>
+          <li><span class="dummy-item-drag">&#x2630;</span><input type="checkbox" name="" id=""><span class="dummy-item-name"></span></li>
+        `;
+        newlist.appendChild(h3);
+        newlist.appendChild(dummyList);
+        container.appendChild(newlist);
+      })
+    })
+  </script>
   <main id="main">
-    <div class="list-container">
-      <div id="list" class="list">
-        <h3 class="list-name">Lorem Ipsum</h3>
-        <div id="list-body">
-          <!-- <div class="list-row">
-            <span class="item-drag">&#x2630;</span>
-            <input class="item-check" type="checkbox" name="state" id="item-1">
-            <span class="item-num">3</span>
-            <span class="item-name notosans">Do The Laundry</span>
-            <span class="item-show-toggle"></span>
-          </div> -->
-        </div>
+    <div id="container" class="list-index">
+      <!-- <div id="list-1" class="list">
+        <h3 class="list-name">Lorem List</h3>
+        <ul class="dummy-list">
+          <li><span class="dummy-item-drag">&#x2630;</span><input type="checkbox" name="" id=""><span class="dummy-item-name"></span></li>
+          <li><span class="dummy-item-drag">&#x2630;</span><input type="checkbox" name="" id=""><span class="dummy-item-name"></span></li>
+          <li><span class="dummy-item-drag">&#x2630;</span><input type="checkbox" name="" id=""><span class="dummy-item-name"></span></li>
+          <li><span class="dummy-item-drag">&#x2630;</span><input type="checkbox" name="" id=""><span class="dummy-item-name"></span></li>
+          <li><span class="dummy-item-drag">&#x2630;</span><input type="checkbox" name="" id=""><span class="dummy-item-name"></span></li>
+        </ul>
       </div>
+      <div id="list-2" class="list" style="background-color: #daf7a6;">
+        <h3 class="list-name">Ipsum List</h3>
+        <ul class="dummy-list">
+          <li><span class="dummy-item-drag">&#x2630;</span><input type="checkbox" name="" id=""><span class="dummy-item-name"></span></li>
+          <li><span class="dummy-item-drag">&#x2630;</span><input type="checkbox" name="" id=""><span class="dummy-item-name"></span></li>
+          <li><span class="dummy-item-drag">&#x2630;</span><input type="checkbox" name="" id=""><span class="dummy-item-name"></span></li>
+          <li><span class="dummy-item-drag">&#x2630;</span><input type="checkbox" name="" id=""><span class="dummy-item-name"></span></li>
+          <li><span class="dummy-item-drag">&#x2630;</span><input type="checkbox" name="" id=""><span class="dummy-item-name"></span></li>
+        </ul>
+      </div> -->
     </div>
   </main>
 </body>

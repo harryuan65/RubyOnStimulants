@@ -164,6 +164,12 @@ main {
 #container {
   width: 700px;
   min-height: 600px; }
+  #container.list-index {
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center; }
 
 @keyframes alert-forwards {
   0% {
@@ -358,23 +364,29 @@ div[id*="dropdown-toggle"] {
 .invert-again {
   filter: invert(100%) hue-rotate(180deg); }
 
-.list-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center; }
-
 .list {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  border: solid 1px #eee;
   background-color: #fff1a4;
-  width: 350px;
+  width: 250px;
   height: 500px;
   box-sizing: border-box;
-  padding: 4px 0 4px 0; }
+  padding: 4px 0 4px 0;
+  transition: .2s ease;
+  transform: rotateX(15deg) rotateY(40deg);
+  transform-style: preserve-3d;
+  position: relative;
+  cursor: pointer;
+  margin-left: -120px; }
+  .list:hover {
+    transform: translateY(-80px); }
+  .list.show {
+    transform: none;
+    cursor: default;
+    width: 350px;
+    margin: 0; }
   .list.loading {
     justify-content: center; }
     .list.loading::before {
@@ -392,6 +404,21 @@ div[id*="dropdown-toggle"] {
     transform: rotate(0deg); }
   to {
     transform: rotate(360deg); } }
+.dummy-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: .6;
+  width: inherit;
+  padding: 0; }
+  .dummy-list li {
+    list-style: none; }
+    .dummy-list li .dummy-item-name {
+      border-bottom: #5b5b5b 1px solid;
+      display: inline-block;
+      width: 140px; }
+
 .list-row {
   display: flex;
   flex-direction: row;
@@ -399,9 +426,9 @@ div[id*="dropdown-toggle"] {
   align-items: center;
   width: 300px;
   padding: 5px 0 5px 0;
-  transition: border .2s ease-out;
-  opacity: 0;
-  animation: fade-in .8s ease forwards; }
+  transition: border .2s ease-out; }
+  .list-row.show {
+    flex-direction: center; }
   .list-row .item-drag {
     font-size: 24px;
     vertical-align: middle;

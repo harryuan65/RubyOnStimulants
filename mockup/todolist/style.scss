@@ -191,6 +191,10 @@ main{
   // max-width: 800px;
   width: 700px;
   min-height: 600px;
+  &.list-index{
+    width: 90%;
+    @include flex(row, center, center);
+  }
 }
 
 //alerts (currently login page only)
@@ -406,17 +410,34 @@ div[id*="dropdown-toggle"]{
 
 
 //mockup todolist
-.list-container{
-  @include flex(row, center, center);
-}
 .list{
   @include flex(column, flex-start, center);
-  border: solid 1px #eee;
+  // border: solid 1px #eee;
   background-color: rgb(255, 241, 164);
-  width: 350px;
+  width: 250px;
   height: 500px;
   box-sizing: border-box;
   padding: 4px 0 4px 0;
+  transition: .2s ease;
+
+  transform: rotateX(15deg) rotateY(40deg);
+  transform-style: preserve-3d;
+  // position: absolute;
+  position: relative;
+  cursor: pointer;
+  margin-left: -120px;
+
+  &:hover{
+    transform: translateY(-80px);
+  }
+
+  &.show{
+    transform: none;
+    cursor: default;
+    width: 350px;
+    margin: 0;
+  }
+
   &.loading{
     justify-content: center;
     &::before{
@@ -435,8 +456,26 @@ div[id*="dropdown-toggle"]{
   from{transform: rotate(0deg)}
   to{transform: rotate(360deg)}
 }
+.dummy-list{
+  @include flex(column, center, center);
+  opacity: .6;
+  width: inherit;
+  padding: 0;
+  li{
+    list-style: none;
+    .dummy-item-name{
+      border-bottom: #5b5b5b 1px solid;
+      display: inline-block;
+      width: 140px;
+      // height: 24px; //only use this when no text
+    }
+  }
+}
 .list-row{
   @include flex(row, center, center);
+  &.show{
+    flex-direction: center;
+  }
   width: 300px;
   padding: 5px 0 5px 0;
   & .item-drag{
@@ -470,8 +509,8 @@ div[id*="dropdown-toggle"]{
   }
   transition: border .2s ease-out;
 
-  opacity: 0;
-  animation: fade-in .8s ease forwards;
+  // opacity: 0;
+  // animation: fade-in .8s ease forwards;
 }
 @keyframes fade-in{
   from{opacity: 0;}

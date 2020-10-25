@@ -3,45 +3,48 @@
 <%#=readable_time(@article.created_at) %>
 <%= stylesheet_link_tag "article-page"%>
 
-<div class="wrap-article show">
-  <div class="wrap-title <%= @is_author ? "can-edit" : "readonly"%>">
-    <h1 id="article_<%= @article.id%>" class="article-page-title notosans-bold text-dk"><%= @article.title %></h1>
-    <% if @is_author%>
-    <div class="wrap-pen">
-      <a href="<%= edit_article_path(@article)%>" class="article-page-edit text-7e pen">&#x270E;</a>
-    </div>
-    <% end %>
-    <!-- <span class="article-page-subtitle show notosans-light text-7e"><%= @article.subtitle %></span>-->
-    <span class="article-page-tag show notosans-light text-7e">tags:
-      <% @article.tag_names.each_with_index do |tag, i| %>
-        <span class="tag-text"><%= tag %></span>
-      <% if i!=@article.tag_names.size-1 %>
-        <span class="notosans">,</span>
+<div id="container">
+  <div class="wrap-article show">
+    <div class="wrap-title <%= @is_author ? "can-edit" : "readonly"%>">
+      <h1 id="article_<%= @article.id%>" class="article-page-title notosans-bold text-dk"><%= @article.title %></h1>
+      <% if @is_author%>
+      <div class="wrap-pen">
+        <a href="<%= edit_article_path(@article)%>" class="article-page-edit text-7e pen">&#x270E;</a>
+      </div>
       <% end %>
-    <% end %>
-    </span>
-    <span class="article-page-author show notosans-light text-dk"><%= username(@article.user) %></span>
-    <span class="article-page-created-at notosans-light text-7e"><%= @article.created_at.strftime("%a, %d %b %Y") %></span>
+      <!-- <span class="article-page-subtitle show notosans-light text-7e"><%= @article.subtitle %></span>-->
+      <span class="article-page-tag show notosans-light text-7e">tags:
+        <% @article.tag_names.each_with_index do |tag, i| %>
+          <span class="tag-text"><%= tag %></span>
+        <% if i!=@article.tag_names.size-1 %>
+          <span class="notosans">,</span>
+        <% end %>
+      <% end %>
+      </span>
+      <span class="article-page-author show notosans-light text-dk"><%= username(@article.user) %></span>
+      <span class="article-page-created-at notosans-light text-7e"><%= @article.created_at.strftime("%a, %d %b %Y") %></span>
 
-  </div>
-
-  <hr>
-  <!-- <p class="article-page-content show notosans-light text-dk"><%= @article.content.gsub(/\n/, "\<br\>").html_safe %></p>-->
-  <div class="article-page-content show markdown text-dk">
-   <%= Article.to_markdown(@article.content) %>
-  </div>
-
-  <footer>
-    <img src="<%= @article.user.image_url%>" alt="<%@article.user.name%>" class="crop-circle">
-    <div class="wrap-author-info">
-      <h1 class="author-name notosans text-5b"><%= @article.user.name %></h1>
-      <p class="author-desc notosans text-7e"><%= @article.user.name=="Harry Yuan" ? "Rails Developer" : "" %></p>
     </div>
-  </footer>
-</div>
 
+    <hr>
+    <!-- <p class="article-page-content show notosans-light text-dk"><%= @article.content.gsub(/\n/, "\<br\>").html_safe %></p>-->
+    <div class="article-page-content show markdown text-dk">
+     <%= Article.to_markdown(@article.content) %>
+    </div>
+
+    <footer>
+      <img src="<%= @article.user.image_url%>" alt="<%@article.user.name%>" class="crop-circle">
+      <div class="wrap-author-info">
+        <h1 class="author-name notosans text-5b"><%= @article.user.name %></h1>
+        <p class="author-desc notosans text-7e"><%= @article.user.name=="Harry Yuan" ? "Rails Developer" : "" %></p>
+      </div>
+    </footer>
+  </div>
+</div>
 <script>
-  document.querySelectorAll('pre code').forEach(e=>{
-    hljs.highlightBlock(e);
+  $(".wrap-article.show").ready(function(e){
+    document.querySelectorAll('pre code').forEach(e=>{
+      hljs.highlightBlock(e);
+    })
   })
 </script>

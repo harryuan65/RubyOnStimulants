@@ -2,7 +2,9 @@ class ToDoListsController < ApplicationController
   before_action :set_user
 
   def index
-    @list = ToDoList.first
+    @lists = ToDoList.all
+    @z_index_count = @lists.size
+    @bg_mapping = ["rgb(255, 241, 164)", "#daf7a6", "#F0B27A", "#AED6F1", "#F5B7B1"]
   end
 
   def show

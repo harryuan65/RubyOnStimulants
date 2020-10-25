@@ -69,17 +69,14 @@ function togglePreviewMarkdown(togglePreview, raw=null, prod=false){
     previewToggle.classList.add('active');
     var previewMarkdownDiv = document.getElementById('preview-markdown');
     if(fetchPage && raw && contentChanged){ // only fetch preview when there is a difference
+      // beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
       $.ajax({
           type: "POST",
-          beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
           url: prod ? "/preview_markdown" : "http://localhost:3005/preview_markdown",
           data: {content: raw},
-      // success: (e)=>{console.log(e)},
       dataType: "html"})
       .done(function(data){
-        // console.log("Fetches");
         previewMarkdownDiv.innerHTML = data;
-        // console.log(hljs);
         document.querySelectorAll('pre code').forEach(e=>{
           hljs.highlightBlock(e);
         })

@@ -1,2 +1,14 @@
-add show first, please edit:
-<%= link_to "First list path", to_do_list_path(@list)%>
+<%= javascript_include_tag "to_do_lists" %>
+<%= stylesheet_link_tag "to_do_lists" %>
+
+<% @lists.each_with_index do |list, i| %>
+  <div id="list-<%= list.id%>" class="list notosans" style="background-color: <%= @bg_mapping[i%5]%>; z-index: <%= @z_index_count%>;">
+    <h3 class="list-name"><%= list.name %></h3>
+    <ul class="dummy-list">
+      <% list.items.each do |item| %>
+        <li><span class="dummy-item-drag">☰</span><input type="checkbox" name="" id=""><span class="dummy-item-name"><%= item.name %></span></li>
+      <% end %>
+    </ul>
+  </div>
+  <% @z_index_count-=1 %>
+<% end %>

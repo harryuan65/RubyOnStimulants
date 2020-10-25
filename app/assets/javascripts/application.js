@@ -13,8 +13,8 @@
 //= require activestorage
 //= require turbolinks
 //= require jquery
-//= require jquery_ujs
 //= require jquery-easing
+//= require rails-ujs
 //= require shared
 //= require jquery-ui/widgets/draggable
 //= require jquery-ui/widgets/droppable

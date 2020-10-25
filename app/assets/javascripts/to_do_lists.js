@@ -1,34 +1,29 @@
 var list = null;
-var nums = [0, 1, 2, 3, 4, 5, 6];
+var listBody = null;
+var items = null;
 var dragging, draggedOver;
-var customNums = [0, 1, 2, 3, 4, 5, 6];
-var tasks = ["Lorem ipsum",
-              "Dolorum",
-              "Ut voluptates",
-              "Adipisci",
-              "Dolore",
-              "Id omnis",
-              "Accusantium",
-              "Quam laborum",
-              "Iste molestias",
-              "Corporis"
-            ]
 var userActions = [];
 
-$(document).on('turbolinks:load',()=>{
-  listBody = document.getElementById('list-body');
-
-  // renderItems(customNums);
-  //TODO fetching to do items of current list
+$(document).on('turbolinks:load', async ()=>{
+  $('#list-container').ready(function(){
+    // buildListAndShowLoading();
+    // on ajax success
+    // loadedAndBuildList();
+    // renderItems(items);
+  })
 })
 
-const shuffle = (numbers) => {
-  return numbers.sort(() => Math.random() - 0.5)
+function buildListAndShowLoading(id){
+  list = document.createElement('div');
+  list.classList.add('list');
+  list.id = id;
+  list.innerHTML = '';
+  list.classList.add("loading");
 }
 
-const renderItems = (data) =>{
+function renderItems(data){
   listBody.innerText = '';
-  data.forEach(num=>{
+  data.forEach(item=>{
     var listRow = document.createElement("div");
     listRow.classList.add("list-row");
 
@@ -44,20 +39,16 @@ const renderItems = (data) =>{
     var itemNum = document.createElement("span");
     itemNum.classList.add("item-num");
     itemNum.classList.add("notosans");
-    itemNum.innerText = `${num}`;
+    itemNum.innerText = item.id;
 
     var itemName = document.createElement("span");
     itemName.classList.add("item-name");
     itemName.classList.add("notosans");
-    itemName.innerText = tasks[num];
+    itemName.innerText = item.name;
 
     var itemSelect = document.createElement("span");
     itemSelect.classList.add("item-show-toggle");
 
-    // itemDrag.draggable = true
-    // itemDrag.addEventListener('drag', setDragging)
-    // itemDrag.addEventListener('dragover', draggingOver)
-    // itemDrag.addEventListener('drop', compare)
     itemDrag.addEventListener('mousedown', showGrabbingcursor)
     itemDrag.addEventListener('mouseup', hideGrabbingcursor)
 
@@ -99,7 +90,7 @@ const renderItems = (data) =>{
   console.log("Current numbers:", customNums);
 }
 
-const compare = (e) =>{
+function compare(e){
   console.log(draggedOver);
   var index1 = customNums.indexOf(dragging);
   var index2 = customNums.indexOf(draggedOver);
@@ -133,14 +124,14 @@ function draggingOut(ev){
   listRowOuting.classList.remove("will-insert-before");
   listRowOuting.classList.remove("will-insert-after");
 }
-const setDragging = (e) =>{
+function setDragging(e){
   dragging = parseInt(e.target.querySelector('.item-num').innerText)
 }
 
-const showGrabbingcursor = (ev) =>{
+function showGrabbingcursor(ev){
   ev.target.classList.add("grabbing")
 }
 
-const hideGrabbingcursor = (ev) =>{
+function hideGrabbingcursor(ev){
   ev.target.classList.remove("grabbing")
 }

@@ -1,5 +1,8 @@
 @import './resources.scss';
-
+#list-container{
+  @include flex(row, center, center);
+  @include size(100%, 100%);
+}
 .list{
   @include flex(column, flex-start, center);
   // border: solid 1px #eee;
@@ -33,7 +36,7 @@
     justify-content: center;
     // animation: fade-in .3s ease-in-out forwards;
   }
-  #list-body #loading-body{
+  .list-body .loading-body{
     width: 30px;
     height: 30px;
     border-width: 7px;
@@ -73,6 +76,13 @@
   }
 }
 .list-row{
+  transform: scale(0.7);
+  &.in-selected-list{
+    transform: none;
+    transition: transform .2s ease-out;
+  }
+  transition: transform .2s ease-out;
+
   @include flex(row, center, center);
   &.show{
     flex-direction: center;
@@ -125,4 +135,10 @@
 }
 .will-insert-after{
   border-bottom: solid 1px #fa2525;
+}
+
+#back-to-todolist{
+  position: absolute;
+  top: 10%;
+  left: 5%;
 }

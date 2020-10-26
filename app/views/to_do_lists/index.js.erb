@@ -1,0 +1,9 @@
+$("#list-container").addClass("fade-out");
+
+setTimeout(function(){
+  $("#list-container").html("<%= j render("index")%>");
+  setTimeout(function(){
+    $("#list-container").removeClass("fade-out");
+    $("#list-container").addClass("fade-in");
+  }, 500)
+}, 500);

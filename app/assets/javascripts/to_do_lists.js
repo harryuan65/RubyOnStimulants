@@ -1,20 +1,14 @@
-var list = null;
-var listBody = null;
-var items = null;
 var dragging, draggedOver;
-var loadedData = [];
-var userActions = [];
 
 $(document).on('turbolinks:load', async ()=>{
   $('#list-container').ready(function(){
-    setUpListener();
+    // setUpListener();
   })
 })
 function setUpListener(){
   $(".list").on('click', function(){
     let selectedList = $(this);
     list = selectedList; //use loading.js
-    let dummyList = $(selectedList).find(".dummy-list");
 
     //turn off transform via add show class
     selectedList.addClass('show');
@@ -26,74 +20,16 @@ function setUpListener(){
     let waitTime = fadeOutTime;
     setTimeout(function(){
       $(".list:not(.show)").remove();
-    }, fadeOutTime);
-
-    // create list-body, loading-body, append loading-body into list-body
-    listBody = document.createElement('div');
-    listBody.id = 'list-body';
-
-    loadingBody = document.createElement('div');
-    loadingBody.id = "loading-body";
-
-    listBody.append(loadingBody);
-
-    // fade out the dummy list
-    waitTime+=fadeOutTime;
-    setTimeout(function(){
-      dummyList.addClass('fade-out');
-    }, waitTime)
-
-    // after dummylist fade out, make list's justify content to center by adding "loading" class
-    waitTime+=fadeOutTime;
-    setTimeout(function(){
-      dummyList.remove();
-      selectedList.addClass("loading");
-
-      // append listBody, will show its loading-body spinning
-      selectedList.append(listBody);
+      $(".list-row" ,selectedList).addClass("in-selected-list");
     }, waitTime);
 
-    let fakeLoadDataTime = 600;
-    waitTime+=fakeLoadDataTime;
-    setTimeout(function(){
-      $.ajax({
-        url: `/to_do_lists/${selectedList.attr('id')}`,
-        contentType: 'application/json',
-        dataType: 'script'
-      }).done(function(data){
-        selectedList.addClass("loading");
-        listBody.classList.add("fade-out");
-
-        setTimeout(function(){
-          loadingBody.remove();
-          data = JSON.parse(data);
-          loadedData = data;
-          console.log(data)
-          console.log(JSON.stringify(data, null ,2))
-          renderItems(data);
-          listBody.classList.remove("fade-out");
-          listBody.classList.add("fade-in");
-        }, 1500);
-
-        setTimeout(function(){
-          selectedList.removeClass("loading");
-        }, 1500);
-      }).fail(function(err){
-        alert(err);
-      })
-    }, waitTime);
   })
 }
-//dev
-// function buildListAndShowLoading(id){
-//   list = document.createElement('div');
-//   list.classList.add('list');
-//   list.id = id;
-//   list.innerHTML = '';
-//   list.classList.add("loading");
-// }
 
-function renderItems(data){
+function renderItems(list_id, data){
+  console.log(JSON.stringify(data, null, 2));
+  list = document.getElementById(`list-${list_id}`);
+  listBody = list.querySelector('.list-body');
   listBody.innerText = '';
   data.forEach(item=>{
     var listRow = document.createElement("div");
@@ -132,17 +68,21 @@ function renderItems(data){
 
     listBody.appendChild(listRow)
 
+    if(list.classList.contains("show")){
+      listRow.classList.add("in-selected-list");
+    }
+
     $(listRow).draggable({
       drag: setDragging,
       stop: function(ev){
-        renderItems(loadedData)
+        renderItems(list_id, data)
       },
       cancel: '.list-row > .item-check, .list-row > .item-name, .list-row > .item-show-toggle', // use this to keep children from being dragged and disabled(cannot select, etc.)
     })
     $(listRow).droppable({
-      over: draggingOver,
+      over: function(ev){draggingOver(ev, data)},
       out: draggingOut,
-      drop: compare
+      drop: function(ev){compare(data)}
     });
   })
   dragging = null
@@ -151,24 +91,29 @@ function renderItems(data){
   // console.log("Current numbers:", loadedData);
 }
 
-function compare(e){
+function compare(dataInTheList){
   console.log(draggedOver);
-  var index1 = customNums.indexOf(dragging);
-  var index2 = customNums.indexOf(draggedOver);
-  customNums.splice(index1, 1)//把dragging從array刪掉
-  customNums.splice(index2, 0, dragging) //insert dragging到draggedOver的位置
+  draggingItem = dataInTheList.find(obj => obj.id==dragging);
+  draggedOverItem = dataInTheList.find(obj => obj.id==draggedOver);
+  if(draggingItem.to_do_list_id!==draggedOverItem.to_do_list_id){return ;}
 
-  renderItems(customNums)
+  var index1 = dataInTheList.indexOf(draggingItem);
+  var index2 = dataInTheList.indexOf(draggedOverItem);
+  dataInTheList.splice(index1, 1)//把dragging從array刪掉
+  dataInTheList.splice(index2, 0, draggingItem) //insert dragging到draggedOver的位置
+
+  list_id = draggingItem.to_do_list_id;
+  renderItems(list_id, dataInTheList);
 };
 
-function draggingOver(ev) {
+function draggingOver(ev, data) {
   ev.preventDefault();
   var listRowBeingOver = ev.target;
   draggedOver = parseInt(listRowBeingOver.querySelector('.item-num').innerText)
   listRowBeingOver.classList.add("covering")
-
   //add the border while dragging over something
-  if (customNums.indexOf(draggedOver) < customNums.indexOf(dragging)){
+  let ids = data.map(e=>e.id);
+  if (ids.indexOf(draggedOver) < ids.indexOf(dragging)){
     listRowBeingOver.classList.add("will-insert-before")
   }
   else{
@@ -186,7 +131,8 @@ function draggingOut(ev){
   listRowOuting.classList.remove("will-insert-after");
 }
 function setDragging(e){
-  dragging = parseInt(e.target.querySelector('.item-num').innerText)
+  dragging = parseInt(e.target.querySelector('.item-num').innerText);
+  console.log(dragging)
 }
 
 function showGrabbingcursor(ev){

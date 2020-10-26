@@ -42,9 +42,11 @@
   </div>
 </div>
 <script>
+$(document).on('turbolinks:load', (e)=>{
   $(".wrap-article.show").ready(function(e){
     document.querySelectorAll('pre code').forEach(e=>{
       hljs.highlightBlock(e);
     })
   })
+})
 </script>

@@ -212,44 +212,6 @@ textarea.article-page-content{
 .wrap-edit-cancel-save{
   @include flex(row, flex-end,center);
 }
-.btn{
-  @include size(100px, 45px);
-  @include flex(row, center, center);
-  border: solid 1px #585858;
-  border-radius: 6px;
-  font-size: 16px;
-  transition: .1s;
-  box-shadow: 1px 1px 5px gray;
-  cursor: pointer;
-  &:focus{
-    outline: none;
-  }
-  &.yes{
-    background-color: #2D3047;
-  }
-  &.save{
-    background-color: #2D3047;
-    padding-bottom: 3px;
-  }
-  &.cancel{
-    background-color: #737373;
-    margin-right: 25px;
-  }
-  &.preview{
-    background-color: #0a245e;
-  }
-  &:hover{
-    opacity: .8;
-    transition: .1s;
-  }
-  &:active{
-    transition: .1s;
-    border: solid 2px #222222;
-    transform: translate(2px, 2px);
-    box-shadow: none;
-  }
-}
-
 .markdown{
   h1, h2, h3, h4, h5, h6{
     margin-top: 30px;

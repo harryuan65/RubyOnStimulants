@@ -1,7 +1,7 @@
 $("#list-container").addClass("fade-out");
 
 setTimeout(function(){
-  $("#list-container").html("<%= j render("index")%>");
+  $("#list-container").html("<%= j render("list")%>");
   setTimeout(function(){
     $("#list-container").removeClass("fade-out");
     $("#list-container").addClass("fade-in");

@@ -18,20 +18,21 @@ class ArticlesController < ApplicationController
 
   def create
     permitted_params = article_params
-    tags = permitted_params.delete(:tags)
+    tag_str = permitted_params.delete(:tags)
 
     @article = Article.create!(permitted_params)
     @article.state = :draft if @article.state.nil?
-    # @article.category = "general" if @article.category.nil?
-    puts "======"
-    puts tags
-    puts "======"
-    # @article.tag_names << "general" if article_params[:tags]==""
 
-    if @article.save!
-      return redirect_to article_path(@article), notice: I18n.t("controller.articles.create_success")
-    else
-      render_error "Failed to create article!"
+    if tag_str!=""
+      tags = tag_str.split(',').map(&:strip)
+    end
+
+    begin
+      @article.update!(tag_names: tags)
+      @article.save!
+      return redirect_to article_path(@article), notice: I18n.t('controller.articles.update_success')
+    rescue => exception
+      redirect_to article_path(@article), alert: exception.to_s
     end
   end
 

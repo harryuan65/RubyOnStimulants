@@ -35,9 +35,8 @@
           <%= link_to "&#x1f5d1;".html_safe, :back, method: :get, class: "article-destroy", data: {confirm: t('controller.articles.confirm_delete')}%>
         </div>
         <div class="wrap-label-input subtitle">
-          <label for="subtitle" class="notosans-light text-7e">Subtitle</label>
-          <%= f.text_field :subtitle, {value: "", autocomplete: 'off', placeholder: "In case you need a subtitle!", class: "article-page-subtitle notosans-light text-dk"} %>
-          <!-- <input type="text" name="subtitle" class="article-page-subtitle notosans-light text-7e" value=""></input>-->
+          <label for="tags" class="notosans-light text-7e">Tags</label>
+          <%= f.text_field :tags, {value: @article.tag_names.join(", "), class: "article-page-subtitle notosans-light text-dk"} %>
         </div>
         <div class="wrap-label-input state">
           <label for="state" class="notosans-light text-7e">State</label>

@@ -40,6 +40,7 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
     @is_author = current_user && current_user.email == @article.user.email
     if !@is_author && @article.not_public?
+      @article = nil
       return render "shared/route_not_found"
     end
     @article.increment!(:view_count)

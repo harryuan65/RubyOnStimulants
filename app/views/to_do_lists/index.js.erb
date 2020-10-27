@@ -1,9 +1,15 @@
 $("#list-container").addClass("fade-out");
-
-setTimeout(function(){
+$("#list-container").on('animationend', function(){
+  if (event.animationName !== 'fade-out') {
+    return;
+  }
+  $("#list-container").removeClass("loading");
   $("#list-container").html("<%= j render("list")%>");
-  setTimeout(function(){
+  $(".list").ready(function(){
     $("#list-container").removeClass("fade-out");
     $("#list-container").addClass("fade-in");
-  }, 500)
-}, 500);
+  })
+});
+
+
+

@@ -2,7 +2,10 @@
 #list-container{
   @include flex(row, center, center);
   @include size(100%, 100%);
+  margin-top: 30px;
 }
+$list-seleted-grow-time: .4s;
+$fade-time: .1s;
 .list{
   @include flex(column, flex-start, center);
   // border: solid 1px #eee;
@@ -15,73 +18,64 @@
 
   transform: rotateX(15deg) rotateY(40deg);
   transform-style: preserve-3d;
-  // position: absolute;
   position: relative;
   cursor: pointer;
   margin-left: -120px;
 
-  &:not(.show):hover{
+  &:not(.selected):hover{
     transform: translateY(-80px);
   }
 
-  &.show{
+  &.selected{
     transform: none;
     cursor: default;
     width: 350px;
     margin: 0;
-    transition: .3s ease-in-out;
+    transition: $list-seleted-grow-time ease-in-out;
   }
 
-  &.loading{
-    justify-content: center;
-    // animation: fade-in .3s ease-in-out forwards;
-  }
-  .list-body .loading-body{
-    width: 30px;
-    height: 30px;
-    border-width: 7px;
-    border-style: solid;
-    border-color: #a6bedd gray gray gray;
-    border-radius: 50%;
-    animation: list-loading .6s linear infinite;
+  &.list-before-delete{
+    animation: list-removing .2s ease forwards;
   }
 }
-@keyframes list-loading{
+.loading{
+  @include flex(row, center, center);
+  animation: fade-in $fade-time ease forwards;
+}
+.loading-spin{
+  width: 30px;
+  height: 30px;
+  border-width: 7px;
+  border-style: solid;
+  border-color: #a6bedd gray gray gray;
+  border-radius: 50%;
+  animation: loading-spin .6s linear infinite;
+}
+@keyframes loading-spin{
   from{transform: rotate(0deg)}
   to{transform: rotate(360deg)}
 }
+//to make detetion smoother, shirnk it first, remove margin(this cause shivering on delete), then delete
+@keyframes list-removing{
+  to{width: 0;opacity: 0;margin:0}
+}
 .fade-in{
-  animation: fade-in .5s forwards;
+  animation: fade-in $fade-time forwards;
 }
 .fade-out{
-  animation: fade-out .5s forwards;
+  animation: fade-out $fade-time forwards;
 }
 @keyframes fade-out{
   from{opacity: 1;}
   to{opacity: 0;}
 }
-.dummy-list{
-  @include flex(column, center, center);
-  opacity: .6;
-  width: inherit;
-  padding: 0;
-  li{
-    list-style: none;
-    .dummy-item-name{
-      border-bottom: #5b5b5b 1px solid;
-      display: inline-block;
-      width: 140px;
-      // height: 24px; //only use this when no text
-    }
-  }
-}
 .list-row{
   transform: scale(0.7);
-  &.in-selected-list{
+
+  &.grow{
     transform: none;
-    transition: transform .2s ease-out;
+    transition: transform $list-seleted-grow-time ease-out;
   }
-  transition: transform .2s ease-out;
 
   @include flex(row, center, center);
   &.show{

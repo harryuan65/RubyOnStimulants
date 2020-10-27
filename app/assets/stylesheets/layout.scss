@@ -4,7 +4,7 @@ html, body{
   margin: 0;
   padding: 0 0 50px 0;
   width: 100%;
-  min-height: 120%;
+  min-height: 100%;
   background-color: #fff;
 }
 *{
@@ -122,8 +122,7 @@ a, a:hover, a:visited, a:active{
 }
 main{
   position: relative;
-  min-height: 625px;
-  // margin-top: 5%;
+  min-height: 500px;
   @include flex(row, center, center);
 }
 #container{

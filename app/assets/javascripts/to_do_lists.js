@@ -11,18 +11,15 @@ function setUpListener(){
     list = selectedList; //use loading.js
 
     //turn off transform via add show class
-    selectedList.addClass('show');
+    selectedList.addClass('selected');
     //fade out others
-    $(".list:not(.show)").addClass("fade-out");
+    $(".list:not(.selected)").addClass("list-before-delete");
+    $(".list-row", selectedList).addClass("grow");
 
     // wait for fading out;
-    let fadeOutTime = 500;
-    let waitTime = fadeOutTime;
-    setTimeout(function(){
-      $(".list:not(.show)").remove();
-      $(".list-row" ,selectedList).addClass("in-selected-list");
-    }, waitTime);
-
+    $(".list:not(.selected)").on('animationend',()=>{
+      $(".list:not(.selected)").remove();
+    })
   })
 }
 

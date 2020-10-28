@@ -1,14 +1,14 @@
 <!-- used as SJR from index.js.erb -->
   <% @lists.each_with_index do |list, i| %>
     <% if list.id.present? %>
-      <div id="list-<%= list.id%>" class="list notosans" style="background-color: <%= @bg_mapping[i%5]%>; z-index: <%= @z_index_count%>;">
+      <div id="list-<%= list.id%>" class="list notosans" style="background-color: <%= list.bg_color%>; z-index: <%= @z_index_count%>;">
         <p class="list-name"><%= list.name %></p>
         <div class="list-body">
           <script>renderItems("<%= list.id %>", JSON.parse("<%= j list.items.to_json.html_safe %>"));</script>
         </div>
       </div>
     <% else %>
-      <div id="list-new" class="list empty-flex-center notosans" style="background-color: <%= @bg_mapping[i%5]%>; z-index: <%= @z_index_count%>;">
+      <div id="list-new" class="list empty-flex-center notosans" style="background-color: #ECF0F1; z-index: <%= @z_index_count%>;">
         <div class="list-body">
           <div class="add-new-list">&#xff0b;</div>
         </div>

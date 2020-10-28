@@ -4,6 +4,8 @@ class RecreateToDoList < ActiveRecord::Migration[6.0]
     create_table :to_do_lists do |t|
       t.references :user, index: true
       t.string :name, null: false
+      t.integer :items_count, default: 0
+      t.string :bg_color
       t.timestamps
     end
     add_index :to_do_lists, [:user_id, :name], unique: true
@@ -14,6 +16,7 @@ class RecreateToDoList < ActiveRecord::Migration[6.0]
       t.datetime :due_date
       t.references :user, index: true
       t.references :to_do_list, index: true
+      t.integer :position
       t.timestamps
     end
   end

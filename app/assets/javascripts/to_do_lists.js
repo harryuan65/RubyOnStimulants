@@ -65,17 +65,20 @@ function setUpNewListAction(){
   })
 }
 function renderItems(list_id, data){
-  console.log(JSON.stringify(data, null, 2));
+  // console.log(JSON.stringify(data, null, 2));
   list = document.getElementById(`list-${list_id}`);
   listBody = list.querySelector('.list-body');
   listBody.innerText = '';
 
   // push an empty item for new
-  data.push({id: '+', name: ''});
+  if(!data.find(e=>{return e.unDraggable===true})){
+    data.push({unDraggable: true, position: '+', name: ''});
+  }
 
   data.forEach(item=>{
     var listRow = document.createElement("div");
     listRow.classList.add("list-row");
+    listRow.id = item.id;
 
     var itemDrag = document.createElement("span");
     itemDrag.classList.add("item-drag");
@@ -89,7 +92,7 @@ function renderItems(list_id, data){
     var itemNum = document.createElement("span");
     itemNum.classList.add("item-num");
     itemNum.classList.add("notosans");
-    itemNum.innerText = item.id;
+    itemNum.innerText = item.position;
 
     var itemName = document.createElement("span");
     itemName.classList.add("item-name");
@@ -100,10 +103,9 @@ function renderItems(list_id, data){
       let itemName = event.target;
       let nameText = itemName.innerText;
       if(nameText===itemName.getAttribute('data-current')){
-        console.log('no change');
       }else{
         itemName.setAttribute('data-current', nameText);
-        console.log('new value');
+        console.log(`new itemName${listRow.id} value is ${nameText}`);
       }
     };
     itemName.innerText = item.name;
@@ -126,6 +128,8 @@ function renderItems(list_id, data){
       listRow.classList.add("grow");
     }
 
+    if(item.unDraggable){return;}
+
     $(listRow).draggable({
       drag: setDragging,
       stop: function(ev){
@@ -142,13 +146,11 @@ function renderItems(list_id, data){
   dragging = null
   draggedOver = null
 
-  // console.log("Current numbers:", loadedData);
 }
 
 function compare(dataInTheList){
-  console.log(draggedOver);
-  draggingItem = dataInTheList.find(obj => obj.id==dragging);
-  draggedOverItem = dataInTheList.find(obj => obj.id==draggedOver);
+  draggingItem = dataInTheList.find(obj => obj.position==dragging);
+  draggedOverItem = dataInTheList.find(obj => obj.position==draggedOver);
   if(draggingItem.to_do_list_id!==draggedOverItem.to_do_list_id){return ;}
 
   var index1 = dataInTheList.indexOf(draggingItem);
@@ -166,7 +168,7 @@ function draggingOver(ev, data) {
   draggedOver = parseInt(listRowBeingOver.querySelector('.item-num').innerText)
   listRowBeingOver.classList.add("covering")
   //add the border while dragging over something
-  let ids = data.map(e=>e.id);
+  let ids = data.map(e=>e.position);
   if (ids.indexOf(draggedOver) < ids.indexOf(dragging)){
     listRowBeingOver.classList.add("will-insert-before")
   }
@@ -186,7 +188,6 @@ function draggingOut(ev){
 }
 function setDragging(e){
   dragging = parseInt(e.target.querySelector('.item-num').innerText);
-  console.log(dragging)
 }
 
 function showGrabbingCursor(ev){

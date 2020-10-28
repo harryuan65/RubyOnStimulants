@@ -3,7 +3,6 @@ $("#list-container").on('animationend', function(){
   if (event.animationName !== 'fade-out') {
     return;
   }
-  $("#list-container").removeClass("loading");
   $("#list-container").html("<%= j render("list")%>");
   $(".list").ready(function(){
     $("#list-container").removeClass("fade-out");

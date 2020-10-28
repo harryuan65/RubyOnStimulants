@@ -1,12 +1,14 @@
 class ToDoListsController < ApplicationController
   before_action :set_user
+  layout "to_do_lists/layout"
 
   def index
     @lists = ToDoList.all
+    @lists = @lists.to_a.push ToDoList.new
     @z_index_count = @lists.size
     @bg_mapping = ["rgb(255, 241, 164)", "#daf7a6", "#F0B27A", "#AED6F1", "#F5B7B1"]
     respond_to do |format|
-      format.html {render layout: "to_do_lists/layout"}
+      format.html
       format.js
     end
   end
@@ -19,31 +21,6 @@ class ToDoListsController < ApplicationController
     # end
     render json: @list.items
   end
-  # def add_todo
-  #   begin
-  #     @item = @current_user.to_do_lists.create!(
-  #         thing: todo_params[:thing],
-  #         done: false,
-  #         deadline: todo_params[:deadline],## parse  "to_do_list"=>{"deadline(1i)"=>"2020", "deadline(2i)"=>"2", "deadline(3i)"=>"19", "deadline(4i)"=>"02", "deadline(5i)"=>"05"}
-  #         postscript: todo_params[:postscript]
-  #     )
-  #     if @item.save
-  #       flash[:notice] = "成功新增item"
-  #     end
-  #   rescue=>e
-  #     flash[:alert] = "#{e}"
-  #     puts "#{e}"
-  #   end
-  # end
-
-  # def delete_todo
-  #   begin
-  #     ToDoList.find_by(id: params[:id]).delete
-  #     return render json:{success: true, message:"deleted #{params[:id]}"}
-  #   rescue=>e
-  #     return render json:{success: false, message:"#{e}"}
-  #   end
-  # end
 
   private
 

@@ -39,6 +39,9 @@
 .text-dk{
   color: #5B5858;
 }
+.text-2b{
+  color: #2B2828;
+}
 .text-5b{
   color: #5B5858;
 }
@@ -93,6 +96,13 @@
   &.back-to-todolist{
     background-color: #009649;
   }
+}
+// Try to override Chrome's autofill background-color
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active  {
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
 }
 // ::-webkit-scrollbar{
 //   width: 2px

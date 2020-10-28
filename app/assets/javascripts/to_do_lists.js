@@ -1,33 +1,78 @@
 var dragging, draggedOver;
+var removeOtherListsVersion = false;
+(function( $ ){
+  $.fn.setSelectedList = function() {
+    let list = this;
+    list.addClass('selected');
+    $(".list-row", list).addClass("grow");
+  };
 
-$(document).on('turbolinks:load', async ()=>{
-  $('#list-container').ready(function(){
-    // setUpListener();
-  })
-})
+  $.fn.unsetSelectedList = function() {
+    let list = this;
+    list.removeClass('selected');
+    $(".list-row", list).removeClass("grow");
+  };
+  $.fn.removeList = function(){
+    let list = this;
+    list.addClass("list-before-delete");
+    list.on('animationend', ()=>{
+      list.remove();
+    })
+  }
+})( jQuery );
+
 function setUpListener(){
+  setUpSelectList();
+  setUpNewListAction();
+  // $('input[type="checkbox"].item-check').on('change', function(e){
+  //   let checkbox = $(this);
+  //   // TODO: ajax
+  //   if(checkbox.checked){
+  //     true;
+  //   }
+  //   else{
+  //     false;
+  //   }
+  // })
+}
+function setUpSelectList(){
   $(".list").on('click', function(){
     let selectedList = $(this);
-    list = selectedList; //use loading.js
 
-    //turn off transform via add show class
-    selectedList.addClass('selected');
-    //fade out others
-    $(".list:not(.selected)").addClass("list-before-delete");
-    $(".list-row", selectedList).addClass("grow");
-
-    // wait for fading out;
-    $(".list:not(.selected)").on('animationend',()=>{
-      $(".list:not(.selected)").remove();
-    })
+    if(removeOtherListsVersion){
+      //fade out others and delete
+      $(".list:not(.selected)").removeList();
+    }
+    else{
+      $(".list.selected").unsetSelectedList();
+      selectedList.setSelectedList();
+    }
+    selectedList.setSelectedList();
   })
 }
+function setUpNewListAction(){
+  // on: fires on enery new event
+  // one: fires only once
+  $("#list-new").one('click', function(){
+    let newList = $(this);
+    newList.removeClass("empty-flex-center");
+    $('.add-new-list', newList).remove();
+    let newListName = $('<input type="text" name="name" class="list-name notosans text-2b" autocomplete="off" placeholder="New List Name"/>');
 
+    newList.prepend(newListName);
+    renderItems('new', []);
+    newListName.focus();
+  })
+}
 function renderItems(list_id, data){
   console.log(JSON.stringify(data, null, 2));
   list = document.getElementById(`list-${list_id}`);
   listBody = list.querySelector('.list-body');
   listBody.innerText = '';
+
+  // push an empty item for new
+  data.push({id: '+', name: ''});
+
   data.forEach(item=>{
     var listRow = document.createElement("div");
     listRow.classList.add("list-row");
@@ -49,13 +94,25 @@ function renderItems(list_id, data){
     var itemName = document.createElement("span");
     itemName.classList.add("item-name");
     itemName.classList.add("notosans");
+    itemName.contentEditable = true;
+    itemName.setAttribute('data-current', '');
+    itemName.onblur = (event)=>{
+      let itemName = event.target;
+      let nameText = itemName.innerText;
+      if(nameText===itemName.getAttribute('data-current')){
+        console.log('no change');
+      }else{
+        itemName.setAttribute('data-current', nameText);
+        console.log('new value');
+      }
+    };
     itemName.innerText = item.name;
 
     var itemSelect = document.createElement("span");
     itemSelect.classList.add("item-show-toggle");
 
-    itemDrag.addEventListener('mousedown', showGrabbingcursor)
-    itemDrag.addEventListener('mouseup', hideGrabbingcursor)
+    itemDrag.addEventListener('mousedown', showGrabbingCursor)
+    itemDrag.addEventListener('mouseup', hideGrabbingCursor)
 
     listRow.appendChild(itemDrag);
     listRow.appendChild(itemNum);
@@ -65,8 +122,8 @@ function renderItems(list_id, data){
 
     listBody.appendChild(listRow)
 
-    if(list.classList.contains("show")){
-      listRow.classList.add("in-selected-list");
+    if(list.classList.contains("selected")){
+      listRow.classList.add("grow");
     }
 
     $(listRow).draggable({
@@ -132,10 +189,10 @@ function setDragging(e){
   console.log(dragging)
 }
 
-function showGrabbingcursor(ev){
+function showGrabbingCursor(ev){
   ev.target.classList.add("grabbing")
 }
 
-function hideGrabbingcursor(ev){
+function hideGrabbingCursor(ev){
   ev.target.classList.remove("grabbing")
 }

@@ -4,7 +4,7 @@
   @include size(100%, 100%);
   margin-top: 30px;
 }
-$list-seleted-grow-time: .4s;
+$list-seleted-grow-time: .1s;
 $fade-time: .1s;
 .list{
   @include flex(column, flex-start, center);
@@ -38,9 +38,12 @@ $fade-time: .1s;
     animation: list-removing .2s ease forwards;
   }
 }
-.loading{
+.add-new-list{
+  font-family: cursive;
+  font-size: 60px;
+}
+.empty-flex-center{
   @include flex(row, center, center);
-  animation: fade-in $fade-time ease forwards;
 }
 .loading-spin{
   width: 30px;
@@ -68,6 +71,42 @@ $fade-time: .1s;
 @keyframes fade-out{
   from{opacity: 1;}
   to{opacity: 0;}
+}
+// #list-new-top-container{
+//   @include flex(row, space-around, center);
+
+//   input[type="submit"]{
+//     &:hover{
+//       background-color: rgb(100, 100, 100);
+//       transition: .1s ease;
+//     }
+//     transition: background-color .1s ease;
+//     background-color: #009649;
+//     color: #eee;
+//     border: 1px solid;
+//     border-radius: 6px;
+//     cursor: pointer;
+//     font-size: 27px;
+//     margin-left: 8px;
+//   }
+// }
+input.list-name{
+  background-color: transparent;
+  border-radius: 7px;
+  border: solid 1px #5b5b5b;
+  background-color: rgba(150, 150, 150, 0.2);
+  padding: 1px 5px 3px 9px;
+  &::placeholder{
+    font-size: 19px;
+  }
+  &:focus{
+    outline: none;
+  }
+  width: 220px;
+}
+.list-name{
+  margin: 0.5em 0 0.5em 0;
+  font-size: 23px;
 }
 .list-row{
   transform: scale(0.7);

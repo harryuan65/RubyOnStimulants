@@ -2,14 +2,5 @@
 <%= link_to "Back To List", to_do_lists_path, remote: true, id: "back-to-todolist", class: "btn notosans-light text-e7 back-to-todolist" %>
 
 <div class="" id="list-container">
-  <% @lists.each_with_index do |list, i| %>
-    <div id="list-<%= list.id%>" class="list notosans" style="background-color: <%= @bg_mapping[i%5]%>; z-index: <%= @z_index_count%>;">
-      <h3 class="list-name"><%= list.name %></h3>
-      <div class="list-body">
-        <script>renderItems("<%= list.id %>", JSON.parse("<%= j list.items.to_json.html_safe %>"));</script>
-      </div>
-    </div>
-    <% @z_index_count-=1 %>
-  <% end %>
+  <%= render "list" %>
 </div>
-<script>setUpListener()</script>

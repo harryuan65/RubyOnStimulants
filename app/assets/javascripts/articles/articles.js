@@ -51,7 +51,11 @@ function select(event){
   radio.prop('checked', true); //event.target = pair
   radio.parent().addClass("selected"); //event.target = pair
 }
-
+function hightlightAllCodes(){
+  document.querySelectorAll('pre code').forEach(e=>{
+    hljs.highlightBlock(e);
+  })
+}
 function togglePreviewMarkdown(togglePreview, raw=null, prod=false){
   contentChanged = raw ? previewLength!=raw.length : false;
   previewLength = raw ? raw.length : previewLength;
@@ -77,9 +81,7 @@ function togglePreviewMarkdown(togglePreview, raw=null, prod=false){
       dataType: "html"})
       .done(function(data){
         previewMarkdownDiv.innerHTML = data;
-        document.querySelectorAll('pre code').forEach(e=>{
-          hljs.highlightBlock(e);
-        })
+        hightlightAllCodes();
       }).fail(function(err){
         console.error(err);
         alert("Something is wrong with server")

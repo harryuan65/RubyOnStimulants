@@ -214,7 +214,9 @@ textarea.article-page-content{
 }
 .markdown{
   h1, h2, h3, h4, h5, h6{
-    margin-top: 30px;
+    &:not(:first-of-type){
+      margin-top: 80px;
+    }
   }
   h1{font-size: 30px;}
   h2{font-size: 23.4px;}
@@ -255,19 +257,25 @@ textarea.article-page-content{
   }
   pre > code{ //```
     border-radius: 4px;
+    padding: 1em 0.5em 1em 1em;
+    margin: 50px 0 50px 0;
   }
   table{
     border-collapse: collapse;
-    margin-left: 30px;
+    margin: 30px 0 30px 30px;
     th{
-      background-color: rgba(22, 22, 22, .2)
+      background-color: rgba(22, 22, 22, .2);
     }
     td{
-      background-color: rgba(100, 100, 100, .1)
+      background-color: rgba(100, 100, 100, .1);
     }
     td, th{
       text-align: center;
-      padding: 0 7px 0 7px;
+      border: 1px solid #5b5b5b7c;
+      padding: 15px;
+    }
+    & + p {
+      margin: 80px 0 80px 0;
     }
   }
   blockquote {

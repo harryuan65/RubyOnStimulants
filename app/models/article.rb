@@ -34,7 +34,7 @@ class Article < ApplicationRecord
     render = Redcarpet::Render::HTML.new(hard_wrap: true)
     markdown = Redcarpet::Markdown.new(render, options)
     output = markdown.render(text)
-    output = output.gsub(/\<\/p\>/, "</p><br>")
+    # output = output.gsub(/\<\/p\>/, "</p><br>")
     output.html_safe
   end
 end

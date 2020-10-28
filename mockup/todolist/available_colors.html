@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ToDoList - Available BG Colors</title>
+  <script>
+    var colors = [];
+    document.addEventListener('DOMContentLoaded', ()=>{
+      colors = [
+        //red
+        "#F5B7B1",
+        "#F2D7D5",
+        // yellow, orange
+        "#F0B27A",
+        "#F8C471",
+        "#FFF1A4",
+        //green
+        "#82E0AA",
+        "#DAF7A6",
+        //blue
+        "#85C1E9",
+        "#AED6F1",
+        //purple
+        "#EBDEF0",
+        "#E8DAEF"];
+      var body = document.querySelector('body');
+      document.getElementById('count').innerText = `${colors.length}`;
+      body.style=`
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-family: Monaco;
+      `;
+      colors.forEach(color=>{
+        var container = document.createElement('div');
+        container.style=`
+          display: flex;
+          flex-direction: column;
+          justfy-content:center;
+          align-items: center;
+          margin: 20px 0 0 0 ;
+        `;
+        var text = document.createElement('span');
+        text.innerText = color;
+
+        var block = document.createElement('div');
+        block.style="width: 60px;height:60px;m";
+        block.style.backgroundColor = color;
+        container.append(text);
+        container.append(block);
+        body.append(container);
+      })
+    })
+  </script>
+</head>
+<body>
+  <h2>目前有<span id="count"></span>種顏色</h2>
+</body>
+</html>

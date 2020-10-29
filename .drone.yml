@@ -8,6 +8,7 @@ steps:
   - rubocop -v
   - rubocop
 - name: tests
+  image: ruby:2.7.2-alpine
   commands:
   - echo "Running Tests..."
   - bin/rspec -v

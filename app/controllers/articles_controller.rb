@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   require 'redcarpet/render_strip'
-
+  layout "articles/layout"
   def index
     @offset = params[:offset] || 0
     if current_user

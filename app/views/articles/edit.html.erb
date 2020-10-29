@@ -1,7 +1,3 @@
-<%= javascript_include_tag "highlight/highlight" %>
-<%= stylesheet_link_tag $markdown_hljs_css %>
-<%= stylesheet_link_tag "article-page"%>
-<%= javascript_include_tag "articles/articles" %>
 <div id="container">
   <%= form_for @article, url: article_path(@article), method: 'PUT' do |f|  %>
     <div class="wrap-article">

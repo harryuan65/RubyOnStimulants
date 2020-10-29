@@ -7,10 +7,11 @@ steps:
   commands:
   - rubocop -v
   - rubocop
-- name: backend
-  image: alpine:latest
+- name: tests
   commands:
-  - echo "Backend building"
+  - echo "Running Tests..."
+  - bin/rspec -v
+  - bin/rspec
 - name: notify
   image: plugins/slack
   when:

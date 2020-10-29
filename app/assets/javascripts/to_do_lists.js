@@ -24,6 +24,7 @@ var removeOtherListsVersion = false;
 function setUpListener(){
   setUpSelectList();
   setUpNewListAction();
+  setUpListEditEvents();
   // $('input[type="checkbox"].item-check').on('change', function(e){
   //   let checkbox = $(this);
   //   // TODO: ajax
@@ -62,6 +63,16 @@ function setUpNewListAction(){
     newList.prepend(newListName);
     renderItems('new', []);
     newListName.focus();
+  })
+  // $("#list-new").on('click', function(){
+  //   let newList = $(this);
+  //   let newListName = $("input[type='text'].list-name", newList);
+  //   newListName.focus();
+  // })
+}
+function setUpListEditEvents(){
+  $("input.list-name").focusout(function(event){
+    console.log(event.target.value);
   })
 }
 function renderItems(list_id, data){

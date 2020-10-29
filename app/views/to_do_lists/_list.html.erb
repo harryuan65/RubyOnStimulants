@@ -2,7 +2,8 @@
   <% @lists.each_with_index do |list, i| %>
     <% if list.id.present? %>
       <div id="list-<%= list.id%>" class="list notosans" style="background-color: <%= list.bg_color%>; z-index: <%= @z_index_count%>;">
-        <p class="list-name"><%= list.name %></p>
+        <input type="text" name="name" class="list-name notosans text-2b" autocomplete="off" value="<%= list.name %>"/>
+        <%= link_to "&#x2715;".html_safe, "#", class: "delete-list text-5b", remote: true %>
         <div class="list-body">
           <script>renderItems("<%= list.id %>", JSON.parse("<%= j list.items.to_json.html_safe %>"));</script>
         </div>

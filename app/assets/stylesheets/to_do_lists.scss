@@ -96,6 +96,9 @@ input.list-name{
   border: solid 1px #5b5b5b;
   background-color: rgba(150, 150, 150, 0.2);
   padding: 1px 5px 3px 9px;
+  background-color: transparent;
+  border: none;
+  text-align: center;
   &::placeholder{
     font-size: 19px;
   }
@@ -103,6 +106,12 @@ input.list-name{
     outline: none;
   }
   width: 220px;
+}
+.delete-list{
+  position: absolute;
+  right: 20px;//因為list這個parent是relative，所以child若是absolute，left就是對parent的絕對位置！https://stackoverflow.com/questions/5209814/can-i-position-an-element-fixed-relative-to-parent
+  top: 16px;
+  font-size: 22px;
 }
 .list-name{
   margin: 0.5em 0 0.5em 0;

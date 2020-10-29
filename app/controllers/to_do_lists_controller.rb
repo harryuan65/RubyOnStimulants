@@ -4,6 +4,7 @@ class ToDoListsController < ApplicationController
 
   def index
     @lists = ToDoList.all
+    # @lists = []
     @lists = @lists.to_a.push ToDoList.new
     @z_index_count = @lists.size
     respond_to do |format|

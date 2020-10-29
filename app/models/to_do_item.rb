@@ -1,7 +1,7 @@
 class ToDoItem < ApplicationRecord
   belongs_to :list, class_name: "ToDoList", foreign_key: "to_do_list_id", counter_cache: :items_count
   belongs_to :user
-
+  enum state: [:pending, :finished]
   after_create :set_default_position
 
   def set_default_position

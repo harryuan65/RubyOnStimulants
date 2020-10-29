@@ -15,6 +15,10 @@
 class ToDoList < ApplicationRecord
   BG_COLOR_SELECTION = ["#F5B7B1", "#F2D7D5", "#F0B27A", "#F8C471", "#FFF1A4", "#82E0AA", "#DAF7A6", "#85C1E9", "#AED6F1", "#EBDEF0", "#E8DAEF"]
   # TODO validates bg_color
+  validates :user_id, presence: true
+  validates :name, presence: true
+  validates :bg_color, presence: true
+
   belongs_to :user
   has_many :items, -> { order(position: :asc) }, class_name: "ToDoItem", dependent: :destroy
 

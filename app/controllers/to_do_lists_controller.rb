@@ -22,6 +22,16 @@ class ToDoListsController < ApplicationController
     render json: @list.items
   end
 
+  def create
+    param! :name, String, required: true
+    name = params[:name]
+    @list = ToDoList.create!(name: name)
+    if @list.save!
+      render json: @list
+    else
+      render json: {success: false}
+    end
+  end
   private
 
   def todo_params

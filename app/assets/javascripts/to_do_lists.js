@@ -19,8 +19,58 @@ var removeOtherListsVersion = false;
       list.remove();
     })
   }
-})( jQuery );
+  $.fn.setLoading = function(){
+    let loadingContainer = this;
+    $('.content', loadingContainer).removeClass("display");
+    $('.mask', loadingContainer).addClass("display");
+  }
+  $.fn.swapContent = function(){
+    let listBody = this;
+    let content = $('.content', listBody);
+    let mask = $('.mask', listBody);
+    let current = mask.hasClass("display") ? mask : content,
+        other = !mask.hasClass("display") ? mask : content;
+    // console.log("current is ", current.prop('class'), "other is ", other.prop('class'));
 
+    current.addClass("fade-out");
+    current.on('animationend', function(){
+      other.removeClass("fade-out");
+      let current = $(this);
+      current.removeClass("display");
+      other.addClass("display");
+      //test
+      renderItems('new', [])
+    });
+  }
+  $.fn.setCreateListByName = function(){
+    let newListName = this;
+    newListName.focusout(function(event){
+      let newListName = $(event.target);
+      let value = newListName.val();
+      if(value.length>0){
+        console.log(value);
+        console.log('create');
+        newListName.prop('disabled', true);
+        let listBody = newListName.next(".list-body")
+        listBody.setLoading();
+        $(".loading-spin", listBody).css("margin-bottom", '85px');
+      }
+    })
+  }
+  $.fn.setUpdateListName = function(){
+    let listName = this;
+    listName.focusout(function(event){
+      console.log(event.target.value);
+      let e = $(event.target);
+      console.log(e);
+      console.log('update');
+      console.log(value);
+    })
+  }
+})( jQuery );
+function pretendToLoadNewList(){
+  $('.list-body', '#list-new').swapContent();
+}
 function setUpListener(){
   setUpSelectList();
   setUpNewListAction();
@@ -56,12 +106,14 @@ function setUpNewListAction(){
   // one: fires only once
   $("#list-new").one('click', function(){
     let newList = $(this);
-    newList.removeClass("empty-flex-center");
-    $('.add-new-list', newList).remove();
+    $('.content', newList).removeClass("empty-with-a-plus")
+    $('.add-new-list', newList).toggle();
+
     let newListName = $('<input type="text" name="name" class="list-name notosans text-2b" autocomplete="off" placeholder="New List Name"/>');
+    newListName.setCreateListByName();
 
     newList.prepend(newListName);
-    renderItems('new', []);
+    // renderItems('new', []);
     newListName.focus();
   })
   // $("#list-new").on('click', function(){
@@ -71,16 +123,14 @@ function setUpNewListAction(){
   // })
 }
 function setUpListEditEvents(){
-  $("input.list-name").focusout(function(event){
-    console.log(event.target.value);
-  })
+  $("input.list-name").setUpdateListName();
 }
 function renderItems(list_id, data){
   // console.log(JSON.stringify(data, null, 2));
   list = document.getElementById(`list-${list_id}`);
-  listBody = list.querySelector('.list-body');
-  listBody.innerText = '';
-
+  listBodyContent = list.querySelector('.list-body .body-content-base.content');
+  listBodyContent.innerText = '';
+  // listBodyContent.style.backgroundColor = list.style.backgroundColor; // 確保ToDoItem有背景顏色，才不會一開始loading就被透過來看到（其實loading在下面)
   // push an empty item for new
   if(!data.find(e=>{return e.unDraggable===true})){
     data.push({unDraggable: true, position: '+', name: ''});
@@ -133,7 +183,7 @@ function renderItems(list_id, data){
     listRow.appendChild(itemName);
     listRow.appendChild(itemSelect);
 
-    listBody.appendChild(listRow)
+    listBodyContent.appendChild(listRow)
 
     if(list.classList.contains("selected")){
       listRow.classList.add("grow");

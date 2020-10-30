@@ -1,17 +1,28 @@
 <!-- used as SJR from index.js.erb -->
   <% @lists.each_with_index do |list, i| %>
     <% if list.id.present? %>
-      <div id="list-<%= list.id%>" class="list notosans" style="background-color: <%= list.bg_color%>; z-index: <%= @z_index_count%>;">
+      <div id="list-<%= list.id%>" class="list notosans" style="background-color: <%= list.bg_color%>; z-index: <%= @z_index_count*10%>;">
         <input type="text" name="name" class="list-name notosans text-2b" autocomplete="off" value="<%= list.name %>"/>
         <%= link_to "&#x2715;".html_safe, "#", class: "delete-list text-5b", remote: true %>
         <div class="list-body">
+          <div class="body-content-base content display"></div>
+          <div class="body-content-base mask">
+            <div class="loading-spin">
+            </div>
+          </div>
           <script>renderItems("<%= list.id %>", JSON.parse("<%= j list.items.to_json.html_safe %>"));</script>
         </div>
       </div>
     <% else %>
-      <div id="list-new" class="list empty-flex-center notosans" style="background-color: #ECF0F1; z-index: <%= @z_index_count%>;">
+      <div id="list-new" class="list notosans" style="background-color: #ECF0F1; z-index: <%= @z_index_count%>;">
         <div class="list-body">
-          <div class="add-new-list">&#xff0b;</div>
+          <div class="body-content-base content empty-with-a-plus display">
+            <div class="add-new-list">&#xff0b;</div>
+          </div>
+          <div class="body-content-base mask">
+            <div class="loading-spin">
+            </div>
+          </div>
         </div>
       </div>
     <% end %>

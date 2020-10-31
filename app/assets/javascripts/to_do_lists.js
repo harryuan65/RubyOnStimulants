@@ -65,9 +65,9 @@ var removeOtherListsVersion = true;
           console.log(JSON.stringify(data, null, 2));
           newList.swapLoading();
         })
-        .fail(function(data){
-          console.error(JSON.stringify(data, null, 2));
-          console.log(JSON.stringify(data, null, 2));
+        .fail(function(jqXHR){
+          console.error(JSON.stringify(jqXHR.responseJSON, null, 2));
+          // console.log(JSON.stringify(error, null, 2));
         })
         // dev
       }

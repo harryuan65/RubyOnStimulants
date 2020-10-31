@@ -244,7 +244,8 @@ zh-TW:
       create_success: "成功新增 %{word}"
       back_to_words: "回單字本"
     to_do_lists:
-      create_success: "Successfully created list \"%{name}\""
+      create_success: "成功新增清單 \"%{name}\""
+      update_success: "成功更新清單 \"%{name}\""
   date:
     today:
       minutes_ago: '%{minutes} 分鐘前'

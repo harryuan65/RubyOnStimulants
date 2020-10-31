@@ -22,7 +22,6 @@ var removeOtherListsVersion = true;
   $.fn.setLoading = function(isLoading){
     let list = this;
     let listName = $('.list-name', list);
-    // let listNameState = listName.prop('disabled');
     listName.prop('disabled', isLoading);
 
     let listBody = $('.list-body', list);
@@ -31,18 +30,19 @@ var removeOtherListsVersion = true;
 
     let current = isLoading ? content : mask, //現在要是isLoading就代表content是被display的
         other = !isLoading ? content : mask;
-    // let current = mask.hasClass("display") ? mask : content,
-    //     other = !mask.hasClass("display") ? mask : content;
     console.log("current is ", current.prop('class'), "other is ", other.prop('class'));
 
     current.removeClass("display");
     other.addClass("display");
   }
-  $.fn.createListByData = function(listData){
+  $.fn.updateByData = function(isNew=false, listData){
     let list = this;
-    $('.list-name', list).val(listData.name);
-    list.css('background-color', listData.bgColor);
-    renderItems('new', []);
+    let {name, bgColor} = listData;
+    $('.list-name', list).val(name);
+
+    if(bgColor){list.css('background-color', bgColor);}
+    if(isNew){renderItems('new', []);}
+
     list.setLoading(false);
   }
   $.fn.setCreateListByName = function(){
@@ -68,7 +68,7 @@ var removeOtherListsVersion = true;
           console.log(JSON.stringify(data, null, 2));
           if(data.success){
             let listData = data.list;
-            newList.createListByData(listData);
+            newList.updateByData(true, listData);
             setFlash(true, data.flash);
           }else{
             alert(data.error);
@@ -80,18 +80,37 @@ var removeOtherListsVersion = true;
           setFlash(false, errorMsg);
           newList.setLoading(false);
         })
-        // dev
       }
     })
   }
   $.fn.setUpdateListName = function(){
-    let listName = this;
+    let list = this;
+    let listName = $('.list-name', list);
     listName.focusout(function(event){
-      console.log(event.target.value);
-      let e = $(event.target);
-      console.log(e);
-      console.log('update');
-      console.log(value);
+      let listName = $(event.target);
+      let inputName = listName.val();
+      let listId = list.prop('id');
+      $.ajax({
+        method: "PUT",
+        url: "/to_do_lists",
+        data: {id: listId, name: inputName},
+        dataType: "json"
+      })
+      .done(function(data){
+        console.log(JSON.stringify(data, null, 2));
+        if(data.success){
+          let listData = data.list;
+          newList.updateByData(listData);
+          setFlash(true, data.flash);
+        }else{
+          alert(data.error);
+        }
+      })
+      .fail(function(jqXHR){
+        let errorMsg = jqXHR.responseJSON.error;
+        setFlash(false, errorMsg);
+        newList.setLoading(false);
+      })
     })
   }
 })( jQuery );
@@ -151,7 +170,7 @@ function setUpNewListAction(){
   // })
 }
 function setUpListEditEvents(){
-  $("input.list-name").setUpdateListName();
+  $(".list:not(#list-new)").setUpdateListName();
 }
 function renderItems(list_id, data){
   // console.log(JSON.stringify(data, null, 2));

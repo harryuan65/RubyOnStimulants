@@ -10,10 +10,8 @@ module TechPod
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
-    config.autoloader = :classic
-    config.paths.add File.join('app', 'api'), glob: File.join('**', '*.rb')
-    config.autoload_paths += Dir[Rails.root.join('app','utils','*')]
-    config.eager_load_paths += %W(#{Rails.root}/lib)
+    # config.autoloader = :classic
+    config.eager_load_paths += %W[#{config.root}/lib]
     config.i18n.load_path += Dir[Rails.root.join('config','locales','*.yml')]
     config.i18n.default_locale = :en
     config.time_zone = 'Asia/Taipei'

@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
-  include CSVParser
-  include Global
+  include Parser
   include Error::ErrorHandler
   # before_action :set_locale_by_api
   # before_action :show_info

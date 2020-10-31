@@ -1,6 +1,17 @@
 require 'csv'
-require_relative './global.rb'
-module CSVParser
+module Parser
+  ASSETS_PATH = Rails.root.join('app/assets/')
+  CSV_PATH = Rails.root.join('app/assets/csv')
+  CSV_UPLOAD_PATH = Rails.root.join('app/assets/csv/upload')
+  CSV_EXPORT_PATH = Rails.root.join('app/assets/csv/export')
+  FILE_ROOTS = [CSV_PATH, CSV_EXPORT_PATH,CSV_EXPORT_PATH,CSV_UPLOAD_PATH].map{|p| p.to_s}
+
+  def isFileRoot path
+    current_root = path.gsub(path.split('/')[-1],'').gsub(/\/$/,'')
+    puts("Global: Path = "+current_root)
+    return FILE_ROOTS.include?(current_root)
+  end
+
   def createhash row, avoid_nil, exclude_str='' #(array) row = [["name", "jack"],["goognight_user_id"],["ip", "223.140.238.128"], ["intro", nil], ["id", "2941471"] ,["email", "o8q4@yahoo.com.tw"], ["google_email", nil], ["device_platform", "iOS"]]
     if avoid_nil
       row = row.select{

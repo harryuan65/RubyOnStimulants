@@ -251,6 +251,8 @@ en:
       go_home: "Return to homepage"
       route_not_found: "Page not found"
       record_not_found: "Resource not found"
+      record_invalid: "Record Invalid"
+      internal_server_error: "Server Error"
     title:
       sign_in: "Login"
       hello: "Hello world"
@@ -275,6 +277,8 @@ en:
       empty_query: "Search keyword is empty!"
       create_success: "Successfully added \"%{word}\""
       back_to_words: "Back to WordBook"
+    to_do_lists:
+      create_success: "Successfully created list \"%{name}\""
   date:
     today:
       minutes_ago: '%{minutes} minute(s) ago'

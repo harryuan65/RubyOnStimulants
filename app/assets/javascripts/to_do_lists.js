@@ -19,28 +19,31 @@ var removeOtherListsVersion = true;
       list.remove();
     })
   }
-  $.fn.swapLoading = function(){
+  $.fn.setLoading = function(isLoading){
     let list = this;
     let listName = $('.list-name', list);
-    let listNameState = listName.prop('disabled');
-    listName.prop('disabled', !listNameState);
+    // let listNameState = listName.prop('disabled');
+    listName.prop('disabled', isLoading);
 
     let listBody = $('.list-body', list);
     let content = $('.content', listBody);
     let mask = $('.mask', listBody);
-    let current = mask.hasClass("display") ? mask : content,
-        other = !mask.hasClass("display") ? mask : content;
-    // console.log("current is ", current.prop('class'), "other is ", other.prop('class'));
 
-    current.addClass("fade-out");
-    current.on('animationend', function(){
-      other.removeClass("fade-out");
-      let current = $(this);
-      current.removeClass("display");
-      other.addClass("display");
-      //test
-      renderItems('new', [])
-    });
+    let current = isLoading ? content : mask, //現在要是isLoading就代表content是被display的
+        other = !isLoading ? content : mask;
+    // let current = mask.hasClass("display") ? mask : content,
+    //     other = !mask.hasClass("display") ? mask : content;
+    console.log("current is ", current.prop('class'), "other is ", other.prop('class'));
+
+    current.removeClass("display");
+    other.addClass("display");
+  }
+  $.fn.createListByData = function(listData){
+    let list = this;
+    $('.list-name', list).val(listData.name);
+    list.css('background-color', listData.bgColor);
+    renderItems('new', []);
+    list.setLoading(false);
   }
   $.fn.setCreateListByName = function(){
     let newList = this;
@@ -53,21 +56,29 @@ var removeOtherListsVersion = true;
       if(inputName.length>0){
         console.log('create with ', inputName);
         // ajax to create list
-        newList.swapLoading();
+        newList.setLoading(true);
 
         $.ajax({
           method: "POST",
-          url: "/post_test",
+          url: "/to_do_lists",
           data: {name: inputName},
           dataType: "json"
         })
         .done(function(data){
           console.log(JSON.stringify(data, null, 2));
-          newList.swapLoading();
+          if(data.success){
+            let listData = data.list;
+            newList.createListByData(listData);
+            setFlash(true, data.flash);
+          }else{
+            alert(data.error);
+          }
         })
         .fail(function(jqXHR){
-          console.error(JSON.stringify(jqXHR.responseJSON, null, 2));
-          // console.log(JSON.stringify(error, null, 2));
+          let errorMsg = jqXHR.responseJSON.error;
+          // console.error(JSON.stringify(jqXHR.responseJSON, null, 2));
+          setFlash(false, errorMsg);
+          newList.setLoading(false);
         })
         // dev
       }
@@ -85,7 +96,11 @@ var removeOtherListsVersion = true;
   }
 })( jQuery );
 function pretendToLoadNewList(){
-  $('#list-new').swapLoading();
+  // fuck you and i will see you tomorrow
+  // $('#list-new').animate({backgroundColor: "#daf7a6"},2000,function(ev){$(ev.target).setLoading(false);});
+
+  $('#list-new').css('background-color', "#daf7a6");
+  $('#list-new').setLoading(false);
 }
 function setUpListener(){
   setUpSelectList();

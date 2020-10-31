@@ -218,6 +218,8 @@ zh-TW:
       go_home: "回首頁"
       route_not_found: "頁面不存在"
       record_not_found: "找不到這個項目"
+      record_invalid: "無效項目"
+      internal_server_error: "發生錯誤"
     title:
       sign_in: "登入"
       home: "首頁"
@@ -241,6 +243,8 @@ zh-TW:
       empty_query: "沒有關鍵字"
       create_success: "成功新增 %{word}"
       back_to_words: "回單字本"
+    to_do_lists:
+      create_success: "Successfully created list \"%{name}\""
   date:
     today:
       minutes_ago: '%{minutes} 分鐘前'

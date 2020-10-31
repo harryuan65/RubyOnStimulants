@@ -60,7 +60,7 @@ class ApplicationController < ActionController::Base
   end
 
   def post_test
-    raise ActiveRecord::RecordNotFound
+    # raise ActiveRecord::RecordNotFound # test ajax fail
     if request.headers["REMOTE_ADDR"] == "::1"
       puts("==================")
       puts "Headers:"
@@ -68,7 +68,7 @@ class ApplicationController < ActionController::Base
       puts "\nParameters:"
       params.each{|k,v| puts k.to_s+': '+v.to_s}
       puts("==================")
-      render json:{message: "Ok", success: true}
+      render json: {success: true, success: true, name: "This name is new", bg_color: ToDoList::BG_COLOR_SELECTION.sample}.camelize_for_js
     else
       render_error "Unauthorized"
     end

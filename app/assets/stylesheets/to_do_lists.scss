@@ -9,13 +9,12 @@ $fade-time: .1s;
 $input-disable-time: .1s;
 .list{
   @include flex(column, flex-start, center);
-  // border: solid 1px #eee;
   background-color: rgb(255, 241, 164);
   width: 250px;
   height: 500px;
   box-sizing: border-box;
   padding: 4px 0 4px 0;
-  transition: .2s ease;
+  transition: transform .2s ease, background-color 2s ease;
 
   transform: rotateX(15deg) rotateY(40deg);
   transform-style: preserve-3d;
@@ -32,7 +31,7 @@ $input-disable-time: .1s;
     cursor: default;
     width: 350px;
     margin: 0;
-    transition: $list-seleted-grow-time ease-in-out;
+    transition: transform $list-seleted-grow-time ease-in-out;
   }
 
   &.list-before-delete{

@@ -15,6 +15,7 @@
 class ToDoList < ApplicationRecord
   BG_COLOR_SELECTION = ["#F5B7B1", "#F2D7D5", "#F0B27A", "#F8C471", "#FFF1A4", "#82E0AA", "#DAF7A6", "#85C1E9", "#AED6F1", "#EBDEF0", "#E8DAEF"]
   # TODO validates bg_color
+  before_validation :set_bg_color
   validates :user_id, presence: true
   validates :name, presence: true
   validates :bg_color, presence: true
@@ -28,9 +29,8 @@ class ToDoList < ApplicationRecord
       :t2=>Time.now.in_time_zone("Taipei").end_of_day
   )}
 
-  after_commit :set_bg_color, on: :create
 
   def set_bg_color
-    self.update!(bg_color: BG_COLOR_SELECTION[self.id%BG_COLOR_SELECTION.size])
+    self.bg_color = BG_COLOR_SELECTION[(rand()*BG_COLOR_SELECTION.size).to_i]
   end
 end

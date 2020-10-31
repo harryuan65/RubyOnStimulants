@@ -15,23 +15,29 @@ class ToDoListsController < ApplicationController
 
   def show
     @list = ToDoList.includes(:items).find params[:id]
-    # respond_to do |format|
-    #   format.html {render json:{message: "Unauthorized"}}
-    #   format.js {render json: @list.items}
-    # end
+
     render json: @list.items
   end
 
   def create
     param! :name, String, required: true
     name = params[:name]
-    @list = ToDoList.create!(name: name)
-    if @list.save!
-      render json: @list
-    else
-      render json: {success: false}
-    end
+    @list = ToDoList.create!(name: name, user_id: @current_user.id)
+    render json: {success: true, flash: I18n.t("controller.to_do_lists.create_success", name: name), list: @list.as_json}.camelize_for_js
   end
+
+  def update
+    param! :id, Integer, required: true
+    param! :name, String, required: true
+    name = params[:name]
+    id = params[:id]
+
+    @list = ToDoList.find(:id)
+    @list.update!(name: name)
+
+    render json: {success: true, list: @list.as_json}.camelize_for_js
+  end
+
   private
 
   def todo_params

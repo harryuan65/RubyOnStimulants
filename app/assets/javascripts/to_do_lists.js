@@ -59,8 +59,7 @@ var removeOtherListsVersion = true;
           method: "POST",
           url: "/post_test",
           data: {name: inputName},
-          dataType: "json",
-          contentType: "application/json"
+          dataType: "json"
         })
         .done(function(data){
           console.log(JSON.stringify(data, null, 2));

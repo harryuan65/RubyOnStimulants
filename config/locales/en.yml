@@ -250,6 +250,7 @@ en:
       not_logged_in: "You are not logged in."
       go_home: "Return to homepage"
       route_not_found: "Page not found"
+      record_not_found: "Resource not found"
     title:
       sign_in: "Login"
       hello: "Hello world"

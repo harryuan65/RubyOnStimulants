@@ -60,13 +60,17 @@ class ApplicationController < ActionController::Base
   end
 
   def post_test
-    puts("==================")
-    puts "Headers:"
-    request.headers.each{|k,v| puts k.to_s+': '+v.to_s}
-    puts "\nParameters:"
-    params.each{|k,v| puts k.to_s+': '+v.to_s}
-    puts("==================")
-    render json:{message:"Ok"}
+    if request.headers["REMOTE_ADDR"] == "::1"
+      puts("==================")
+      puts "Headers:"
+      request.headers.each{|k,v| puts k.to_s+': '+v.to_s}
+      puts "\nParameters:"
+      params.each{|k,v| puts k.to_s+': '+v.to_s}
+      puts("==================")
+      render json:{message: "Ok", success: true}
+    else
+      render_error "Unauthorized"
+    end
   end
 
   # File operations: currently for Excel
@@ -108,11 +112,15 @@ class ApplicationController < ActionController::Base
     render 'shared/route_not_found', status: :not_found
   end
 
-  def render_error(msg)
+  def render_error(msg, status: :bad_request)
+    render json: {message: msg}, status: status
+  end
+
+  def render_error_page(msg)
     @success = false
     @status = 403
     @message = msg
-    return render "shared/result", layout: false
+    return render "shared/result", layout: false, status: :forbidden
   end
 
   # This is found on https://stackoverflow.com/questions/4709109/base-64-url-decode-with-ruby-rails

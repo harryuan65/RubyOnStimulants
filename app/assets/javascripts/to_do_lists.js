@@ -49,13 +49,28 @@ var removeOtherListsVersion = true;
     newListName.focusout(function(event){
       let newListName = $(event.target);
 
-      let value = newListName.val();
-      if(value.length>0){
-        console.log('create with ', value);
-
-        let listBody = newListName.next(".list-body");
+      let inputName = newListName.val();
+      if(inputName.length>0){
+        console.log('create with ', inputName);
+        // ajax to create list
         newList.swapLoading();
-        $(".loading-spin", listBody).css("margin-bottom", '55px');
+
+        $.ajax({
+          method: "POST",
+          url: "/post_test",
+          data: {name: inputName},
+          dataType: "json",
+          contentType: "application/json"
+        })
+        .done(function(data){
+          console.log(JSON.stringify(data, null, 2));
+          newList.swapLoading();
+        })
+        .fail(function(data){
+          console.error(JSON.stringify(data, null, 2));
+          console.log(JSON.stringify(data, null, 2));
+        })
+        // dev
       }
     })
   }

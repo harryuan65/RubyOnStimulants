@@ -70,7 +70,7 @@ function changePage(event){
 }
 function setFlash(success, message){
   let alertMsg = `
-  <p class="alert alert-${success ? "success" : "danger"} notosans-light" onanimationend="foldAlert(this)">
+  <p class="alert alert-${success ? "success" : "danger"} notosans-light" ${success ? 'onanimationend="foldAlert(this)' : ""}">
    <span class="alert-txt">${message}</span>
   </p>
   `;

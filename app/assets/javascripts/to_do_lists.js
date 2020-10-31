@@ -1,5 +1,6 @@
 var dragging, draggedOver;
 var removeOtherListsVersion = true;
+var savedListNamesMapping = {};
 (function( $ ){
   $.fn.setSelectedList = function() {
     let list = this;
@@ -30,18 +31,21 @@ var removeOtherListsVersion = true;
 
     let current = isLoading ? content : mask, //現在要是isLoading就代表content是被display的
         other = !isLoading ? content : mask;
-    console.log("current is ", current.prop('class'), "other is ", other.prop('class'));
+    // console.log("current is ", current.prop('class'), "other is ", other.prop('class'));
 
     current.removeClass("display");
     other.addClass("display");
   }
   $.fn.updateByData = function(isNew=false, listData){
     let list = this;
-    let {name, bgColor} = listData;
+    let {id, name, bgColor} = listData;
     $('.list-name', list).val(name);
 
     if(bgColor){list.css('background-color', bgColor);}
-    if(isNew){renderItems('new', []);}
+    if(isNew){
+      list.prop('id', `list-${id}`);
+      renderItems(`${id}`, []);
+    }
 
     list.setLoading(false);
   }
@@ -89,18 +93,22 @@ var removeOtherListsVersion = true;
     listName.focusout(function(event){
       let listName = $(event.target);
       let inputName = listName.val();
-      let listId = list.prop('id');
+      let listId = list.prop('id').split("list-")[1];
+      console.log(`listId=${listId}`);
+      listId = parseInt(listId);
+
+      list.setLoading(true);
       $.ajax({
         method: "PUT",
-        url: "/to_do_lists",
-        data: {id: listId, name: inputName},
+        url: `/to_do_lists/${listId}`,
+        data: {name: inputName},
         dataType: "json"
       })
       .done(function(data){
         console.log(JSON.stringify(data, null, 2));
         if(data.success){
           let listData = data.list;
-          newList.updateByData(listData);
+          list.updateByData(listData);
           setFlash(true, data.flash);
         }else{
           alert(data.error);
@@ -108,8 +116,12 @@ var removeOtherListsVersion = true;
       })
       .fail(function(jqXHR){
         let errorMsg = jqXHR.responseJSON.error;
+        // update failed, restore list name
+        let listIdStr = list.prop('id').split('list-')[1];
+        alert(`restoring ${listIdStr}`);
+        listName.val(savedListNamesMapping[listIdStr]);
         setFlash(false, errorMsg);
-        newList.setLoading(false);
+        list.setLoading(false);
       })
     })
   }
@@ -125,6 +137,7 @@ function setUpListener(){
   setUpSelectList();
   setUpNewListAction();
   setUpListEditEvents();
+  saveListNameMapping();
   // $('input[type="checkbox"].item-check').on('change', function(e){
   //   let checkbox = $(this);
   //   // TODO: ajax
@@ -170,7 +183,21 @@ function setUpNewListAction(){
   // })
 }
 function setUpListEditEvents(){
-  $(".list:not(#list-new)").setUpdateListName();
+  // 這樣是錯的: $(".list:not(#list-new)").setUpdateListName();
+  //自己定義的個別function，就要個別處理。不然大家都吃到第一個list
+  $(".list:not(#list-new)").each(function(){
+    let list = $(this);
+    list.setUpdateListName();
+  })
+}
+function saveListNameMapping(){
+  // set saved list names mapping for restoration;
+  $('.list').each(function(){
+    let list = $(this);
+    let listName = $('.list-name', list);
+    let listIdStr = list.prop('id').split('list-')[1];
+    savedListNamesMapping[listIdStr] = listName.val();
+  })
 }
 function renderItems(list_id, data){
   // console.log(JSON.stringify(data, null, 2));

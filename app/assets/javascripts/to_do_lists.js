@@ -1,5 +1,5 @@
 var dragging, draggedOver;
-var removeOtherListsVersion = false;
+var removeOtherListsVersion = true;
 (function( $ ){
   $.fn.setSelectedList = function() {
     let list = this;
@@ -19,13 +19,13 @@ var removeOtherListsVersion = false;
       list.remove();
     })
   }
-  $.fn.setLoading = function(){
-    let loadingContainer = this;
-    $('.content', loadingContainer).removeClass("display");
-    $('.mask', loadingContainer).addClass("display");
-  }
-  $.fn.swapContent = function(){
-    let listBody = this;
+  $.fn.swapLoading = function(){
+    let list = this;
+    let listName = $('.list-name', list);
+    let listNameState = listName.prop('disabled');
+    listName.prop('disabled', !listNameState);
+
+    let listBody = $('.list-body', list);
     let content = $('.content', listBody);
     let mask = $('.mask', listBody);
     let current = mask.hasClass("display") ? mask : content,
@@ -43,17 +43,19 @@ var removeOtherListsVersion = false;
     });
   }
   $.fn.setCreateListByName = function(){
-    let newListName = this;
+    let newList = this;
+    let newListName = $("input[type='text'].list-name", newList);
+
     newListName.focusout(function(event){
       let newListName = $(event.target);
+
       let value = newListName.val();
       if(value.length>0){
-        console.log(value);
-        console.log('create');
-        newListName.prop('disabled', true);
-        let listBody = newListName.next(".list-body")
-        listBody.setLoading();
-        $(".loading-spin", listBody).css("margin-bottom", '85px');
+        console.log('create with ', value);
+
+        let listBody = newListName.next(".list-body");
+        newList.swapLoading();
+        $(".loading-spin", listBody).css("margin-bottom", '55px');
       }
     })
   }
@@ -69,7 +71,7 @@ var removeOtherListsVersion = false;
   }
 })( jQuery );
 function pretendToLoadNewList(){
-  $('.list-body', '#list-new').swapContent();
+  $('#list-new').swapLoading();
 }
 function setUpListener(){
   setUpSelectList();
@@ -90,15 +92,13 @@ function setUpSelectList(){
   $(".list").on('click', function(){
     let selectedList = $(this);
 
+    $(".list.selected").unsetSelectedList();
+    selectedList.setSelectedList();
+
     if(removeOtherListsVersion){
       //fade out others and delete
       $(".list:not(.selected)").removeList();
     }
-    else{
-      $(".list.selected").unsetSelectedList();
-      selectedList.setSelectedList();
-    }
-    selectedList.setSelectedList();
   })
 }
 function setUpNewListAction(){
@@ -110,9 +110,8 @@ function setUpNewListAction(){
     $('.add-new-list', newList).toggle();
 
     let newListName = $('<input type="text" name="name" class="list-name notosans text-2b" autocomplete="off" placeholder="New List Name"/>');
-    newListName.setCreateListByName();
-
     newList.prepend(newListName);
+    newList.setCreateListByName();
     // renderItems('new', []);
     newListName.focus();
   })

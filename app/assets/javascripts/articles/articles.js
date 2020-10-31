@@ -14,12 +14,15 @@ var mappings = {
   "<":">"
 }
 window.onload = ()=>{
-  var prevData = document.getElementById('article_content').value;
-  window.onbeforeunload = (event)=>{
-    var currentData = document.getElementById('article_content').value;
-    var diff = currentData.split(prevData).join('');
-    if (diff.length > 0){
-      (event || window.event).returnValue = "ask";
+  var articleContent = document.getElementById('article_content');
+  if(articleContent){
+    let prevData = articleContent.value;
+    window.onbeforeunload = (event)=>{
+      var currentData = document.getElementById('article_content').value;
+      var diff = currentData.split(prevData).join('');
+      if (diff.length > 0){
+        (event || window.event).returnValue = "ask";
+      }
     }
   }
 }

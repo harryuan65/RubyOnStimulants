@@ -7,14 +7,14 @@ steps:
   commands:
   - rubocop -v
   - rubocop
-- name: tests
-  image: ruby:2.7.2-alpine
-  commands:
-  - apt-get install build-essential patch ruby-dev zlib1g-dev liblzma-dev
-  - bundle install
-  - echo "Running Tests..."
-  - bin/rspec -v
-  - bin/rspec
+# - name: tests
+#   image: ruby:2.7.2-alpine
+#   commands:
+#   - apt-get install build-essential patch ruby-dev zlib1g-dev liblzma-dev
+#   - bundle install
+#   - echo "Running Tests..."
+#   - bin/rspec -v
+#   - bin/rspec
 - name: notify
   image: plugins/slack
   when:

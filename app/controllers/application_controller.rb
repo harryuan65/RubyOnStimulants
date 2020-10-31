@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   include CSVParser
   include Global
+  include Error::ErrorHandler
   # before_action :set_locale_by_api
   # before_action :show_info
   around_action {|controller, action| switch_locale(&action)}
@@ -60,6 +61,7 @@ class ApplicationController < ActionController::Base
   end
 
   def post_test
+    raise ActiveRecord::RecordNotFound
     if request.headers["REMOTE_ADDR"] == "::1"
       puts("==================")
       puts "Headers:"

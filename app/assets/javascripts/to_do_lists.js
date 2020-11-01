@@ -1,11 +1,14 @@
 var dragging, draggedOver;
 var removeOtherListsVersion = true;
 var savedListNamesMapping = {};
+var debugItem = null;
 (function( $ ){
   $.fn.setSelectedList = function() {
     let list = this;
     list.addClass('selected');
     $(".list-row", list).addClass("grow");
+    list.css('margin-left', '0');
+    list.css('margin-right', '0');
   };
 
   $.fn.unsetSelectedList = function() {
@@ -36,12 +39,12 @@ var savedListNamesMapping = {};
     current.removeClass("display");
     other.addClass("display");
   }
-  $.fn.updateByData = function(listData, isNew=false){
+  $.fn.updateListByData = function(listData, isNew=false){
     let list = this;
-    let {id, name, bgColor} = listData;
+    let {id, name, bg_color} = listData;
     $('.list-name', list).val(name);
 
-    if(bgColor){list.css('background-color', bgColor);}
+    if(bgColor){list.css('background-color', bg_color);}
     if(isNew){
       list.prop('id', `list-${id}`);
       renderItems(`${id}`, []);
@@ -73,7 +76,7 @@ var savedListNamesMapping = {};
           console.log(JSON.stringify(data, null, 2));
           if(data.success){
             let listData = data.list;
-            newList.updateByData(listData, true);
+            newList.updateListByData(listData, true);
             setFlash(true, data.flash);
           }else{
             alert(data.error);
@@ -107,14 +110,13 @@ var savedListNamesMapping = {};
         data: {name: inputName},
         dataType: "json"
       })
-      .done(function(data){
-        console.log(JSON.stringify(data, null, 2));
+      .done(function({flash, list, error}){
         if(data.success){
-          let listData = data.list;
-          list.updateByData(listData);
-          setFlash(true, data.flash);
+          let listData = list;
+          list.updateListByData(listData);
+          setFlash(true, flash);
         }else{
-          alert(data.error);
+          alert(error);
         }
       })
       .fail(function(jqXHR){
@@ -128,23 +130,50 @@ var savedListNamesMapping = {};
       })
     })
   }
-  $.fn.setCreateUpdateItemByName = function(){
+  $.fn.updateListItemByData = function({id, name, position, state, description, dueDate}, isNew = false){
     let listRow = this;
+    let itemName = $('.item-name', listRow);
+
+    itemName.text(name);
+    if(isNew){
+      let itemNum = $('.item-num', listRow);
+      itemNum.text(position);
+      listRow.prop('id', `item-${id}`);
+    }
+  }
+  $.fn.setCreateUpdateItemByName = function(to_do_list_id){
+    let listRow = this;
+    // console.log(list);
     let listItemName = $('.item-name', listRow);
-    let currentText = listItemName.text();
     //注意這邊是設定全部。
-    listItemName.prop('original-text', currentText);
+    // listItemName.prop('original-text', currentText);
 
     listItemName.blur(function(event){
+      //注意item-id 在listRow上面，但是要更新的值還有比較的attr: data-current在listName裡面。
       let updatedItemName = $(event.target);
       let newInput = updatedItemName.text();
-      if (newInput !== updatedItemName.attr('original-text')){
-        let listId = parseInt(listRow.prop('id').split('list-')[1]);
-        if(updatedItemName.prop('id')==="new"){
-          let params = {method: "POST", toDoListId: listId, name: ""}
+
+      let dataCurrent = updatedItemName.attr('data-current');
+
+      if (newInput !== dataCurrent){
+        listRow.parent().setLoading(true);
+        if(listRow.attr('id')==="item-new"){
+          let params = {method: "POST", url: "/post_test", to_do_list_id, name: newInput}
+          // $.ajax(Object.assign(params, {dataType: "json"}))
+          // .done(function({flash, listItem, error}){
+
+          //   setFlash(true, flash);
+          // })
+          // .fail(function(jqXHR){
+          //   let errorMsg = jqXHR.responseJSON.error;
+          //   setFlash(false, errorMsg);
+          //   listRow.parent().setLoading(false);
+          // })
+          console.log("to create with ", JSON.stringify(params, null, 2));
         }
         else{
-
+          let params = {method: "PUT", url: "/post_test", to_do_list_id, name: newInput}
+          console.log("to update with ", JSON.stringify(params, null, 2));
         }
       }
     })
@@ -209,10 +238,10 @@ function saveListNameMapping(){
     savedListNamesMapping[listIdStr] = listName.val();
   })
 }
-function createItemRow({id, name, position}){
+function createItemRow({to_do_list_id, id, name, position}){
   var listRow = document.createElement("div");
   listRow.classList.add("list-row");
-  listRow.id = id;
+  listRow.id = `item-${id}`;
 
   var itemDrag = document.createElement("span");
   itemDrag.classList.add("item-drag");
@@ -233,6 +262,7 @@ function createItemRow({id, name, position}){
   itemName.classList.add("notosans");
   itemName.contentEditable = true;
   itemName.setAttribute('data-current', name);
+  // console.log(`Setting Item ${itemNum.innerText} of ${listRow.id} to:`, typeof(itemName.getAttribute('data-current')));
   itemName.innerText = name;
 
   var itemSelect = document.createElement("span");
@@ -246,18 +276,19 @@ function createItemRow({id, name, position}){
   listRow.appendChild(itemCheck);
   listRow.appendChild(itemName);
   listRow.appendChild(itemSelect);
-  listRow.setCreateUpdateItemByName();
+  // console.log("List Id is ", to_do_list_id)
+  $(listRow).setCreateUpdateItemByName(to_do_list_id);
   return listRow;
 }
 function renderItems(list_id, data){
-  // console.log(JSON.stringify(data, null, 2));
+
   list = document.getElementById(`list-${list_id}`);
   listBodyContent = list.querySelector('.list-body .body-content-base.content');
   listBodyContent.innerText = '';
-  // listBodyContent.style.backgroundColor = list.style.backgroundColor; // 確保ToDoItem有背景顏色，才不會一開始loading就被透過來看到（其實loading在下面)
+
   // push an empty item for new
   if(!data.find(e=>{return e.unDraggable===true})){
-    data.push({unDraggable: true, id: 'new',newText: '+', name: ''});
+    data.push({unDraggable: true, to_do_list_id: list_id, id: 'new', name: ''});
   }
 
   data.forEach(item=>{

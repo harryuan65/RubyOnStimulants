@@ -3,9 +3,9 @@ class ToDoListsController < ApplicationController
   layout "to_do_lists/layout"
 
   def index
-    @lists = ToDoList.includes(:items).all
-    # @lists = []
+    @lists = ToDoList.includes(:items).all.order(id: :asc)
     @lists = @lists.to_a.push ToDoList.new
+    @lists_count = @lists.size
     @z_index_count = @lists.size
     respond_to do |format|
       format.html
@@ -17,7 +17,7 @@ class ToDoListsController < ApplicationController
     param! :name, String, required: true
     name = params[:name]
     @list = ToDoList.create!(name: name, user_id: @current_user.id)
-    render json: {success: true, flash: I18n.t("controller.to_do_lists.create_success", name: name), list: @list.as_json}.camelize_for_js
+    render json: {success: true, flash: I18n.t("controller.to_do_lists.create_success", name: name), list: @list}
   end
 
   def update
@@ -29,7 +29,7 @@ class ToDoListsController < ApplicationController
     @list = ToDoList.find(id)
     @list.update!(name: name)
 
-    render json: {success: true, flash: I18n.t("controller.to_do_lists.update_success", name: name), list: @list.as_json}.camelize_for_js
+    render json: {success: true, flash: I18n.t("controller.to_do_lists.update_success", name: name), list: @list}
   end
 
   private

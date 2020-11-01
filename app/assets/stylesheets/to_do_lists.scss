@@ -1,4 +1,9 @@
 @import './resources.scss';
+#list-page-wrap{
+  @include flex(column, center, center);
+  @include size(100%, 100%);
+  position: fixed;
+}
 #list-container{
   @include flex(row, center, center);
   @include size(100%, 100%);
@@ -11,19 +16,25 @@ $input-disable-time: .1s;
   @include flex(column, flex-start, center);
   background-color: rgb(255, 241, 164);
   width: 250px;
-  height: 500px;
+  height: 450px;
   box-sizing: border-box;
   padding: 4px 0 4px 0;
-  transition: transform .2s ease, background-color 2s ease;
+  transition: transform .2s ease, background-color 2s ease, opacity $fade-time ease;
 
   transform: rotateX(15deg) rotateY(40deg);
   transform-style: preserve-3d;
   position: relative;
   cursor: pointer;
-  margin-left: -120px;
+  // &:not(:first-of-type):not(:last-of-type){
+    // margin-left: -120px;
+  // }
 
   &:not(.selected):hover{
     transform: translateY(-80px);
+  }
+
+  &:not(.selected:hover){
+    opacity: 0.5;
   }
 
   &.selected{
@@ -163,7 +174,7 @@ input.list-name{
     flex-direction: center;
   }
   width: 300px;
-  padding: 5px 0 5px 0;
+
   & .item-drag{
     font-size: 24px;
     vertical-align: middle;
@@ -213,8 +224,9 @@ input.list-name{
 }
 
 #back-to-todolist{
+  @include size(50px, 50px);
   position: absolute;
-  top: 10%;
-  left: 5%;
-  z-index: 99;
+  bottom: 20px;
+  border-radius: 50%;
+  font-size: 23px;
 }

@@ -66,9 +66,10 @@ class ApplicationController < ActionController::Base
       puts "Headers:"
       request.headers.each{|k,v| puts k.to_s+': '+v.to_s}
       puts "\nParameters:"
+      params = params.snakify_for_rb
       params.each{|k,v| puts k.to_s+': '+v.to_s}
       puts("==================")
-      render json: {success: true, success: true, name: "This name is new", bg_color: ToDoList::BG_COLOR_SELECTION.sample}.camelize_for_js
+      render json: {success: true, flash: "Post Test", id: 999, name: "This is new Item", position: 89}.camelize_for_js
     else
       render_error "Unauthorized"
     end

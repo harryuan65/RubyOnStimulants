@@ -66,10 +66,18 @@ class ApplicationController < ActionController::Base
       puts "Headers:"
       request.headers.each{|k,v| puts k.to_s+': '+v.to_s}
       puts "\nParameters:"
-      params = params.snakify_for_rb
       params.each{|k,v| puts k.to_s+': '+v.to_s}
       puts("==================")
-      render json: {success: true, flash: "Post Test", id: 999, name: "This is new Item", position: 89}.camelize_for_js
+      case params[:dev_type]
+      when "create"
+        render json: {success: true, flash: "Post Test:create", item: ToDoItem.new(id: 111, name: "This is new Item", position: 89, due_date: Time.now+3.day)}
+      when "update"
+        render json: {success: true, flash: "Post Test:update", item: ToDoItem.new(id: 222, name: "This is updated Item", position: 123, due_date: Time.now+3.day)}
+      when "failed"
+        render_error "Dev Failed!"
+      else
+        render json: {success: true, flash: "Post Test:not specified", item: ToDoItem.new(id: 222, name: "This is updated Item", position: 123, due_date: Time.now+3.day)}
+      end
     else
       render_error "Unauthorized"
     end

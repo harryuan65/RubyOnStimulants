@@ -130,15 +130,28 @@ var debugItem = null;
       })
     })
   }
-  $.fn.updateListItemByData = function({id, name, position, state, description, dueDate}, isNew = false){
-    let listRow = this;
-    let itemName = $('.item-name', listRow);
-
-    itemName.text(name);
+  $.fn.updateListItemByData = function({id, name, position, to_do_list_id, state, description, due_date}, isNew = false){
     if(isNew){
-      let itemNum = $('.item-num', listRow);
+      let listRow = $(this);
+      let newListRow = listRow.clone();
+      let itemNum = $('.item-num', newListRow);
       itemNum.text(position);
-      listRow.prop('id', `item-${id}`);
+
+      let itemName = $('.item-name', newListRow);
+      itemName.text(name);
+      itemName.attr('data-current', name);
+
+      newListRow.attr('id', `item-${id}`);
+      newListRow.setCreateUpdateItemByName(to_do_list_id)
+      listRow.find('span.item-name').text('');
+      listRow.before(newListRow);
+    }
+    else{
+      let listRow = $(this);
+      let itemName = $('.item-name', listRow);
+      itemName.text(name);
+      itemName.attr('data-current', name);
+      //TODO: Update other attributes
     }
   }
   $.fn.setCreateUpdateItemByName = function(to_do_list_id){
@@ -151,29 +164,44 @@ var debugItem = null;
     listItemName.blur(function(event){
       //注意item-id 在listRow上面，但是要更新的值還有比較的attr: data-current在listName裡面。
       let updatedItemName = $(event.target);
-      let newInput = updatedItemName.text();
-
-      let dataCurrent = updatedItemName.attr('data-current');
+      let newInput = updatedItemName.text(),
+          dataCurrent = updatedItemName.attr('data-current');
+      console.log(`newInput:${newInput}, dataCurrent: ${dataCurrent}`);
 
       if (newInput !== dataCurrent){
-        listRow.parent().setLoading(true);
+        let list = $(`#list-${to_do_list_id}`);
+        list.setLoading(true);
         if(listRow.attr('id')==="item-new"){
-          let params = {method: "POST", url: "/post_test", to_do_list_id, name: newInput}
-          // $.ajax(Object.assign(params, {dataType: "json"}))
-          // .done(function({flash, listItem, error}){
-
-          //   setFlash(true, flash);
-          // })
-          // .fail(function(jqXHR){
-          //   let errorMsg = jqXHR.responseJSON.error;
-          //   setFlash(false, errorMsg);
-          //   listRow.parent().setLoading(false);
-          // })
+          let params = {method: "POST", url: "/post_test", data: {to_do_list_id, name: newInput, dev_type: "create"}}
+          $.ajax(Object.assign(params, {dataType: "json"}))
+          .done(function({flash, item, error}){
+            console.log(JSON.stringify({flash, item, error}, null, 2));
+            listRow.updateListItemByData(item, true);
+            setFlash(true, flash);
+            list.setLoading(false);
+          })
+          .fail(function(jqXHR){
+            let errorMsg = jqXHR.responseJSON.error;
+            setFlash(false, errorMsg);
+            list.setLoading(false);
+          })
           console.log("to create with ", JSON.stringify(params, null, 2));
         }
         else{
-          let params = {method: "PUT", url: "/post_test", to_do_list_id, name: newInput}
+          let params = {method: "POST", url: "/post_test", data: {to_do_list_id, name: newInput, dev_type: "update"}}
           console.log("to update with ", JSON.stringify(params, null, 2));
+          $.ajax(Object.assign(params, {dataType: "json"}))
+          .done(function({flash, item, error}){
+            console.log(JSON.stringify({flash, item, error}, null, 2));
+            listRow.updateListItemByData(item);
+            setFlash(true, flash);
+            list.setLoading(false);
+          })
+          .fail(function(jqXHR){
+            let errorMsg = jqXHR.responseJSON.error;
+            setFlash(false, errorMsg);
+            list.setLoading(false);
+          })
         }
       }
     })

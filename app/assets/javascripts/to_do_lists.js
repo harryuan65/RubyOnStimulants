@@ -36,7 +36,7 @@ var savedListNamesMapping = {};
     current.removeClass("display");
     other.addClass("display");
   }
-  $.fn.updateByData = function(isNew=false, listData){
+  $.fn.updateByData = function(listData, isNew=false){
     let list = this;
     let {id, name, bgColor} = listData;
     $('.list-name', list).val(name);
@@ -48,6 +48,7 @@ var savedListNamesMapping = {};
     }
 
     list.setLoading(false);
+    saveListNameMapping(); // update restoration mapping;
   }
   $.fn.setCreateListByName = function(){
     let newList = this;
@@ -72,7 +73,7 @@ var savedListNamesMapping = {};
           console.log(JSON.stringify(data, null, 2));
           if(data.success){
             let listData = data.list;
-            newList.updateByData(true, listData);
+            newList.updateByData(listData, true);
             setFlash(true, data.flash);
           }else{
             alert(data.error);
@@ -80,7 +81,7 @@ var savedListNamesMapping = {};
         })
         .fail(function(jqXHR){
           let errorMsg = jqXHR.responseJSON.error;
-          // console.error(JSON.stringify(jqXHR.responseJSON, null, 2));
+
           setFlash(false, errorMsg);
           newList.setLoading(false);
         })
@@ -94,7 +95,9 @@ var savedListNamesMapping = {};
       let listName = $(event.target);
       let inputName = listName.val();
       let listId = list.prop('id').split("list-")[1];
-      console.log(`listId=${listId}`);
+      if(inputName===savedListNamesMapping[listId]){
+        return;
+      }
       listId = parseInt(listId);
 
       list.setLoading(true);
@@ -118,25 +121,39 @@ var savedListNamesMapping = {};
         let errorMsg = jqXHR.responseJSON.error;
         // update failed, restore list name
         let listIdStr = list.prop('id').split('list-')[1];
-        alert(`restoring ${listIdStr}`);
+
         listName.val(savedListNamesMapping[listIdStr]);
         setFlash(false, errorMsg);
         list.setLoading(false);
       })
     })
   }
-})( jQuery );
-function pretendToLoadNewList(){
-  // fuck you and i will see you tomorrow
-  // $('#list-new').animate({backgroundColor: "#daf7a6"},2000,function(ev){$(ev.target).setLoading(false);});
+  $.fn.setCreateUpdateItemByName = function(){
+    let listRow = this;
+    let listItemName = $('.item-name', listRow);
+    let currentText = listItemName.text();
+    //注意這邊是設定全部。
+    listItemName.prop('original-text', currentText);
 
-  $('#list-new').css('background-color', "#daf7a6");
-  $('#list-new').setLoading(false);
-}
+    listItemName.blur(function(event){
+      let updatedItemName = $(event.target);
+      let newInput = updatedItemName.text();
+      if (newInput !== updatedItemName.attr('original-text')){
+        let listId = parseInt(listRow.prop('id').split('list-')[1]);
+        if(updatedItemName.prop('id')==="new"){
+          let params = {method: "POST", toDoListId: listId, name: ""}
+        }
+        else{
+
+        }
+      }
+    })
+  }
+})( jQuery );
+
 function setUpListener(){
   setUpSelectList();
   setUpNewListAction();
-  setUpListEditEvents();
   saveListNameMapping();
   // $('input[type="checkbox"].item-check').on('change', function(e){
   //   let checkbox = $(this);
@@ -167,22 +184,15 @@ function setUpNewListAction(){
   // one: fires only once
   $("#list-new").one('click', function(){
     let newList = $(this);
-    $('.content', newList).removeClass("empty-with-a-plus")
+    $('.content', newList).removeClass("empty-with-a-plus");
     $('.add-new-list', newList).toggle();
 
     let newListName = $('<input type="text" name="name" class="list-name notosans text-2b" autocomplete="off" placeholder="New List Name"/>');
     newList.prepend(newListName);
     newList.setCreateListByName();
-    // renderItems('new', []);
     newListName.focus();
-  })
-  // $("#list-new").on('click', function(){
-  //   let newList = $(this);
-  //   let newListName = $("input[type='text'].list-name", newList);
-  //   newListName.focus();
-  // })
-}
-function setUpListEditEvents(){
+  });
+
   // 這樣是錯的: $(".list:not(#list-new)").setUpdateListName();
   //自己定義的個別function，就要個別處理。不然大家都吃到第一個list
   $(".list:not(#list-new)").each(function(){
@@ -199,6 +209,46 @@ function saveListNameMapping(){
     savedListNamesMapping[listIdStr] = listName.val();
   })
 }
+function createItemRow({id, name, position}){
+  var listRow = document.createElement("div");
+  listRow.classList.add("list-row");
+  listRow.id = id;
+
+  var itemDrag = document.createElement("span");
+  itemDrag.classList.add("item-drag");
+  var dragTextnode = document.createTextNode("\u2630")
+  itemDrag.appendChild(dragTextnode);
+
+  var itemCheck = document.createElement("input");
+  itemCheck.setAttribute('type', 'checkbox')
+  itemCheck.classList.add("item-check");
+
+  var itemNum = document.createElement("span");
+  itemNum.classList.add("item-num");
+  itemNum.classList.add("notosans");
+  itemNum.innerText = position ? position : '+' ;
+
+  var itemName = document.createElement("span");
+  itemName.classList.add("item-name");
+  itemName.classList.add("notosans");
+  itemName.contentEditable = true;
+  itemName.setAttribute('data-current', name);
+  itemName.innerText = name;
+
+  var itemSelect = document.createElement("span");
+  itemSelect.classList.add("item-show-toggle");
+
+  itemDrag.addEventListener('mousedown', showGrabbingCursor)
+  itemDrag.addEventListener('mouseup', hideGrabbingCursor)
+
+  listRow.appendChild(itemDrag);
+  listRow.appendChild(itemNum);
+  listRow.appendChild(itemCheck);
+  listRow.appendChild(itemName);
+  listRow.appendChild(itemSelect);
+  listRow.setCreateUpdateItemByName();
+  return listRow;
+}
 function renderItems(list_id, data){
   // console.log(JSON.stringify(data, null, 2));
   list = document.getElementById(`list-${list_id}`);
@@ -207,55 +257,11 @@ function renderItems(list_id, data){
   // listBodyContent.style.backgroundColor = list.style.backgroundColor; // 確保ToDoItem有背景顏色，才不會一開始loading就被透過來看到（其實loading在下面)
   // push an empty item for new
   if(!data.find(e=>{return e.unDraggable===true})){
-    data.push({unDraggable: true, position: '+', name: ''});
+    data.push({unDraggable: true, id: 'new',newText: '+', name: ''});
   }
 
   data.forEach(item=>{
-    var listRow = document.createElement("div");
-    listRow.classList.add("list-row");
-    listRow.id = item.id;
-
-    var itemDrag = document.createElement("span");
-    itemDrag.classList.add("item-drag");
-    var dragTextnode = document.createTextNode("\u2630")
-    itemDrag.appendChild(dragTextnode);
-
-    var itemCheck = document.createElement("input");
-    itemCheck.setAttribute('type', 'checkbox')
-    itemCheck.classList.add("item-check");
-
-    var itemNum = document.createElement("span");
-    itemNum.classList.add("item-num");
-    itemNum.classList.add("notosans");
-    itemNum.innerText = item.position;
-
-    var itemName = document.createElement("span");
-    itemName.classList.add("item-name");
-    itemName.classList.add("notosans");
-    itemName.contentEditable = true;
-    itemName.setAttribute('data-current', '');
-    itemName.onblur = (event)=>{
-      let itemName = event.target;
-      let nameText = itemName.innerText;
-      if(nameText===itemName.getAttribute('data-current')){
-      }else{
-        itemName.setAttribute('data-current', nameText);
-        console.log(`new itemName${listRow.id} value is ${nameText}`);
-      }
-    };
-    itemName.innerText = item.name;
-
-    var itemSelect = document.createElement("span");
-    itemSelect.classList.add("item-show-toggle");
-
-    itemDrag.addEventListener('mousedown', showGrabbingCursor)
-    itemDrag.addEventListener('mouseup', hideGrabbingCursor)
-
-    listRow.appendChild(itemDrag);
-    listRow.appendChild(itemNum);
-    listRow.appendChild(itemCheck);
-    listRow.appendChild(itemName);
-    listRow.appendChild(itemSelect);
+    var listRow = createItemRow(item);
 
     listBodyContent.appendChild(listRow)
 

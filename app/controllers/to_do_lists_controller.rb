@@ -26,7 +26,7 @@ class ToDoListsController < ApplicationController
     name = params[:name]
     id = params[:id]
 
-    @list = ToDoList.find(:id)
+    @list = ToDoList.find(id)
     @list.update!(name: name)
 
     render json: {success: true, flash: I18n.t("controller.to_do_lists.update_success", name: name), list: @list.as_json}.camelize_for_js

@@ -119,7 +119,10 @@ class ApplicationController < ActionController::Base
   end
 
   def route_not_found
-    render 'shared/route_not_found', status: :not_found
+    respond_to do |format|
+      format.html {render 'shared/route_not_found', status: :not_found}
+      format.js { route_not_found_json(ActionController::RoutingError.new("Route Not Found")) }
+    end
   end
 
   def render_error(msg, status: :bad_request)

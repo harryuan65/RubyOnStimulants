@@ -253,6 +253,7 @@ en:
       record_not_found: "Resource not found"
       record_invalid: "Record Invalid"
       internal_server_error: "Server Error"
+      route_not_found: "Not Found"
     title:
       sign_in: "Login"
       hello: "Hello world"
@@ -280,6 +281,9 @@ en:
     to_do_lists:
       create_success: "Successfully created list \"%{name}\""
       update_success: "Successfully updated list \"%{name}\""
+    to_do_items:
+      create_success: "Successfully created item \"%{name}\""
+      update_success: "Successfully updated item \"%{name}\""
   date:
     today:
       minutes_ago: '%{minutes} minute(s) ago'

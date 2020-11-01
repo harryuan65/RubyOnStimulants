@@ -1,7 +1,8 @@
-var dragging, draggedOver;
+var draggingItem, draggedOverItem;
 var removeOtherListsVersion = true;
 var savedListNamesMapping = {};
 var debugItem = null;
+var currentData = {};
 (function( $ ){
   $.fn.setSelectedList = function() {
     let list = this;
@@ -132,21 +133,22 @@ var debugItem = null;
   }
   $.fn.updateListItemByData = function({id, name, position, to_do_list_id, state, description, due_date}, isNew = false){
     if(isNew){
-      let listRow = $(this);
-      let newListRow = listRow.clone();
-      let itemNum = $('.item-num', newListRow);
-      itemNum.text(position);
+      // let listRow = $(this);
+      // let newListRow = listRow.clone();
+      // let itemNum = $('.item-num', newListRow);
+      // itemNum.text(position);
 
-      let itemName = $('.item-name', newListRow);
-      itemName.text(name);
-      itemName.attr('data-current', name);
+      // let itemName = $('.item-name', newListRow);
+      // itemName.text(name);
+      // itemName.attr('data-current', name);
 
-      newListRow.attr('id', `item-${id}`);
-      newListRow.setCreateUpdateItemByName(to_do_list_id)
-      listRow.find('span.item-name').text('');
-      listRow.before(newListRow);
+      // newListRow.attr('id', `item-${id}`);
+      // newListRow.setCreateUpdateItemByName(to_do_list_id)
+      // listRow.find('span.item-name').text('');
+      // listRow.before(newListRow);
     }
     else{
+      console.log(`Updateing ListRow: id:${id}, name:${name}, position:${position}`)
       let listRow = $(this);
       let itemName = $('.item-name', listRow);
       itemName.text(name);
@@ -172,23 +174,30 @@ var debugItem = null;
         let list = $(`#list-${to_do_list_id}`);
         list.setLoading(true);
         if(listRow.attr('id')==="item-new"){
-          let params = {method: "POST", url: "/post_test", data: {to_do_list_id, name: newInput, dev_type: "create"}}
+          let params = {method: "POST", url: `/to_do_lists/${to_do_list_id}/to_do_items`, data: {to_do_item: {name: newInput}}}
           $.ajax(Object.assign(params, {dataType: "json"}))
           .done(function({flash, item, error}){
             console.log(JSON.stringify({flash, item, error}, null, 2));
-            listRow.updateListItemByData(item, true);
+            // 沿用createItemRow???
+            let newListRow = createItemRow(Object.assign(item,{to_do_list_id}));
+            currentData[to_do_list_id].splice(currentData[to_do_list_id].size-2, 0 ,item);
+            listRow.before(newListRow);
+
             setFlash(true, flash);
             list.setLoading(false);
+            updatedItemName.text(''); //這是那個空的 + new list row
           })
           .fail(function(jqXHR){
             let errorMsg = jqXHR.responseJSON.error;
             setFlash(false, errorMsg);
             list.setLoading(false);
+            updatedItemName.text('');
           })
           console.log("to create with ", JSON.stringify(params, null, 2));
         }
         else{
-          let params = {method: "POST", url: "/post_test", data: {to_do_list_id, name: newInput, dev_type: "update"}}
+          let itemId = parseInt(listRow.attr('id').split('item-')[1]);
+          let params = {method: "PUT", url: `/to_do_lists/${to_do_list_id}/to_do_items/${itemId}`, data: {to_do_item: {name: newInput}}}
           console.log("to update with ", JSON.stringify(params, null, 2));
           $.ajax(Object.assign(params, {dataType: "json"}))
           .done(function({flash, item, error}){
@@ -198,9 +207,11 @@ var debugItem = null;
             list.setLoading(false);
           })
           .fail(function(jqXHR){
+            console.log(JSON.stringify(jqXHR, null ,2))
             let errorMsg = jqXHR.responseJSON.error;
             setFlash(false, errorMsg);
             list.setLoading(false);
+            updatedItemName.text(dataCurrent);
           })
         }
       }
@@ -266,8 +277,13 @@ function saveListNameMapping(){
     savedListNamesMapping[listIdStr] = listName.val();
   })
 }
-function createItemRow({to_do_list_id, id, name, position}){
+function createItemRow({to_do_list_id, id, name, position, unDraggable}){
+  var list = document.getElementById(`list-${to_do_list_id}`);
   var listRow = document.createElement("div");
+
+  if(list.classList.contains("selected")){
+    listRow.classList.add("grow");
+  }
   listRow.classList.add("list-row");
   listRow.id = `item-${id}`;
 
@@ -306,10 +322,24 @@ function createItemRow({to_do_list_id, id, name, position}){
   listRow.appendChild(itemSelect);
   // console.log("List Id is ", to_do_list_id)
   $(listRow).setCreateUpdateItemByName(to_do_list_id);
+  if(!unDraggable){
+    $(listRow).draggable({
+      drag: setDragging,
+      stop: function(ev){
+        renderItems(to_do_list_id, currentData[to_do_list_id])
+      },
+      cancel: '.list-row > .item-check, .list-row > .item-name, .list-row > .item-show-toggle', // use this to keep children from being dragged and disabled(cannot select, etc.)
+    })
+    $(listRow).droppable({
+      over: function(ev){draggingOver(ev, currentData[to_do_list_id])},
+      out: draggingOut,
+      drop: function(ev){compare(currentData[to_do_list_id])}
+    });
+  }
   return listRow;
 }
 function renderItems(list_id, data){
-
+  currentData[list_id] = data;
   list = document.getElementById(`list-${list_id}`);
   listBodyContent = list.querySelector('.list-body .body-content-base.content');
   listBodyContent.innerText = '';
@@ -321,27 +351,7 @@ function renderItems(list_id, data){
 
   data.forEach(item=>{
     var listRow = createItemRow(item);
-
     listBodyContent.appendChild(listRow)
-
-    if(list.classList.contains("selected")){
-      listRow.classList.add("grow");
-    }
-
-    if(item.unDraggable){return;}
-
-    $(listRow).draggable({
-      drag: setDragging,
-      stop: function(ev){
-        renderItems(list_id, data)
-      },
-      cancel: '.list-row > .item-check, .list-row > .item-name, .list-row > .item-show-toggle', // use this to keep children from being dragged and disabled(cannot select, etc.)
-    })
-    $(listRow).droppable({
-      over: function(ev){draggingOver(ev, data)},
-      out: draggingOut,
-      drop: function(ev){compare(data)}
-    });
   })
   dragging = null
   draggedOver = null
@@ -349,6 +359,7 @@ function renderItems(list_id, data){
 }
 
 function compare(dataInTheList){
+  console.log(`draggingItem=${draggingItem}, draggedOverItem=${draggedOverItem}`)
   draggingItem = dataInTheList.find(obj => obj.position==dragging);
   draggedOverItem = dataInTheList.find(obj => obj.position==draggedOver);
   if(draggingItem.to_do_list_id!==draggedOverItem.to_do_list_id){return ;}

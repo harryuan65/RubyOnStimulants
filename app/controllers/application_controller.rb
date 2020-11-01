@@ -68,16 +68,7 @@ class ApplicationController < ActionController::Base
       puts "\nParameters:"
       params.each{|k,v| puts k.to_s+': '+v.to_s}
       puts("==================")
-      case params[:dev_type]
-      when "create"
-        render json: {success: true, flash: "Post Test:create", item: ToDoItem.new(id: 111, name: "This is new Item", position: 89, due_date: Time.now+3.day)}
-      when "update"
-        render json: {success: true, flash: "Post Test:update", item: ToDoItem.new(id: 222, name: "This is updated Item", position: 123, due_date: Time.now+3.day)}
-      when "failed"
-        render_error "Dev Failed!"
-      else
-        render json: {success: true, flash: "Post Test:not specified", item: ToDoItem.new(id: 222, name: "This is updated Item", position: 123, due_date: Time.now+3.day)}
-      end
+      render json: {success: true}
     else
       render_error "Unauthorized"
     end

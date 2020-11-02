@@ -8,11 +8,17 @@
   @include flex(row, center, center);
   @include size(100%, 100%);
   margin-top: 30px;
+  margin-left: 120px;
+
+  &.has-selected-list{
+    margin-left: 0px;
+  }
 }
 $list-seleted-grow-time: .1s;
 $fade-time: .1s;
 $input-disable-time: .1s;
 .list{
+  margin-left: -120px;
   @include flex(column, flex-start, center);
   background-color: rgb(255, 241, 164);
   width: 250px;

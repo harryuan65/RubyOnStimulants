@@ -1,12 +1,12 @@
 var draggingItem, draggedOverItem;
 var removeOtherListsVersion = true;
 var savedListNamesMapping = {};
-var debugItem = null;
 var currentData = {};
 (function( $ ){
   $.fn.setSelectedList = function() {
     let list = this;
     list.addClass('selected');
+    $('#list-container').addClass("has-selected-list");
     $(".list-row", list).addClass("grow");
     list.css('margin-left', '0');
     list.css('margin-right', '0');
@@ -45,7 +45,7 @@ var currentData = {};
     let {id, name, bg_color} = listData;
     $('.list-name', list).val(name);
 
-    if(bgColor){list.css('background-color', bg_color);}
+    if(bg_color){list.css('background-color', bg_color);}
     if(isNew){
       list.prop('id', `list-${id}`);
       renderItems(`${id}`, []);
@@ -177,15 +177,14 @@ var currentData = {};
           let params = {method: "POST", url: `/to_do_lists/${to_do_list_id}/to_do_items`, data: {to_do_item: {name: newInput}}}
           $.ajax(Object.assign(params, {dataType: "json"}))
           .done(function({flash, item, error}){
-            console.log(JSON.stringify({flash, item, error}, null, 2));
-            // 沿用createItemRow???
+            // 沿用createItemRow!
             let newListRow = createItemRow(Object.assign(item,{to_do_list_id}));
-            currentData[to_do_list_id].splice(currentData[to_do_list_id].size-2, 0 ,item);
+            currentData[to_do_list_id].splice(currentData[to_do_list_id].length-1, 0 ,item);
             listRow.before(newListRow);
 
             setFlash(true, flash);
             list.setLoading(false);
-            updatedItemName.text(''); //這是那個空的 + new list row
+            updatedItemName.text(''); //新增完後，+的row要清空留著
           })
           .fail(function(jqXHR){
             let errorMsg = jqXHR.responseJSON.error;
@@ -193,7 +192,7 @@ var currentData = {};
             list.setLoading(false);
             updatedItemName.text('');
           })
-          console.log("to create with ", JSON.stringify(params, null, 2));
+          // console.log("to create with ", JSON.stringify(params, null, 2));
         }
         else{
           let itemId = parseInt(listRow.attr('id').split('item-')[1]);
@@ -219,7 +218,9 @@ var currentData = {};
   }
 })( jQuery );
 
-function setUpListener(){
+function Init(){
+  $('#list-container').removeClass("has-selected-list");
+  renderAllItems();
   setUpSelectList();
   setUpNewListAction();
   saveListNameMapping();
@@ -338,8 +339,17 @@ function createItemRow({to_do_list_id, id, name, position, unDraggable}){
   }
   return listRow;
 }
-function renderItems(list_id, data){
+function saveItem(list_id, data){
   currentData[list_id] = data;
+}
+function renderAllItems(){
+  // let listSize = Object.entries(currentData);
+  for(const [key, value] of Object.entries(currentData) ){
+    renderItems(key, value);
+  }
+  // updateMarginAll(Math.floor(listSize/2), listSize);
+}
+function renderItems(list_id, data){
   list = document.getElementById(`list-${list_id}`);
   listBodyContent = list.querySelector('.list-body .body-content-base.content');
   listBodyContent.innerText = '';
@@ -357,9 +367,8 @@ function renderItems(list_id, data){
   draggedOver = null
 
 }
-
 function compare(dataInTheList){
-  console.log(`draggingItem=${draggingItem}, draggedOverItem=${draggedOverItem}`)
+  // console.log(`draggingItem=${draggingItem.id} ${draggingItem.name}, draggedOverItem=${draggedOverItem.id} ${draggedOverItem.name}`)
   draggingItem = dataInTheList.find(obj => obj.position==dragging);
   draggedOverItem = dataInTheList.find(obj => obj.position==draggedOver);
   if(draggingItem.to_do_list_id!==draggedOverItem.to_do_list_id){return ;}
@@ -407,4 +416,53 @@ function showGrabbingCursor(ev){
 
 function hideGrabbingCursor(ev){
   ev.target.classList.remove("grabbing")
+}
+
+// function updateMarginAll(mid, listSize){
+//   let i = 0;
+//   for(const key of Object.keys(currentData)){
+//     let list = $(`list-${list.id}`);
+//     if(listSize%2==0){
+//       if(i<mid-1){
+//         list.css('margin-right', '-120px');
+//       }
+//       else if(i==mid-1){
+//         list.css('margin-right', '-60px');
+//       }
+//       else if(i==mid){
+//         list.css('margin-left', '-60px');
+//       }
+//       else{
+//         list.css('margin-left', '-120px');
+//       }
+//     }
+//     else{
+//       if(i<mid){
+//         list.css('margin-right', '-120px');
+//       }
+//       else{
+//         list.css('margin-left', '-120px');
+//       }
+//     }
+//   // if is_even
+//   //   if i<mid-1
+//   //     "margin-right: -120px"
+//   //   elsif i==mid-1
+//   //     "margin-right: -60px"
+//   //   elsif i==mid
+//   //     "margin-left: -60px"
+//   //   else
+//   //     "margin-left: -120px"
+//   //   end
+//   // else
+//   //   if i<mid
+//   //     "margin-right: -120px"
+//   //   else
+//   //     "margin-left: -120px"
+//   //   end
+//   // end
+//   }
+// }
+function debugObject(obj){
+  return JSON.stringify(obj, null, 2);
 }

@@ -343,11 +343,9 @@ function saveItem(list_id, data){
   currentData[list_id] = data;
 }
 function renderAllItems(){
-  // let listSize = Object.entries(currentData);
   for(const [key, value] of Object.entries(currentData) ){
     renderItems(key, value);
   }
-  // updateMarginAll(Math.floor(listSize/2), listSize);
 }
 function renderItems(list_id, data){
   list = document.getElementById(`list-${list_id}`);
@@ -418,51 +416,6 @@ function hideGrabbingCursor(ev){
   ev.target.classList.remove("grabbing")
 }
 
-// function updateMarginAll(mid, listSize){
-//   let i = 0;
-//   for(const key of Object.keys(currentData)){
-//     let list = $(`list-${list.id}`);
-//     if(listSize%2==0){
-//       if(i<mid-1){
-//         list.css('margin-right', '-120px');
-//       }
-//       else if(i==mid-1){
-//         list.css('margin-right', '-60px');
-//       }
-//       else if(i==mid){
-//         list.css('margin-left', '-60px');
-//       }
-//       else{
-//         list.css('margin-left', '-120px');
-//       }
-//     }
-//     else{
-//       if(i<mid){
-//         list.css('margin-right', '-120px');
-//       }
-//       else{
-//         list.css('margin-left', '-120px');
-//       }
-//     }
-//   // if is_even
-//   //   if i<mid-1
-//   //     "margin-right: -120px"
-//   //   elsif i==mid-1
-//   //     "margin-right: -60px"
-//   //   elsif i==mid
-//   //     "margin-left: -60px"
-//   //   else
-//   //     "margin-left: -120px"
-//   //   end
-//   // else
-//   //   if i<mid
-//   //     "margin-right: -120px"
-//   //   else
-//   //     "margin-left: -120px"
-//   //   end
-//   // end
-//   }
-// }
 function debugObject(obj){
   return JSON.stringify(obj, null, 2);
 }

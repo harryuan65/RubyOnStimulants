@@ -25,18 +25,10 @@
   <div id="nav-side-menu-container">
    <div class="nav-side-block">
      <h2 class="nav-side-block-title notosans-light text-a9"><%= link_to "News", home_news_path, class: "notosans-light text-d3" %></h2>
-     <h2 class="nav-side-block-title notosans-light text-a9">Articles</h2>
+     <h2 class="nav-side-block-title notosans-light text-a9"><%= link_to "Articles", articles_path, class: "notosans-light text-d3" %></h2>
      <hr class="nav-side-block-hr">
      <div class="nav-side-block-content-container">
        <h3 class="nav-side-block-content"><%= link_to "All", articles_path, class: "notosans-light text-d3" %></h3>
-       <h3 class="nav-side-block-content"><%= link_to "Ruby/Rails", articles_path(category: "ruby"), class: "notosans-light text-d3" %></h3>
-       <h3 class="nav-side-block-content"><%= link_to "Javascript", articles_path(category: "javascript"), class: "notosans-light text-d3" %></h3>
-       <h3 class="nav-side-block-content"><%= link_to "Web Service", articles_path(category: "service"), class: "notosans-light text-d3" %></h3>
-       <h3 class="nav-side-block-content"><%= link_to "Web Design/HTML", articles_path(category: "design"), class: "notosans-light text-d3" %></h3>
-       <% if current_user && current_user.email=="harryuan.65@gmail.com" %>
-         <h3 class="nav-side-block-content"><%= link_to "Todos", articles_path(category: "todo"), class: "notosans-light text-d3" %></h3>
-       <% end %>
-       <!--<h3 class="nav-side-block-content"><%= link_to "✎  ShortNotes", "javascript:void(0)", class: "notosans-light text-d3"%></h3>-->
      </div>
    </div>
 

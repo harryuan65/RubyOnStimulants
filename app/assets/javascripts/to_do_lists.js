@@ -77,6 +77,7 @@ var currentData = {};
           console.log(JSON.stringify(data, null, 2));
           if(data.success){
             let listData = data.list;
+            currentData[listData.id] = [];
             newList.updateListByData(listData, true);
             setFlash(true, data.flash);
           }else{

@@ -3,7 +3,6 @@ class ToDoListsController < ApplicationController
   layout "to_do_lists/layout"
 
   def index
-    puts "Removing #{@remove_id}" if @remove_id
     @lists = ToDoList.includes(:items).all.order(id: :asc)
     @lists = @lists.to_a.push ToDoList.new
     @lists_count = @lists.size

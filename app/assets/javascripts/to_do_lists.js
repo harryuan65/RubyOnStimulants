@@ -65,7 +65,7 @@ var currentData = {};
 
       let inputName = newListName.val();
       if(inputName.length>0){
-        console.log('create with ', inputName);
+        // console.log('create with ', inputName);
         // ajax to create list
         newList.setLoading(true);
 
@@ -76,7 +76,7 @@ var currentData = {};
           dataType: "json"
         })
         .done(function(data){
-          console.log(JSON.stringify(data, null, 2));
+          // console.log(JSON.stringify(data, null, 2));
           if(data.success){
             let listData = data.list;
             currentData[listData.id] = [];
@@ -135,7 +135,7 @@ var currentData = {};
     })
   }
   $.fn.updateListItemByData = function({id, name, position, to_do_list_id, state, description, due_date}){
-    console.log(`Updateing ListRow: id:${id}, name:${name}, position:${position}`)
+    // console.log(`Updateing ListRow: id:${id}, name:${name}, position:${position}`)
     let listRow = $(this);
     let itemName = $('.item-name', listRow);
     itemName.text(name);
@@ -154,7 +154,7 @@ var currentData = {};
       let updatedItemName = $(event.target);
       let newInput = updatedItemName.text(),
           dataCurrent = updatedItemName.attr('data-current');
-      console.log(`newInput:${newInput}, dataCurrent: ${dataCurrent}`);
+      // console.log(`newInput:${newInput}, dataCurrent: ${dataCurrent}`);
 
       if (newInput !== dataCurrent){
         let list = $(`#list-${to_do_list_id}`);
@@ -184,16 +184,16 @@ var currentData = {};
           let itemId = parseInt(listRow.attr('id').split('item-')[1]);
           if(newInput==""){
             let params = {method: "DELETE", url: `/to_do_lists/${to_do_list_id}/to_do_items/${itemId}`}
-            console.log("to delete with ", JSON.stringify(params, null, 2));
+            // console.log("to delete with ", JSON.stringify(params, null, 2));
             $.ajax(Object.assign(params, {dataType: "json"}))
             .done(function({flash, item, error}){
-              console.log(JSON.stringify({flash, item, error}, null, 2));
+              // console.log(JSON.stringify({flash, item, error}, null, 2));
               listRow.remove();
               setFlash(true, flash);
               list.setLoading(false);
             })
             .fail(function(jqXHR){
-              console.log(JSON.stringify(jqXHR, null ,2))
+              // console.log(JSON.stringify(jqXHR, null ,2))
               let errorMsg = jqXHR.responseJSON.error;
               setFlash(false, errorMsg);
               list.setLoading(false);
@@ -205,13 +205,13 @@ var currentData = {};
             console.log("to update with ", JSON.stringify(params, null, 2));
             $.ajax(Object.assign(params, {dataType: "json"}))
             .done(function({flash, item, error}){
-              console.log(JSON.stringify({flash, item, error}, null, 2));
+              // console.log(JSON.stringify({flash, item, error}, null, 2));
               listRow.updateListItemByData(item);
               setFlash(true, flash);
               list.setLoading(false);
             })
             .fail(function(jqXHR){
-              console.log(JSON.stringify(jqXHR, null ,2))
+              // console.log(JSON.stringify(jqXHR, null ,2))
               let errorMsg = jqXHR.responseJSON.error;
               setFlash(false, errorMsg);
               list.setLoading(false);

@@ -18,8 +18,8 @@
               <% case article.state %>
               <% when "draft"%>
                 <%= article.draft?? '<span class="draft notosans-light text-dk">draft</span>'.html_safe : "" %>
-              <% when "not_public"%>
-                <%= article.not_public?? '<span class="private notosans-light text-dk">private</span>'.html_safe : "" %>
+              <% when "hidden"%>
+                <%= article.hidden?? '<span class="private notosans-light text-dk">private</span>'.html_safe : "" %>
               <% end %>
             </div>
             <!-- <span class="article-description subtitle notosans-light text-dk"><%= article.subtitle %></span>-->

@@ -5,7 +5,7 @@ class ArticlesController < ApplicationController
     @offset = params[:offset] || 0
     if current_user
       @articles = Article.includes(:user, :last_comment, :tags).where(state: :published).or(
-                    Article.includes(:user, :last_comment, :tags).where(state: [:draft, :not_public], user_id: current_user.id)
+                    Article.includes(:user, :last_comment, :tags).where(state: [:draft, :hidden], user_id: current_user.id)
                   ).order(id: :desc).limit(50).offset(@offset)
     else
       @articles = Article.includes(:user, :last_comment, :tags).where(state: :published).order(id: :desc).limit(50).offset(@offset)
@@ -39,7 +39,7 @@ class ArticlesController < ApplicationController
   def show
     @article = Article.find(params[:id])
     @is_author = current_user && current_user.email == @article.user.email
-    if !@is_author && @article.not_public?
+    if !@is_author && @article.hidden?
       @article = nil
       return render "shared/route_not_found"
     end

@@ -66,6 +66,61 @@ class HomeController < ApplicationController
   def news_list
     [
       {
+        title: "Reanimate To do list for smoother experience and update on blur",
+        description: "fix a lot of logic for to do list",
+        date: "Oct 29 ~ Nov 1, 2020"
+      },
+      {
+        title: "Introduce Rspec for to do list/items",
+        description: "feat: install rspec",
+        date: "Oct 29, 2020"
+      },
+      {
+        title: "Switch category field to tags for articles",
+        description: "feat: gutentag",
+        date: "Oct 26, 2020"
+      },
+      {
+        title: "Working todolist version1 with SJR",
+        description: "feat: using SJR",
+        date: "Oct 26, 2020"
+      },
+      {
+        title: "Add new todo list animation",
+        description: "feat: replot animation",
+        date: "Oct 26, 2020"
+      },
+      {
+        title: "Adjust article container structure",
+        description: "feat: adjust article container",
+        date: "Oct 25, 2020"
+      },
+      {
+        title: "Implement to do list mockup into rails",
+        description: "feat: view, controller, routes, blablabla...",
+        date: "Oct 25, 2020"
+      },
+      {
+        title: "Add jQuery in to do list mockup",
+        description: "feat: jquery ui",
+        date: "Oct 24, 2020"
+      },
+      {
+        title: "Finish working to do list prototype",
+        description: "feat: pure html/css/javascript",
+        date: "Oct 24, 2020"
+      },
+      {
+        title: "Recreate To-do list, update markdown parser helper",
+        description: "feat: drop and create with new fields",
+        date: "Oct 23, 2020"
+      },
+      {
+        title: "Add private state for article, update UI state style",
+        description: "feat: Update state in articles new and edit",
+        date: "Oct 18, 2020"
+      },
+      {
         title: "Add private state for article, update UI state style",
         description: "feat: Update state in articles new and edit",
         date: "Oct 18, 2020"
@@ -86,14 +141,14 @@ class HomeController < ApplicationController
         date: "Oct 14, 2020"
       },
       {
-        title: "Markdown style and call method",
-        description: "feat: generalize markdown, change pre inline code style",
-        date: "Oct 1 ,2020"
-      },
-      {
         title: "Feature: Expose ColorPicker",
         description: "feat: expose color picker, about me link",
         date: "Oct 8, 2020"
+      },
+      {
+        title: "Markdown style and call method",
+        description: "feat: generalize markdown, change pre inline code style",
+        date: "Oct 1 ,2020"
       },
       {
         title: "Reset root path",

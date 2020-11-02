@@ -10,11 +10,6 @@ class ToDoItemsController < ApplicationController
   end
 
   def update
-    puts "================"
-    puts to_do_item_params
-    puts params
-    puts "================"
-    puts params[:id]
     id = params[:id]
     @item = ToDoItem.find id
     @item.update!(to_do_item_params)
@@ -22,6 +17,12 @@ class ToDoItemsController < ApplicationController
     render json: {flash: I18n.t('controller.to_do_items.update_success', name: @item.name), item: @item}
   end
 
+  def destroy
+    id = params[:id]
+    @item = ToDoItem.includes(:list).find id
+    @item.destroy
+    render json: {flash: I18n.t('controller.to_do_items.delete_success', name: @item.name)}
+  end
   private
 
   def to_do_item_params
@@ -30,7 +31,7 @@ class ToDoItemsController < ApplicationController
 
   def set_user
     if current_user
-      @current_user = User.find_by(email: current_user.email)
+      @current_user = current_user
     else
       redirect_to new_user_session_path
     end

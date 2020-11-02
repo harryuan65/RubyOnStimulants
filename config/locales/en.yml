@@ -284,6 +284,7 @@ en:
     to_do_items:
       create_success: "Successfully created item \"%{name}\""
       update_success: "Successfully updated item \"%{name}\""
+      delete_success: "Successfully deleted item \"%{name}\""
   date:
     today:
       minutes_ago: '%{minutes} minute(s) ago'

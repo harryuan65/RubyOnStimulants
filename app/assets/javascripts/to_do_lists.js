@@ -132,30 +132,13 @@ var currentData = {};
       })
     })
   }
-  $.fn.updateListItemByData = function({id, name, position, to_do_list_id, state, description, due_date}, isNew = false){
-    if(isNew){
-      // let listRow = $(this);
-      // let newListRow = listRow.clone();
-      // let itemNum = $('.item-num', newListRow);
-      // itemNum.text(position);
-
-      // let itemName = $('.item-name', newListRow);
-      // itemName.text(name);
-      // itemName.attr('data-current', name);
-
-      // newListRow.attr('id', `item-${id}`);
-      // newListRow.setCreateUpdateItemByName(to_do_list_id)
-      // listRow.find('span.item-name').text('');
-      // listRow.before(newListRow);
-    }
-    else{
-      console.log(`Updateing ListRow: id:${id}, name:${name}, position:${position}`)
-      let listRow = $(this);
-      let itemName = $('.item-name', listRow);
-      itemName.text(name);
-      itemName.attr('data-current', name);
-      //TODO: Update other attributes
-    }
+  $.fn.updateListItemByData = function({id, name, position, to_do_list_id, state, description, due_date}){
+    console.log(`Updateing ListRow: id:${id}, name:${name}, position:${position}`)
+    let listRow = $(this);
+    let itemName = $('.item-name', listRow);
+    itemName.text(name);
+    itemName.attr('data-current', name);
+    //TODO: Update other attributes
   }
   $.fn.setCreateUpdateItemByName = function(to_do_list_id){
     let listRow = this;
@@ -197,22 +180,42 @@ var currentData = {};
         }
         else{
           let itemId = parseInt(listRow.attr('id').split('item-')[1]);
-          let params = {method: "PUT", url: `/to_do_lists/${to_do_list_id}/to_do_items/${itemId}`, data: {to_do_item: {name: newInput}}}
-          console.log("to update with ", JSON.stringify(params, null, 2));
-          $.ajax(Object.assign(params, {dataType: "json"}))
-          .done(function({flash, item, error}){
-            console.log(JSON.stringify({flash, item, error}, null, 2));
-            listRow.updateListItemByData(item);
-            setFlash(true, flash);
-            list.setLoading(false);
-          })
-          .fail(function(jqXHR){
-            console.log(JSON.stringify(jqXHR, null ,2))
-            let errorMsg = jqXHR.responseJSON.error;
-            setFlash(false, errorMsg);
-            list.setLoading(false);
-            updatedItemName.text(dataCurrent);
-          })
+          if(newInput==""){
+            let params = {method: "DELETE", url: `/to_do_lists/${to_do_list_id}/to_do_items/${itemId}`}
+            console.log("to delete with ", JSON.stringify(params, null, 2));
+            $.ajax(Object.assign(params, {dataType: "json"}))
+            .done(function({flash, item, error}){
+              console.log(JSON.stringify({flash, item, error}, null, 2));
+              listRow.remove();
+              setFlash(true, flash);
+              list.setLoading(false);
+            })
+            .fail(function(jqXHR){
+              console.log(JSON.stringify(jqXHR, null ,2))
+              let errorMsg = jqXHR.responseJSON.error;
+              setFlash(false, errorMsg);
+              list.setLoading(false);
+              updatedItemName.text(dataCurrent);
+            })
+          }
+          else{
+            let params = {method: "PUT", url: `/to_do_lists/${to_do_list_id}/to_do_items/${itemId}`, data: {to_do_item: {name: newInput}}}
+            console.log("to update with ", JSON.stringify(params, null, 2));
+            $.ajax(Object.assign(params, {dataType: "json"}))
+            .done(function({flash, item, error}){
+              console.log(JSON.stringify({flash, item, error}, null, 2));
+              listRow.updateListItemByData(item);
+              setFlash(true, flash);
+              list.setLoading(false);
+            })
+            .fail(function(jqXHR){
+              console.log(JSON.stringify(jqXHR, null ,2))
+              let errorMsg = jqXHR.responseJSON.error;
+              setFlash(false, errorMsg);
+              list.setLoading(false);
+              updatedItemName.text(dataCurrent);
+            })
+          }
         }
       }
     })

@@ -250,6 +250,7 @@ zh-TW:
     to_do_items:
       create_success: "成功新增項目 \"%{name}\""
       update_success: "成功更新項目 \"%{name}\""
+      delete_success: "成功刪除項目 \"%{name}\""
   date:
     today:
       minutes_ago: '%{minutes} 分鐘前'

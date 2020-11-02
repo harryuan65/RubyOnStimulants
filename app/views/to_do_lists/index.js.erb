@@ -1,6 +1,3 @@
-<% if @remove_id %>
-  delete currentData("<%=@remove_id%>")
-<% end %>
 $("#list-container").addClass("fade-out");
 $("#list-container").on('animationend', function(){
   if (event.animationName !== 'fade-out') {

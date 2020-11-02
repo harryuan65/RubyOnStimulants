@@ -3,7 +3,6 @@ class ToDoListsController < ApplicationController
   layout "to_do_lists/layout"
 
   def index
-    @remove_id = params[:remove_id]
     puts "Removing #{@remove_id}" if @remove_id
     @lists = ToDoList.includes(:items).all.order(id: :asc)
     @lists = @lists.to_a.push ToDoList.new
@@ -38,7 +37,7 @@ class ToDoListsController < ApplicationController
     id = params[:id]
     @list = ToDoList.find(id)
     @list.destroy
-    redirect_to to_do_lists_path, remove_id: @list.id, format: :js, notice: I18n.t("controller.to_do_lists.delete_success", name: @list.name)
+    redirect_to to_do_lists_path, format: :js, notice: I18n.t("controller.to_do_lists.delete_success", name: @list.name)
   end
   private
 

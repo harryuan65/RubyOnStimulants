@@ -11,16 +11,49 @@ module Error
 
     private
     def record_not_found_json(exception)
-      render json: {flash: I18n.t('controller.general.record_not_found'), error: exception.to_s}, status: :not_found
+      status = :not_found
+      respond_to do |format|
+        format.html {
+          @status = Rack::Utils::SYMBOL_TO_STATUS_CODE[status]
+          @message = I18n.t('controller.general.record_not_found')
+          render json: "shared/result", flash: @message
+        }
+        format.json {render json: {flash: I18n.t('controller.general.record_not_found'), error: exception.to_s}, status: status}
+      end
     end
     def record_invalid_json(exception)
-      render json: {flash: I18n.t('controller.general.record_invalid'), error: exception.to_s}, status: :bad_request
+      status = :bad_request
+      respond_to do |format|
+        format.html {
+          format.html {
+            @status = Rack::Utils::SYMBOL_TO_STATUS_CODE[status]
+            @message = I18n.t('controller.general.record_invalid')
+            render "shared/result", flash: @message
+          }
+        format.json {render json: {flash: I18n.t('controller.general.record_invalid'), error: exception.to_s}, status: status}
+      end
     end
     def server_error_json(exception)
-      render json: {flash: I18n.t('controller.general.internal_server_error'), error: exception.to_s}, status: :internal_server_error
+      status = :internal_server_error
+      respond_to do |format|
+        format.html {
+          @status = Rack::Utils::SYMBOL_TO_STATUS_CODE[status]
+          @message = I18n.t('controller.general.internal_server_error') + ": " + exception.to_s
+          render "shared/result", flash: @message
+        }
+        format.json {render json: {flash: I18n.t('controller.general.internal_server_error'), error: exception.to_s}, status: status}
+      end
     end
     def route_not_found_json(exception)
-      render json: {flash: I18n.t('controller.general.route_not_found'), error: exception.to_s}, status: :not_found
+      status = :not_found
+      respond_to do |format|
+        format.html {
+          @status = Rack::Utils::SYMBOL_TO_STATUS_CODE[status]
+          @message = I18n.t('controller.general.route_not_found')
+          render "shared/result", flash: @message
+        }
+        format.json {render json: {flash: I18n.t('controller.general.route_not_found'), error: exception.to_s}, status: status}
+      end
     end
   end
 end

@@ -23,6 +23,14 @@ class ToDoItemsController < ApplicationController
     @item.destroy
     render json: {flash: I18n.t('controller.to_do_items.delete_success', name: @item.name)}
   end
+
+  def update_position
+    id = params[:id]
+    position = params[:position]
+    @item = ToDoItem.find id
+    @item.set_list_position(position) if @item.position!=position
+    render json: {flash: I18n.t('controller.to_do_items.update_success', name: @item.name), item: @item}
+  end
   private
 
   def to_do_item_params

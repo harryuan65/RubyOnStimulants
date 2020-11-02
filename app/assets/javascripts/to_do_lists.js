@@ -331,7 +331,7 @@ function createItemRow({to_do_list_id, id, name, position, unDraggable}){
   $(listRow).setCreateUpdateItemByName(to_do_list_id);
   if(!unDraggable){
     $(listRow).draggable({
-      drag: setDragging,
+      drag: function(ev){setDragging(ev, currentData[to_do_list_id])},
       stop: function(ev){
         renderItems(to_do_list_id, currentData[to_do_list_id])
       },
@@ -376,9 +376,9 @@ function renderItems(list_id, data){
 
 }
 function compare(dataInTheList){
-  // console.log(`draggingItem=${draggingItem.id} ${draggingItem.name}, draggedOverItem=${draggedOverItem.id} ${draggedOverItem.name}`)
-  draggingItem = dataInTheList.find(obj => obj.position==dragging);
-  draggedOverItem = dataInTheList.find(obj => obj.position==draggedOver);
+  console.log(`draggingItem=${draggingItem.id} ${draggingItem.name}, draggedOverItem=${draggedOverItem.id} ${draggedOverItem.name}`)
+  // draggingItem = dataInTheList.find(obj => obj.position==dragging);
+  // draggedOverItem = dataInTheList.find(obj => obj.position==draggedOver);
   if(draggingItem.to_do_list_id!==draggedOverItem.to_do_list_id){return ;}
 
   var index1 = dataInTheList.indexOf(draggingItem);
@@ -388,16 +388,24 @@ function compare(dataInTheList){
 
   list_id = draggingItem.to_do_list_id;
   renderItems(list_id, dataInTheList);
+  // $.ajax({
+  //   url: `/to_do_items/${draggingItem.id}`
+  // }).done(function(data){
+
+  // })
 };
 
 function draggingOver(ev, data) {
   ev.preventDefault();
   var listRowBeingOver = ev.target;
-  draggedOver = parseInt(listRowBeingOver.querySelector('.item-num').innerText)
+  let position = parseInt(listRowBeingOver.querySelector('.item-num').innerText);
+  draggedOverItem = data.find(obj=>{return obj.position===position});
+  console.log(JSON.stringify(draggedOverItem, null ,2));
+
   listRowBeingOver.classList.add("covering")
   //add the border while dragging over something
-  let ids = data.map(e=>e.position);
-  if (ids.indexOf(draggedOver) < ids.indexOf(dragging)){
+  // let ids = data.map(e=>e.position);
+  if (data.indexOf(draggedOverItem) < data.indexOf(draggingItem)){
     listRowBeingOver.classList.add("will-insert-before")
   }
   else{
@@ -414,8 +422,10 @@ function draggingOut(ev){
   listRowOuting.classList.remove("will-insert-before");
   listRowOuting.classList.remove("will-insert-after");
 }
-function setDragging(e){
-  dragging = parseInt(e.target.querySelector('.item-num').innerText);
+function setDragging(ev, data){
+  let position = parseInt(ev.target.querySelector('.item-num').innerText);
+  draggingItem = data.find(e=>{return e.position===position});
+  // console.log(JSON.stringify(draggingItem, null ,2));
 }
 
 function showGrabbingCursor(ev){

@@ -33,6 +33,9 @@ Rails.application.routes.draw do
 
   resources :to_do_lists do
     resources :to_do_items do
+      member do
+        post :update_position
+      end
     end
   end
 

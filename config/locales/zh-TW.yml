@@ -247,6 +247,7 @@ zh-TW:
     to_do_lists:
       create_success: "成功新增清單 \"%{name}\""
       update_success: "成功更新清單 \"%{name}\""
+      delete_success: "成功刪除清單 \"%{name}\""
     to_do_items:
       create_success: "成功新增項目 \"%{name}\""
       update_success: "成功更新項目 \"%{name}\""

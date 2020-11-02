@@ -32,6 +32,12 @@ class ToDoListsController < ApplicationController
     render json: {success: true, flash: I18n.t("controller.to_do_lists.update_success", name: name), list: @list}
   end
 
+  def destroy
+    id = params[:id]
+    @list = ToDoList.find(id)
+    @list.destroy
+    redirect_to to_do_lists_path, notice: I18n.t("controller.to_do_lists.delete_success", name: @list.name), format: :js
+  end
   private
 
   def set_user

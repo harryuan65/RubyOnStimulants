@@ -307,7 +307,6 @@ function createItemRow({to_do_list_id, id, name, position, unDraggable, i}){
   itemNum.classList.add("item-num");
   itemNum.classList.add("notosans");
   // itemNum.innerText = position ? position : '+' ;
-  console.log(i);
   itemNum.innerText = i!=-1 ? i : '+' ;
 
   var itemName = document.createElement("span");
@@ -381,7 +380,7 @@ function renderItems(list_id, data){
 
 }
 function compare(to_do_list_id, dataInTheList){
-  console.log(`draggingItem=${draggingItem.id} ${draggingItem.name}, draggedOverItem=${draggedOverItem.id} ${draggedOverItem.name}`)
+  // console.log(`draggingItem=${draggingItem.id} ${draggingItem.name}, draggedOverItem=${draggedOverItem.id} ${draggedOverItem.name}`)
   var index1 = dataInTheList.indexOf(draggingItem);
   var index2 = dataInTheList.indexOf(draggedOverItem);
 
@@ -417,7 +416,7 @@ function draggingOver(ev, data) {
   var listRowBeingOver = ev.target;
   let position = parseInt(listRowBeingOver.querySelector('.item-num').innerText);
   draggedOverItem = data.find(obj=>{return obj.position===position});
-  console.log(JSON.stringify(draggedOverItem, null ,2));
+  // console.log(JSON.stringify(draggedOverItem, null ,2));
 
   listRowBeingOver.classList.add("covering")
   //add the border while dragging over something

@@ -25,11 +25,10 @@ module Error
       status = :bad_request
       respond_to do |format|
         format.html {
-          format.html {
-            @status = Rack::Utils::SYMBOL_TO_STATUS_CODE[status]
-            @message = I18n.t('controller.general.record_invalid')
-            render "shared/result", flash: @message
-          }
+          @status = Rack::Utils::SYMBOL_TO_STATUS_CODE[status]
+          @message = I18n.t('controller.general.record_invalid')
+          render "shared/result", flash: @message
+        }
         format.json {render json: {flash: I18n.t('controller.general.record_invalid'), error: exception.to_s}, status: status}
       end
     end

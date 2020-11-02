@@ -1,23 +1,24 @@
 <%= stylesheet_link_tag 'home', media: 'all', 'data-turbolinks-track': 'reload'%>
 
-<p class="welcome-txt text-dk notosans-light">This website is managed by <a href="https://github.com/harryuan65/" class="text-dk notosans-bold">Harry Yuan</a>.</p>
-<section class="news">
-  <h2 class="section-h2 text-7e notosans-light">Updates</h2>
-  <hr class="section-hr">
-  <div class="section-content-container">
-   <% @news_list.each do |news| %>
-    <div class="article-container">
-      <a href="javascript:void(0)" class="article-link news">
-       <h3 class="article-title notosans-bold"><%= news[:title] %></h3>
-       <span class="article-description notosans-light text-dk"><%= news[:description] %></span>
-      </a>
-      <span class="article-author notosans-light text-dk">harry</span>
-      <span class="article-created-at notosans-light text-dk"><%= news[:date] %></span>
+<div class="container">
+  <p class="welcome-txt text-dk notosans-light">This website is managed by <a href="https://github.com/harryuan65/" class="text-dk notosans-bold">Harry Yuan</a>.</p>
+  <section class="news">
+    <h2 class="section-h2 text-7e notosans-light">Updates</h2>
+    <hr class="section-hr">
+    <div class="section-content-container">
+     <% @news_list.each do |news| %>
+      <div class="article-container">
+        <a href="javascript:void(0)" class="article-link news">
+         <h3 class="article-title notosans-bold"><%= news[:title] %></h3>
+         <span class="article-description notosans-light text-dk"><%= news[:description] %></span>
+        </a>
+        <span class="article-author notosans-light text-dk">harry</span>
+        <span class="article-created-at notosans-light text-dk"><%= news[:date] %></span>
+      </div>
+     <% end %>
     </div>
-   <% end %>
-  </div>
-</section>
-
+  </section>
+</div>
 <%# legacy %>
 <%# <%= link_to("#{content_tag(:span,"單字本",class:"option-text")}".html_safe, words_path(locale: 'zh-TW'),class:"home-option") %>
 <%# <%= link_to("#{content_tag(:span,"寫文章",class:"option-text")}".html_safe, articles_path(locale: 'zh-TW'),class:"home-option") %>

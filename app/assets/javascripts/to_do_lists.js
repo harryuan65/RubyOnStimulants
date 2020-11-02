@@ -48,6 +48,8 @@ var currentData = {};
     if(bg_color){list.css('background-color', bg_color);}
     if(isNew){
       list.prop('id', `list-${id}`);
+      let listBody = list.find('.list-body');
+      listBody.before(`<a class="delete-list text-5b" data-remote="true" rel="nofollow" data-method="delete" href="/to_do_lists/${id}">✕</a>`);
       renderItems(`${id}`, []);
     }
 
@@ -353,6 +355,10 @@ function renderAllItems(){
 }
 function renderItems(list_id, data){
   list = document.getElementById(`list-${list_id}`);
+  if(list==null){
+    delete currentData[list_id];
+    return;
+  }
   listBodyContent = list.querySelector('.list-body .body-content-base.content');
   listBodyContent.innerText = '';
 

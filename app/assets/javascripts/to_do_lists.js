@@ -414,8 +414,8 @@ function compare(to_do_list_id, dataInTheList){
 function draggingOver(ev, data) {
   ev.preventDefault();
   var listRowBeingOver = ev.target;
-  let position = parseInt(listRowBeingOver.querySelector('.item-num').innerText);
-  draggedOverItem = data.find(obj=>{return obj.position===position});
+  let i = parseInt(listRowBeingOver.querySelector('.item-num').innerText);
+  draggedOverItem = data.find(obj=>{return obj.i===i});
   // console.log(JSON.stringify(draggedOverItem, null ,2));
 
   listRowBeingOver.classList.add("covering")
@@ -439,8 +439,8 @@ function draggingOut(ev){
   listRowOuting.classList.remove("will-insert-after");
 }
 function setDragging(ev, data){
-  let position = parseInt(ev.target.querySelector('.item-num').innerText);
-  draggingItem = data.find(e=>{return e.position===position});
+  let i = parseInt(ev.target.querySelector('.item-num').innerText);
+  draggingItem = data.find(e=>{return e.i===i});
   // console.log(JSON.stringify(draggingItem, null ,2));
 }
 

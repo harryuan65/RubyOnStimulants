@@ -284,7 +284,7 @@ function saveListNameMapping(){
     savedListNamesMapping[listIdStr] = listName.val();
   })
 }
-function createItemRow({to_do_list_id, id, name, position, unDraggable}){
+function createItemRow({to_do_list_id, id, name, position, unDraggable, i}){
   var list = document.getElementById(`list-${to_do_list_id}`);
   var listRow = document.createElement("div");
 
@@ -306,7 +306,9 @@ function createItemRow({to_do_list_id, id, name, position, unDraggable}){
   var itemNum = document.createElement("span");
   itemNum.classList.add("item-num");
   itemNum.classList.add("notosans");
-  itemNum.innerText = position ? position : '+' ;
+  // itemNum.innerText = position ? position : '+' ;
+  console.log(i);
+  itemNum.innerText = i!=-1 ? i : '+' ;
 
   var itemName = document.createElement("span");
   itemName.classList.add("item-name");
@@ -340,7 +342,7 @@ function createItemRow({to_do_list_id, id, name, position, unDraggable}){
     $(listRow).droppable({
       over: function(ev){draggingOver(ev, currentData[to_do_list_id])},
       out: draggingOut,
-      drop: function(ev){compare(currentData[to_do_list_id])}
+      drop: function(ev){compare(to_do_list_id, currentData[to_do_list_id])}
     });
   }
   return listRow;
@@ -364,35 +366,50 @@ function renderItems(list_id, data){
 
   // push an empty item for new
   if(!data.find(e=>{return e.unDraggable===true})){
-    data.push({unDraggable: true, to_do_list_id: list_id, id: 'new', name: ''});
+    data.push({unDraggable: true, to_do_list_id: list_id, id: 'new', name: '', i:-1});
   }
 
+  let i = 1;
   data.forEach(item=>{
-    var listRow = createItemRow(item);
-    listBodyContent.appendChild(listRow)
+    let itemWithI = item.i==-1 ? item : Object.assign(item, {i: i});
+    var listRow = createItemRow(itemWithI);
+    listBodyContent.appendChild(listRow);
+    i++;
   })
   dragging = null
   draggedOver = null
 
 }
-function compare(dataInTheList){
+function compare(to_do_list_id, dataInTheList){
   console.log(`draggingItem=${draggingItem.id} ${draggingItem.name}, draggedOverItem=${draggedOverItem.id} ${draggedOverItem.name}`)
-  // draggingItem = dataInTheList.find(obj => obj.position==dragging);
-  // draggedOverItem = dataInTheList.find(obj => obj.position==draggedOver);
-  if(draggingItem.to_do_list_id!==draggedOverItem.to_do_list_id){return ;}
-
   var index1 = dataInTheList.indexOf(draggingItem);
   var index2 = dataInTheList.indexOf(draggedOverItem);
-  dataInTheList.splice(index1, 1)//把dragging從array刪掉
-  dataInTheList.splice(index2, 0, draggingItem) //insert dragging到draggedOver的位置
 
-  list_id = draggingItem.to_do_list_id;
-  renderItems(list_id, dataInTheList);
-  // $.ajax({
-  //   url: `/to_do_items/${draggingItem.id}`
-  // }).done(function(data){
+  let list = $(`list-${draggingItem.to_do_list_id}`);
+  list.setLoading(false);
+  $.ajax({
+    method:"POST",
+    url: `/to_do_lists/${draggingItem.to_do_list_id}/to_do_items/${draggingItem.id}/update_position`,
+    data: {position: index2+1},
+    dataType: "json"
+  })
+  .done(function(data){
+    if(draggingItem.to_do_list_id!==draggedOverItem.to_do_list_id){return ;}
 
-  // })
+    dataInTheList.splice(index1, 1)//把dragging從array刪掉
+    dataInTheList.splice(index2, 0, draggingItem) //insert dragging到draggedOver的位置
+
+    list_id = draggingItem.to_do_list_id;
+
+    renderItems(list_id, dataInTheList);
+    setFlash(true, data.flash);
+  })
+  .fail(function(jqXHR){
+    let errorMsg = jqXHR.responseJSON.error;
+    setFlash(false, errorMsg);
+    list.setLoading(false);
+    renderItems(list_id, dataInTheList);
+  })
 };
 
 function draggingOver(ev, data) {

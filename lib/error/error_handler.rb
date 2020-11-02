@@ -29,7 +29,7 @@ module Error
           @message = I18n.t('controller.general.record_invalid')
           render "shared/result", flash: @message
         }
-        format.json {render json: {flash: I18n.t('controller.general.record_invalid'), error: exception.to_s}, status: status}
+        format.js {render json: {flash: I18n.t('controller.general.record_invalid'), error: exception.to_s}, status: status}
       end
     end
     def server_error_json(exception)
@@ -40,7 +40,7 @@ module Error
           @message = I18n.t('controller.general.internal_server_error') + ": " + exception.to_s
           render "shared/result", flash: @message
         }
-        format.json {render json: {flash: I18n.t('controller.general.internal_server_error'), error: exception.to_s}, status: status}
+        format.js {render json: {flash: I18n.t('controller.general.internal_server_error'), error: exception.to_s}, status: status}
       end
     end
     def route_not_found_json(exception)
@@ -51,7 +51,7 @@ module Error
           @message = I18n.t('controller.general.route_not_found')
           render "shared/result", flash: @message
         }
-        format.json {render json: {flash: I18n.t('controller.general.route_not_found'), error: exception.to_s}, status: status}
+        format.js {render json: {flash: I18n.t('controller.general.route_not_found'), error: exception.to_s}, status: status}
       end
     end
   end

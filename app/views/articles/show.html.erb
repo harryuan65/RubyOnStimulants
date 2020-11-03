@@ -9,9 +9,9 @@
       <% end %>
       <!-- <span class="article-page-subtitle show notosans-light text-7e"><%= @article.subtitle %></span>-->
       <span class="article-page-tag show notosans-light text-7e">tags:
-        <% @article.tag_names.each_with_index do |tag, i| %>
+        <% @article.tags.map(&:name).each_with_index do |tag, i| %>
           <span class="tag-text"><%= tag %></span>
-        <% if i!=@article.tag_names.size-1 %>
+        <% if i!=@article.tags.size-1 %>
           <span class="notosans">,</span>
         <% end %>
       <% end %>

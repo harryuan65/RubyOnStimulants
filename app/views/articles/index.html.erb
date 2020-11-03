@@ -24,9 +24,9 @@
             </div>
             <!-- <span class="article-description subtitle notosans-light text-dk"><%= article.subtitle %></span>-->
             <div class="wrap-tags">
-              <% article.tag_names.each_with_index do |tag, i| %>
+              <% article.tags.map(&:name).each_with_index do |tag, i| %>
                   <span class="article-description tag notosans-light text-dk"><%= tag %></span>
-                <% if i!=article.tag_names.size-1 %>
+                <% if i!=article.tags.size-1 %>
                   <span class="notosans-light text-dk">,</span>
                 <% end %>
               <% end %>

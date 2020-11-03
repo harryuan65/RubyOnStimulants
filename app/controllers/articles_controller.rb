@@ -44,6 +44,7 @@ class ArticlesController < ApplicationController
       return render "shared/route_not_found"
     end
     @article.increment!(:view_count)
+    # render plain: render_to_string("show")
     # @markdown = Redcarpet::Markdown.new(renderer, extensions = {})
   end
 

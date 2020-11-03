@@ -134,12 +134,16 @@ var currentData = {};
       })
     })
   }
-  $.fn.updateListItemByData = function({id, name, position, to_do_list_id, state, description, due_date}){
+  $.fn.updateListItemByData = function(item){
+    // {id, name, position, to_do_list_id, state, description, due_date}
     // console.log(`Updateing ListRow: id:${id}, name:${name}, position:${position}`)
     let listRow = $(this);
     let itemName = $('.item-name', listRow);
-    itemName.text(name);
-    itemName.attr('data-current', name);
+    itemName.text(item.name);
+    itemName.attr('data-current', item.name);
+
+    let currentListItemData = currentData[item.to_do_list_id].find(e=>{return e.id===item.id});
+    currentData[item.to_do_list_id].splice(currentData[item.to_do_list_id].indexOf(currentListItemData), 1, Object.assign(item, {i: currentListItemData.i}));
     //TODO: Update other attributes
   }
   $.fn.setCreateUpdateItemByName = function(to_do_list_id){

@@ -21,7 +21,7 @@ class ToDoItemsController < ApplicationController
     id = params[:id]
     @item = ToDoItem.includes(:list).find id
     @item.destroy
-    render json: {flash: I18n.t('controller.to_do_items.delete_success', name: @item.name)}
+    render json: {flash: I18n.t('controller.to_do_items.delete_success', name: @item.name), item: @item}
   end
 
   def update_position

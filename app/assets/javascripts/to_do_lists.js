@@ -164,7 +164,8 @@ var currentData = {};
           $.ajax(Object.assign(params, {dataType: "json"}))
           .done(function({flash, item, error}){
             // 沿用createItemRow!
-            let newListRow = createItemRow(Object.assign(item,{to_do_list_id}));
+            let newListRow = createItemRow(Object.assign(item,{to_do_list_id, i: currentData[to_do_list_id].length}));
+            $(newListRow).setCreateUpdateItemByName(to_do_list_id);
             currentData[to_do_list_id].splice(currentData[to_do_list_id].length-1, 0 ,item);
             listRow.before(newListRow);
 
@@ -189,6 +190,7 @@ var currentData = {};
             .done(function({flash, item, error}){
               // console.log(JSON.stringify({flash, item, error}, null, 2));
               listRow.remove();
+              currentData[to_do_list_id].splice(currentData[to_do_list_id].indexOf(currentData[to_do_list_id].find(e=>{return e.id===item.id})), 1);
               setFlash(true, flash);
               list.setLoading(false);
             })
@@ -380,9 +382,9 @@ function renderItems(list_id, data){
 
 }
 function compare(to_do_list_id, dataInTheList){
-  // console.log(`draggingItem=${draggingItem.id} ${draggingItem.name}, draggedOverItem=${draggedOverItem.id} ${draggedOverItem.name}`)
   var index1 = dataInTheList.indexOf(draggingItem);
   var index2 = dataInTheList.indexOf(draggedOverItem);
+  console.log(`draggingItem=${draggingItem.id} ${draggingItem.name} (${draggingItem.i}), draggedOverItem=${draggedOverItem.id} ${draggedOverItem.name} (${draggedOverItem.i})`);
 
   let list = $(`list-${draggingItem.to_do_list_id}`);
   list.setLoading(false);
@@ -393,7 +395,10 @@ function compare(to_do_list_id, dataInTheList){
     dataType: "json"
   })
   .done(function(data){
-    if(draggingItem.to_do_list_id!==draggedOverItem.to_do_list_id){return ;}
+    // console.log("ITEMS:r");
+    // console.log(JSON.stringify(draggingItem, null ,2));
+    // console.log(JSON.stringify(draggedOverItem, null ,2));
+    if(parseInt(draggingItem.to_do_list_id)!==parseInt(draggedOverItem.to_do_list_id)){return ;}
 
     dataInTheList.splice(index1, 1)//把dragging從array刪掉
     dataInTheList.splice(index2, 0, draggingItem) //insert dragging到draggedOver的位置

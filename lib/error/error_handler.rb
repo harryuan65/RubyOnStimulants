@@ -34,6 +34,8 @@ module Error
     end
     def server_error_json(exception)
       status = :internal_server_error
+      logger.fatal exception.to_s
+      logger.fatal exception.backtrace[0]
       respond_to do |format|
         format.html {
           @status = Rack::Utils::SYMBOL_TO_STATUS_CODE[status]

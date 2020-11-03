@@ -19,7 +19,7 @@ class ToDoItemsController < ApplicationController
 
   def destroy
     id = params[:id]
-    @item = ToDoItem.includes(:list).find id
+    @item = ToDoItem.find id
     @item.destroy
     render json: {flash: I18n.t('controller.to_do_items.delete_success', name: @item.name), item: @item}
   end

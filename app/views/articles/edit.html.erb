@@ -1,3 +1,8 @@
+<%= javascript_include_tag "highlight/highlight" %>
+<%= javascript_include_tag "articles/articles" %>
+<%= stylesheet_link_tag $markdown_hljs_css %>
+<%= stylesheet_link_tag 'articles', media: 'all', 'data-turbolinks-track': 'reload'%>
+<%= stylesheet_link_tag "article-page"%>
 <div id="container">
   <%= form_for @article, url: article_path(@article), method: 'PUT' do |f|  %>
     <div class="wrap-article">

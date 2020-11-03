@@ -30,9 +30,10 @@ $("main").ready(()=>{
   //load current state's style
   $('input[type="radio"]:checked').parent().addClass("selected");
   $(".state-pair input[type='radio']:checked").addClass("selected");
-  $('pre code').each(e=>{
-    hljs.highlightBlock(this);
-  })
+  hljs.initHighlighting();
+  // $('pre code').each(e=>{
+  //   hljs.highlightBlock(this);
+  // })
   //markdown autocomplete support
   $("#article_content").on('keydown', (e)=>{
     if(Object.keys(mappings).includes(e.key)){

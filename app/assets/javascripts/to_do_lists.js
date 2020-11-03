@@ -202,7 +202,7 @@ var currentData = {};
           }
           else{
             let params = {method: "PUT", url: `/to_do_lists/${to_do_list_id}/to_do_items/${itemId}`, data: {to_do_item: {name: newInput}}}
-            console.log("to update with ", JSON.stringify(params, null, 2));
+            // console.log("to update with ", JSON.stringify(params, null, 2));
             $.ajax(Object.assign(params, {dataType: "json"}))
             .done(function({flash, item, error}){
               // console.log(JSON.stringify({flash, item, error}, null, 2));

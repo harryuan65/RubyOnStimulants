@@ -456,7 +456,9 @@ div[id*="dropdown-toggle"] {
 
 .article-page-content {
   font-size: 20px;
-  max-width: 800px; }
+  max-width: 800px;
+  min-height: 300px;
+  padding: 10px; }
   .article-page-content.show {
     margin-top: 60px; }
 
@@ -627,7 +629,7 @@ textarea.article-page-content {
     white-space: pre-wrap; }
   .markdown li:not(:first-child) {
     margin-top: 10px; }
-  .markdown p > code, .markdown li > code {
+  .markdown code, .markdown li > code {
     color: #282828;
     background-color: #DDDDDD;
     padding: 1px 7px 1px 7px;

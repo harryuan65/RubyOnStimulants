@@ -1,23 +1,27 @@
 <nav id="nav-top">
   <%= link_to "TECHPOD", root_path ,class:"techpod notosans-bold" %>
-  <div class="wrap-user-stats">
   <% if current_user %>
-  <% if !["articles#new", "articles#edit"].include?("#{params[:controller]}##{params[:action]}") %>
-  <%= link_to "&#x270e;".html_safe, new_article_path, class: "user-stat text-dk notosans-light new-article pen" %>
-  <% end %>
+    <div class="dropdown">
+      <% if current_user.image_url %>
+        <img src="<%= current_user.image_url%>" alt="img" class="nav-profile-img crop-circle toggle-dropdown-men">
+      <% else %>
+        <div class="nav-profile-img crop-circle toggle-dropdown-men" style="background-color: #585858;">
+      <% end %>
 
-  <% if current_user.image_url %>
-    <img src="<%= current_user.image_url%>" alt="img" class="nav-profile-img crop-circle">
+      <ul class="dropdown-menu">
+        <li class="username"><div class= "text-7e notosans-light"><%= username(current_user) %></div></li>
+        <% if !["articles#new", "articles#edit"].include?("#{params[:controller]}##{params[:action]}") %>
+        <li><%= link_to "<span class=\"pen\">&#x270e;</span> Write Article".html_safe, new_article_path, class: "text-dk notosans-light" %></li>
+        <% end %>
+        <li><%= link_to "Logout", destroy_user_session_path, method: :delete, class: "text-dk notosans-light", data: {confirm: t("devise.sessions.confirm_sign_out")} %></li>
+      </ul>
+    </div>
   <% else %>
+    <div class="wrap-singin-out">
+      <%= link_to "Sign In", new_user_session_path, class: "text-dk notosans-light signin" %>
+      <%= link_to "Sign Up", new_user_registration_path, class: "text-dk notosans-light signup" %>
+    </div>
   <% end %>
-
-  <%= link_to username(current_user), "javascript:void(0)" , class: "user-stat text-dk notosans-light username" %>
-  <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "user-stat text-dk notosans-light", data: {confirm: t("devise.sessions.confirm_sign_out")} %>
-  <% else %>
-  <%= link_to "Sign In", new_user_session_path, class: "user-stat text-dk notosans-light signin" %>
-  <%= link_to "Sign Up", new_user_registration_path, class: "user-stat text-dk notosans-light signup" %>
-  <% end %>
-  </div>
 </nav>
 <div class="nav-side-toggle idle" id="nav-side-toggle" onclick="toggleSideNav()">&#x2630;</div>
 

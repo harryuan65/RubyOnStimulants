@@ -39,14 +39,15 @@
   </div>
   <nav id="nav-top">
     <a class="techpod notosans-bold" href="/">TECHPOD</a>
-    <div class="dropdown">
+    <div class="wrap-user-stats">
+      <a class="user-stat text-dk notosans-light new-article pen" href="/articles/new">&#x270e;</a>
+
       <img src="https://lh3.googleusercontent.com/a-/AOh14GgmaCscPk5hJoDb4XKHvDIeC3XP6s4pvruNN-u98w=s96-c" alt="img"
-        class="nav-profile-img crop-circle toggle-dropdown-menu">
-      <ul class="dropdown-menu">
-        <li><a class="text-dk notosans-light" href="/articles/new"><span class="pen">&#x270e;</span> Write Article</a></li>
-        <li><a class="text-dk notosans-light username" href="javascript:void(0)">harryuan.65</a></li>
-        <li><a class="text-dk notosans-light" data-confirm="Confirm sign out ?" rel="nofollow" data-method="delete" href="/users/sign_out">Logout</a></li>
-      </ul>
+        class="nav-profile-img crop-circle">
+
+      <a class="user-stat text-dk notosans-light username" href="javascript:void(0)">harryuan.65</a>
+      <a class="user-stat text-dk notosans-light" data-confirm="Confirm sign out ?" rel="nofollow" data-method="delete"
+        href="/users/sign_out">Logout</a>
     </div>
   </nav>
   <div class="nav-side-toggle idle" id="nav-side-toggle" onclick="toggleSideNav()">&#x2630;</div>
@@ -108,8 +109,36 @@
         </div>
 
         <hr>
-        <div id="article-page-content" class="article-page-content show markdown text-dk">
-          <h1>Scenario</h1>
+        <div id="article-page-content" class="article-page-content show markdown text-dk" contenteditable>
+
+
+        </div>
+
+        <footer>
+          <img src="https://lh3.googleusercontent.com/a-/AOh14GgmaCscPk5hJoDb4XKHvDIeC3XP6s4pvruNN-u98w=s96-c" alt=""
+            class="crop-circle">
+          <div class="wrap-author-info">
+            <h1 class="author-name notosans text-5b">Harry Yuan</h1>
+            <p class="author-desc notosans text-7e">Rails Developer</p>
+          </div>
+        </footer>
+      </div>
+    </div>
+    <script>
+      $(document).on('turbolinks:load', (e) => {
+        $(".wrap-article.show").ready(function (e) {
+          document.querySelectorAll('pre code').forEach(e => {
+            hljs.highlightBlock(e);
+          })
+        })
+      })
+    </script>
+  </main>
+</body>
+
+</html>
+
+<!-- <h1>Scenario</h1>
 
           <p>前人建了一個Courses Table，其中有一個欄位叫做supported_languages，他是一個string (varchar(255))</p>
 
@@ -339,30 +368,4 @@ where (&#39;[&#39; || support_languages || &#39;]&#39;)::jsonb @&gt; &#39;[1,8]&
               href="https://stackoverflow.com/questions/48321403/postgres-jsonb-int-array-contains-any-of-array-values">stackoverflow
               - json contain operator</a><br>
             <a href="https://stackoverflow.com/questions/36985926/what-does-the-operator-in-postgres-do">stackoverflow -
-              what does @&gt; mean?</a></p>
-
-        </div>
-
-        <footer>
-          <img src="https://lh3.googleusercontent.com/a-/AOh14GgmaCscPk5hJoDb4XKHvDIeC3XP6s4pvruNN-u98w=s96-c" alt=""
-            class="crop-circle">
-          <div class="wrap-author-info">
-            <h1 class="author-name notosans text-5b">Harry Yuan</h1>
-            <p class="author-desc notosans text-7e">Rails Developer</p>
-          </div>
-        </footer>
-      </div>
-    </div>
-    <script>
-      $(document).on('turbolinks:load', (e) => {
-        $(".wrap-article.show").ready(function (e) {
-          document.querySelectorAll('pre code').forEach(e => {
-            hljs.highlightBlock(e);
-          })
-        })
-      })
-    </script>
-  </main>
-</body>
-
-</html>
+              what does @&gt; mean?</a></p> -->

@@ -1,3 +1,90 @@
+// shared.js
+var fetchPage = true;
+var previewLength = 0;
+var contentChanged = false;
+var map = {};
+document.addEventListener('DOMContentLoaded', ()=>{
+  //detect two consecutive keys press
+  document.onkeyup = (e)=>{
+    e = e || window.event;
+    map[e.key] = e.type == "keydown";
+    map = {}
+  }
+  document.onkeydown = (e)=>{
+    e = e || window.event;
+    map[e.key] = e.type == "keydown";
+    // console.log(e.type)
+    // console.log(e.altKey)
+    // console.log(map)
+    if (map["Alt"] && map["∂"]){
+      toggleDarkMode();
+    }
+  }
+})
+function toggleDarkMode(){
+  document.documentElement.classList.toggle('dark-mode');
+  document.querySelectorAll('.no-dark').forEach(e=>{
+    e.classList.toggle('invert-again');
+  })
+}
+function foldAlert(this_obj){
+    // console.log("Reversing...")
+    setTimeout( ()=>{
+       this_obj.style.animation = "alert-backwards 1s forwards running";
+    }, 3000);
+}
+function toggleSideNav(forceClose=false){
+  let navSide = document.getElementById('nav-side');
+  let toggle = document.getElementById('nav-side-toggle');
+  if(forceClose){
+    navSide.classList.remove('active');
+    toggle.classList.remove('active');
+  }
+  else{
+    navSide.classList.toggle('active');
+    toggle.classList.toggle('active');
+  }
+}
+function openConfirm(event){
+  event.preventDefault();
+  document.getElementById('confirm-bkg').classList.toggle('show');
+}
+function closeConfirm(){
+  document.getElementById('confirm-bkg').classList.remove('show');
+}
+function changePage(event){
+  // TODO
+  event.preventDefault();
+  toggleSideNav();
+  let url = event.target.getAttribute('href');
+  console.log(url);
+  $.get(url, (resText)=>{
+    // var find = $('#main', resText); //this jquery object's context is undefined, causing find.length=0
+    var find = $(resText).filter('#main'); //equals to the above
+    console.log(find.length);
+    console.log(find);
+    if (find.length>0){
+      console.log("Replacing new element");
+      $('#main').replaceWith(find);
+    }
+  })
+}
+function setFlash(success, message){
+  let alertMsg = `
+  <p class="alert alert-${success ? "success" : "danger"} notosans-light" ${success ? 'onanimationend="foldAlert(this)' : ""}">
+   <span class="alert-txt">${message}</span>
+  </p>
+  `;
+  $("#wrap-alert").html(alertMsg);
+}
+
+//articles.js
+function insertTextInPos(element, beforePos, newText){
+  var startPos = element.selectionStart;
+  var endPos = element.selectionEnd;
+  element.value = element.value.substring(0, startPos) + newText + element.value.substring(endPos, element.value.length);
+  element.selectionStart = element.selectionEnd = beforePos;
+}
 var mappings = {
   "[": "]",
   "`": "`",
@@ -29,113 +116,12 @@ $("main").ready(()=>{
   //   hljs.highlightBlock(this);
   // })
   //markdown autocomplete support
-  console.log('set!');
-  $("#article-page-content").on('keydown', (e)=>{
-    let prevChar = getPreviousChar(e.target);
-    let laterChar = getLaterChar(e.target);
-    debugRange(e.target);
-    // console.log('Input:', e.key ,', Previous:', prevChar, 'Later:', laterChar)
-    if(['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Backspace', "Meta", "Shift", "Control"].includes(e.key) ){return;}
-    // console.log(e.target.nodeName)
-    // insertElementAtCursor('p', e.key);
-
+  $("#article_content").on('keydown', (e)=>{
     if(Object.keys(mappings).includes(e.key)){
-      insertTextAtCursor(mappings[e.key]);
-      // document.selection.createRange().text = mappings[e.key];
-      // insertTextInPos(e.target, e.target.selectionStart, mappings[e.key]);
-    }
-    else{
-      //check if the text is inside a ``
-      if(prevChar=='`'){
-        console.log(true)
-        insertElementAtCursor('code', e.key);
-      }
+      insertTextInPos(e.target, e.target.selectionStart, mappings[e.key]);
     }
   })
 })
-function insertTextAtCursor(text){
-    let selection = window.getSelection();
-    let range = selection.getRangeAt(0);
-    // range.deleteContents();
-    let node = document.createTextNode(text);
-    range.insertNode(node);
-
-    for(let position = 0; position != text.length; position++){
-        // selection.modify("move", "right", "character");
-        selection.modify("move", "left", "character");
-    };
-}
-function debugRange(containerEl){
-  if (window.getSelection) {
-    sel = window.getSelection();
-    console.log("Selection.rangeCount=", sel.rangeCount)
-    if (sel.rangeCount > 0) {
-      range = sel.getRangeAt(0).cloneRange();
-      console.log("before collapse PrevRange.toString:", range.toString());
-      range.collapse(true);
-      console.log("before setEnd PrevRange.toString:", range.toString());
-      range.setStart(containerEl, 0);
-      console.log("PrevRange.toString:", range.toString());
-      precedingChar = range.toString().slice(-1);
-      console.log("=====================")
-    }
-  }
-}
-function getPreviousChar(containerEl){
-  var precedingChar = "", sel, range, precedingRange;
-  if (window.getSelection) {
-    sel = window.getSelection();
-    if (sel.rangeCount > 0) {
-      range = sel.getRangeAt(0).cloneRange();
-      // console.log("before collapse PrevRange.toString:", range.toString());
-      range.collapse(true);
-      // console.log("before setEnd PrevRange.toString:", range.toString());
-      range.setStart(containerEl, 0);
-      // console.log("PrevRange.toString:", range.toString());
-      precedingChar = range.toString().slice(-1);
-    }
-    // For Windows
-    // else if ( (sel = document.selection) && sel.type != "Control") {
-    //   range = sel.createRange();
-    //   precedingRange = range.duplicate();
-    //   precedingRange.moveToElementText(containerEl);
-    //   precedingRange.setEndPoint("EndToStart", range);
-    //   precedingChar = precedingRange.text.slice(-1);
-    // }
-  }
-  return precedingChar;
-}
-function getLaterChar(containerEl){
-  var laterChar = "", sel, range, precedingRange;
-  if (window.getSelection) {
-    sel = window.getSelection();
-
-    if (sel.rangeCount > 0) {
-      range = sel.getRangeAt(0).cloneRange();
-      // console.log("before collapse LaterRange.toString:", range.toString());
-      // range.collapse(false);
-      // console.log("before setEnd LaterRange.toString:", range.toString());
-      // range.setEnd(containerEl, 0);
-      console.log("LaterRange.toString:", range.toString());
-      // laterChar = range.toString().slice(-1);
-    }
-  }
-  return laterChar;
-}
-function insertElementAtCursor(eleType, text){
-  let selection = window.getSelection();
-  let range = selection.getRangeAt(0);
-  range.deleteContents();
-  let code = document.createElement(eleType);
-  let node = document.createTextNode(text);
-  code.append(node);
-  range.insertNode(code);
-
-  // for(let position = 0; position != text.length; position++){
-  //     // selection.modify("move", "right", "character");
-  //     selection.modify("move", "left", "character");
-  // };
-}
 function select(event){
   let otherRadios = $('input[type="radio"]');
   otherRadios.parent().removeClass("selected");

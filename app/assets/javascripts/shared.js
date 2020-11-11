@@ -76,3 +76,8 @@ function setFlash(success, message){
   `;
   $("#wrap-alert").html(alertMsg);
 }
+
+function toggleStats(){
+  //TODO
+  // $(".toggle-dropdown").toggleClass("show");
+}

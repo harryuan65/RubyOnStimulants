@@ -89,7 +89,7 @@
     margin-top: 50px;
   }
   & > label{
-    font-size: 15px;
+    font-size: 20px;
   }
 }
 .wrap-state{
@@ -117,8 +117,8 @@
   }
   &.selected{
     border: 2px solid #76787e;
-    background-color: #222c65;
-    transition: background-color .4s ease;
+    background-color: #263380;
+    transition: background-color .2s ease;
     span{
       color: #e7e7e7;
     }
@@ -132,17 +132,22 @@
 $input-transition-delay: .1s;
 input[class^=article-page-],textarea[class^=article-page-]{
   @include size(600px, auto);
-  border: none;
+  border: 1px solid transparent;
+  border-radius: 5px;
 
   padding: 5px;
+  margin-top: 5px;
   transition: border $input-transition-delay ease-out;
   &:focus{
     transition: border $input-transition-delay ease-out;
     outline: none;
+    border: 1px solid #5858586d;
   }
   &::placeholder{
-    color: #cccccc;
+    color: #bab8b8;
     font-style: italic;
+    font-weight: lighter;
+    font-family: 'Noto Sans Light'
   }
 }
 input.article-page-title{
@@ -159,6 +164,7 @@ textarea.article-page-content{
   display: block;
   width: 800px;
   min-height: 600px;
+  resize: none;
 }
 .content-base{
   @include flex(row, space-between, flex-start);
@@ -194,11 +200,11 @@ textarea.article-page-content{
   cursor: pointer;
   font-size: 24px;
   &#edit-toggle{
-    right: -28px;
+    right: -35px;
   }
   &#preview-toggle{
-    top: 67px;
-    right: -28px;
+    top: 70px;
+    right: -35px;
   }
   &.active{
     font-family: 'Noto Sans Bold';

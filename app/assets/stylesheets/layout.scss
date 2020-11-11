@@ -160,6 +160,9 @@ main{
   // max-width: 800px;
   width: 700px;
   min-height: 600px;
+  &.expand-for-article-new{
+    width: 900px;
+  }
 }
 
 //alerts (currently login page only)

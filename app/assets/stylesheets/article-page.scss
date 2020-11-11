@@ -104,10 +104,10 @@
 .state-pair{
   box-sizing: border-box;
   border: 2px solid transparent;
-  padding: 7px;
+  padding: 5px 7px 5px 7px;
   transition: .1s ease;
   cursor: pointer;
-  border-radius: 7px;
+  border-radius: 3px;
   &:hover{
     border: 2px solid #999999;
     background-color: #545454;
@@ -116,8 +116,9 @@
     }
   }
   &.selected{
-    border: 2px solid #003f3a;
-    background-color: #00a294;
+    border: 2px solid #76787e;
+    background-color: #222c65;
+    transition: background-color .4s ease;
     span{
       color: #e7e7e7;
     }

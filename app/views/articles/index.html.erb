@@ -14,7 +14,7 @@
         <div class="article-container" id="article-<%=article.id%>">
           <a href="<%= article_path(article.id)%>" class="article-link">
             <div class="wrap-article-title">
-              <h3 class="article-title notosans-bold"><%= article.title %></h3>
+              <h3 class="article-title notosans"><%= article.title %></h3>
               <% case article.state %>
               <% when "draft"%>
                 <%= article.draft?? '<span class="draft notosans-light text-dk">draft</span>'.html_safe : "" %>

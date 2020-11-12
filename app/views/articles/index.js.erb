@@ -1,0 +1,7 @@
+newDataSize = <%= @articles.size %>
+listSize += newDataSize;
+$("#load-more").parent("#load-more-container").before("<%= j render("index")%>")
+if(newDataSize===0 || (newDataSize>0 && newDataSize < 50) ){
+  $("#load-more-container").remove();
+}
+

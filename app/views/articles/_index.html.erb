@@ -1,0 +1,26 @@
+<% @articles.each do |article| %>
+  <div class="article-container" id="article-<%=article.id%>">
+    <a href="<%= article_path(article.id)%>" class="article-link">
+      <div class="wrap-article-title">
+        <h3 class="article-title notosans-bold"><%= article.title %></h3>
+        <% case article.state %>
+        <% when "draft"%>
+          <%= article.draft?? '<span class="draft notosans-light text-dk">draft</span>'.html_safe : "" %>
+        <% when "hidden"%>
+          <%= article.hidden?? '<span class="private notosans-light text-dk">private</span>'.html_safe : "" %>
+        <% end %>
+      </div>
+      <!-- <span class="article-description subtitle notosans-light text-dk"><%= article.subtitle %></span>-->
+      <div class="wrap-tags">
+        <% article.tags.map(&:name).each_with_index do |tag, i| %>
+            <span class="article-description tag notosans-light text-dk"><%= tag %></span>
+          <% if i!=article.tags.size-1 %>
+            <span class="notosans-light text-dk">,</span>
+          <% end %>
+        <% end %>
+      </div>
+    </a>
+    <span class="article-author notosans-light text-dk"><%= username(article.user) %></span>
+    <span class="article-created-at notosans-light text-dk"><%= article.created_at.strftime("%B") %> <%= article.created_at.day %></span>
+  </div>
+<% end %>

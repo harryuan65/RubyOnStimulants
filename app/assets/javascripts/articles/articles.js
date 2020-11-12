@@ -1,3 +1,5 @@
+var listSize = 0;
+var newDataSize = 0;
 function insertTextInPos(element, beforePos, newText){
   var startPos = element.selectionStart;
   var endPos = element.selectionEnd;
@@ -111,4 +113,25 @@ function togglePreviewMarkdown(togglePreview, raw=null, prod=false){
     editPage.classList.add('display');
     editToggle.classList.add('active');
   }
+}
+
+function LoadMore(){
+  $.ajax({
+    url: `/articles?offset=${listSize}`,
+    dataType: "script"
+  })
+  .done(function(res){
+    console.log('OK唷');
+  })
+  .fail(function(jqXHR){
+    let contentType = jqXHR.getResponseHeader('Content-Type');
+    if(jqXHR.responseJSON){
+      let errorMsg = jqXHR.responseJSON.error;
+      setFlash(false, errorMsg);
+    }
+    else{
+      console.log(jqXHR.responseText)
+      setFlash(false, `Response Type mismatched: got ${contentType}`);
+    }
+  })
 }

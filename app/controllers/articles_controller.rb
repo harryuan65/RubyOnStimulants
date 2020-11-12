@@ -4,11 +4,15 @@ class ArticlesController < ApplicationController
   def index
     @offset = params[:offset] || 0
     if current_user
-      @articles = Article.includes(:user, :last_comment, :tags).where(state: :published).or(
-                    Article.includes(:user, :last_comment, :tags).where(state: [:draft, :hidden], user_id: current_user.id)
+      @articles = Article.includes(:user, :tags).where(state: :published).or(
+                    Article.includes(:user, :tags).where(state: [:draft, :hidden], user_id: current_user.id)
                   ).order(id: :desc).limit(50).offset(@offset)
     else
-      @articles = Article.includes(:user, :last_comment, :tags).where(state: :published).order(id: :desc).limit(50).offset(@offset)
+      @articles = Article.includes(:user, :tags).where(state: :published).order(id: :desc).limit(50).offset(@offset)
+    end
+    respond_to do |format|
+      format.html
+      format.js
     end
   end
 

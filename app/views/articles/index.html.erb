@@ -36,6 +36,13 @@
           <span class="article-created-at notosans-light text-dk"><%= article.created_at.strftime("%B") %> <%= article.created_at.day %></span>
         </div>
       <% end %>
+      <div id="load-more-container" class="notosans-bold text-5b">
+        <span id="load-more" onclick="LoadMore()"><%= t('controller.articles.load_more') %></span>
+      </div>
     </div>
   </section>
+
+  <script>
+    listSize = <%= @articles.size %>;
+  </script>
 </div>

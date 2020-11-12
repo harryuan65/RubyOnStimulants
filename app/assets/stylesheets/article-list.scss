@@ -60,3 +60,12 @@
   font-size: 15px;
   @include flex(row, flex-end, flex-end);
 }
+#load-more-container{
+  display: grid;
+  place-content: center;
+  height: 72px;
+  #load-more{
+    cursor: pointer;
+    font-size: 20px;
+  }
+}

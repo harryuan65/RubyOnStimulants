@@ -51,6 +51,7 @@ group :development do
   gem 'faker'
   gem 'dotenv-rails'
   gem 'annotate'
+  gem 'bullet'
 end
 
 group :test do

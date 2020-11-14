@@ -32,13 +32,13 @@
       <% else %>
         <div class="nav-side-block">
           <h2 class="nav-side-block-title notosans-light text-a9">
-            <div class="nav-profile-img crop-circle" style="background-color: #585858;">?</div>
-            <span class="notosans-light username text-d3"><%= username(current_user) %></span>
+            <div class="nav-profile-img crop-circle" style="background-color: #585858;"></div>
+            <span class="notosans-light username text-d3">Not Signed In</span>
           </h2>
           <hr class="nav-side-block-hr">
           <div class="nav-side-block-content-container">
-            <h3 class="nav-side-block-content"><%= link_to "Sign In", new_user_session_path, class: "text-dk notosans-light signin" %></h3>
-            <h3 class="nav-side-block-content"><%= link_to "Sign Up", new_user_registration_path, class: "text-dk notosans-light signup" %></h3>
+            <h3 class="nav-side-block-content"><%= link_to "Sign In", new_user_session_path, class: "text-d3 notosans-light signin" %></h3>
+            <h3 class="nav-side-block-content"><%= link_to "Sign Up", new_user_registration_path, class: "text-d3 notosans-light signup" %></h3>
           </div>
         </div>
       <% end %>

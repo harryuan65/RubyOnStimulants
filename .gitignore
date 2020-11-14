@@ -31,10 +31,9 @@
 /config/master.key
 .env
 /config/credentials.yml.enc
-/mockup/home/.sass-cache
 /mockup/home/style.css.map
-/mockup/articles/show/.sass-cache
 /mockup/articles/show/style.css.map
-/mockup/articles/edit/.sass-cache
 /mockup/articles/edit/style.css.map
+*.sass-cache
+*.css.map
 docker

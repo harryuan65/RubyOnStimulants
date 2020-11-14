@@ -1,60 +1,60 @@
 <nav id="nav-top">
-  <%= link_to "TECHPOD", root_path ,class:"techpod notosans-bold" %>
-  <% if current_user %>
-    <div class="dropdown">
-      <% if current_user.image_url %>
-        <img src="<%= current_user.image_url%>" alt="img" class="nav-profile-img crop-circle toggle-dropdown-men">
+  <a class="link-wrap-title notosans" href="/">
+    <%= svg('ruby', class: "ruby-icon") %>
+    <span class="title">ActiveMine</span>
+  </a>
+  <div class="nav-top-options-container">
+    <div class="nav-top-option idle" id="nav-side-toggle">
+      <%= svg_asset('search-icon') %>
+    </div>
+    <div id="nav-side-toggle" class="nav-top-option idle" onclick="toggleSideNav()">
+      <%= svg_asset('menu-icon') %>
+    </div>
+    <!-- <div class="nav-top-option idle" id="nav-side-toggle" onclick="toggleSideNav()">&#x2630;</div> -->
+  </div>
+  <nav id="nav-side" class="no-dark">
+    <div id="nav-side-menu-container">
+
+      <% if current_user %>
+        <div class="nav-side-block">
+          <h2 class="nav-side-block-title notosans-light text-a9">
+            <img src="<%= current_user.image_url%>" alt="img" class="nav-profile-img crop-circle">
+            <span class="notosans-light username text-d3"><%= username(current_user) %></span>
+          </h2>
+          <hr class="nav-side-block-hr">
+          <div class="nav-side-block-content-container">
+              <% if !["articles#new", "articles#edit"].include?("#{params[:controller]}##{params[:action]}") %>
+                <h3 class="nav-side-block-content"><%= link_to "<span class=\"pen\">&#x270e;</span> Write Article".html_safe, new_article_path, class: "text-d3 notosans-light" %></h3>
+              <% end %>
+            <h3 class="nav-side-block-content"><%= link_to "Logout", destroy_user_session_path, method: :delete, class: "text-d3 notosans-light", data: {confirm: t("devise.sessions.confirm_sign_out")} %></h3>
+          </div>
+        </div>
       <% else %>
-        <div class="nav-profile-img crop-circle toggle-dropdown-men" style="background-color: #585858;">
+        <div class="nav-side-block">
+          <h2 class="nav-side-block-title notosans-light text-a9">
+            <div class="nav-profile-img crop-circle" style="background-color: #585858;">?</div>
+            <span class="notosans-light username text-d3"><%= username(current_user) %></span>
+          </h2>
+          <hr class="nav-side-block-hr">
+          <div class="nav-side-block-content-container">
+            <h3 class="nav-side-block-content"><%= link_to "Sign In", new_user_session_path, class: "text-dk notosans-light signin" %></h3>
+            <h3 class="nav-side-block-content"><%= link_to "Sign Up", new_user_registration_path, class: "text-dk notosans-light signup" %></h3>
+          </div>
+        </div>
       <% end %>
 
-      <ul class="dropdown-menu">
-        <li class="username"><div class= "text-7e notosans-light"><%= username(current_user) %></div></li>
-        <% if !["articles#new", "articles#edit"].include?("#{params[:controller]}##{params[:action]}") %>
-        <li><%= link_to "<span class=\"pen\">&#x270e;</span> Write Article".html_safe, new_article_path, class: "text-dk notosans-light" %></li>
-        <% end %>
-        <li><%= link_to "Logout", destroy_user_session_path, method: :delete, class: "text-dk notosans-light", data: {confirm: t("devise.sessions.confirm_sign_out")} %></li>
-      </ul>
-    </div>
-  <% else %>
-    <div class="wrap-singin-out">
-      <%= link_to "Sign In", new_user_session_path, class: "text-dk notosans-light signin" %>
-      <%= link_to "Sign Up", new_user_registration_path, class: "text-dk notosans-light signup" %>
-    </div>
-  <% end %>
-</nav>
-<div class="nav-side-toggle idle" id="nav-side-toggle" onclick="toggleSideNav()">&#x2630;</div>
 
-<nav id="nav-side" class="no-dark">
-  <div id="nav-side-menu-container">
-   <div class="nav-side-block">
-     <h2 class="nav-side-block-title notosans-light text-a9"><%= link_to "News", home_news_path, class: "notosans-light text-d3" %></h2>
-     <h2 class="nav-side-block-title notosans-light text-a9"><%= link_to "Articles", articles_path, class: "notosans-light text-d3" %></h2>
-     <hr class="nav-side-block-hr">
-     <div class="nav-side-block-content-container">
-       <h3 class="nav-side-block-content"><%= link_to "All", articles_path, class: "notosans-light text-d3" %></h3>
-     </div>
-   </div>
-
-  <div class="nav-side-block">
-    <h2 class="nav-side-block-title notosans-light text-a9">Tools</h2>
-    <hr class="nav-side-block-hr">
-    <div class="nav-side-block-content-container">
-      <h3 class="nav-side-block-content"><%= link_to "ColorPicker", ENV['COLORPICKER_URL'] || "javascript:void(0)", class: "notosans-light text-d3" %></h3>
-      <h3 class="nav-side-block-content"><%= link_to "WordBook", words_path, class: "notosans-light text-d3"%></h3>
-      <h3 class="nav-side-block-content"><%= link_to "ToDoList", to_do_lists_path, class: "notosans-light text-d3"%></h3>
-      <!-- <h3 class="nav-side-block-content"><%= link_to "MyPurchases".html_safe, "javascript:void(0)", class: "notosans-light text-d3"%></h3> %>-->
+      <div class="nav-side-block">
+        <h2 class="nav-side-block-title notosans-light text-a9"><%= link_to "Explore", home_news_path, class: "notosans-light text-d3" %></h2>
+        <hr class="nav-side-block-hr">
+        <div class="nav-side-block-content-container">
+          <h3 class="nav-side-block-content"><%= link_to "Articles", articles_path, class: "notosans-light text-d3" %></h3>
+          <h3 class="nav-side-block-content"><%= link_to "ColorPicker", ENV['COLORPICKER_URL'] || "javascript:void(0)", class: "notosans-light text-d3" %></h3>
+          <h3 class="nav-side-block-content"><%= link_to "WordBook", words_path, class: "notosans-light text-d3"%></h3>
+          <h3 class="nav-side-block-content"><%= link_to "ToDoList", to_do_lists_path, class: "notosans-light text-d3"%></h3>
+          <h3 class="nav-side-block-content"><%= link_to "Author", ENV['ABOUT_URL'] || "javascript:void(0)", class: "notosans-light text-d3" %></h3>
+        </div>
+      </div>
     </div>
-   </div>
-  </div>
-
-  <div class="nav-side-block">
-    <h2 class="nav-side-block-title notosans-light text-a9">About</h2>
-    <hr class="nav-side-block-hr">
-    <div class="nav-side-block-content-container">
-      <h3 class="nav-side-block-content"><%= link_to "Author", ENV['ABOUT_URL'] || "javascript:void(0)", class: "notosans-light text-d3" %></h3>
-      <!-- <h3 class="nav-side-block-content"><%= link_to "WordCards", "javascript:void(0)", class: "notosans-light text-d3" %></h3>-->
-    </div>
-   </div>
-  </div>
+  </nav>
 </nav>

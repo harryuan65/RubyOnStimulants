@@ -66,7 +66,7 @@ class HomeController < ApplicationController
   def news_list
     [
       {
-        title: "Reanimate To do list for smoother experience and update on blur",
+        title: "Reanimate To do list",
         description: "fix a lot of logic for to do list",
         date: "Oct 29 ~ Nov 1, 2020"
       },

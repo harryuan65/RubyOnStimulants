@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= @article && current_position=="articles#show" ? @article.title + " - TechPod"  : "TechPod - A Place with Tech Notes and Tools" %></title>
+    <title><%= @article && current_position=="articles#show" ? @article.title + " - ActiveMine"  : "ActiveMine - Dig out valuable things from the Internet" %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" >
@@ -48,6 +48,7 @@
     <%= render('shared/nav') %>
     <main id="main">
       <%= yield %>
+      <%= render('shared/sidebar') %>
     </main>
   </body>
 </html>

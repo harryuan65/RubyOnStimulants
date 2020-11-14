@@ -3,6 +3,7 @@ var fetchPage = true;
 var previewLength = 0;
 var contentChanged = false;
 var map = {};
+var dev = null;
 document.addEventListener('DOMContentLoaded', ()=>{
   //detect two consecutive keys press
   document.onkeyup = (e)=>{
@@ -35,14 +36,15 @@ function foldAlert(this_obj){
 }
 function toggleSideNav(forceClose=false){
   let navSide = document.getElementById('nav-side');
-  let toggle = document.getElementById('nav-side-toggle');
+  let svgs = $("svg",".nav-top-option");
+  dev = svgs;
   if(forceClose){
     navSide.classList.remove('active');
-    toggle.classList.remove('active');
+    svgs.removeClass('active');
   }
   else{
     navSide.classList.toggle('active');
-    toggle.classList.toggle('active');
+    svgs.toggleClass('active');
   }
 }
 function openConfirm(event){

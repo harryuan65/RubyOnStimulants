@@ -1,10 +1,10 @@
 <%= stylesheet_link_tag 'home', media: 'all', 'data-turbolinks-track': 'reload'%>
 
 <div class="container">
-  <p class="welcome-txt text-dk notosans-light">This website is managed by <a href="https://github.com/harryuan65/" class="text-dk notosans-bold">Harry Yuan</a>.</p>
+  <p class="welcome-txt text-dk notosans">This website is managed by <a href="https://github.com/harryuan65/" class="text-dk notosans-bold">Harry Yuan</a>.</p>
   <section class="news">
-    <h2 class="section-h2 text-7e notosans-light">Updates</h2>
-    <hr class="section-hr">
+    <h2 class="block-title text-7e notosans">Updates</h2>
+    <hr class="block-hr">
     <div class="section-content-container">
      <% @news_list.each do |news| %>
       <div class="article-container">

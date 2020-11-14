@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks", sessions:"users/sessions", registrations: "users/registrations" }
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  root 'articles#index'
+  root 'home#index'
   get 'download', controller:'application', action:'download'
   get 'delete', controller:'application', action:'delete'
   post 'post_test', controller:'application', action:'post_test'
@@ -59,9 +59,6 @@ Rails.application.routes.draw do
   end
 
   resources :articles, :controller=>'articles' do
-    collection do
-      get :serialize_users
-    end
   end
 
   resources :words, :controller=>'words' do

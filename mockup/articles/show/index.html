@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>Postgres: Query string - TechPod</title>
+  <title>Postgres: Query string - ActiveMine</title>
   <meta name="csrf-param" content="authenticity_token" />
   <meta name="csrf-token"
     content="O1ncNSbJ9uPhDJ7A2AL6W2DatBsWvhgNqHZ2pfl9GT3fz+cDqRinKuebBZeMuBbqGowrOZk97gsxrAmDzL/RSQ==" />
@@ -28,7 +28,7 @@
           <h1 class="contirm-title notosans text-dk">Are You Sure?</h1>
           <h4 class="confirm-message notosans-light text-dk">All you changes will be lost.</h4>
         </div>
-        <div class="x notosans-bold text-dk" onclick="closeConfirm()">&#x2715;</div>
+        <div class="x notosans text-dk" onclick="closeConfirm()">&#x2715;</div>
       </div>
       <div class="wrap-confirm-btns confirm">
         <button id="no" class="btn cancel notosans-light text-e7" onclick="closeConfirm()">&#x2715; No</button>
@@ -38,61 +38,58 @@
     </div>
   </div>
   <nav id="nav-top">
-    <a class="techpod notosans-bold" href="/">TECHPOD</a>
-    <div class="dropdown">
-      <img src="https://lh3.googleusercontent.com/a-/AOh14GgmaCscPk5hJoDb4XKHvDIeC3XP6s4pvruNN-u98w=s96-c" alt="img"
-        class="nav-profile-img crop-circle toggle-dropdown-menu">
-      <ul class="dropdown-menu">
-        <li><a class="text-dk notosans-light" href="/articles/new"><span class="pen">&#x270e;</span> Write Article</a></li>
-        <li><a class="text-dk notosans-light username" href="javascript:void(0)">harryuan.65</a></li>
-        <li><a class="text-dk notosans-light" data-confirm="Confirm sign out ?" rel="nofollow" data-method="delete" href="/users/sign_out">Logout</a></li>
-      </ul>
+    <a class="link-wrap-title notosans" href="/">
+      <svg id="ruby" viewBox="0 0 61 58">
+        <path id="ruby-path" fill="transparent" stroke="#DB1C19" stroke-width="2" stroke-linejoin="round" pathLength="1" d="M 2.4 17.7 L 11.9 8.2 L 31 5.6 L 49 8.3 L 59.6 17.7 L 42.9 19.9 L 49 8.3 L 31.1 10.4 L 11.9 8.2 L 18.9 19.9 L 31.1 10.4 L 42.9 19.9 L 18.9 19.9 L 2.4 17.7 L 31 54.6 L 18.9 19.9 L 42.9 19.9 L 31 54.6 L 59.6 17.7"/>
+      </svg>
+      <span class="title">ActiveMine</span>
+    </a>
+    <div class="nav-top-options-container">
+      <div class="nav-top-option idle" id="nav-side-toggle">
+        <svg id="search-icon" width="28" height="28" xmlns="http://www.w3.org/2000/svg" stroke-linecap="round" fill-rule="evenodd">
+          <path d="M 16.0677 16.704 c -1.5147 1.3653 -3.5199 2.196 -5.7177 2.196 c -4.7187 0 -8.55 -3.8313 -8.55 -8.55 s 3.8313 -8.55 8.55 -8.55 s 8.55 3.8313 8.55 8.55 c 0 2.1978 -0.8307 4.203 -2.196 5.7177 l 6.696 6.696 l -0.6363 0.6363 l -6.696 -6.696 z m -5.7177 -14.004 c 4.2219 0 7.65 3.4281 7.65 7.65 s -3.4281 7.65 -7.65 7.65 s -7.65 -3.4281 -7.65 -7.65 s 3.4281 -7.65 7.65 -7.65 z"/>
+        </svg>
+      </div>
+      <div id="nav-side-toggle" class="nav-top-option idle" onclick="toggleSideNav()">
+        <svg version="1.1" id="nav-toggle" stroke-linecap="round" stroke-width="2" width="24" height="24" >
+          <path d="M 21.3 5.3 H 0.9 M 21.3 13.2 H 0.9 M 21.3 21.1 H 0.9"/>
+        </svg>
+      </div>
+      <!-- <div class="nav-top-option idle" id="nav-side-toggle" onclick="toggleSideNav()">&#x2630;</div> -->
     </div>
-  </nav>
-  <div class="nav-side-toggle idle" id="nav-side-toggle" onclick="toggleSideNav()">&#x2630;</div>
 
-  <nav id="nav-side" class="no-dark">
-    <div id="nav-side-menu-container">
-      <div class="nav-side-block">
-        <h2 class="nav-side-block-title notosans-light text-a9"><a class="notosans-light text-d3" href="/news">News</a>
-        </h2>
-        <h2 class="nav-side-block-title notosans-light text-a9"><a class="notosans-light text-d3"
-            href="/articles">Articles</a></h2>
-        <hr class="nav-side-block-hr">
-        <div class="nav-side-block-content-container">
-          <h3 class="nav-side-block-content"><a class="notosans-light text-d3" href="/articles">All</a></h3>
+    <nav id="nav-side" class="no-dark">
+      <div id="nav-side-menu-container">
+        <div class="nav-side-block">
+          <h2 class="nav-side-block-title notosans-light text-a9">
+            <img src="https://lh3.googleusercontent.com/a-/AOh14GgmaCscPk5hJoDb4XKHvDIeC3XP6s4pvruNN-u98w=s96-c" alt="img" class="nav-profile-img crop-circle"></a>
+            <span class="notosans-light username text-d3">harryuan.65</span>
+          </h2>
+          <hr class="nav-side-block-hr">
+          <div class="nav-side-block-content-container">
+            <h3 class="nav-side-block-content"><a class="notosans-light text-d3" data-confirm="Confirm sign out ?" rel="nofollow" data-method="delete" href="/users/sign_out">Logout</a></h3>
+          </div>
         </div>
-      </div>
 
-      <div class="nav-side-block">
-        <h2 class="nav-side-block-title notosans-light text-a9">Tools</h2>
-        <hr class="nav-side-block-hr">
-        <div class="nav-side-block-content-container">
-          <h3 class="nav-side-block-content"><a class="notosans-light text-d3"
-              href="https://harryuan65.github.io/CanvasColorPicker/">ColorPicker</a></h3>
-          <h3 class="nav-side-block-content"><a class="notosans-light text-d3" href="/words">WordBook</a></h3>
-          <h3 class="nav-side-block-content"><a class="notosans-light text-d3" href="/to_do_lists">ToDoList</a></h3>
-          <!-- <h3 class="nav-side-block-content"><a class="notosans-light text-d3" href="javascript:void(0)">MyPurchases</a></h3> %>-->
+        <div class="nav-side-block">
+          <h2 class="nav-side-block-title notosans-light text-a9"><a class="notosans-light text-d3" href="/news">Explore</a></h2>
+          <hr class="nav-side-block-hr">
+          <div class="nav-side-block-content-container">
+            <h3 class="nav-side-block-content"><a class="notosans-light text-d3" href="/articles">Articles</a></h3>
+            <h3 class="nav-side-block-content"><a class="notosans-light text-d3" href="https://harryuan65.github.io/CanvasColorPicker/">ColorPicker</a></h3>
+            <h3 class="nav-side-block-content"><a class="notosans-light text-d3" href="/words">WordBook</a></h3>
+            <h3 class="nav-side-block-content"><a class="notosans-light text-d3" href="/to_do_lists">ToDoList</a></h3>
+            <h3 class="nav-side-block-content"><a class="notosans-light text-d3" href="https://harryuan65.github.io/">About Author</a></h3>
+          </div>
         </div>
-      </div>
-    </div>
-
-    <div class="nav-side-block">
-      <h2 class="nav-side-block-title notosans-light text-a9">About</h2>
-      <hr class="nav-side-block-hr">
-      <div class="nav-side-block-content-container">
-        <h3 class="nav-side-block-content"><a class="notosans-light text-d3"
-            href="https://harryuan65.github.io/">Author</a></h3>
-        <!-- <h3 class="nav-side-block-content"><a class="notosans-light text-d3" href="javascript:void(0)">WordCards</a></h3>-->
-      </div>
-    </div>
-    </div>
+    </nav>
   </nav>
+
   <main id="main">
     <div id="container">
       <div class="wrap-article show">
         <div class="wrap-title can-edit">
-          <h1 id="article_18" class="article-page-title notosans-bold text-dk">Postgres: Query string</h1>
+          <h1 id="article_18" class="article-page-title notosans text-dk">Postgres: Query string</h1>
           <div class="wrap-pen">
             <a href="/articles/18/edit" class="article-page-edit text-7e pen">&#x270E;</a>
           </div>

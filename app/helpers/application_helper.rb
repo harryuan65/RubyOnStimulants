@@ -1,4 +1,17 @@
 module ApplicationHelper
+  def svg_asset(name, **options)
+    if options.any?
+      option_str = options.reduce(""){|res, (k,v)| res = res + "#{k}=\"#{v}\" " }
+    end
+    (
+      <<-HTML
+        <svg #{option_str}>
+          <use href="#{asset_path(name)}##{name}"></use>
+        </svg>
+      HTML
+    ).html_safe
+  end
+
   def svg(name, **options)
     file_path = "#{Rails.root}/app/assets/images/#{name}.svg"
     if File.exists?(file_path)

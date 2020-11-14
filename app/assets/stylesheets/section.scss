@@ -1,11 +1,12 @@
-.section-h2{
+.block-title{
   margin: 0 0 3px 0;
-  font-size: 30px;
+  font-size: 23px;
   font-weight: normal;
 }
-.section-hr{
+.block-hr{
   margin-block-start: 0;
   margin-block-end: 0;
+  width: 100%;
 }
 .section-content-container{
   margin-top: 25px;
@@ -13,6 +14,9 @@
   overflow: scroll;
   height: 600px;
   overflow: scroll;
+  &.articles{
+    overflow: visible;
+  }
 }
 //custom section style for each page
 section.news{

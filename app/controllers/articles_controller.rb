@@ -6,9 +6,9 @@ class ArticlesController < ApplicationController
     if current_user
       @articles = Article.includes(:user, :tags).where(state: :published).or(
                     Article.includes(:user, :tags).where(state: [:draft, :hidden], user_id: current_user.id)
-                  ).order(id: :desc).limit(50).offset(@offset)
+                  ).order(id: :desc).limit(20).offset(@offset)
     else
-      @articles = Article.includes(:user, :tags).where(state: :published).order(id: :desc).limit(50).offset(@offset)
+      @articles = Article.includes(:user, :tags).where(state: :published).order(id: :desc).limit(20).offset(@offset)
     end
     respond_to do |format|
       format.html

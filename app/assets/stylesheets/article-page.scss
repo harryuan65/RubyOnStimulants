@@ -312,3 +312,12 @@ footer{
 .wrap-author-info{
   @include flex(column, center, center);
 }
+
+@media only screen and (max-width: 420px){
+  .article-page-title{
+    font-size: 27px;
+  }
+  .markdown pre > code {
+    font-size: 14px;
+  }
+}

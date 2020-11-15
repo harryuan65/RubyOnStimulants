@@ -2,13 +2,14 @@ class ArticlesController < ApplicationController
   require 'redcarpet/render_strip'
   layout "articles/layout"
   def index
+    @limit = 10
     @offset = params[:offset] || 0
     if current_user
       @articles = Article.includes(:user, :tags).where(state: :published).or(
                     Article.includes(:user, :tags).where(state: [:draft, :hidden], user_id: current_user.id)
-                  ).order(id: :desc).limit(20).offset(@offset)
+                  ).order(id: :desc).limit(@limit).offset(@offset)
     else
-      @articles = Article.includes(:user, :tags).where(state: :published).order(id: :desc).limit(20).offset(@offset)
+      @articles = Article.includes(:user, :tags).where(state: :published).order(id: :desc).limit(@limit).offset(@offset)
     end
     respond_to do |format|
       format.html

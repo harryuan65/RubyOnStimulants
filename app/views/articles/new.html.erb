@@ -22,7 +22,7 @@
     radio.parent().addClass("selected"); //event.target = pair
   }
 </script>
-<div id="container" class="<%= ("#{params[:controller]}##{params[:action]}" =="articles#new" ? "expand-for-article-new" : "") %>">
+<div class="container" class="<%= ("#{params[:controller]}##{params[:action]}" =="articles#new" ? "expand-for-article-new" : "") %>">
   <%= form_with model: @article do |f|  %>
     <div class="wrap-article">
       <div class="wrap-title">

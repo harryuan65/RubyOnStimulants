@@ -38,12 +38,7 @@ module ApplicationHelper
     "#{params[:controller]}##{params[:action]}"
   end
 
-  def should_load_hightlight_js
-    ["articles#new", "articles#show", "articles#edit"].include?(current_position)
+  def should_show_sidebar
+    ["articles#index"].include?(current_position)
   end
-
-  def is_article_editing_page
-    ["articles#new", "articles#edit"].include?(current_position)
-  end
-
 end

@@ -1,7 +1,7 @@
 newDataSize = <%= @articles.size %>
 listSize += newDataSize;
 $("#load-more").parent("#load-more-container").before("<%= j render("index")%>")
-if(newDataSize===0 || (newDataSize>0 && newDataSize < 20) ){
+if(newDataSize===0 || (newDataSize>0 && newDataSize < <%= @limit %>) ){
   $("#load-more-container").remove();
 }
 

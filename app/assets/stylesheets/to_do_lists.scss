@@ -9,7 +9,7 @@
   @include size(100%, 100%);
   margin-top: 30px;
   margin-left: 120px;
-
+  margin-top: 0;
   &.has-selected-list{
     margin-left: 0px;
   }
@@ -21,8 +21,9 @@ $input-disable-time: .1s;
   margin-left: -120px;
   @include flex(column, flex-start, center);
   background-color: rgb(255, 241, 164);
+  border-radius: 8px;
   width: 250px;
-  height: 450px;
+  height: 360px;
   box-sizing: border-box;
   padding: 4px 0 4px 0;
   transition: transform .2s ease, background-color 2s ease, opacity $fade-time ease;
@@ -36,7 +37,7 @@ $input-disable-time: .1s;
   // }
 
   &:not(.selected):hover{
-    transform: translateY(-80px);
+    transform: translateY(-30px);
   }
 
   &:not(.selected:hover){

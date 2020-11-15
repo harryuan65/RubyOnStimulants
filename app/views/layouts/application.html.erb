@@ -42,7 +42,7 @@
     <%= render('shared/nav') %>
     <main id="main">
       <%= yield %>
-      <% unless @hide_sidebar %>
+      <% if should_show_sidebar %>
         <%= render('shared/sidebar') %>
       <% end %>
     </main>

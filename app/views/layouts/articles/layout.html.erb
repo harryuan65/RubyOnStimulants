@@ -19,12 +19,12 @@
   <body>
     <div class="wrap-alert" id="wrap-alert">
       <% if notice %>
-        <p class="alert alert-success notosans-light" onanimationend="foldAlert(this)">
+        <p class="alert alert-success notosans" onanimationend="foldAlert(this)">
          <span class="alert-txt"><%= notice %></span>
         </p>
       <% end %>
       <% if alert %>
-         <p class="alert alert-danger notosans-light" onanimationend="foldAlert(this)">
+         <p class="alert alert-danger notosans" onanimationend="foldAlert(this)">
          <span class="alert-txt"> <%= alert %></span>
         </p>
       <% end %>
@@ -35,13 +35,13 @@
           <div class="wrap-confirm-text-all">
             <div class="wrap-confirm-text">
               <h1 class="contirm-title notosans text-dk">Are You Sure?</h1>
-              <h4 class="confirm-message notosans-light text-dk">All you changes will be lost.</h4>
+              <h4 class="confirm-message notosans text-dk">All you changes will be lost.</h4>
             </div>
-            <div class="x notosans-bold text-dk" onclick="closeConfirm()">&#x2715;</div>
+            <div class="x notosans text-dk" onclick="closeConfirm()">&#x2715;</div>
           </div>
           <div class="wrap-confirm-btns confirm">
-            <button id="no" class="btn cancel notosans-light text-e7" onclick="closeConfirm()">&#x2715; No</button>
-            <input id="yes" type="submit" class="btn yes notosans-light text-e7" onclick="history.go(-1);return false;" value="&#x25EF; Yes">
+            <button id="no" class="btn cancel notosans text-e7" onclick="closeConfirm()">&#x2715; No</button>
+            <input id="yes" type="submit" class="btn yes notosans text-e7" onclick="history.go(-1);return false;" value="&#x25EF; Yes">
           </div>
       </div>
     </div>

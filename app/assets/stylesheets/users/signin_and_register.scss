@@ -1,29 +1,4 @@
-@font-face{
-  font-family: 'Noto Sans';
-  src: font-url('NotoSans-Regular.ttf') format('truetype');
-}
-@font-face{
-  font-family: 'Noto Sans Light';
-  src: font-url('NotoSans-Light.ttf') format('truetype');
-}
-@font-face{
-  font-family: 'Noto Sans Bold';
-  src: font-url('NotoSans-Bold.ttf') format('truetype');
-}
-@font-face{
-  font-family: 'Noto Sans CJK TC';
-  src: font-url('NotoSansCJKtc-Regular.otf') format('opentype');
-}
-@mixin flex($fd:row, $jc:flex-start,$ai:flex-start){
-  display: flex;
-  flex-direction: $fd;
-  justify-content: $jc;
-  align-items: $ai;
-}
-@mixin size($w, $h){
-  width: $w;
-  height: $h;
-}
+@import '../resources.scss';
 @font-face {
   font-family: 'fontello';
   src: font-url('asterisk/fontello.eot?27015240');
@@ -58,9 +33,6 @@ input[type="password"] {
 *{
   box-sizing: border-box;
 }
-*:not(.tc){
-  font-family: 'Noto Sans';
-}
 html, body{
   margin: 0;
   padding: 0;
@@ -74,26 +46,19 @@ body{
 a{
   text-decoration: none;
 }
-a:link, a:hover, a:active, a:visited{
-  color: #5B5858;
+#container-sign{
+  @include flex(row, space-evenly, center);
+  font-family: 'Noto Sans';
+  width: 750px;
 }
-#container-signin{
-  @include flex(column, flex-start, center);
-  @include size(580px, 645px);
-  border-radius: 6px;
-  background-color: white;
-  border: 1px solid #5B5858;
-  border-radius: 15px;
-}
-#txt-signin{
-  font-size: 48px;
+.txt-sign{
+  font-size: 32px;
   color: #636363;
   font-weight: normal;
+  margin: 0 0 20px 0;
 }
 .wrap{
-  &.signin{
-    margin-top: 21px;
-  }
+  @include size(300px, 300px);
   &.signup{
     margin-bottom: 21px;
   }
@@ -101,8 +66,9 @@ a:link, a:hover, a:active, a:visited{
     @include flex(column, center, center);
   }
   &.middle{
-    margin-top: 15px;
-    @include flex(row, space-between, center);
+    margin: 0 90px 0 90px;
+    border: solid 1px #5b5b5b66;
+    width: 0;
   }
   &.inputs{
     @include flex(column, center, center);
@@ -112,19 +78,26 @@ a:link, a:hover, a:active, a:visited{
   color: #979797;
   font-size: 22px;
 }
-hr{
-  display: inline-block;
-  width: 189px;
+hr.sign{
+  display: inline-block;;
+  width: 600px;
+  margin: 10px;
+  transform: rotate(90deg);
 }
 .signin-option{
   @include flex(row, center, center);
   @include size(290px, 43px);
   filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, .2));
-  $transition-delay: .1s;
+  $transition-delay: .07s;
+  transition: transfrom $transition-delay ease;
   border-radius: 6px;
   &:not(.input){ //facebook and google
     margin-top: 10px;
     font-family: 'Noto Sans CJK TC';
+  }
+  &:active{
+    transform: translate(2px, 2px);
+    transition: transfrom $transition-delay ease;
   }
   &.facebook{
     background-color: #3C5999;
@@ -171,6 +144,10 @@ hr{
     margin-top: 40px;
     &.signin{
       background-color: #36A44F;
+      &:hover{
+        background-color: #216431;
+        color: rgba(216, 216, 216,.8);
+      }
     }
     &.signup{
       background-color: #2D3047;
@@ -206,4 +183,9 @@ hr{
 .link-signup{
   position: absolute;
   color: #979797;
+}
+.page-link{
+  text-align: center;
+  width: 290px;
+  display: inline-block;
 }

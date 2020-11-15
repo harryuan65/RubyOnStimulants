@@ -1,86 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sign Up - ActiveMine</title>
-  <%= stylesheet_link_tag "users/signin_and_register" %>
-  <%= javascript_include_tag "users/signin_and_register" %>
-  <script>
-    document.addEventListener('DOMContentLoaded',()=>{
-      let signupForm = document.getElementById('form-signup');
-      if (signupForm){
-        signupForm.addEventListener('submit',(event)=>{
-          event.preventDefault();
-          let pwd = signupForm.querySelector('#user_password').value;
-          let pwdConfirmation = signupForm.querySelector('#user_password_confirmation').value;
-          if (pwd!==pwdConfirmation){
-            let alert = document.createElement("div");
-            let alertText = document.createElement("span");
-            alert.classList.add("alert");
-            alert.classList.add("alert-danger");
-            alert.setAttribute("onanimationend", "foldAlert(this)");
-            alertText.innerText = "<%= I18n.t('devise.registrations.password_inconsistent') %>";
-            alert.animationPlayState = "running";
-            alert.appendChild(alertText);
-            document.getElementById('wrap-alert').appendChild(alert);
-            let inputs = document.querySelectorAll('.signin-option.input');
-            inputs.forEach(e=>e.value = "");
-            inputs[0].focus();
-          }
-          else{
-            signupForm.submit();
-          }
-        });
-      }
-    })
+<%= stylesheet_link_tag "users/signin_and_register" %>
+<%= javascript_include_tag "users/signin_and_register" %>
+<%= javascript_include_tag "users/register" %>
+<div id="container-sign">
+  <%= form_for(@user, as: :user, url: registration_path(@user), html: {id: 'form-signup'}) do |f| %>
+    <h1 class="txt-sign">Sign Up</h1>
+    <%= render "devise/shared/error_messages", resource: resource %>
 
-  </script>
-
-</head>
-<body>
-    <div class="wrap-alert" id="wrap-alert">
-      <% if notice %>
-        <p class="alert alert-success notosans-light" onanimationend="foldAlert(this)">
-         <span class="alert-txt" id="alert-text"><%= notice %></span>
-        </p>
-      <% end %>
-      <% if alert %>
-         <p class="alert alert-danger notosans-light" onanimationend="foldAlert(this)">
-         <span class="alert-txt" id="alert-text"> <%= alert %></span>
-        </p>
-      <% end %>
-        <%# <p class="txt alert alert-danger animation-forwards" onanimationend="foldAlert(this)"><span class="alert-txt">Test abcdefghijadfadsf123</span></p> %>
+    <div class="signin-pair">
+        <!-- second arg is display text, or it'll find devise I18n-->
+        <%= f.label "email", "username", class: 'signin-label' %>
+        <%= f.email_field(:email, required: true, class: "signin-option input username", autofocus: true, autocomplete: 'off') %>
     </div>
-    <div id="container-signin">
-      <h1 id="txt-signin">Sign Up</h1>
-      <%= form_for(@user, as: :user, url: registration_path(@user), html: {id: 'form-signup'}) do |f| %>
-        <%= render "devise/shared/error_messages", resource: resource %>
 
-        <div class="signin-pair">
-            <!-- second arg is display text, or it'll find devise I18n-->
-            <%= f.label "email", "username", class: 'signin-label' %>
-            <%= f.email_field(:email, required: true, class: "signin-option input username", autofocus: true, autocomplete: 'off') %>
-        </div>
-
-        <div class="signin-pair">
-            <%= f.label "password", "password", class: 'signin-label' %>
-            <% if @minimum_password_length %>
-            <em>(<%= @minimum_password_length %> characters minimum)</em>
-            <% end %><br />
-            <%= f.password_field(:password, required: true, class: "signin-option input password", autocomplete: 'off') %>
-        </div>
-
-        <div class="signin-pair">
-          <%= f.label "password_confirmation", "confirm password" , class: 'signin-label' %><br />
-          <%= f.password_field :password_confirmation, class: "signin-option input password",autocomplete: "new-password" %>
-        </div>
-
-        <div class="signin-pair">
-          <%= f.submit "Sign up", class: "signin-option submit signup", id: "btn-signup"%>
-        </div>
-      <% end %>
-      <%= render "users/shared/links" %>
+    <div class="signin-pair">
+        <%= f.label "password", "password", class: 'signin-label' %>
+        <% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %> characters minimum)</em>
+        <% end %><br />
+        <%= f.password_field(:password, required: true, class: "signin-option input password", autocomplete: 'off') %>
     </div>
-  </body>
-</html>
+
+    <div class="signin-pair">
+      <%= f.label "password_confirmation", "confirm password" , class: 'signin-label' %><br />
+      <%= f.password_field :password_confirmation, class: "signin-option input password",autocomplete: "new-password" %>
+    </div>
+
+    <div class="signin-pair">
+      <%= f.submit "Sign up", class: "signin-option submit signup", id: "btn-signup"%>
+    </div>
+    <%= link_to "Have an account? Sign In", new_user_session_path, class: "text-dk page-link" %><br />
+  <% end %>
+</div>

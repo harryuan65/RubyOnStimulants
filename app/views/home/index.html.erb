@@ -1,7 +1,7 @@
 <%= stylesheet_link_tag 'home', media: 'all', 'data-turbolinks-track': 'reload'%>
 
 <div class="container">
-  <p class="welcome-txt text-dk notosans">This website is managed by <a href="https://github.com/harryuan65/" class="text-dk notosans-bold">Harry Yuan</a>.</p>
+  <p class="welcome-txt text-dk notosans">This website is managed by <a href="https://github.com/harryuan65/" class="text-dk notosans">Harry Yuan</a>.</p>
   <section class="news">
     <h2 class="block-title text-7e notosans">Updates</h2>
     <hr class="block-hr">
@@ -9,11 +9,11 @@
      <% @news_list.each do |news| %>
       <div class="article-container">
         <a href="javascript:void(0)" class="article-link news">
-         <h3 class="article-title notosans-bold"><%= news[:title] %></h3>
-         <span class="article-description notosans-light text-dk"><%= news[:description] %></span>
+         <h3 class="article-title notosans"><%= news[:title] %></h3>
+         <span class="article-description notosans text-dk"><%= news[:description] %></span>
         </a>
-        <span class="article-author notosans-light text-dk">harry</span>
-        <span class="article-created-at notosans-light text-dk"><%= news[:date] %></span>
+        <span class="article-author notosans text-dk"></span>
+        <span class="article-created-at notosans text-dk"><%= news[:date] %></span>
       </div>
      <% end %>
     </div>

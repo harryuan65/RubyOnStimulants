@@ -2,7 +2,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def new
     @user = User.new
     @minimum_password_length = 6
-    render 'users/registrations/new', layout: false
+    render 'users/registrations/new'
   end
 
   def create

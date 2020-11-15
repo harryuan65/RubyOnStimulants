@@ -66,9 +66,14 @@ class HomeController < ApplicationController
   def news_list
     [
       {
+        title: "Rename site to ActiveMine and implement new theme layout and style",
+        description: "took me 3 days",
+        date: "Nov 15, 2020"
+      },
+      {
         title: "Reanimate To do list",
         description: "fix a lot of logic for to do list",
-        date: "Oct 29 ~ Nov 1, 2020"
+        date: "Nov 1, 2020"
       },
       {
         title: "Introduce Rspec for to do list/items",
@@ -263,7 +268,7 @@ class HomeController < ApplicationController
       {
         title: "harrysworkspace",
         description: "Day of site creation.",
-        date: "Oct 19, 2029"
+        date: "Oct 19, 2019"
       }
     ]
   end

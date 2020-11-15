@@ -70,5 +70,15 @@
   }
 }
 @media only screen and (max-width: 420px){
+  .article-container{
+    grid-template-columns: 70% 30%;
+    padding:0;
+  }
+  .article-author{
+    font-size: 13px;
+  }
+  .article-created-at{
+    font-size: 13px;
+  }
   .article-description{display:none;}
 }

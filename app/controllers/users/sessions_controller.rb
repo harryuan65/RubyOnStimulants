@@ -1,7 +1,8 @@
 class Users::SessionsController < Devise::OmniauthCallbacksController
   def new
     @user = User.new
-    render "users/sessions/new", layout: false
+    @hide_sidebar = true
+    render "users/sessions/new" #, locals: { show_sidebar: false}
   end
 
   def create

@@ -1,29 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sign In - ActiveMine</title>
   <%= stylesheet_link_tag "users/signin_and_register" %>
   <%= javascript_include_tag "users/signin_and_register" %>
-</head>
-<body>
-    <div class="wrap-alert" id="wrap-alert">
-      <% if notice %>
-        <p class="alert alert-success notosans-light" onanimationend="foldAlert(this)">
-         <span class="alert-txt"><%= notice %></span>
-        </p>
-      <% end %>
-      <% if alert %>
-         <p class="alert alert-danger notosans-light" onanimationend="foldAlert(this)">
-         <span class="alert-txt"> <%= alert %></span>
-        </p>
-      <% end %>
-        <%# <p class="txt alert alert-danger animation-forwards" onanimationend="foldAlert(this)"><span class="alert-txt">Test abcdefghijadfadsf123</span></p> %>
-    </div>
-    <div id="container-signin">
+    <div id="container-sign" class="container">
         <div class="wrap oauth signin">
-        <h1 id="txt-signin">Sign In</h1>
+        <h1 class="txt-sign">Sign In</h1>
           <%- if devise_mapping.omniauthable? %>
             <%- resource_class.omniauth_providers.each do |provider| %>
               <% case provider.to_s %>
@@ -37,29 +16,26 @@
           <% end %>
         </div>
         <div class="wrap middle">
-            <hr>
-            <span class="txt">or</span>
-            <hr>
         </div>
         <div class="wrap inputs">
+          <h1 class="txt-sign">Sign In</h1>
           <%= form_for @user, url: user_session_path(@user)  do |f| %>
             <div class="signin-pair">
               <%= f.label "username", "username", class: 'signin-label' %>
               <% #text_field_tag(:email, nil, required: true, class: "signin-option input",required: true, autocomplete: 'on') %>
-              <%= f.email_field(:email, required: true, class: "signin-option input username",required: true, autocomplete: 'off') %>
+              <%= f.email_field(:email, class: "signin-option input username",required: true, autocomplete: 'off') %>
             </div>
 
             <div class="signin-pair">
               <%= f.label "password", "password", class: 'signin-label' %>
-              <%= f.password_field(:password, required: true, class: "signin-option input",required: true, autocomplete: 'off') %>
+              <%= f.password_field(:password, class: "signin-option input",required: true, autocomplete: 'off') %>
             </div>
 
             <div class="signin-pair">
               <%= f.submit "Sign In", class:"signin-option submit signin" %>
             </div>
-            <%= link_to "Don't have an account?", new_user_registration_path, class: "link-signup"%>
+            <%= link_to "Don't have an account?", new_user_registration_path, class: "text-dk page-link"%>
           <% end %>
         </div>
     </div>
-</body>
-</html>
+

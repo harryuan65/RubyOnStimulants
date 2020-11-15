@@ -5,11 +5,11 @@
 }
 @font-face{
   font-family: 'Noto Sans Light';
-  src: url('../../app/assets/fonts/NotoSans-Light.ttf') format('truetype');
+  src: url('../../app/assets/fonts/notosans.ttf') format('truetype');
 }
 @font-face{
   font-family: 'Noto Sans Bold';
-  src: url('../../app/assets/fonts/NotoSans-Bold.ttf') format('truetype');
+  src: url('../../app/assets/fonts/notosans.ttf') format('truetype');
 }
 @font-face{
   font-family: 'Noto Sans CJK TC';
@@ -156,10 +156,10 @@ a, a:hover, a:visited, a:active{
 .notosans{
   font-family: 'Noto Sans';
 }
-.notosans-light{
+.notosans{
   font-family: 'Noto Sans Light';
 }
-.notosans-bold{
+.notosans{
   font-family: 'Noto Sans Bold';
 }
 .text-dk{

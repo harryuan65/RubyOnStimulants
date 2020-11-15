@@ -4,11 +4,11 @@
 }
 @font-face{
   font-family: 'Noto Sans Light';
-  src: url('../../../app/assets/fonts/NotoSans-Light.ttf') format('truetype');
+  src: url('../../../app/assets/fonts/notosans.ttf') format('truetype');
 }
 @font-face{
   font-family: 'Noto Sans Bold';
-  src: url('../../../app/assets/fonts/NotoSans-Bold.ttf') format('truetype');
+  src: url('../../../app/assets/fonts/notosans.ttf') format('truetype');
 }
 @mixin flex($fd:row, $jc:flex-start,$ai:flex-start){
   display: flex;
@@ -26,10 +26,10 @@
 .notosans{
   font-family: 'Noto Sans';
 }
-.notosans-light{
+.notosans{
   font-family: 'Noto Sans Light';
 }
-.notosans-bold{
+.notosans{
   font-family: 'Noto Sans Bold';
 }
 .text-dk{

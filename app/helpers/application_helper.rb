@@ -6,7 +6,7 @@ module ApplicationHelper
     (
       <<-HTML
         <svg #{option_str}>
-          <use href="#{asset_path(name)}##{name}"></use>
+          <use href="#{asset_path(name+'.svg')}##{name}"></use>
         </svg>
       HTML
     ).html_safe

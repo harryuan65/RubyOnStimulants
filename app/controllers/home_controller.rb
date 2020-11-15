@@ -39,7 +39,7 @@ class HomeController < ApplicationController
   end
 
   def domain_auth
-    render "google3e784468cd0fd9bb.html", layout: false
+    send_file Rails.root.join("google3e784468cd0fd9bb.html")
   end
 
   def list_home

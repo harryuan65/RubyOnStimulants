@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   post 'preview_markdown', controller:'application', action:'preview_markdown'
   get 'privacy_policy', controller: 'home', action: 'privacy_policy'
   post 'cancel_fb_authorization', controller: 'application', action: 'dev_cancel_fb'
+  get 'google3e784468cd0fd9bb.html', controller: 'home', action: 'domain_auth'
   scope :controller=>"home",:path=>"/", :as=>"home" do
     get 'news'=>:index
     get 'post_newrecord'=>:post_newrecord

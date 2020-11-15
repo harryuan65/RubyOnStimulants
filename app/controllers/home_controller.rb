@@ -38,6 +38,10 @@ class HomeController < ApplicationController
   def yeah
   end
 
+  def domain_auth
+    render "google3e784468cd0fd9bb.html", layout: false
+  end
+
   def list_home
     @data = []
     50.times.each do |d|

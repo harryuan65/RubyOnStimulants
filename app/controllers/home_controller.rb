@@ -39,7 +39,8 @@ class HomeController < ApplicationController
   end
 
   def domain_auth
-    send_file Rails.root.join("google3e784468cd0fd9bb.html")
+    @htmldoc = File.read('google3e784468cd0fd9bb.html.txt')
+    render html: @htmldoc
   end
 
   def list_home

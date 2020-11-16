@@ -8,11 +8,11 @@
   <div class="card-wrap">
      <div class="card">
         <div class="card-content" onclick="toggleRotate(this)">
-        <div class="front">
+        <div class="card-face front">
           <h1 class="word"><%= word.name %></h1>
           <h4 class="definition"><span class="zh"><%= word.first_definition.zh_tw_translation %></span><span class="part-of-speech">&nbsp;<%= word.first_definition.part_of_speech%></span></h4>
         </div>
-        <div class="back">
+        <div class="card-face back">
           <h4 class="definition-org"><%= word.first_definition.def_org.capitalize %></h4>
           <hr>
           <h4 class="example"><%= word.first_definition.first_example&.sentence || "(No example)" %></h4>

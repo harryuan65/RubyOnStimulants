@@ -26,6 +26,7 @@
   }
   padding: 0 40px 0 40px;
   flex-wrap: wrap;
+  width: 100%;
 }
 .card-wrap{
   margin-top: 50px;
@@ -48,60 +49,61 @@
     transform-style: preserve-3d;
     // border: 1px solid black;
   }
-  .front, .back{
+  .card-face{
     position: absolute;
     backface-visibility: hidden;
     width: 100%;
     height:100%;
-  }
-  .front{
-    @include flex(column, center, center);
-    // background-color: #83b582;
-    background-color: #117864;
-    color: #eee;
-    .word{
-      @include flex(row, space-between, center);
-      font-size: 35px;
-    }
-    .definition{
-      text-align: center;
-    }
-    .zh{
-      display: inline-block;
-      max-width: 200px;
-      word-wrap: wrap;
-      font-size: 18px;
-    }
-  }
-  .back{
-      background-color: #fcf8e8;
-      transform: rotateY(180deg);
-      .definition-org{
-        width: inherit;
-        height: auto;
-        box-sizing: border-box;
-        padding: 10px;
+    border-radius: 8px;
+    &.front{
+      @include flex(column, center, center);
+      // background-color: #83b582;
+      background-color: #117864;
+      color: #eee;
+      .word{
+        @include flex(row, space-between, center);
+        font-size: 35px;
       }
-      .example, .translation{
-        padding-left: 10px;
+      .definition{
+        text-align: center;
       }
-      .example{
-        line-height: 1.2;
-        &::before{
-          content: '';
-          display: inline-block;
-          border-radius: 50%;
-          height: 4px;
-          width: 4px;
-          border: 1px solid black;
-          margin-right: 10px;
-          background-color: black;
-          vertical-align: middle;
+      .zh{
+        display: inline-block;
+        max-width: 200px;
+        word-wrap: wrap;
+        font-size: 18px;
+      }
+    }
+    &.back{
+        background-color: #fcf8e8;
+        transform: rotateY(180deg);
+        .definition-org{
+          width: inherit;
+          height: auto;
+          box-sizing: border-box;
+          padding: 10px;
         }
-      }
-      .translation{
-        margin-top: 10px;
-      }
+        .example, .translation{
+          padding-left: 10px;
+        }
+        .example{
+          line-height: 1.2;
+          &::before{
+            content: '';
+            display: inline-block;
+            border-radius: 50%;
+            height: 4px;
+            width: 4px;
+            border: 1px solid black;
+            margin-right: 10px;
+            background-color: black;
+            vertical-align: middle;
+          }
+        }
+        .translation{
+          margin-top: 10px;
+        }
+    }
   }
   a.btn-details{
     &:link, &:visited{

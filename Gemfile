@@ -85,3 +85,5 @@ gem 'gutentag'
 gem "jquery-ui-rails", "~> 6.0"
 gem "acts_as_list"
 gem 'rollbar'
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'

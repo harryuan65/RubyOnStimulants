@@ -81,3 +81,10 @@ function toggleStats(){
   //TODO
   // $(".toggle-dropdown").toggleClass("show");
 }
+function toggleSearchBar(){
+  var searchForm = document.getElementById('search-form');
+  var searchBar = document.getElementById('searchbar');
+  searchForm.classList.toggle('display');
+  searchBar.classList.toggle('display');
+  searchBar.disabled = !searchBar.disabled;
+}

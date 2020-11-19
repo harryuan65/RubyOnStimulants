@@ -272,6 +272,8 @@ en:
       confirm_delete: 'Confirm delete article?'
       empty: "Oops! Looks like there is nothing here."
       load_more: "Load more..."
+      search: "Search article..."
+      search_result_title: "Articles containing keyword \"%{keyword}\""
     line:
       welcome: "Hello there! We are Omama and Bai.\nThank you for adding me as your friend!\nWe will do our best to help you!"
       currently_no_services: "Um...Sorry the message parsing funtionalities are still in development"

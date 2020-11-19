@@ -93,6 +93,14 @@ class ArticlesController < ApplicationController
       return redirect_to article_path(@article), alert: I18n.t('controller.articles.delete_failed') + "error: " + exception.to_s
     end
   end
+
+  def search
+    @keyword = params[:keyword]
+    article_ids = Article.search_with(@keyword)
+    @articles = Article.find_with_sequence(article_ids)
+
+    render "search_result"
+  end
   private
   def article_params
     # params.permit(:title, :subtitle, :content, :privacy)

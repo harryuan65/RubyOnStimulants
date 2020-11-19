@@ -238,6 +238,8 @@ zh-TW:
       confirm_delete: '確定要刪除此文章？'
       empty: "目前沒有內容"
       load_more: "載入更多..."
+      search: "搜尋文章..."
+      search_result_title: "包含關鍵字 \"%{keyword}\" 的文章"
     line:
       welcome: "安安尼好！我們是Omama跟小白～\n謝謝尼加入我們的好友，希望我們能在生活上幫到尼喔"
       currently_no_services: '那個～抱歉目前訊息處理的功能在開發中喔'

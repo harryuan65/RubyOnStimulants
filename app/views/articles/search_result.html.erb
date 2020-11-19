@@ -1,0 +1,40 @@
+<%# 所以只要那個resource.scss裡面import shared，之後都可以在resource.scss上面做更改局部css即可！ %>
+<div class="container">
+  <h2 class="search-result notosans text-dk"><%= t('controller.articles.search_result_title', keyword: @keyword) %></h2>
+  <section class="articles">
+    <h2 class="block-title notosans text-7e">Articles <%= @category.present?? ": #{@category}" : "" %></h2>
+    <hr class="block-hr">
+    <div class="section-content-container articles">
+    <% if @articles.empty? %>
+      <h2 class="notosans text-dk"><%= t('controller.articles.empty') %></h2>
+    <% end %>
+      <% @articles.each do |article| %>
+        <div class="article-container" id="article-<%=article.id%>">
+          <a href="<%= article_path(article.id)%>" class="article-link">
+            <div class="wrap-article-title">
+              <h3 class="article-title notosans"><%= article.title %></h3>
+              <% case article.state %>
+              <% when "draft"%>
+                <%= article.draft?? '<span class="draft notosans text-dk">draft</span>'.html_safe : "" %>
+              <% when "hidden"%>
+                <%= article.hidden?? '<span class="private notosans text-dk">private</span>'.html_safe : "" %>
+              <% end %>
+            </div>
+            <!-- <span class="article-description subtitle notosans text-dk"><%= article.subtitle %></span>-->
+            <div class="wrap-tags">
+              <% article.tags.map(&:name).each_with_index do |tag, i| %>
+                  <span class="article-description tag notosans text-dk"><%= tag %></span>
+                <% if i!=article.tags.size-1 %>
+                  <span class="notosans text-dk">,</span>
+                <% end %>
+              <% end %>
+            </div>
+          </a>
+          <span class="article-author notosans text-dk"><%= username(article.user) %></span>
+          <span class="article-created-at notosans text-dk"><%= article.created_at.strftime("%B") %> <%= article.created_at.day %></span>
+        </div>
+      <% end %>
+    </div>
+  </section>
+
+</div>

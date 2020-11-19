@@ -1,10 +1,13 @@
-<nav id="nav-top">
-  <a class="link-wrap-title notosans" href="/">
+<nav id="nav-top" class="notosans">
+  <a class="link-wrap-title" href="/">
     <%= svg('ruby', class: "ruby-icon") %>
     <span class="title">ActiveMine</span>
   </a>
+  <%= form_tag search_articles_path, id: 'search-form' do%>
+    <%= text_field_tag :keyword, nil, id: 'searchbar', autocomplete: 'off', placeholder: t('controller.articles.search'), disabled: true %>
+  <% end %>
   <div class="nav-top-options-container">
-    <div class="nav-top-option idle" id="nav-side-toggle" onclick="alert('Still WIP')">
+    <div class="nav-top-option idle" id="nav-side-toggle" onclick="toggleSearchBar()">
       <%= svg_asset('search-icon') %>
     </div>
     <div id="nav-side-toggle" class="nav-top-option idle" onclick="toggleSideNav()">

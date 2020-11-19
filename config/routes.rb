@@ -60,6 +60,10 @@ Rails.application.routes.draw do
   end
 
   resources :articles, :controller=>'articles' do
+    collection do
+      get :search, to: redirect("/")
+      post :search
+    end
   end
 
   resources :words, :controller=>'words' do

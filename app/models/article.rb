@@ -15,6 +15,8 @@
 #
 
 class Article < ApplicationRecord
+  include Searchable
+  include SequenceMaintainable
   Gutentag::ActiveRecord.call self
 
   validates :title, presence: true

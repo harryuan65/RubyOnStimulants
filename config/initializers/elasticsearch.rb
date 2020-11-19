@@ -1,0 +1,1 @@
+Elasticsearch::Model.client = Elasticsearch::Client.new url: ENV['ES_URL'], log: true

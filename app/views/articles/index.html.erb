@@ -1,7 +1,7 @@
 <%# 所以只要那個resource.scss裡面import shared，之後都可以在resource.scss上面做更改局部css即可！ %>
 <div class="container">
   <% unless @category.present? %>
-    <p class="welcome-txt text-dk notosans">Hello there! This is Harry. I'm a web developer interested in mining all the goods out there on the Internet. Here you can find some of them which I've already organized.</p>
+    <p class="welcome-txt text-dk notosans"><%= t('controller.articles.welcome_message') %></p>
   <% end %>
   <section class="articles">
     <h2 class="block-title notosans text-7e">Articles <%= @category.present?? ": #{@category}" : "" %></h2>
@@ -33,7 +33,7 @@
             </div>
           </a>
           <span class="article-author notosans text-dk"><%= username(article.user) %></span>
-          <span class="article-created-at notosans text-dk"><%= article.created_at.strftime("%B") %> <%= article.created_at.day %></span>
+          <span class="article-created-at notosans text-dk"><%= readable_time(article.created_at) %></span>
         </div>
       <% end %>
       <div id="load-more-container" class="notosans text-5b">

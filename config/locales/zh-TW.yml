@@ -210,6 +210,21 @@ zh-TW:
       long: "%Y年%m月%d日 %H:%M"
       short: "%m月%d日 %H:%M"
     pm: 下午
+  sidebar:
+    you_might_interested: "你可能感興趣"
+    about_the_site: "關於本站"
+    about_site: "小工程師想要整理網路挖到的寶到這邊"
+  navbar:
+    logout: "登出"
+    not_signed_in: "尚未登入"
+    sign_in: "登入"
+    sign_up: "註冊"
+    explore: "探索"
+    articles: "文章"
+    color_picker: "顏色提取器"
+    word_book: "單字本"
+    to_do_list: "待辦事項"
+    about: "關於本站作者"
   controller:
     general:
       success: "執行成功"
@@ -240,6 +255,8 @@ zh-TW:
       load_more: "載入更多..."
       search: "搜尋文章..."
       search_result_title: "包含關鍵字 \"%{keyword}\" 的文章"
+      welcome_message: "哈囉！我是Harry，是個喜歡Rails的菜鳥工程師，喜歡學習各種新東西。覺得網路上自學找資料就像挖寶，想把挖到的資源整理在這裡。"
+      write_new: "寫文章"
     line:
       welcome: "安安尼好！我們是Omama跟小白～\n謝謝尼加入我們的好友，希望我們能在生活上幫到尼喔"
       currently_no_services: '那個～抱歉目前訊息處理的功能在開發中喔'

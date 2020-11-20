@@ -5,9 +5,14 @@
   grid-template-columns: 80% 20%;
   grid-template-rows: repeat(2, 36px);
   align-content: center;
-  padding-right: 14px; // or scroll bar overlaps
+  padding: 10px; // or scroll bar overlaps
+  transition: background-color .1s ease-in;
   &:not(:first-child){
-    margin-top: 45px;
+    margin-top: 20px;
+  }
+  &:hover{
+    background-color: #dddddd88;
+    transition: background-color .1s ease-out;
   }
 }
 .article-link{
@@ -79,5 +84,10 @@
   }
   .article-created-at{
     font-size: 13px;
+  }
+  .article-link{
+    h3.article-title{
+      font-size: 18px;
+    }
   }
 }

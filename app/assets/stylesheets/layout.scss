@@ -63,13 +63,16 @@ nav#nav-top{
   width: 30%;
   transition: .2s ease;
   @include flex(row, center, center);
+  z-index: -1;
+
   &.display{
     opacity: 1;
     transition: .2s cubic-bezier(0.22, 0.61, 0.36, 1);;
+    z-index: 999;
   }
 }
 #searchbar{
-  border: 1px solid #fff;
+  border: 1px solid #ffffff55;
   border-radius: 15px;
   outline: none;
   padding: 0 10px 0 18px;
@@ -188,10 +191,18 @@ nav#nav-side{
 .nav-side-block-content-container{
   padding-left: 25px;
 }
-h3.nav-side-block-content{
+h3.nav-side-block-content a{
   font-weight: normal;
+  text-decoration: none;
+
+  &:hover{
+    color: #fff;
+  }
+  &:active{
+    font-weight: bold;
+  }
 }
-a, a:hover, a:visited, a:active{
+a{
   text-decoration: none;
 }
 .pen{
@@ -235,6 +246,9 @@ main{
     margin-left: 5px;
     margin-top: 10px;
   }
+  .block-content{
+    padding-left: 10px;
+  }
 }
 //alerts (currently login page only)
 @keyframes alert-forwards{
@@ -267,7 +281,7 @@ main{
   position: fixed;
   height: 90px;
   font-weight: bold;
-  z-index: 999;
+  z-index: 1000;
   color: #fff;
   text-shadow: -1px 0 #222222, 0 1px #222222, 1px 0 #222222, 0 -1px #222222;
   animation: alert-forwards .8s ease normal forwards;
@@ -481,7 +495,6 @@ div[id*="dropdown-toggle"]{
     height: 90px;
     width: 240px;
     background-color: #2D3047;
-    z-index: 999;
   }
 }
 @media only screen and (max-width: 1150px){

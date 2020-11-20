@@ -243,6 +243,21 @@ en:
       long: "%B %d, %Y %H:%M"
       short: "%d %b %H:%M"
     pm: pm
+  sidebar:
+    you_might_interested: "You Might Interested"
+    about_the_site: "About The Site"
+    about_site: A web developer is digging out good stuff from the Internet
+  navbar:
+    logout: "Logout"
+    not_signed_in: "Not Signed In"
+    sign_in: "Sign In"
+    sign_up: "Sign Up"
+    explore: "Explore"
+    articles: "Articles"
+    color_picker: "ColorPicker"
+    word_book: "WordBook"
+    to_do_list: "ToDoList"
+    about: "Author"
   controller:
     general:
       success: "Action done successfully!"
@@ -274,6 +289,8 @@ en:
       load_more: "Load more..."
       search: "Search article..."
       search_result_title: "Articles containing keyword \"%{keyword}\""
+      welcome_message: "Hello there! This is Harry. I'm a web developer interested in mining all the goods out there on the Internet. Here you can find some of them which I've already organized."
+      write_new: "Write Article"
     line:
       welcome: "Hello there! We are Omama and Bai.\nThank you for adding me as your friend!\nWe will do our best to help you!"
       currently_no_services: "Um...Sorry the message parsing funtionalities are still in development"

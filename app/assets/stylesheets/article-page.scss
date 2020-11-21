@@ -323,6 +323,9 @@ footer{
 }
 .wrap-author-info{
   @include flex(column, center, center);
+  .author-desc{
+    max-width: 350px;
+  }
 }
 
 @media only screen and (max-width: 420px){
@@ -334,5 +337,13 @@ footer{
   }
   .blockquote{
     margin: 1em;
+  }
+  .wrap-author-info{
+    .author-name{
+      font-size: 25px;
+    }
+    .author-desc{
+      max-width: 200px;
+    }
   }
 }

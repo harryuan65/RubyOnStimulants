@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
     else
       logger.debug "* Locale set to '#{locale}'"
     end
-
+    I18n.locale = locale
     I18n.with_locale(locale, &action)
   end
 
@@ -111,21 +111,7 @@ class ApplicationController < ActionController::Base
   end
 
   def route_not_found
-    respond_to do |format|
-      format.html {render 'shared/route_not_found', status: :not_found}
-      format.js { route_not_found_json(ActionController::RoutingError.new("Route Not Found")) }
-    end
-  end
-
-  def render_error(msg, status: :bad_request)
-    render json: {message: msg}, status: status
-  end
-
-  def render_error_page(msg)
-    @success = false
-    @status = 403
-    @message = msg
-    return render "shared/result", layout: false, status: :forbidden
+    raise ActionController::RoutingError.new("Route Not Found")
   end
 
   # This is found on https://stackoverflow.com/questions/4709109/base-64-url-decode-with-ruby-rails
@@ -162,6 +148,11 @@ class ApplicationController < ActionController::Base
       return render text: "Yee"
     end
   end
+
+  def err
+    raise StandardError, "YEEEEEE has joined the room"
+  end
+
   protected
 
   def configure_permitted_parameters

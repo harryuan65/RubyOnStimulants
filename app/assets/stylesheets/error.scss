@@ -1,0 +1,17 @@
+@import "./resources.scss";
+.container.error{
+  @include flex(column, center, center);
+  position: absolute;
+}
+.error-title{
+  font-size: 60px;
+}
+.error-subtitle{
+  font-size: 28px;
+}
+
+@media only screen and (max-width: 420px){
+  .container.error{
+    width: 100%;
+  }
+}

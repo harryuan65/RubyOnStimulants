@@ -233,6 +233,16 @@ textarea.article-page-content{
   font-family: 'Noto Sans';
   a{
     color: #3390cf;
+    transition: color 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+    &:hover{
+      color: #20567a;
+      transition: color 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+    &:active{
+      color: #20567a;
+      font-weight: bold;
+      transition: color 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
   }
   p{
     margin:0;

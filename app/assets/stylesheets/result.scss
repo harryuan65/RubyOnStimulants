@@ -1,9 +1,6 @@
 // Place all the styles related to the stomptest controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-main{
-  font-family: 'Monaco';
-}
 @mixin flex($fd:row, $jc:flex-start,$ai:flex-start){
   display: flex;
   flex-direction: $fd;

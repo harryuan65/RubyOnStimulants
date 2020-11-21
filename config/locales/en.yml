@@ -268,7 +268,6 @@ en:
       record_not_found: "Resource not found"
       record_invalid: "Record Invalid"
       internal_server_error: "Server Error"
-      route_not_found: "Not Found"
     title:
       sign_in: "Login"
       hello: "Hello world"

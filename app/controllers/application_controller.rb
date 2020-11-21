@@ -156,8 +156,6 @@ class ApplicationController < ActionController::Base
 
   def preview_markdown
     if current_user
-      # options = [:fenced_code_blocks, :no_intra_emphasis, :strikethrough, :underline, :highlight, :quote]
-      # output = Markdown.new(params[:content], *options).to_html.html_safe
       output = Article.to_markdown(params[:content])
       return render html: output
     else

@@ -1,10 +1,10 @@
 var listSize = 0;
 var newDataSize = 0;
-function insertTextInPos(element, beforePos, newText){
+function insertTextInCaret(element, newText){
   var startPos = element.selectionStart;
   var endPos = element.selectionEnd;
   element.value = element.value.substring(0, startPos) + newText + element.value.substring(endPos, element.value.length);
-  element.selectionStart = element.selectionEnd = beforePos;
+  element.selectionStart = element.selectionEnd = startPos;
 }
 var mappings = {
   "[": "]",
@@ -39,7 +39,7 @@ $("main").ready(()=>{
   //markdown autocomplete support
   $("#article_content").on('keydown', (e)=>{
     if(Object.keys(mappings).includes(e.key)){
-      insertTextInPos(e.target, e.target.selectionStart, mappings[e.key]);
+      insertTextInCaret(e.target, mappings[e.key]);
     }
   })
 })

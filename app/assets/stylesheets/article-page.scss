@@ -231,6 +231,9 @@ textarea.article-page-content{
   h5{font-size: 12px;}
   h6{font-size: 10px;}
   font-family: 'Noto Sans';
+  a{
+    color: #3390cf;
+  }
   p{
     margin:0;
   }
@@ -318,5 +321,8 @@ footer{
   }
   .markdown pre > code {
     font-size: 14px;
+  }
+  .blockquote{
+    margin: 1em;
   }
 }

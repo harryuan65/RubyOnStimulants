@@ -70,7 +70,7 @@ class SuppliesController < ApplicationController
 
   def check_valid_user
     puts current_user.email
-    if ['matcha110817@gmail.com', 'harryuan.65@gmail.com'].exclude?(current_user.email)
+    unless current_user.admin?
       return render 'shared/result',locals:{status:false, error:"Unauthorized"}, status: :unauthorized
     end
   end

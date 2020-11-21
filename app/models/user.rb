@@ -24,6 +24,7 @@ class User < ApplicationRecord
   has_many :comments
   has_many :user_word_ships, dependent: :destroy
   has_many :words, through: :user_word_ships, source: :word
+  enum role: [:normal, :admin]
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -38,10 +39,10 @@ class User < ApplicationRecord
       return user
     else
       existing_user = User.where(:email => data["email"]).first
-      if  existing_user
+      if existing_user
         existing_user.google_uid = access_token.uid
         existing_user.google_token = access_token.credentials.token
-        existing_user.image_url = data["image"] if existing_user.image_url.nil?
+        existing_user.image_url = data["image"] if data["image"]
         existing_user.save!
         return existing_user
       else

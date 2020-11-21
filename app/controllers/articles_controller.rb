@@ -1,4 +1,5 @@
 class ArticlesController < ApplicationController
+  before_action :authenticate_user!, only: [:backup]
   require 'redcarpet/render_strip'
   layout "articles/layout"
   def index
@@ -100,6 +101,14 @@ class ArticlesController < ApplicationController
     @articles = Article.find_with_sequence(article_ids)
 
     render "search_result"
+  end
+
+  def backup
+    if current_user.member? || current_user.admin?
+      # Article.backup
+    else
+      raise Error::UnauthorizedError
+    end
   end
   private
   def article_params

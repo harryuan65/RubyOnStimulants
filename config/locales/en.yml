@@ -291,6 +291,7 @@ en:
       search_result_title: "Articles containing keyword \"%{keyword}\""
       welcome_message: "Hello there! This is Harry. I'm a web developer interested in mining all the goods out there on the Internet. Here you can find some of them which I've already organized."
       write_new: "Write Article"
+      backup: "Backup Articles"
     line:
       welcome: "Hello there! We are Omama and Bai.\nThank you for adding me as your friend!\nWe will do our best to help you!"
       currently_no_services: "Um...Sorry the message parsing funtionalities are still in development"

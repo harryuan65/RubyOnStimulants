@@ -88,3 +88,7 @@ gem 'rollbar'
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
 gem 'rubyzip'
+
+gem 'sidekiq'
+gem 'sidekiq-scheduler'
+gem 'slack-ruby-client'

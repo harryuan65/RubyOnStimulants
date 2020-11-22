@@ -39,4 +39,6 @@
 docker
 Procfile.dev
 Procfile.dev-es
+Procfile.dev-sidekiq
 sandbox
+dump.rdb

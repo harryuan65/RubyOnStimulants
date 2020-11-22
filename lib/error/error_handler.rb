@@ -35,7 +35,6 @@ module Error
     end
 
     def handle(i18n_message:, error_message:, status:)
-      i18n_message = i18n_message
       respond_to do |format|
         format.html {
           @status = status

@@ -3,7 +3,7 @@ class AddIntroToUsers < ActiveRecord::Migration[6.0]
     reversible do |migration|
       migration.up do
         execute(
-        <<~SQL
+        <<~SQL.squish
           ALTER TABLE users ADD COLUMN intro VARCHAR(128);
           UPDATE users
           SET intro='rails developer'
@@ -14,7 +14,7 @@ class AddIntroToUsers < ActiveRecord::Migration[6.0]
 
       migration.down do
         execute(
-          <<~SQL
+          <<~SQL.squish
             ALTER TABLE users DROP COLUMN intro;
           SQL
         )

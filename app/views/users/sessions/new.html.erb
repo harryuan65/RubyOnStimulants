@@ -2,14 +2,14 @@
   <%= javascript_include_tag "users/signin_and_register" %>
     <div id="container-sign" class="container">
         <div class="wrap oauth signin">
-        <h1 class="txt-sign">Sign In</h1>
+        <h1 class="txt-sign">Sign In Via</h1>
           <%- if devise_mapping.omniauthable? %>
             <%- resource_class.omniauth_providers.each do |provider| %>
               <% case provider.to_s %>
               <% when "facebook" %>
-                <%= link_to "#{svg('facebook', id: "facebook", class: "icon-signin facebook")} Sign In via Facebook".html_safe, omniauth_authorize_path(resource_name, provider), class:"signin-option facebook" %>
+                <%= link_to "#{svg('facebook', id: "facebook", class: "icon-signin facebook")} Facebook".html_safe, omniauth_authorize_path(resource_name, provider), class:"signin-option facebook" %>
               <% when "google_oauth2" %>
-                <%= link_to "#{image_tag('google.png', class: "icon-signin google")} Sign In via Google".html_safe, omniauth_authorize_path(resource_name, provider),class:"signin-option google" %>
+                <%= link_to "#{image_tag('google.png', class: "icon-signin google")} Google".html_safe, omniauth_authorize_path(resource_name, provider),class:"signin-option google" %>
               <% else %>
               <% end %>
             <% end %>

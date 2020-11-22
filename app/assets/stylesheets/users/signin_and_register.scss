@@ -58,20 +58,23 @@ a{
   margin: 0 0 20px 0;
 }
 .wrap{
-  @include size(300px, 300px);
   &.signup{
     margin-bottom: 21px;
+    @include size(300px, 300px);
   }
   &.oauth{
     @include flex(column, center, center);
+    @include size(300px, 300px);
   }
   &.middle{
     margin: 0 90px 0 90px;
     border: solid 1px #5b5b5b66;
     width: 0;
+    height: 300px;
   }
   &.inputs{
     @include flex(column, center, center);
+    @include size(300px, 300px);
   }
 }
 .txt{
@@ -188,4 +191,16 @@ hr.sign{
   text-align: center;
   width: 290px;
   display: inline-block;
+}
+
+@media only screen and (max-width: 768px){
+  #container-sign{
+    @include flex(column, space-evenly, center);
+  }
+  .wrap.middle{
+    margin: 0 0 30px 0;
+    border: solid 1px #5b5b5b66;
+    width: 300px;
+    height: 0;
+  }
 }

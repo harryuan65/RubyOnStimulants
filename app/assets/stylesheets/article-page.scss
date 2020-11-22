@@ -91,6 +91,10 @@
   & > label{
     font-size: 20px;
   }
+  &.checkbox{
+    flex-direction: row;
+    align-items: center;
+  }
 }
 .wrap-state{
   @include flex(row, flex-start center);
@@ -131,7 +135,9 @@
 }
 $input-transition-delay: .1s;
 input[class^=article-page-],textarea[class^=article-page-]{
-  @include size(600px, auto);
+  &:not(.article-page-backup-id){
+    @include size(600px, auto);
+  }
   border: 1px solid transparent;
   border-radius: 5px;
 

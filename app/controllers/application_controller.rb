@@ -150,7 +150,7 @@ class ApplicationController < ActionController::Base
   end
 
   def err
-    raise StandardError, "YEEEEEE has joined the room"
+    raise NoMethodError.new("這家咖啡廳太讚了")
   end
 
   protected

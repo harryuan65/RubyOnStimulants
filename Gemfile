@@ -87,3 +87,4 @@ gem "acts_as_list"
 gem 'rollbar'
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
+gem 'rubyzip'

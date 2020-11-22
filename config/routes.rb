@@ -64,6 +64,9 @@ Rails.application.routes.draw do
     collection do
       get :search, to: redirect("/")
       post :search
+      get :backup_settings
+      post :backup
+      post :backup_acked
     end
   end
 

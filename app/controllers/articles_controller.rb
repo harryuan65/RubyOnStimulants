@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  before_action :authenticate_user!, only: [:backup]
+  before_action :authenticate_user!, only: [:backup, :backup_acked]
   require 'redcarpet/render_strip'
   layout "articles/layout"
   def index
@@ -103,13 +103,50 @@ class ArticlesController < ApplicationController
     render "search_result"
   end
 
+  def backup_settings
+  end
+
   def backup
-    if current_user.member? || current_user.admin?
-      # Article.backup
+    if current_user.premium?
+      user_name = (current_user.email.split('@')[0]).gsub(/[^0-9a-zA-Z]/, '')
+      output_dir = 'tmp/articles_output'
+      file_name = ["articles", user_name, Date.current.to_s(:db)].join("_")
+      file_path = "#{output_dir}/#{file_name}.zip"
+      FileUtils.mkdir(output_dir) unless File.directory?(output_dir)
+      File.open(file_path, "w") do |file|
+        file.chmod(0644)
+        file_path = file.path
+        Article.backup( user_id: current_user.id,
+                        file_path: file_path,
+                        use_range: params[:use_range],
+                        id_range: params[:id_range])
+      end
+      file = File.open(file_path, "r")
+      # send_file will act async
+      send_data file.read, type: 'application/zip', filename: "#{file_name}.zip"
+      File.delete(file_path)
     else
       raise Error::UnauthorizedError
     end
   end
+
+  def backup_acked
+    if current_user.premium?
+      user_name = (current_user.email.split('@')[0]).gsub(/[^0-9a-zA-Z]/, '')
+      file_name = params[:file_name]
+      if File.file?("tmp/articles_output/#{file_name}") && file_name.include?(user_name)
+        File.delete(params[:file_name])
+        respond_to do |format|
+          format.js {return render json:{success: true}}
+        end
+      else
+        raise ActiveRecord::RecordNotFound
+      end
+    else
+      raise Error::UnauthorizedError
+    end
+  end
+
   private
   def article_params
     # params.permit(:title, :subtitle, :content, :privacy)

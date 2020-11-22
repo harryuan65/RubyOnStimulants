@@ -2,5 +2,7 @@
 <%= link_to(t('controller.general.go_home'), root_path) %>
 <div class="container notosans text-dk error">
   <h1 class="error-title"><%= @i18n_message %></h1>
-  <h2 class="error-subtitle"><%= @error_message %></h2>
+  <% if current_user && current_user.admin? %>
+    <h2 class="error-subtitle"><%= @error_message %></h2>
+  <% end %>
 </div>

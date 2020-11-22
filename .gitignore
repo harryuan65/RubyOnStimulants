@@ -38,3 +38,4 @@
 *.css.map
 docker
 Procfile.dev
+Procfile.dev-es

@@ -24,7 +24,7 @@ class User < ApplicationRecord
   has_many :comments
   has_many :user_word_ships, dependent: :destroy
   has_many :words, through: :user_word_ships, source: :word
-  enum role: [:normal, :admin]
+  enum role: [:normal, :admin, :member]
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -84,5 +84,9 @@ class User < ApplicationRecord
     user.name = auth.info.name
     user.save!
     return user
+  end
+
+  def premium?
+    admin? || member?
   end
 end

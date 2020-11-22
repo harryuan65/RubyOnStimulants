@@ -1,0 +1,26 @@
+<%= stylesheet_link_tag("article-backup") %>
+<%= stylesheet_link_tag("article-page")%>
+<div class="container notosans">
+<h1 class="backup-title"><%= t('controller.articles.backup') %></h1>
+<%= form_tag backup_articles_path, id: "form-backup" do %>
+  <div class="wrap-id-settings">
+
+    <div class="wrap-label-input checkbox">
+      <h2 class="use-range-text">Use Range?</h2>
+      <%= check_box_tag :use_range, true, false, class: "notosans text-dk" %>
+    </div>
+
+    <div class="wrap-label-input">
+      <%= label_tag "From ID"%>
+      <%= number_field_tag "id_range[from_id]", 1, class: 'article-page-backup-id', min: 1, max: 50, autofocus: true  %>
+    </div>
+    <div class="wrap-label-input">
+      <%= label_tag "To ID"%>
+      <%= number_field_tag "id_range[to_id]", 2, class: 'article-page-backup-id', min: 1, max: 50 %>
+    </div>
+    <div class="wrap-label-input">
+      <%= submit_tag t('controller.articles.backup'), class: "btn submit article-backup" %>
+    </div>
+  </div>
+<% end %>
+</div>

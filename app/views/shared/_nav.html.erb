@@ -29,6 +29,9 @@
               <% if !["articles#new", "articles#edit"].include?("#{params[:controller]}##{params[:action]}") %>
                 <h3 class="nav-side-block-content"><%= link_to "<span class=\"pen\">&#x270e;</span> #{t('controller.articles.write_new')}".html_safe, new_article_path, class: "text-d3 notosans" %></h3>
               <% end %>
+              <% if current_user.premium? %>
+                <h3 class="nav-side-block-content"><%= link_to t('controller.articles.backup').html_safe, backup_settings_articles_path, class: "text-d3 notosans" %></h3>
+              <% end %>
             <h3 class="nav-side-block-content"><%= link_to t('navbar.logout'), destroy_user_session_path, method: :delete, class: "text-d3 notosans", data: {confirm: t("devise.sessions.confirm_sign_out")} %></h3>
           </div>
         </div>

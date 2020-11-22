@@ -466,6 +466,7 @@ DEPENDENCIES
   rest-client
   rollbar
   rspec-rails (~> 4.0.1)
+  rubyzip
   sass-rails (~> 5.0)
   selenium-webdriver
   solargraph

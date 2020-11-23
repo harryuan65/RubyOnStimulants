@@ -16,8 +16,8 @@ class LineController < ApplicationController
         case event.type
         when Line::Bot::Event::Follow
           line_uid = event['source']['userId']
-          res = $line_client.get_profile(line_uid)
-          profile = JSON.parse(res.body)
+          # res = $line_client.get_profile(line_uid)
+          # profile = JSON.parse(res.body)
           line_user = OnbLineUser.where(line_uid: line_uid).first
           unless line_user
             params_camel_keys_to_underscore = Hash[*p.map{|k,v| [k.underscore.to_sym,v]}.flatten]

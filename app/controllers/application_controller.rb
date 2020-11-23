@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
     logger.debug "* Accept-Language: #{request.env['HTTP_ACCEPT_LANGUAGE']}"
     locale = extract_locale_from_accept_language_header
 
-    if I18n.available_locales.exclude?(locale)
+    if locale.nil? || I18n.available_locales.exclude?(locale)
       locale = :en
       logger.debug "* Locale not supported. Set to '#{locale}'"
     else
@@ -58,6 +58,10 @@ class ApplicationController < ActionController::Base
     puts "Path: #{request.method} #{request.path}"
     puts "Controller: #{params[:controller]}##{params[:action]}"
     puts '========================'
+  end
+
+  def poke
+    render json:{msg: "ok"}
   end
 
   def post_test
@@ -168,7 +172,7 @@ class ApplicationController < ActionController::Base
   # end
 
   def extract_locale_from_accept_language_header
-    # request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
-    request.env['HTTP_ACCEPT_LANGUAGE'].split(",")[0].to_sym
+    lang = request.env['HTTP_ACCEPT_LANGUAGE']
+    lang.split(",")[0].to_sym if lang
   end
 end

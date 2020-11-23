@@ -1,0 +1,16 @@
+---
+:timeout: 25
+
+:queues:
+  - default
+  - critital
+
+:schedule:
+  wake_up:
+    cron: '20 1-13 * * *'
+    class: WakeWorker
+
+production:
+  :concurrency: 1
+staging:
+  :concurrency: 1

@@ -311,8 +311,8 @@ en:
     today:
       minutes_ago: '%{minutes} minute(s) ago'
       hours_ago: '%{hours} hour(s) ago'
-    same_year: '%{hour}:%{minute} %{month}, %{day}'
-    long_ago: '%{hour}:%{minute} %{month}, %{day}, %{year}'
+    same_year: '%{month} %{day}'
+    long_ago: '%{day}, %{month}, %{year}'
     order:
       - :day
       - :month

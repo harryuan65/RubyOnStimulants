@@ -64,6 +64,7 @@
 .article-created-at{
   font-size: 15px;
   @include flex(row, flex-end, flex-end);
+  opacity: .6;
 }
 #load-more-container{
   display: grid;
@@ -87,7 +88,7 @@
   }
   .article-link{
     h3.article-title{
-      font-size: 18px;
+      font-size: 16px;
     }
   }
 }

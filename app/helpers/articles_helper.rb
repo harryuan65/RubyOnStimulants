@@ -18,9 +18,7 @@ module ArticlesHelper
       I18n.t('date.long_ago',
         year: created_at.year,
         month: I18n.locale==:en ? I18n.t('date.month_names')[created_at.month] : created_at.month,
-        day: created_at.day,
-        hour: created_at.strftime('%H'),
-        minute: created_at.strftime('%M'))
+        day: created_at.day)
     end
   end
 end

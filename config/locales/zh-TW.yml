@@ -277,8 +277,8 @@ zh-TW:
     today:
       minutes_ago: '%{minutes} 分鐘前'
       hours_ago: '%{hours} 小時前'
-    same_year: '%{month}月%{day}日 %{hour}:%{minute}'
-    long_ago: '%{year}/%{month}/%{day} %{hour}:%{minute}'
+    same_year: '%{month}月%{day}日'
+    long_ago: '%{year}/%{month}/%{day}'
     order:
       - :day
       - :month

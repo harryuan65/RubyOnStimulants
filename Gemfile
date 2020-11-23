@@ -91,4 +91,3 @@ gem 'rubyzip'
 
 gem 'sidekiq'
 gem 'sidekiq-scheduler'
-gem 'slack-ruby-client'

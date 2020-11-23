@@ -141,8 +141,6 @@ GEM
       i18n (>= 1.6, < 2)
     faraday (1.0.1)
       multipart-post (>= 1.2, < 3)
-    faraday_middleware (1.0.0)
-      faraday (~> 1.0)
     ffi (1.13.1)
     ffi (1.13.1-java)
     ffi (1.13.1-x64-mingw32)
@@ -150,7 +148,6 @@ GEM
     fugit (1.4.0)
       et-orbi (~> 1.1, >= 1.1.8)
       raabro (~> 1.4)
-    gli (2.19.2)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     gutentag (2.5.3)
@@ -375,12 +372,6 @@ GEM
       sidekiq (>= 3)
       thwait
       tilt (>= 1.4.0)
-    slack-ruby-client (0.15.1)
-      faraday (>= 1.0)
-      faraday_middleware
-      gli
-      hashie
-      websocket-driver
     solargraph (0.39.17)
       backport (~> 1.1)
       benchmark
@@ -502,7 +493,6 @@ DEPENDENCIES
   selenium-webdriver
   sidekiq
   sidekiq-scheduler
-  slack-ruby-client
   solargraph
   spring
   spring-watcher-listen (~> 2.0.0)

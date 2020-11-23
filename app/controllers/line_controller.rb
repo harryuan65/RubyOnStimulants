@@ -5,18 +5,18 @@ class LineController < ApplicationController
     puts body
 
     signature = request.env['HTTP_X_LINE_SIGNATURE']
-    unless $client.validate_signature(body, signature)
+    unless $line_client.validate_signature(body, signature)
       return render plain: 'Bad request', status: :bad_request
     end
 
-    events = $client.parse_events_from(body)
+    events = $line_client.parse_events_from(body)
     events.each do |event|
       case event
       when Line::Bot::Event::Message
         case event.type
         when Line::Bot::Event::Follow
           line_uid = event['source']['userId']
-          res = $client.get_profile(line_uid)
+          res = $line_client.get_profile(line_uid)
           profile = JSON.parse(res.body)
           line_user = OnbLineUser.where(line_uid: line_uid).first
           unless line_user
@@ -25,7 +25,7 @@ class LineController < ApplicationController
           end
           # This will consume usage
           # I18n.use_locale(line_user.language.to_sym)
-          # $client.push_message(line_uid, I18n.t('controller.line.welcome'))
+          # $line_client.push_message(line_uid, I18n.t('controller.line.welcome'))
         when Line::Bot::Evnet::Unfollow
           line_uid = event['source']['userId']
           OnbLineUser.find_by(line_uid: line_uid)&.update({
@@ -51,9 +51,9 @@ class LineController < ApplicationController
             :stickerId=>"52002750",
             :stickerResourceType=>'ANIMATION'
           }
-          $client.reply_message(event['replyToken'], [message, sticker])
+          $line_client.reply_message(event['replyToken'], [message, sticker])
         when Line::Bot::Event::MessageType::Image, Line::Bot::Event::MessageType::Video
-          response = $client.get_message_content(event.message['id'])
+          response = $line_client.get_message_content(event.message['id'])
           tf = Tempfile.open("content")
           tf.write(response.body)
         end

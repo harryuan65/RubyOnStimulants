@@ -242,6 +242,11 @@ en:
       default: "%a, %d %b %Y %H:%M:%S %z"
       long: "%B %d, %Y %H:%M"
       short: "%d %b %H:%M"
+      today:
+        minutes_ago: '%{minutes} minute(s) ago'
+        hours_ago: '%{hours} hour(s) ago'
+      same_year: '%{month} %{day}'
+      long_ago: '%{day}, %{month}, %{year}'
     pm: pm
   sidebar:
     you_might_interested: "You Might Interested"
@@ -307,13 +312,3 @@ en:
       create_success: "Successfully created item \"%{name}\""
       update_success: "Successfully updated item \"%{name}\""
       delete_success: "Successfully deleted item \"%{name}\""
-  date:
-    today:
-      minutes_ago: '%{minutes} minute(s) ago'
-      hours_ago: '%{hours} hour(s) ago'
-    same_year: '%{month} %{day}'
-    long_ago: '%{day}, %{month}, %{year}'
-    order:
-      - :day
-      - :month
-      - :year

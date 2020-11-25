@@ -8,13 +8,13 @@ zh-TW:
           has_many: 由於 %{record} 需要此記錄，所以無法移除記錄
   date:
     abbr_day_names:
-    - 周日
-    - 周一
-    - 周二
-    - 周三
-    - 周四
-    - 周五
-    - 周六
+    - 日
+    - 一
+    - 二
+    - 三
+    - 四
+    - 五
+    - 六
     abbr_month_names:
     -
     - 1月
@@ -209,6 +209,11 @@ zh-TW:
       default: "%Y年%m月%d日 %A %H:%M:%S %Z"
       long: "%Y年%m月%d日 %H:%M"
       short: "%m月%d日 %H:%M"
+      today:
+        minutes_ago: '%{minutes} 分鐘前'
+        hours_ago: '%{hours} 小時前'
+      same_year: '%{month}月%{day}日'
+      long_ago: '%{year}/%{month}/%{day}'
     pm: 下午
   sidebar:
     you_might_interested: "你可能感興趣"
@@ -273,13 +278,3 @@ zh-TW:
       create_success: "成功新增項目 \"%{name}\""
       update_success: "成功更新項目 \"%{name}\""
       delete_success: "成功刪除項目 \"%{name}\""
-  date:
-    today:
-      minutes_ago: '%{minutes} 分鐘前'
-      hours_ago: '%{hours} 小時前'
-    same_year: '%{month}月%{day}日'
-    long_ago: '%{year}/%{month}/%{day}'
-    order:
-      - :day
-      - :month
-      - :year

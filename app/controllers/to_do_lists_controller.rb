@@ -6,7 +6,6 @@ class ToDoListsController < ApplicationController
     @lists = ToDoList.includes(:items).all.order(id: :asc)
     @lists = @lists.to_a.push ToDoList.new
     @lists_count = @lists.size
-    @z_index_count = @lists.size
     respond_to do |format|
       format.html
       format.js

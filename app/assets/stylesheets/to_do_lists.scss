@@ -4,37 +4,52 @@
   @include size(100%, 100%);
   position: fixed;
 }
-#list-container{
-  @include flex(row, center, center);
-  @include size(100%, 100%);
-  margin-top: 30px;
-  margin-left: 120px;
-  margin-top: 0;
-  &.has-selected-list{
-    margin-left: 0px;
+.container.list-page{
+  @include flex(column, center, center);
+  width: 80%
+}
+section.todolist{
+  width: 100%;
+  position: relative;
+  #back-to-todolist{
+    @include size(50px, 50px);
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    border-radius: 50%;
+    font-size: 23px;
+    svg{
+      width: 25px;
+      opacity: .9;
+    }
+  }
+  .section-content-container{
+    display: flex;
+    flex-direction: row;
+    overflow: auto;
+    min-height: 450px;
+    &.jc{
+      justify-content: center;
+    }
   }
 }
+
 $list-seleted-grow-time: .1s;
 $fade-time: .1s;
 $input-disable-time: .1s;
 .list{
-  margin-left: -120px;
+  margin: auto;
   @include flex(column, flex-start, center);
-  background-color: rgb(255, 241, 164);
   border-radius: 8px;
-  width: 250px;
+  min-width: 250px;
   height: 360px;
   box-sizing: border-box;
   padding: 4px 0 4px 0;
   transition: transform .2s ease, background-color 2s ease, opacity $fade-time ease;
 
-  transform: rotateX(15deg) rotateY(40deg);
   transform-style: preserve-3d;
   position: relative;
   cursor: pointer;
-  // &:not(:first-of-type):not(:last-of-type){
-    // margin-left: -120px;
-  // }
 
   &:not(.selected):hover{
     transform: translateY(-30px);
@@ -48,7 +63,7 @@ $input-disable-time: .1s;
     transform: none;
     cursor: default;
     width: 350px;
-    margin: 0;
+    height: 460px;
     transition: transform $list-seleted-grow-time ease-in-out;
   }
 
@@ -64,6 +79,7 @@ $input-disable-time: .1s;
 .list-body{
   position: relative;
   @include size(100%, 100%);
+  overflow-y: scroll;
 
   & .body-content-base{
     position: absolute;
@@ -110,7 +126,7 @@ input[type="text"]:disabled{
 }
 //to make detetion smoother, shirnk it first, remove margin(this cause shivering on delete), then delete
 @keyframes list-removing{
-  to{width: 0;opacity: 0;margin:0}
+  to{width: 0;opacity: 0;}
 }
 .fade-in{
   animation: fade-in $fade-time forwards;
@@ -170,18 +186,22 @@ input.list-name{
 }
 .list-row{
   transform: scale(0.7);
-
+  position: relative;
+  overflow: hidden;
   &.grow{
     transform: none;
     transition: transform $list-seleted-grow-time ease-out;
   }
 
-  @include flex(row, center, center);
+  @include flex(column, center, center);
   &.show{
     flex-direction: center;
   }
   width: 300px;
-
+  transition: border .2s ease-out;
+}
+.list-row__top{
+  @include flex(row, center, center);
   & .item-drag{
     font-size: 24px;
     vertical-align: middle;
@@ -211,10 +231,19 @@ input.list-name{
       border-width: 0 7px 10px 7px;
     }
   }
-  transition: border .2s ease-out;
+}
+.list-row__bottom{
+  position: relative;
+  overflow: hidden;
+  @include size(100%, auto);
+  @include flex(row, center, center);
+  height: 0;
+  transition: height .3s ease;
 
-  // opacity: 0;
-  // animation: fade-in .8s ease forwards;
+  &.selected{
+    height: 150px;
+    transition: height .3s ease;
+  }
 }
 @keyframes fade-in{
   from{opacity: 0;}
@@ -229,11 +258,13 @@ input.list-name{
 .will-insert-after{
   border-bottom: solid 1px #fa2525;
 }
-
-#back-to-todolist{
-  @include size(50px, 50px);
-  position: absolute;
-  bottom: 20px;
-  border-radius: 50%;
-  font-size: 23px;
+@media only screen and (max-width: 420px){
+  .list-row__top{
+    & .item-name{
+      font-size: 16px;
+      border-bottom: #5b5b5b 1px solid;
+      width: 175px;
+      height: inherit;
+    }
+  }
 }

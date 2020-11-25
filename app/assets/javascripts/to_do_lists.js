@@ -6,10 +6,8 @@ var currentData = {};
   $.fn.setSelectedList = function() {
     let list = this;
     list.addClass('selected');
-    $('#list-container').addClass("has-selected-list");
     $(".list-row", list).addClass("grow");
-    list.css('margin-left', '0');
-    list.css('margin-right', '0');
+    $(".section-content-container").addClass('jc');
   };
 
   $.fn.unsetSelectedList = function() {
@@ -252,12 +250,13 @@ function setUpSelectList(){
     let selectedList = $(this);
 
     $(".list.selected").unsetSelectedList();
-    selectedList.setSelectedList();
+    selectedList.addClass('ready-select');
 
     if(removeOtherListsVersion){
       //fade out others and delete
-      $(".list:not(.selected)").removeList();
+      $(".list:not(.selected):not(.ready-select)").removeList();
     }
+    selectedList.setSelectedList();
   })
 }
 function setUpNewListAction(){
@@ -290,9 +289,11 @@ function saveListNameMapping(){
     savedListNamesMapping[listIdStr] = listName.val();
   })
 }
-function createItemRow({to_do_list_id, id, name, position, unDraggable, i}){
+function createItemRow({to_do_list_id, id, name, due_date, description, state, unDraggable, i}){
   var list = document.getElementById(`list-${to_do_list_id}`);
   var listRow = document.createElement("div");
+  var listRowTop = document.createElement("div");
+  var listRowBottom = document.createElement("div");
 
   if(list.classList.contains("selected")){
     listRow.classList.add("grow");
@@ -300,6 +301,8 @@ function createItemRow({to_do_list_id, id, name, position, unDraggable, i}){
   listRow.classList.add("list-row");
   listRow.id = `item-${id}`;
 
+  listRowTop.classList.add('list-row__top');
+  listRowBottom.classList.add('list-row__bottom');
   var itemDrag = document.createElement("span");
   itemDrag.classList.add("item-drag");
   var dragTextnode = document.createTextNode("\u2630")
@@ -312,7 +315,6 @@ function createItemRow({to_do_list_id, id, name, position, unDraggable, i}){
   var itemNum = document.createElement("span");
   itemNum.classList.add("item-num");
   itemNum.classList.add("notosans");
-  // itemNum.innerText = position ? position : '+' ;
   itemNum.innerText = i!=-1 ? i : '+' ;
 
   var itemName = document.createElement("span");
@@ -325,15 +327,45 @@ function createItemRow({to_do_list_id, id, name, position, unDraggable, i}){
 
   var itemSelect = document.createElement("span");
   itemSelect.classList.add("item-show-toggle");
+  if(!unDraggable){
+    itemSelect.onclick = (e)=>{
+      let itemSelect = e.target;
+      let parent = itemSelect.parentNode.parentNode;
+      let seletedRowBottom = document.querySelectorAll('.list-row__bottom.selected')
+      let selectedShowToggle = document.querySelectorAll('.item-show-toggle.selected')
+      console.log(seletedRowBottom.length)
+      if(itemSelect.classList.contains('selected')){
+        seletedRowBottom.forEach(e=>{e.classList.remove('selected')});
+        selectedShowToggle.forEach(e=>{e.classList.remove('selected')});
+      }else{
+        seletedRowBottom.forEach(e=>{e.classList.remove('selected')});
+        selectedShowToggle.forEach(e=>{e.classList.remove('selected')});
+        itemSelect.classList.add('selected');
+        parent.querySelector('.list-row__bottom').classList.add('selected');
+      }
+    }
+  }
 
   itemDrag.addEventListener('mousedown', showGrabbingCursor)
   itemDrag.addEventListener('mouseup', hideGrabbingCursor)
 
-  listRow.appendChild(itemDrag);
-  listRow.appendChild(itemNum);
-  listRow.appendChild(itemCheck);
-  listRow.appendChild(itemName);
-  listRow.appendChild(itemSelect);
+  listRowTop.appendChild(itemDrag);
+  listRowTop.appendChild(itemNum);
+  listRowTop.appendChild(itemCheck);
+  listRowTop.appendChild(itemName);
+  listRowTop.appendChild(itemSelect);
+
+  var testNode = document.createElement('div');
+  testNode.innerHTML = `
+    <ul>
+      <li>時間：${due_date}</li>
+      <li>備註：${description}</li>
+      <li>狀態：${state}</li>
+    </ul>
+  `;
+  listRowBottom.appendChild(testNode);
+  listRow.appendChild(listRowTop)
+  listRow.appendChild(listRowBottom);
   // console.log("List Id is ", to_do_list_id)
   $(listRow).setCreateUpdateItemByName(to_do_list_id);
   if(!unDraggable){
@@ -342,7 +374,8 @@ function createItemRow({to_do_list_id, id, name, position, unDraggable, i}){
       stop: function(ev){
         renderItems(to_do_list_id, currentData[to_do_list_id])
       },
-      cancel: '.list-row > .item-check, .list-row > .item-name, .list-row > .item-show-toggle', // use this to keep children from being dragged and disabled(cannot select, etc.)
+      axis: "y",
+      cancel: '.list-row > .list-row__up, .list-row > .list-row__bottom, .list-row .item-check, .list-row .item-name, .list-row .item-show-toggle', // use this to keep children from being dragged and disabled(cannot select, etc.)
     })
     $(listRow).droppable({
       over: function(ev){draggingOver(ev, currentData[to_do_list_id])},

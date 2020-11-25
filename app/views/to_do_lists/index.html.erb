@@ -1,7 +1,12 @@
-<div id="list-page-wrap">
-  <div id="list-container">
-    <%= render "list" %>
-  </div>
+<%= javascript_include_tag 'datetime' %>
+<div class="container list-page">
+  <section class="todolist">
+    <h2 class="block-title notosans text-7e">To-Do Lists <%= @category.present?? ": #{@category}" : "" %></h2>
+    <hr class="block-hr">
+    <div class="section-content-container">
+      <%= render "list" %>
+    </div>
+
   <!-- This will ask for js response-->
-  <%= link_to "⬅", to_do_lists_path, remote: true, id: "back-to-todolist", class: "btn notosans text-e7 back-to-todolist" %>
+  <%= link_to svg_asset("refresh"), to_do_lists_path, remote: true, id: "back-to-todolist", class: "btn notosans text-e7 back-to-todolist" %>
 </div>

@@ -3,7 +3,7 @@ $logo-color: #e7e7e7;
 $nav-bg-color: #242527;
 html, body{
   margin: 0;
-  padding: 0 0 50px 0;
+  padding: 0;
   width: 100%;
   min-height: 100%;
   background-color: #fff;
@@ -220,11 +220,11 @@ main{
   position: relative;
   min-height: 500px;
   @include flex(row, space-evenly, flex-start);
+  margin-top: 100px;
 }
 .container{
   width: 700px;
   min-height: 400px;
-  margin-top: 110px;
 }
 #sidebar{
   @include flex(column, flex-start, flex-start);

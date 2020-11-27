@@ -20,14 +20,14 @@ class Article < ApplicationRecord
   Gutentag::ActiveRecord.call self
 
   validates :title, presence: true
-
+  default_scope {includes(:user, :tags)}
   belongs_to :user
   has_many :comments
   has_one :last_comment, ->{select("distinct on (article_id) *").order("article_id desc, created_at desc")}, class_name: "Comment", foreign_key: :article_id
   enum state: [:draft, :published, :hidden]
 
   def self.hot
-    order(Arel.sql("likes_count*comments_count desc"))
+    includes(:user, :tags).order(Arel.sql("likes_count*comments_count desc"))
   end
 
   def trimmed_content

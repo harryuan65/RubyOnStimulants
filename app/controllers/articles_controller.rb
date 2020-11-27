@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  before_action :authenticate_user!, only: [:backup, :backup_acked]
+  before_action :authenticate_user!, only: [:backup]
   require 'redcarpet/render_strip'
   layout "articles/layout"
   def index

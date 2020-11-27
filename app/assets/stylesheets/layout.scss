@@ -493,7 +493,7 @@ div[id*="dropdown-toggle"]{
     position: absolute;
     height: 90px;
     width: 240px;
-    background-color: #2D3047;
+    background-color: $nav-bg-color;
   }
 }
 @media only screen and (max-width: 1150px){

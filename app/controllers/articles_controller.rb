@@ -133,7 +133,7 @@ class ArticlesController < ApplicationController
   def hot
     data = {
       update_time: Time.now,
-      articles: Article.hot
+      articles: Article.hot.to_a
     }
     @time = data[:update_time]
     @articles = data[:articles]
@@ -144,7 +144,7 @@ class ArticlesController < ApplicationController
     data = Rails.cache.fetch('hot_articles', expires_in: 2.minutes) do
       {
         update_time: Time.now,
-        articles: Article.hot
+        articles: Article.hot.to_a
       }
     end
     @time = data[:update_time]

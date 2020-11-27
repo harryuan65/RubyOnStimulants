@@ -130,21 +130,26 @@ class ArticlesController < ApplicationController
     end
   end
 
-  def backup_acked
-    if current_user.premium?
-      user_name = (current_user.email.split('@')[0]).gsub(/[^0-9a-zA-Z]/, '')
-      file_name = params[:file_name]
-      if File.file?("tmp/articles_output/#{file_name}") && file_name.include?(user_name)
-        File.delete(params[:file_name])
-        respond_to do |format|
-          format.js {return render json:{success: true}}
-        end
-      else
-        raise ActiveRecord::RecordNotFound
-      end
-    else
-      raise Error::UnauthorizedError
+  def hot
+    data = {
+      update_time: Time.now,
+      articles: Article.hot
+    }
+    @time = data[:update_time]
+    @articles = data[:articles]
+    render 'hot'
+  end
+
+  def cached_hot
+    data = Rails.cache.fetch('hot_articles', expires_in: 2.minutes) do
+      {
+        update_time: Time.now,
+        articles: Article.hot
+      }
     end
+    @time = data[:update_time]
+    @articles = data[:articles]
+    render 'hot'
   end
 
   private

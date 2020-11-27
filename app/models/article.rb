@@ -26,6 +26,10 @@ class Article < ApplicationRecord
   has_one :last_comment, ->{select("distinct on (article_id) *").order("article_id desc, created_at desc")}, class_name: "Comment", foreign_key: :article_id
   enum state: [:draft, :published, :hidden]
 
+  def self.hot
+    order(Arel.sql("likes_count*comments_count desc"))
+  end
+
   def trimmed_content
     self.content.truncate(50, omission: "...(#{I18n.t('controller.articles.omission')})")
   end

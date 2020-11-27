@@ -1,0 +1,43 @@
+<div class="container">
+  <section class="articles">
+    <h2 class="block-title notosans text-7e">Hot Articles (Updated At: <%= @time.in_time_zone("Taipei").to_s %>)</h2>
+    <hr class="block-hr">
+    <div class="section-content-container articles">
+    <% if @articles.empty? %>
+      <h2 class="notosans text-dk"><%= t('controller.articles.empty') %></h2>
+    <% end %>
+      <% @articles.each do |article| %>
+        <div class="article-container" id="article-<%=article.id%>">
+          <a href="<%= article_path(article.id)%>" class="article-link">
+            <div class="wrap-article-title">
+              <h3 class="article-title notosans"><%= article.title %></h3>
+              <% case article.state %>
+              <% when "draft"%>
+                <%= article.draft?? '<span class="draft notosans text-dk">draft</span>'.html_safe : "" %>
+              <% when "hidden"%>
+                <%= article.hidden?? '<span class="private notosans text-dk">private</span>'.html_safe : "" %>
+              <% end %>
+            </div>
+            <div class="wrap-tags">
+              <% article.tags.map(&:name).each_with_index do |tag, i| %>
+                  <span class="article-description tag notosans text-dk"><%= tag %></span>
+                <% if i!=article.tags.size-1 %>
+                  <span class="notosans text-dk">,</span>
+                <% end %>
+              <% end %>
+            </div>
+          </a>
+          <span class="article-author notosans text-dk"><%= article.user.name %></span>
+          <span class="article-created-at notosans text-dk"><%= readable_time(article.created_at) %></span>
+        </div>
+      <% end %>
+      <div id="load-more-container" class="notosans text-5b">
+        <span id="load-more" onclick="LoadMore()"><%= t('controller.articles.load_more') %></span>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    listSize = <%= @articles.size %>;
+  </script>
+</div>

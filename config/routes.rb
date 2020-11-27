@@ -67,13 +67,14 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :articles, :controller=>'articles' do
+  resources :articles do
     collection do
       get :search, to: redirect("/")
       post :search
       get :backup_settings
       post :backup
-      post :backup_acked
+      get :hot
+      get :cached_hot
     end
   end
 

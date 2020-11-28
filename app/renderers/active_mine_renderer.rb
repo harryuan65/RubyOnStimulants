@@ -1,18 +1,26 @@
 class ActiveMineRenderer < Redcarpet::Render::HTML
-  def initialize(render_options)
-    super(render_options)
+  def initialize(**options)
+    super(options)
   end
 
-  # def block_code(code, language)
-  #   lang = code.match(/#\s([^\s]+)/)
-  #   if lang && lang[1]
-  #     %(<div class="#{lang[1]}">#{code}</div>)
-  #   else
-  #     %(<div class="nohighlight">#{code}</div>)
-  #   end
-  # end
+  def block_code(code, language)
+    if language
+      <<-HTML
+        <pre>
+          <code class="#{language}">#{code}</code>
+        </pre>
+      HTML
+    else
+      <<-HTML
+        <pre>
+          <code class="plaintext">#{code}
+          </code>
+        </pre>
+      HTML
+    end
+  end
 
-  # def link(link, title, content)
-  #   "TEST"
-  # end
+  def link(link, title, content)
+    %(<a href="#{link}" target="_blank">#{content}</a>)
+  end
 end

@@ -1,5 +1,4 @@
 var collecting = false;
-var currentArticleId = null;
 var previewMarkdownDiv = null;
 var articleContent = null;
 
@@ -30,9 +29,6 @@ $(".container").ready(()=>{
       }
     }
   }
-  $("#edit-page").resizable();
-  $("#article-option-bar").resizable();
-
   var previewPage = document.getElementById('preview-page');
   previewPage.onscroll= (e)=>{
     articleContent.scrollTop = e.target.scrollTop;
@@ -66,13 +62,13 @@ function setStatusText(message=null, keepStaying=false){
 async function sleep(ms=0){
   return new Promise((resolve, reject)=>{setTimeout(resolve, ms)})
 }
-async function prepareToUpdateArticle(delay=1000){
-  // resizeContent();
+async function prepareToUpdateArticle(){
   if(!collecting){
     collecting = true;
     setStatusText("Saving...", true);
-    await sleep(delay);
-    updateArticle(articleContent.value);
+    sleep(1500).then(e=>{
+      updateArticle(articleContent.value);
+    });
   }
 }
 function previewArticle(raw){

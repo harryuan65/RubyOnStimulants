@@ -83,11 +83,22 @@ class ArticlesController < ApplicationController
   end
 
   def update
-    @article = Article.find(params[:id])
-    @article.update!(
-      title: Article.get_title(params[:content]),
-      content: params[:content]
-    )
+    @article = Article.includes(:tags).find(params[:id])
+    current_tags = @article.tags.map(&:name)
+    parsed_tags = Article.get_tags(params[:content])
+    should_update_tags = Set.new(current_tags) != Set.new(parsed_tags)
+    if should_update_tags
+      @article.update!(
+        title: Article.get_title(params[:content]),
+        content: params[:content],
+        tag_names: parsed_tags
+      )
+    else
+      @article.update!(
+        title: Article.get_title(params[:content]),
+        content: params[:content]
+      )
+    end
     render json: {success: true, content: Article.to_markdown(@article.content)}
   end
 

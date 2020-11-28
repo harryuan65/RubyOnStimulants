@@ -1,12 +1,9 @@
-<%= javascript_include_tag "highlight/highlight" %>
-<%= javascript_include_tag "articles/articles" %>
 <%= stylesheet_link_tag $markdown_hljs_css %>
 <%= stylesheet_link_tag 'articles', media: 'all', 'data-turbolinks-track': 'reload'%>
 <%= stylesheet_link_tag "article-page"%>
 <div class="container">
   <div class="wrap-article show">
     <div class="wrap-title <%= @is_author ? "can-edit" : "readonly"%>">
-      <h1 id="article_<%= @article.id%>" class="article-page-title notosans text-dk"><%= @article.title %></h1>
       <% if @is_author%>
       <div class="wrap-pen">
         <a href="<%= edit_article_path(@article)%>" class="article-page-edit text-7e pen">&#x270E;</a>
@@ -21,8 +18,7 @@
         <% end %>
       <% end %>
       </span>
-      <span class="article-page-author show notosans text-dk"><%= username(@article.user) %></span>
-      <span class="article-page-created-at notosans text-7e"><%= @article.created_at.strftime("%a, %d %b %Y") %></span>
+      <span class="article-page-created-at show notosans text-7e"><%= @article.created_at.strftime("%a, %d %b %Y") %></span>
 
     </div>
 

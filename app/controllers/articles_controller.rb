@@ -19,8 +19,8 @@ class ArticlesController < ApplicationController
   end
 
   def new
-    @article = Article.new(title: "New Article", user: current_user)
-    render 'new2'
+    @article = Article.create!(title: "New Article", user_id: current_user.id, content: "# New Article", state: :draft)
+    redirect_to edit_article_path(@article)
   end
 
   def create
@@ -70,33 +70,25 @@ class ArticlesController < ApplicationController
 
   def edit
     @article = Article.find(params[:id])
+    render 'edit_v2'
+  end
+
+  def preview_markdown
+    if current_user
+      output = Article.to_markdown(params[:content])
+      return render json: {success: true, content: output}
+    else
+      return render text: "Yee"
+    end
   end
 
   def update
     @article = Article.find(params[:id])
-
-    permitted_params = article_params
-    tag_str = permitted_params.delete(:tags)
-    tags = @article.tag_names
-
-    if tag_str!=""
-      tags = tag_str.split(',').map(&:strip)
-    end
-
-    if @article
-      begin
-        if tags == @article.tag_names
-          @article.update!(permitted_params)
-        else
-          @article.update!(permitted_params.merge(tag_names: tags))
-        end
-
-        @article.save!
-        return redirect_to article_path(@article), notice: I18n.t('controller.articles.update_success')
-      rescue => exception
-        redirect_to article_path(@article), alert: exception.to_s
-      end
-    end
+    @article.update!(
+      title: Article.get_title(params[:content]),
+      content: params[:content]
+    )
+    render json: {success: true, content: Article.to_markdown(@article.content)}
   end
 
   def destroy

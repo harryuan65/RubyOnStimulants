@@ -223,11 +223,16 @@ main{
   margin-top: 100px;
   &.expand-for-article-new{
     @include size(100%, auto);
+    margin-top: 90px;
   }
 }
 .container{
   width: 700px;
   min-height: 400px;
+  &.article-new-v2{
+    @include size(100%, auto);
+    @include flex(column, center, center);
+  }
 }
 #sidebar{
   @include flex(column, flex-start, flex-start);
@@ -509,4 +514,19 @@ div[id*="dropdown-toggle"]{
 }
 .invert-again{
   filter: invert(100%) hue-rotate(180deg);
+}
+$fade-time: .2s;
+@keyframes fade-in{
+  from{opacity: 0;}
+  to{opacity: 1;}
+}
+@keyframes fade-out{
+  from{opacity: 1;}
+  to{opacity: 0;}
+}
+.fade-in{
+  animation: fade-in $fade-time forwards;
+}
+.fade-out{
+  animation: fade-out $fade-time forwards;
 }

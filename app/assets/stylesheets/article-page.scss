@@ -1,4 +1,6 @@
 @import './resources';
+
+//v1
 .wrap-article{
   margin: 80px 0 90px 0;
   &.show{
@@ -178,26 +180,6 @@ textarea.article-page-content{
   position: relative;
   overflow: visible;
 }
-
-// dev
-.wrap-article-edit-page{
-  @include flex(row, space-around, center);
-  @include size(95%, 100%);
-  .page{
-    position: relative;
-    width: 50%;
-    min-height: 600px;
-  }
-}
-#content{
-  min-height: 100%;
-  width: 100%;
-  border: solid 1px #5b5b5b;
-  position: absolute;
-  padding: 5px;
-  resize: none;
-}
-// /dev
 .content-page{
   position: absolute;
   width: 800px;
@@ -209,14 +191,13 @@ textarea.article-page-content{
   &.display{
     z-index: 1;
   }
-
-  //a div inside page-toggle
-  #preview-markdown{
-    font-size: 20px;
-    padding: 5px;
-    overflow: scroll;
-    max-height: 600px;
-  }
+}
+//a div inside page-toggle
+#preview-markdown{
+  font-size: 20px;
+  padding: 5px;
+  overflow: scroll;
+  max-height: 600px;
 }
 .page-toggle{
   position: absolute;
@@ -244,6 +225,66 @@ textarea.article-page-content{
 .wrap-edit-cancel-save{
   @include flex(row, flex-end,center);
 }
+
+// v2
+.article-option-bar{
+  background-color: #323232;
+  @include flex(row, flex-end, center);
+  @include size(100%, 50px);
+  a.article-option{
+    &:not(:first-child){
+      margin-left: 10px;
+    }
+    &:last-child{
+      margin-right: 10px;
+    }
+    &:hover svg path{
+      fill: #cccccc;
+      transition: fill .2s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+    transition: fill .2s cubic-bezier(0.075, 0.82, 0.165, 1);
+  }
+  svg{
+    path{
+      fill: #ffffff;
+    }
+    display: inline-block;
+    @include size(35px, 35px);
+  }
+}
+.wrap-article-edit-page{
+  @include flex(row, space-around, center);
+  @include size(100%, 100%);
+  .page{
+    position: relative;
+    width: 50%;
+    height: 600px;
+    overflow: scroll;
+    .page-content{
+      padding: 10px 10px 30px 10px;
+      #preview-content{
+        font-size: 20px;
+      }
+    }
+    textarea#article-content-v2{
+      &::placeholder{
+        color: #ccc;
+        font-style: italic;
+      }
+      min-height: 100%;
+      width: 100%;
+      border: solid 1px #5b5b5b;
+      position: absolute;
+      resize: none;
+      font-size: 21px;
+      background-color: #333333;
+      color: #eee;
+      outline: none;
+    }
+  }
+}
+// end v2
+
 .markdown{
   h1, h2, h3, h4, h5, h6{
     &:not(:first-of-type){

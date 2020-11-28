@@ -1,6 +1,6 @@
 module ArticlesHelper
   def should_expand_for_new
-    "#{params[:controller]}##{params[:action]}"=="articles#new"
+    ["articles#new", "articles#edit"].include? "#{params[:controller]}##{params[:action]}"
   end
 
   def readable_time created_at

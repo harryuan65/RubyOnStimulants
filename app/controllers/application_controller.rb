@@ -144,15 +144,6 @@ class ApplicationController < ActionController::Base
     return render json: {success: true}
   end
 
-  def preview_markdown
-    if current_user
-      output = Article.to_markdown(params[:content])
-      return render html: output
-    else
-      return render text: "Yee"
-    end
-  end
-
   def err
     raise NoMethodError.new("這家咖啡廳太讚了")
   end

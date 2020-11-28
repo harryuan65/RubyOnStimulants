@@ -12,7 +12,6 @@ Rails.application.routes.draw do
   get 'download', controller:'application', action:'download'
   get 'delete', controller:'application', action:'delete'
   post 'post_test', controller:'application', action:'post_test'
-  post 'preview_markdown', controller:'application', action:'preview_markdown'
   get 'err', controller:'application', action:'err'
   get 'privacy_policy', controller: 'home', action: 'privacy_policy'
   post 'cancel_fb_authorization', controller: 'application', action: 'dev_cancel_fb'
@@ -74,6 +73,7 @@ Rails.application.routes.draw do
       get :backup_settings
       post :backup
       get :mine
+      post :preview_markdown
       get :hot
       get :cached_hot
     end

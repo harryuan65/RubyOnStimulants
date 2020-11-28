@@ -1,0 +1,23 @@
+<%= javascript_include_tag "highlight/highlight" %>
+<%= javascript_include_tag "articles/edit" %>
+<%= stylesheet_link_tag $markdown_hljs_css %>
+<%= stylesheet_link_tag 'articles', media: 'all', 'data-turbolinks-track': 'reload'%>
+<%= stylesheet_link_tag "article-page"%>
+<script>
+  currentArticleId = <%= @article.id %>;
+</script>
+<div class="container article-new-v2">
+  <div class="article-option-bar" id="article-option-bar">
+    <span id="status" class="notosans text-e7"></span>
+    <%= link_to svg("eye"), article_path(@article), class: "article-option" %>
+    <%= link_to svg("trashcan"), article_path(@article), method: :delete, class: "article-option", data: {confirm: t('controller.articles.confirm_delete')} %>
+  </div>
+  <div class="wrap-article-edit-page">
+    <div id="edit-page" class="page edit">
+      <%= text_area_tag :content, @article.content, {id: "article-content-v2", autocomplete: 'off', placeholder: "Say something", class: "page-content markdown text-dk", oninput: "prepareToUpdateArticle()"} %>
+    </div>
+    <div id="preview-page" class="page preview">
+      <div id="preview-content" class="page-content markdown text-dk"></div>
+    </div>
+  </div>
+</div>

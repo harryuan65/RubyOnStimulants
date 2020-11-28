@@ -30,6 +30,15 @@ class Article < ApplicationRecord
     includes(:user, :tags).order(Arel.sql("likes_count*comments_count desc"))
   end
 
+  def self.get_title content
+    if content!=""
+      match_data = content.match(/#\s(.+)[\n|$]*/)
+      return match_data[1]
+    else
+      nil
+    end
+  end
+
   def trimmed_content
     self.content.truncate(50, omission: "...(#{I18n.t('controller.articles.omission')})")
   end
@@ -37,10 +46,10 @@ class Article < ApplicationRecord
   def self.to_markdown(text)
     options = [:fenced_code_blocks, :no_intra_emphasis, :strikethrough, :underline, :highlight, :quote, :tables, :lax_spacing, :footnotes]
     options = options.inject({}){|res, d| res.merge({d=>true})}
-    render = Redcarpet::Render::HTML.new(hard_wrap: true)
+    render = ActiveMineRenderer.new({hard_wrap: true, safe_links_only: true, with_toc_data: true})
     markdown = Redcarpet::Markdown.new(render, options)
     output = markdown.render(text)
-    # output = output.gsub(/\<\/p\>/, "</p><br>")
+    output = output.gsub(/\<\/p\>/, "</p><br>")
     output.html_safe
   end
 

@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  before_action :authenticate_user!, only: [:backup]
+  before_action :authenticate_user!, only: [:backup, :mine]
   require 'redcarpet/render_strip'
   layout "articles/layout"
   def index
@@ -39,6 +39,19 @@ class ArticlesController < ApplicationController
       return redirect_to article_path(@article), notice: I18n.t('controller.articles.update_success')
     rescue => exception
       redirect_to article_path(@article), alert: exception.to_s
+    end
+  end
+
+  def mine
+    @scope = "mine"
+    @limit = 10
+    @offset = params[:offset] || 0
+    @articles = Article.includes(:user, :tags).where(state: :published).or(
+      Article.includes(:user, :tags).where(state: [:draft, :hidden], user_id: current_user.id)
+    ).order(id: :desc).limit(@limit).offset(@offset)
+    respond_to do |format|
+      format.html {render 'index'}
+      format.js {render 'index'}
     end
   end
 

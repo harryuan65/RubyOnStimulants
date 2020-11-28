@@ -115,9 +115,9 @@ function togglePreviewMarkdown(togglePreview, raw=null, prod=false){
   }
 }
 
-function LoadMore(){
+function LoadMore(isMine=null){
   $.ajax({
-    url: `/articles?offset=${listSize}`,
+    url: isMine ? `/articles/mine?offset=${listSize}` : `/articles?offset=${listSize}`,
     dataType: "script"
   })
   .done(function(res){

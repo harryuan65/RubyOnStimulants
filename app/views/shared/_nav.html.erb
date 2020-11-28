@@ -29,6 +29,7 @@
               <% if !["articles#new", "articles#edit"].include?("#{params[:controller]}##{params[:action]}") %>
                 <h3 class="nav-side-block-content"><%= link_to "<span class=\"pen\">&#x270e;</span> #{t('controller.articles.write_new')}".html_safe, new_article_path, class: "text-d3 notosans" %></h3>
               <% end %>
+            <h3 class="nav-side-block-content"><%= link_to t('controller.articles.mine').html_safe, mine_articles_path, class: "text-d3 notosans" %></h3>
               <% if current_user.premium? %>
                 <h3 class="nav-side-block-content"><%= link_to t('controller.articles.backup').html_safe, backup_settings_articles_path, class: "text-d3 notosans" %></h3>
               <% end %>

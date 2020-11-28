@@ -21,24 +21,27 @@ module Searchable
 
     def self.search_with(keyword)
       query = {
-        # sort: [{created_at: "desc"}],
-        # size: 20,
-        # query: {
-        #   bool: {
-        #     must: [
-        #       multi_match: {
-        #         query: keyword,
-        #         fields: ["title", "content"]
-        #       }
-        #     ]
-        #   }
-        # }
         query: {
           function_score: {
             query: {
-              multi_match: {
-                query: keyword,
-                fields: ["title^2", "content"]
+              bool: {
+                must: [
+                  {
+                    multi_match: {
+                      query: "Dokku",
+                      fields: ["title^2", "content"]
+                    }
+                  },
+                  {
+                    bool: {
+                      must_not: {
+                        terms: {
+                          state: ["draft", "hidden"]
+                       }
+                     }
+                   }
+                  }
+                ]
               }
             }
           }

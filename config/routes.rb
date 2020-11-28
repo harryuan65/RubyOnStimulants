@@ -73,6 +73,7 @@ Rails.application.routes.draw do
       post :search
       get :backup_settings
       post :backup
+      get :mine
       get :hot
       get :cached_hot
     end

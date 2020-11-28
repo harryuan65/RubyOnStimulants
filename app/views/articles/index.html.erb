@@ -35,7 +35,7 @@
         </div>
       <% end %>
       <div id="load-more-container" class="notosans text-5b">
-        <span id="load-more" onclick="LoadMore()"><%= t('controller.articles.load_more') %></span>
+        <span id="load-more" onclick="LoadMore(<%= @scope=='mine' %>)"><%= t('controller.articles.load_more') %></span>
       </div>
     </div>
   </section>

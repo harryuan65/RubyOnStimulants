@@ -10,14 +10,12 @@ module ArticlesHelper
       end
     elsif created_at.year==now.year #same year
       I18n.t('time.formats.same_year',
-        month: I18n.locale==:en ? I18n.t('time.formats.month_names')[created_at.month] : created_at.month,
-        day: created_at.day,
-        hour: created_at.strftime('%H'),
-        minute: created_at.strftime('%M'))
+        month: I18n.locale==:en ? I18n.t('date.abbr_month_names')[created_at.month] : created_at.month,
+        day: created_at.day)
     else #long ago
       I18n.t('time.formats.long_ago',
         year: created_at.year,
-        month: I18n.locale==:en ? I18n.t('time.formats.month_names')[created_at.month] : created_at.month,
+        month: I18n.locale==:en ? I18n.t('date.abbr_month_names')[created_at.month] : created_at.month,
         day: created_at.day)
     end
   end

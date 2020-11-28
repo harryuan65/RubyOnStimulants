@@ -221,6 +221,9 @@ main{
   min-height: 500px;
   @include flex(row, space-evenly, flex-start);
   margin-top: 100px;
+  &.expand-for-article-new{
+    @include size(100%, auto);
+  }
 }
 .container{
   width: 700px;

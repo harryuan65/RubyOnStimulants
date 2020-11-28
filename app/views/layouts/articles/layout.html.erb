@@ -47,7 +47,7 @@
       </div>
     </div>
     <%= render('shared/nav') %>
-    <main id="main">
+    <main id="main" class="<%= should_expand_for_new ? "expand-for-article-new" : ""%>">
       <%= yield %>
       <% if should_show_sidebar %>
         <%= render('shared/sidebar') %>

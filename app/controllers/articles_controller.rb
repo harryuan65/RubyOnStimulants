@@ -19,7 +19,8 @@ class ArticlesController < ApplicationController
   end
 
   def new
-    @article = Article.new
+    @article = Article.new(title: "New Article", user: current_user)
+    render 'new2'
   end
 
   def create

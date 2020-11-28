@@ -143,7 +143,7 @@ function hightlightAllCodes(){
     hljs.highlightBlock(e);
   })
 }
-function togglePreviewMarkdown(togglePreview, raw=null, prod=false){
+function togglePreviewMarkdownV1(togglePreview, raw=null, prod=false){
   contentChanged = raw ? previewLength!=raw.length : false;
   previewLength = raw ? raw.length : previewLength;
   previewPage = document.getElementById('preview-page');

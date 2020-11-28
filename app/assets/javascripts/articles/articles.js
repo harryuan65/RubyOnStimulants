@@ -1,5 +1,6 @@
 var listSize = 0;
 var newDataSize = 0;
+var collecting = false;
 function insertTextInCaret(element, newText){
   var startPos = element.selectionStart;
   var endPos = element.selectionEnd;
@@ -33,9 +34,6 @@ $("main").ready(()=>{
   $('input[type="radio"]:checked').parent().addClass("selected");
   $(".state-pair input[type='radio']:checked").addClass("selected");
   hljs.initHighlighting();
-  // $('pre code').each(e=>{
-  //   hljs.highlightBlock(this);
-  // })
   //markdown autocomplete support
   $("#article_content").on('keydown', (e)=>{
     if(Object.keys(mappings).includes(e.key)){
@@ -62,7 +60,50 @@ function hightlightAllCodes(){
     hljs.highlightBlock(e);
   })
 }
-function togglePreviewMarkdown(togglePreview, raw=null, prod=false){
+//dev
+function resizeContent(){
+  let textarea = document.getElementById('content');
+
+  if(textarea.scrollTop!==0){
+    textarea.style.height = 10 + textarea.scrollHeight + 'px';
+  }
+}
+function showContent(event){
+  var textarea = event.target;
+  resizeContent();
+  if(!collecting){
+    collecting = true
+    console.log("collecting");
+  }
+  if(collecting){
+    setTimeout(function(){
+      togglePreviewMarkdownV2(textarea.value);
+      console.log("sendAjax");
+      collecting = false;
+    }, 1000);
+  }
+}
+function togglePreviewMarkdownV2(raw=null){
+  contentChanged = raw ? previewLength!=raw.length : false;
+  previewLength = raw ? raw.length : previewLength;
+  previewMarkdownDiv = document.getElementById('preview-markdown');
+  if(fetchPage && raw && contentChanged){ // only fetch preview when there is a difference
+    $.ajax({
+        type: "POST",
+        url: "/preview_markdown",
+        data: {content: raw},
+        dataType: "html"})
+    .done(function(data){
+      previewMarkdownDiv.innerHTML = data;
+      hightlightAllCodes();
+    }).fail(function(err){
+      console.error(err);
+      alert("Something is wrong with server")
+    })
+  }
+}
+// /dev
+function togglePreviewMarkdownV1(togglePreview, raw=null, prod=false){
   contentChanged = raw ? previewLength!=raw.length : false;
   previewLength = raw ? raw.length : previewLength;
   previewPage = document.getElementById('preview-page');
@@ -73,10 +114,6 @@ function togglePreviewMarkdown(togglePreview, raw=null, prod=false){
   let previewIsOn = previewToggle.classList.contains('active');
 
   if(togglePreview && !previewIsOn){
-    editPage.classList.remove('display');
-    editToggle.classList.remove('active');
-    previewPage.classList.add('display');
-    previewToggle.classList.add('active');
     var previewMarkdownDiv = document.getElementById('preview-markdown');
     if(fetchPage && raw && contentChanged){ // only fetch preview when there is a difference
       // beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},

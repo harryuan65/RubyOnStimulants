@@ -178,6 +178,26 @@ textarea.article-page-content{
   position: relative;
   overflow: visible;
 }
+
+// dev
+.wrap-article-edit-page{
+  @include flex(row, space-around, center);
+  @include size(95%, 100%);
+  .page{
+    position: relative;
+    width: 50%;
+    min-height: 600px;
+  }
+}
+#content{
+  min-height: 100%;
+  width: 100%;
+  border: solid 1px #5b5b5b;
+  position: absolute;
+  padding: 5px;
+  resize: none;
+}
+// /dev
 .content-page{
   position: absolute;
   width: 800px;

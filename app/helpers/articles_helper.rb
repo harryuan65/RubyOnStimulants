@@ -1,4 +1,8 @@
 module ArticlesHelper
+  def should_expand_for_new
+    "#{params[:controller]}##{params[:action]}"=="articles#new"
+  end
+
   def readable_time created_at
     created_at = created_at.in_time_zone("Taipei") if I18n.locale!=:en
     now = I18n.locale==:en ? Time.now.in_time_zone('UTC') : Time.now.in_time_zone("Taipei")

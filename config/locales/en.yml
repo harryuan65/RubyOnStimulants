@@ -298,6 +298,10 @@ en:
       write_new: "Write Article"
       mine: "My Articles"
       backup: "Backup Articles"
+      fetching_preview: "Fetching preview..."
+      done: "Done"
+      saving: "Saving..."
+      saved: "Saved"
     line:
       welcome: "Hello there! We are Omama and Bai.\nThank you for adding me as your friend!\nWe will do our best to help you!"
       currently_no_services: "Um...Sorry the message parsing funtionalities are still in development"

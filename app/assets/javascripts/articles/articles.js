@@ -14,20 +14,6 @@ window.onload = ()=>{
     }
   }
 }
-// function select(event){
-//   let otherRadios = $('input[type="radio"]');
-//   otherRadios.parent().removeClass("selected");
-
-//   // also toggles class when clicking on child 'span'
-//   if(event.target.nodeName==="SPAN"){
-//     var radio = $('input[type="radio"]', event.target.parentNode);
-//   }
-//   else{
-//     var radio = $('input[type="radio"]', event.target);
-//   }
-//   radio.prop('checked', true); //event.target = pair
-//   radio.parent().addClass("selected"); //event.target = pair
-// }
 function hightlightAllCodes(){
   document.querySelectorAll('pre code').forEach(e=>{
     hljs.highlightBlock(e);

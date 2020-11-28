@@ -34,11 +34,45 @@ $(".container").ready(()=>{
     articleContent.scrollTop = e.target.scrollTop;
   }
   articleContent.onscroll = (e)=>{
-    previewPage.scrollTop = e.target.scrollTop;
+    artContent = e.target;
+    previewPage.scrollTop = artContent.scrollTop;
+    if(artContent.scrollTop + artContent.offsetHeight > artContent.scrollHeight){
+      previewPage.scrollTo({
+        top: previewPage.scrollHeight,
+        left: 0,
+        behavior: 'smooth'
+      });
+    }
   }
   previewArticle();
 })
 //v2
+function select(event){
+  let otherRadios = $('input[type="radio"]');
+  otherRadios.parent().removeClass("selected");
+
+  // also toggles class when clicking on child 'span'
+  if(event.target.nodeName==="SPAN"){
+    var radio = $('input[type="radio"]', event.target.parentNode);
+  }
+  else{
+    var radio = $('input[type="radio"]', event.target);
+  }
+  radio.prop('checked', true); //event.target = pair
+  radio.parent().addClass("selected"); //event.target = pair
+  $.ajax({
+    type: "PUT",
+    url: `/articles/${currentArticleId}/update_state`,
+    data: {state: radio.val()},
+    dataType: "json"})
+  .done(function(data){
+    setStatusText(savedText, true);
+  }).fail(function(jqXHR){
+    console.error(jqXHR);
+    let errorMsg = jqXHR.responseJSON.error;
+    setStatusText(errorMsg, true);
+  })
+}
 function resizeContent(){
   if(articleContent.scrollTop!==0){
     articleContent.style.height = 10 + articleContent.scrollHeight + 'px';
@@ -65,14 +99,14 @@ async function sleep(ms=0){
 async function prepareToUpdateArticle(){
   if(!collecting){
     collecting = true;
-    setStatusText("Saving...", true);
-    sleep(1500).then(e=>{
+    setStatusText(savingText, true);
+    sleep(1000).then(e=>{
       updateArticle(articleContent.value);
     });
   }
 }
 function previewArticle(raw){
-  setStatusText("Fetching preview...", true);
+  setStatusText(fetchingPreviewText, true);
   $.ajax({
     type: "POST",
     url: `/articles/preview_markdown`,
@@ -81,7 +115,7 @@ function previewArticle(raw){
   .done(function(data){
     previewMarkdownDiv.innerHTML = data.content;
     hightlightAllCodes();
-    setStatusText("Done.");
+    setStatusText(doneText);
   }).fail(function(jqXHR){
     console.error(jqXHR);
     let errorMsg = jqXHR.responseJSON.error;
@@ -101,7 +135,7 @@ function updateArticle(raw=null){
       previewMarkdownDiv.innerHTML = data.content;
       hightlightAllCodes();
       collecting = false;
-      setStatusText("Saved", true);
+      setStatusText(savedText, true);
     }).fail(function(jqXHR){
       console.error(jqXHR);
       let errorMsg = jqXHR.responseJSON.error;

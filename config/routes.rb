@@ -77,6 +77,9 @@ Rails.application.routes.draw do
       get :hot
       get :cached_hot
     end
+    member do
+      put :update_state
+    end
   end
 
   resources :words, :controller=>'words' do

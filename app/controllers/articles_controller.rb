@@ -70,7 +70,7 @@ class ArticlesController < ApplicationController
 
   def edit
     @article = Article.find(params[:id])
-    render 'edit_v2'
+    render 'edit'
   end
 
   def preview_markdown
@@ -82,7 +82,16 @@ class ArticlesController < ApplicationController
     end
   end
 
+  def update_state
+    param! :state, String, required: true
+
+    @article = Article.find(params[:id])
+    @article.update(state: params[:state])
+    render json: {success: true, state: @article.state}
+  end
+
   def update
+    param! :content, String, required: true
     @article = Article.includes(:tags).find(params[:id])
     current_tags = @article.tags.map(&:name)
     parsed_tags = Article.get_tags(params[:content])

@@ -264,6 +264,10 @@ zh-TW:
       write_new: "寫文章"
       mine: "我的文章"
       backup: "備份文章"
+      fetching_preview: "讀取預覽中..."
+      done: "完成"
+      saving: "儲存中..."
+      saved: "已儲存"
     line:
       welcome: "安安尼好！我們是Omama跟小白～\n謝謝尼加入我們的好友，希望我們能在生活上幫到尼喔"
       currently_no_services: '那個～抱歉目前訊息處理的功能在開發中喔'

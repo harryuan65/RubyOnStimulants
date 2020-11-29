@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  before_action :authenticate_user!, only: [:backup, :mine]
+  before_action :authenticate_user!, only: [:backup, :mine, :get_link_title]
   require 'redcarpet/render_strip'
   layout "articles/layout"
   def index
@@ -79,6 +79,19 @@ class ArticlesController < ApplicationController
       return render json: {success: true, content: output}
     else
       return render text: "Yee"
+    end
+  end
+
+  def get_link_title
+    param! :url, String
+    begin
+      res = RestClient.get(params[:url], {accept: :html, user_agent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.61 Safari/537.36"})
+      doc = Nokogiri::HTML(res)
+      return render plain: doc.at('title').children.text
+    rescue RestClient::NotFound
+      return render plain: I18n.t('controller.general.route_not_found')
+    rescue SocketError
+      return render plain: I18n.t('controller.general.invalid_url')
     end
   end
 

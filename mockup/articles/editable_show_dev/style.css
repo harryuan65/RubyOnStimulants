@@ -4,10 +4,10 @@
   src: url("../../../app/assets/fonts/NotoSans-Regular.ttf") format("truetype"); }
 @font-face {
   font-family: 'Noto Sans Light';
-  src: url("../../../app/assets/fonts/notosans.ttf") format("truetype"); }
+  src: url("../../../app/assets/fonts/NotoSans-Light.ttf") format("truetype"); }
 @font-face {
   font-family: 'Noto Sans Bold';
-  src: url("../../../app/assets/fonts/notosans.ttf") format("truetype"); }
+  src: url("../../../app/assets/fonts/NotoSans-Bold.ttf") format("truetype"); }
 .crop-circle {
   clip-path: circle(50% at 50% 50%); }
 

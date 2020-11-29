@@ -76,6 +76,7 @@ Rails.application.routes.draw do
       post :preview_markdown
       get :hot
       get :cached_hot
+      get :get_link_title
     end
     member do
       put :update_state

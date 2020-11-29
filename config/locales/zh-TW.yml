@@ -240,7 +240,8 @@ zh-TW:
       record_not_found: "資源不存在"
       record_invalid: "無效項目"
       internal_server_error: "發生錯誤"
-      unauthorized: "Unauthorized"
+      unauthorized: "無權限"
+      invalid_url: "無效位址"
     title:
       sign_in: "登入"
       home: "首頁"

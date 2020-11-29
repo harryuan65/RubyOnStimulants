@@ -1,10 +1,37 @@
 var collecting = false;
 var previewMarkdownDiv = null;
 var articleContent = null;
+var collection = [];
+function checkCollection(){
+  if(collection[0]!=="h"){
+    collection = collection.slice(1, collection.length);
+  }
+  let integration = collection.join('');
+  if(!integration.includes("::")){ return; }
+
+  let parts = integration.split('::');
+  let input = parts[0];
+  let cmd = parts[1];
+  console.log("link=",input);
+  switch(cmd){
+    case "link":
+      $.ajax({
+        url: `/articles/get_link_title?url=${input}`
+      })
+      .always(function(responseText, textStatus){
+        insertTextInCaret(articleContent, `[${responseText}](${input})`)
+        collection = [];
+      })
+      break;
+    default:
+      collection = [];
+  }
+}
 
 function insertTextInCaret(element, newText){
   var startPos = element.selectionStart;
   var endPos = element.selectionEnd;
+  console.log("inserting at", startPos)
   element.value = element.value.substring(0, startPos) + newText + element.value.substring(endPos, element.value.length);
   element.selectionStart = element.selectionEnd = startPos;
 }
@@ -26,6 +53,35 @@ $(".container").ready(()=>{
     articleContent.onkeydown = (e)=>{
       if(Object.keys(mappings).includes(e.key)){
         insertTextInCaret(e.target, mappings[e.key]);
+      }
+      if(e.key.length==1){
+        collection.push(e.key);
+        console.log(collection, e.key);
+      }
+      if(e.key==="Tab"){
+        checkCollection();
+        e.preventDefault();
+      }
+      if(e.key==="Backspace"){
+        collection.pop();
+      }
+    }
+  }
+  if(articleContent && typeof(articleContent.onpaste)!=="undefined"){
+    articleContent.onpaste = (e)=>{
+      collection.pop();
+      let input = e.clipboardData.getData('text');
+      collection.push(input);
+      if(input.match(/http:\/\/(.+)|https:\/\/(.+)/i)){
+        e.preventDefault();
+        $.ajax({
+          url: `/articles/get_link_title?url=${input}`
+        })
+        .always(function(responseText, textStatus){
+          insertTextInCaret(articleContent, `[${responseText}](${input})`)
+          collection = [];
+          prepareToUpdateArticle();
+        })
       }
     }
   }
@@ -111,7 +167,8 @@ function previewArticle(raw){
     type: "POST",
     url: `/articles/preview_markdown`,
     data: {content: articleContent.value},
-    dataType: "json"})
+    dataType: "json",
+    timeout: 3000})
   .done(function(data){
     previewMarkdownDiv.innerHTML = data.content;
     hightlightAllCodes();
@@ -134,12 +191,13 @@ function updateArticle(raw=null){
     .done(function(data){
       previewMarkdownDiv.innerHTML = data.content;
       hightlightAllCodes();
-      collecting = false;
       setStatusText(savedText, true);
     }).fail(function(jqXHR){
       console.error(jqXHR);
       let errorMsg = jqXHR.responseJSON.error;
       setStatusText(errorMsg, true);
+    }).always(function(){
+      collecting = false;
     })
   }
 }

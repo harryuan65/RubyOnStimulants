@@ -205,14 +205,6 @@ h3.nav-side-block-content a{
 a{
   text-decoration: none;
 }
-.pen{
-  opacity: 0.4;
-  transition: .3s ease;
-  &:hover{
-    opacity: 1;
-    transition: .3s ease;
-  }
-}
 .nav-profile-img{
   width: 38px;
 }
@@ -232,6 +224,9 @@ main{
   &.article-new-v2{
     @include size(100%, auto);
     @include flex(column, center, center);
+  }
+  &#article-show{
+    width: 70%;
   }
 }
 #sidebar{

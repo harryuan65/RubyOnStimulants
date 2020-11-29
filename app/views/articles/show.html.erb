@@ -3,38 +3,28 @@
 
 <div class="container" id="article-show">
   <div class="wrap-article show">
-    <div class="wrap-title <%= @is_author ? "can-edit" : "readonly"%>">
-      <% if @is_author%>
-      <div class="wrap-pen">
-        <a href="<%= edit_article_path(@article)%>" class="article-page-edit text-7e pen">&#x270E;</a>
-      </div>
-      <% end %>
-      <!-- <span class="article-page-subtitle show notosans text-7e"><%= @article.subtitle %></span>-->
-      <span class="article-page-tag show notosans text-7e">tags:
-        <% @article.tags.map(&:name).each_with_index do |tag, i| %>
-          <span class="tag-text"><%= tag %></span>
-        <% if i!=@article.tags.size-1 %>
-          <span class="notosans">,</span>
-        <% end %>
-      <% end %>
-      </span>
-      <span class="article-page-created-at show notosans text-7e"><%= @article.created_at.strftime("%a, %d %b %Y") %></span>
-
-    </div>
-
-    <hr>
-    <!-- <p class="article-page-content show notosans text-dk"><%= @article.content.gsub(/\n/, "\<br\>").html_safe %></p>-->
     <div class="article-page-content show markdown text-dk">
       <%= Article.to_markdown(@article.content) %>
     </div>
-
-    <footer>
-      <img src="<%= @article.user.image_url%>" alt="<%@article.user.name%>" class="crop-circle">
-      <div class="wrap-author-info">
-        <h1 class="author-name notosans text-5b"><%= @article.user.name %></h1>
-        <p class="author-desc notosans text-7e"><%= @article.user.intro%></p>
+  </div>
+</div>
+<div id="info-wrap">
+  <div class="article-info">
+    <% if @is_author%>
+      <div class="wrap-edit">
+        <a href="<%= edit_article_path(@article)%>" class="article-page-edit notosans text-7e"><span class="pen">&#x270E;</span><span class="edit-txt"><%= t('controller.articles.edit') %></span></a>
       </div>
-    </footer>
+    <% end %>
+    <div class="wrap-created notosans text-7e">
+      <span class="created-txt"><span class="clock">&#x1f551;</span><span class="txt"><%= t('controller.articles.created_at') %></span></span>
+      <span class="article-page-created-at show"><%= @article.created_at.strftime("%b %d %Y") %></span>
+    </div>
+  </div>
+  <hr>
+  <div class="author-info">
+    <h3 class="author-name notosans text-5b"><%= @article.user.name %></h3>
+    <p class="author-desc notosans text-7e"><%= @article.user.intro%></p>
+    <img src="<%= @article.user.image_url%>" alt="<%@article.user.name%>" class="crop-circle">
   </div>
 </div>
 <script>

@@ -7,36 +7,8 @@
     margin: 40px 0 90px 0;
   }
 }
-.wrap-title{
-  display: grid;
-  align-content: center;
-  &.readonly{
-    grid-template-columns: 75% 25%;
-  }
-  &.can-edit{
-    grid-template-columns: 75% 25%;
-  }
-  .wrap-pen{
-    @include flex(row, flex-end, center);
-    grid-column: 2/3;
-  }
-}
-.article-page-created-at{
-  @include flex(row,flex-end,center);
-  grid-column: 2/3;
-  font-size: 18px;
-  // min-width: 125px;
-  &.show{
-    grid-row: 2/3;
-    grid-column: 2/3;
-  }
-}
 .article-page-tag{
   font-size: 19px;
-  &.show{
-    grid-row: 2/3;
-    grid-column: 1/2;
-  }
   .tag-text{ //same as `` in markdown pre code
     color: #282828;
     background-color:#DDDDDD;
@@ -44,17 +16,7 @@
     border-radius: 4px;
   }
 }
-.article-page-content{
-  &.show{
-    margin-top: 60px;
-  }
-  font-size: 20px;
-  max-width: 800px;
-}
-.article-page-edit{
-  @include flex(row,flex-end,center);
-  font-size: 36px;
-}
+
 //edit
 .wrap-title-and-delete{
   @include flex(row, space-between, center);
@@ -139,6 +101,7 @@ $input-transition-delay: .1s;
   background-color: #323232;
   position: fixed;
   top: 90px;
+  z-index: 99;
   @include flex(row, space-between, center);
   @include size(100%, 50px);
   a.article-option{
@@ -229,6 +192,7 @@ $input-transition-delay: .1s;
   }
   p{
     margin:0;
+    font-size: 20px;
   }
   br{
     display: block;
@@ -252,7 +216,8 @@ $input-transition-delay: .1s;
     font-family: Menlo, Monaco, 'Courier New', monospace;
   }
   p > code{
-    font-size: 13px;
+    font-size: 15px;
+    margin: 0 5px 0 5px;
   }
   pre > code{ //```
     border-radius: 4px;
@@ -298,34 +263,81 @@ $input-transition-delay: .1s;
     display: inline;
   }
 }
-footer{
-  @include flex(row, space-around, center);
-  margin-top: 80px;
-  border-top: 1px solid #5b5b5b;
-}
-.wrap-author-info{
-  @include flex(column, center, center);
-  .author-desc{
-    max-width: 350px;
+// info
+#info-wrap{
+  position: relative;
+  @include flex(column, center, flex-start);
+  min-width: 200px;
+  .article-info{
+    width: 100%;
+    height: 150px;
+    @include flex(column, center, flex-start);
+    grid-template-columns: 80% 20%;
+    .wrap-edit{
+      opacity: 0.4;
+      transition: .3s ease;
+      &:hover{
+        opacity: 1;
+        transition: .3s ease;
+      }
+      .pen{
+        font-size: 36px;
+      }
+      .edit-txt{
+        font-size: 24px;
+      }
+    }
+    .wrap-created{
+      @include flex(column, center, flex-start);
+      width: 100%;
+      .created-txt{
+        @include flex(row, center, center);
+        .clock{
+          font-size: 26px;
+        }
+        .txt{
+          margin-left: 5px;
+          font-size: 24px;
+        }
+      }
+    }
+  }
+  hr{
+    border: 1px solid #7e7e7e;
+    width: 200px;
+  }
+  .author-info{
+    width: 100%;
+    padding: 15px;
+    @include flex(column, center, flex-start);
+    .author-desc{
+      max-width: 150px;
+    }
   }
 }
-
+.article-page-created-at{
+  @include flex(row,flex-end,center);
+  grid-column: 2/3;
+  font-size: 18px;
+  // min-width: 125px;
+  &.show{
+    white-space: nowrap;
+    justify-content: flex-start;
+    width: 100%;
+    margin-left: 30px;
+  }
+}
+.article-page-edit{
+  @include flex(row, flex-end,center);
+}
 @media only screen and (max-width: 420px){
   .article-page-title{
     font-size: 27px;
   }
   .markdown pre > code {
-    font-size: 14px;
+    font-size: 17px;
   }
   .blockquote{
     margin: 1em;
-  }
-  .wrap-author-info{
-    .author-name{
-      font-size: 25px;
-    }
-    .author-desc{
-      max-width: 200px;
-    }
   }
 }

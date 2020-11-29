@@ -263,6 +263,8 @@ zh-TW:
       search_result_title: "包含關鍵字 \"%{keyword}\" 的文章"
       welcome_message: "哈囉！我是Harry，是個喜歡Rails的菜鳥工程師，喜歡學習各種新東西。覺得網路上自學找資料就像挖寶，想把挖到的資源整理在這裡。"
       write_new: "寫文章"
+      created_at: "建立時間"
+      edit: "編輯文章"
       mine: "我的文章"
       backup: "備份文章"
       fetching_preview: "讀取預覽中..."

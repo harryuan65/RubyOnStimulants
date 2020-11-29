@@ -296,6 +296,8 @@ en:
       search_result_title: "Articles containing keyword \"%{keyword}\""
       welcome_message: "Hello there! This is Harry. I'm a web developer interested in mining all the goods out there on the Internet. Here you can find some of them which I've already organized."
       write_new: "Write Article"
+      created_at: "Created At"
+      edit: "Edit Article"
       mine: "My Articles"
       backup: "Backup Articles"
       fetching_preview: "Fetching preview..."

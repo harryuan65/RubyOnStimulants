@@ -12,7 +12,6 @@ function checkCollection(){
   let parts = integration.split('::');
   let input = parts[0];
   let cmd = parts[1];
-  console.log("link=",input);
   switch(cmd){
     case "link":
       $.ajax({
@@ -31,7 +30,6 @@ function checkCollection(){
 function insertTextInCaret(element, newText){
   var startPos = element.selectionStart;
   var endPos = element.selectionEnd;
-  console.log("inserting at", startPos)
   element.value = element.value.substring(0, startPos) + newText + element.value.substring(endPos, element.value.length);
   element.selectionStart = element.selectionEnd = startPos;
 }
@@ -56,7 +54,6 @@ $(".container").ready(()=>{
       }
       if(e.key.length==1){
         collection.push(e.key);
-        console.log(collection, e.key);
       }
       if(e.key==="Tab"){
         checkCollection();
@@ -160,6 +157,10 @@ async function prepareToUpdateArticle(){
       updateArticle(articleContent.value);
     });
   }
+}
+function forceUpdate(event){
+  event.preventDefault();
+  updateArticle();
 }
 function previewArticle(raw){
   setStatusText(fetchingPreviewText, true);

@@ -111,6 +111,11 @@ $input-transition-delay: .1s;
     &:last-child{
       margin-right: 10px;
     }
+    &.refresh{
+      svg{
+        width: 26px;
+      }
+    }
     &:hover svg path{
       fill: #cccccc;
       transition: fill .2s cubic-bezier(0.075, 0.82, 0.165, 1);

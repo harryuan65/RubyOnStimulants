@@ -197,9 +197,8 @@ function updateArticle(raw=null, force=false){
       console.error(jqXHR);
       let errorMsg = jqXHR.responseJSON.error;
       setStatusText(errorMsg, true);
-    }).always(function(){
-      collecting = false;
     })
   }
+  collecting = false;
 }
 // end v2

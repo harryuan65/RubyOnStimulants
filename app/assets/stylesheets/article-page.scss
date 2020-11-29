@@ -237,11 +237,6 @@ $input-transition-delay: .1s;
   }
   pre{
     white-space: pre-wrap; //break lines when too long
-    // use this when hljs is not available
-    // background-color: #3b3b3b;
-    // color: #bbb;
-    // padding: 15px;
-    // font-size: 18px;
   }
   li:not(:first-child){
     margin-top: 10px;
@@ -249,11 +244,15 @@ $input-transition-delay: .1s;
   p > code, li > code{ // `this`
     color: #282828;
     background-color:#DDDDDD;
-    padding: 1px 7px 1px 7px;
+    padding: 2px 5px 2px 5px;
+    margin: 0 3px 0 3px;
     border-radius: 4px;
   }
   code, pre{
     font-family: Menlo, Monaco, 'Courier New', monospace;
+  }
+  p > code{
+    font-size: 13px;
   }
   pre > code{ //```
     border-radius: 4px;

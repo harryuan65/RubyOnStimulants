@@ -1,4 +1,10 @@
+<%= javascript_include_tag "highlight/highlight" %>
 <script>
+  function hightlightAllCodes(){
+    document.querySelectorAll('pre code').forEach(e=>{
+      hljs.highlightBlock(e);
+    })
+  }
   $(".container").ready(function(){
     $('input[type="radio"]:checked').parent().addClass("selected");
     $(".state-pair input[type='radio']:checked").addClass("selected");
@@ -9,10 +15,8 @@
     fetchingPreviewText = "<%= t('controller.articles.fetching_preview') %>";
   });
 </script>
-<%= javascript_include_tag "highlight/highlight" %>
 <%= javascript_include_tag "articles/edit" %>
 <%= stylesheet_link_tag $markdown_hljs_css %>
-<%= stylesheet_link_tag 'articles', media: 'all', 'data-turbolinks-track': 'reload'%>
 <%= stylesheet_link_tag "article-page"%>
 
 <div class="article-option-bar" id="article-option-bar">
@@ -39,7 +43,7 @@
 <div class="container article-new-v2">
   <div class="wrap-article-edit-page">
     <div id="edit-page" class="page edit">
-      <%= text_area_tag :content, @article.content, {id: "article-content-v2", autocomplete: 'off', placeholder: "Say something", class: "page-content markdown text-dk", oninput: "prepareToUpdateArticle()"} %>
+      <%= text_area_tag :content, @article.content, {id: "article-content-v2", spellcheck: false, autocomplete: 'off', placeholder: "Say something", class: "page-content markdown text-dk", oninput: "prepareToUpdateArticle()"} %>
     </div>
     <div id="preview-page" class="page preview">
       <div id="preview-content" class="page-content markdown text-dk"></div>

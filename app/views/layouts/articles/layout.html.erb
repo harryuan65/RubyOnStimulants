@@ -6,15 +6,35 @@
     <%= csp_meta_tag %>
     <meta name="google-site-verification" content="ShpDI9Bv2xUb3AwyKKldqZ2Ax87ZG9dFxVFvYqWvrG4" />
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" >
-    <%# <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= stylesheet_link_tag    'layout', media: 'all', 'data-turbolinks-track': 'reload'%>
-
     <%= javascript_include_tag "highlight/highlight" %>
-    <%= javascript_include_tag "articles/articles" %>
-    <%= stylesheet_link_tag $markdown_hljs_css %>
+    <%= stylesheet_link_tag    'layout', media: 'all', 'data-turbolinks-track': 'reload'%>
+   <script>
+      var listSize = 0;
+      var newDataSize = 0;
+
+      function LoadMore(isMine=null){
+        $.ajax({
+          url: isMine ? `/articles/mine?offset=${listSize}` : `/articles?offset=${listSize}`,
+          dataType: "script"
+        })
+        .done(function(res){
+          console.log('OK唷');
+        })
+        .fail(function(jqXHR){
+          let contentType = jqXHR.getResponseHeader('Content-Type');
+          if(jqXHR.responseJSON){
+            let errorMsg = jqXHR.responseJSON.error;
+            setFlash(false, errorMsg);
+          }
+          else{
+            console.log(jqXHR.responseText)
+            setFlash(false, `Response Type mismatched: got ${contentType}`);
+          }
+        })
+      }
+    </script>
     <%= stylesheet_link_tag 'articles', media: 'all', 'data-turbolinks-track': 'reload'%>
-    <%= stylesheet_link_tag "article-page"%>
   </head>
 
   <body>

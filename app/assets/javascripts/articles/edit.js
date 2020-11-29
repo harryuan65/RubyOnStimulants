@@ -36,13 +36,13 @@ $(".container").ready(()=>{
   articleContent.onscroll = (e)=>{
     artContent = e.target;
     previewPage.scrollTop = artContent.scrollTop;
-    if(artContent.scrollTop + artContent.offsetHeight > artContent.scrollHeight){
-      previewPage.scrollTo({
-        top: previewPage.scrollHeight,
-        left: 0,
-        behavior: 'smooth'
-      });
-    }
+    // if(artContent.scrollTop + artContent.offsetHeight > artContent.scrollHeight){
+    //   previewPage.scrollTo({
+    //     top: previewPage.scrollHeight,
+    //     left: 0,
+    //     behavior: 'smooth'
+    //   });
+    // }
   }
   previewArticle();
 })

@@ -160,7 +160,7 @@ async function prepareToUpdateArticle(){
 }
 function forceUpdate(event){
   event.preventDefault();
-  updateArticle();
+  updateArticle(articleContent.value, true);
 }
 function previewArticle(raw){
   setStatusText(fetchingPreviewText, true);
@@ -180,10 +180,10 @@ function previewArticle(raw){
     setStatusText(errorMsg, true);
   })
 }
-function updateArticle(raw=null){
+function updateArticle(raw=null, force=false){
   contentChanged = raw ? previewLength!=raw.length : false;
   previewLength = raw ? raw.length : previewLength;
-  if(raw && contentChanged){ // only fetch preview when there is a difference
+  if(raw && contentChanged || force){ // only fetch preview when there is a difference
     $.ajax({
         type: "PUT",
         url: `/articles/${currentArticleId}`,

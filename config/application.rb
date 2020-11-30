@@ -13,6 +13,7 @@ module ActiveMine
     config.autoloader = :classic
     config.eager_load_paths += %W[#{config.root}/lib]
     config.i18n.load_path += Dir[Rails.root.join('config','locales','*.yml')]
+    # config.autoload_paths += Dir[Rails.root.join('app', 'services', '{**}')]
     config.i18n.default_locale = :en
     config.time_zone = 'Asia/Taipei'
     config.active_record.default_timezone = :local

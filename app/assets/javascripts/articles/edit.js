@@ -82,21 +82,21 @@ $(".container").ready(()=>{
       }
     }
   }
-  var previewPage = document.getElementById('preview-page');
-  previewPage.onscroll= (e)=>{
-    articleContent.scrollTop = e.target.scrollTop;
-  }
-  articleContent.onscroll = (e)=>{
-    artContent = e.target;
-    previewPage.scrollTop = artContent.scrollTop;
-    // if(artContent.scrollTop + artContent.offsetHeight > artContent.scrollHeight){
-    //   previewPage.scrollTo({
-    //     top: previewPage.scrollHeight,
-    //     left: 0,
-    //     behavior: 'smooth'
-    //   });
-    // }
-  }
+  // var previewPage = document.getElementById('preview-page');
+  // previewPage.onscroll= (e)=>{
+  //   articleContent.scrollTop = e.target.scrollTop;
+  // }
+  // articleContent.onscroll = (e)=>{
+  //   artContent = e.target;
+  //   previewPage.scrollTop = artContent.scrollTop;
+  //   // if(artContent.scrollTop + artContent.offsetHeight > artContent.scrollHeight){
+  //   //   previewPage.scrollTo({
+  //   //     top: previewPage.scrollHeight,
+  //   //     left: 0,
+  //   //     behavior: 'smooth'
+  //   //   });
+  //   // }
+  // }
   previewArticle();
 })
 //v2

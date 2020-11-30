@@ -137,7 +137,16 @@ class ArticlesController < ApplicationController
   def search
     @keyword = params[:keyword]
     article_ids = Article.search_with(@keyword)
-    @articles = Article.find_with_sequence(article_ids)
+    @limit = 10
+    @offset = params[:offset] || 0
+    if current_user
+      @articles = Article.includes(:user, :tags).where(state: :published).or(
+                    Article.includes(:user, :tags).where(state: [:draft, :hidden], user_id: current_user.id)
+                  ).order(id: :desc).limit(@limit).offset(@offset)
+    else
+      @articles = Article.includes(:user, :tags).where(state: :published).order(id: :desc).limit(@limit).offset(@offset)
+    end
+    @articles = @articles.index_by(&:id).slice(*article_ids).values
 
     render "search_result"
   end

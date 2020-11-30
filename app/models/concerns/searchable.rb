@@ -28,18 +28,9 @@ module Searchable
                 must: [
                   {
                     multi_match: {
-                      query: "Dokku",
+                      query: keyword,
                       fields: ["title^2", "content"]
                     }
-                  },
-                  {
-                    bool: {
-                      must_not: {
-                        terms: {
-                          state: ["draft", "hidden"]
-                       }
-                     }
-                   }
                   }
                 ]
               }

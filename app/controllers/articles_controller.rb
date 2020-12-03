@@ -146,7 +146,7 @@ class ArticlesController < ApplicationController
     else
       @articles = Article.includes(:user, :tags).where(state: :published).order(id: :desc).limit(@limit).offset(@offset)
     end
-    @articles = @articles.index_by(&:id).slice(*article_ids).values
+    @articles = @articles.where(id: article_ids).index_by(&:id).slice(*article_ids).values
 
     render "search_result"
   end

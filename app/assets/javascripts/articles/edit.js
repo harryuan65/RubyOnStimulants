@@ -69,7 +69,7 @@ $(".container").ready(()=>{
       collection.pop();
       let input = e.clipboardData.getData('text');
       collection.push(input);
-      if(input.match(/http:\/\/(.+)|https:\/\/(.+)/i)){
+      if(input.match(/^http:\/\/(.+)$|^https:\/\/(.+)$/i)){
         e.preventDefault();
         $.ajax({
           url: `/articles/get_link_title?url=${input}`

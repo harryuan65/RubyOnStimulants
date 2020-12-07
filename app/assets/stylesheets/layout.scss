@@ -1,11 +1,12 @@
 @import './resources';
 $logo-color: #e7e7e7;
 $nav-bg-color: #242527;
+$nav-top-height: 90px;
 html, body{
   margin: 0;
   padding: 0;
   width: 100%;
-  min-height: 100%;
+  height: 100%;
   background-color: #fff;
 }
 body{
@@ -20,7 +21,7 @@ body{
 nav#nav-top{
   position: fixed;
   width: 100%;
-  height: 90px;
+  height: $nav-top-height;
   // border-bottom: solid 1px rgba(88, 88, 88, 0.3);
   @include flex(row, space-between, center);
   z-index: 999;
@@ -214,15 +215,17 @@ main{
   @include flex(row, space-evenly, flex-start);
   margin-top: 100px;
   &.expand-for-article-new{
-    @include size(100%, auto);
-    margin-top: 140px;
+    @include size(100%, 100%);
+    top: 140px;
+    position: absolute;
+    margin-top: 0;
   }
 }
 .container{
   width: 700px;
   min-height: 400px;
   &.article-new-v2{
-    @include size(100%, auto);
+    @include size(100%, 100%);
     @include flex(column, center, center);
   }
   &#article-show{

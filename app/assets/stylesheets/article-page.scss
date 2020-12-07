@@ -97,10 +97,11 @@
 $input-transition-delay: .1s;
 
 // v2
+$article-option-bar-height: 90px;
 .article-option-bar{
   background-color: #323232;
   position: fixed;
-  top: 90px;
+  top: $article-option-bar-height;
   z-index: 99;
   @include flex(row, space-between, center);
   @include size(100%, 50px);
@@ -142,7 +143,7 @@ $input-transition-delay: .1s;
   .page{
     position: relative;
     width: 50%;
-    height: 575px;
+    height: 100%;
     overflow: scroll;
     .page-content{
       padding: 10px;
@@ -155,7 +156,7 @@ $input-transition-delay: .1s;
         color: #ccc;
         font-style: italic;
       }
-      min-height: 100%;
+      height: 100%;
       width: 100%;
       border: solid 1px #5b5b5b;
       position: absolute;

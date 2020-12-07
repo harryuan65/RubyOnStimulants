@@ -42,3 +42,4 @@ Procfile.dev-es
 Procfile.dev-sidekiq
 sandbox
 dump.rdb
+get_routes.rb

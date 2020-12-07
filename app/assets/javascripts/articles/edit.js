@@ -7,11 +7,13 @@ function checkCollection(){
     collection = collection.slice(1, collection.length);
   }
   let integration = collection.join('');
+  console.log(integration);
   if(!integration.includes("::")){ return; }
 
   let parts = integration.split('::');
   let input = parts[0];
   let cmd = parts[1];
+  console.log(cmd)
   switch(cmd){
     case "link":
       $.ajax({
@@ -21,6 +23,11 @@ function checkCollection(){
         insertTextInCaret(articleContent, `[${responseText}](${input})`)
         collection = [];
       })
+      break;
+    case "folder":
+      articleContent.value = articleContent.value.replace(/::folder/g, "📂");
+      prepareToUpdateArticle();
+      collection = [];
       break;
     default:
       collection = [];

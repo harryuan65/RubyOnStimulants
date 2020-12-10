@@ -91,3 +91,4 @@ gem 'rubyzip'
 
 gem 'sidekiq'
 gem 'sidekiq-scheduler'
+gem "thread_safe", "~> 0.3.6"

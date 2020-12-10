@@ -22,59 +22,59 @@
     radio.parent().addClass("selected"); //event.target = pair
   }
 </script>
-<div class="container" class="<%= ("#{params[:controller]}##{params[:action]}" =="articles#new" ? "expand-for-article-new" : "") %>">
+<div class="container" class="<%= "#{params[:controller]}-#{params[:action]}"%>">
   <%= form_with model: @article do |f|  %>
     <div class="wrap-article">
       <div class="wrap-title">
-        <%= f.hidden_field :user_id, {value: current_user.id, class: "article-page-title notosans text-dk"} %>
+        <%= f.hidden_field :user_id, {value: current_user.id, class: "article-page-title font text-dft"} %>
         <div class="wrap-title-and-delete">
           <div class="wrap-label-input title">
-            <label for="title" class="notosans text-dk">Title</label>
-            <%= f.text_field :title, {value: @article.title, autocomplete: 'off', class: "article-page-title notosans text-dk", required: true} %>
+            <label for="title" class="notosans text-dft">Title</label>
+            <%= f.text_field :title, {value: @article.title, autocomplete: 'off', class: "article-page-title font text-dft", required: true} %>
           </div>
           <%= link_to "&#x1f5d1;".html_safe, :back, method: :get, class: "article-destroy", data: {confirm: t('controller.articles.confirm_delete')}%>
         </div>
         <div class="wrap-label-input subtitle">
-          <label for="tags" class="notosans text-dk">Tags</label>
-          <%= f.text_field :tags, {value: @article.tag_names.join(", "), placeholder: "docker, design-pattern, ...", class: "article-page-subtitle notosans text-dk"} %>
+          <label for="tags" class="notosans text-dft">Tags</label>
+          <%= f.text_field :tags, {value: @article.tag_names.join(", "), placeholder: "docker, design-pattern, ...", class: "article-page-subtitle font text-dft"} %>
         </div>
         <div class="wrap-label-input state">
-          <label for="state" class="notosans text-dk">State</label>
+          <label for="state" class="notosans text-dft">State</label>
           <div class="wrap-state">
             <div class="state-pair" onclick="select(event)">
-              <span class="notosans text-7e">Draft</span>
-              <%= f.radio_button :state, "draft", class: "notosans text-dk" %>
+              <span class="notosans text-t4">Draft</span>
+              <%= f.radio_button :state, "draft", class: "notosans text-dft" %>
             </div>
             <div class="state-pair" onclick="select(event)">
-              <span class="notosans text-7e">Published</span>
-              <%= f.radio_button :state, "published", class: "notosans text-dk" %>
+              <span class="notosans text-t4">Published</span>
+              <%= f.radio_button :state, "published", class: "notosans text-dft" %>
             </div>
             <div class="state-pair" onclick="select(event)">
-              <span class="notosans text-7e">Private</span>
-              <%= f.radio_button :state, "hidden", class: "notosans text-dk" %>
+              <span class="notosans text-t4">Private</span>
+              <%= f.radio_button :state, "hidden", class: "notosans text-dft" %>
             </div>
           </div>
         </div>
       </div>
       <div class="wrap-label-input content">
-        <label for="content" class="notosans text-dk">Content</label>
+        <label for="content" class="notosans text-dft">Content</label>
         <div class="content-base">
           <div id="preview-page" class="content-page preview">
-            <div id="preview-toggle" class="page-toggle notosans text-dk" onclick="togglePreviewMarkdownV1(true, document.getElementById('article_content').value, <%=Rails.env.production?%>)">PREVIEW</div>
-            <div id="preview-markdown" class="markdown text-dk"></div>
+            <div id="preview-toggle" class="page-toggle font text-dft" onclick="togglePreviewMarkdownV1(true, document.getElementById('article_content').value, <%=Rails.env.production?%>)">PREVIEW</div>
+            <div id="preview-markdown" class="markdown text-dft"></div>
           </div>
           <div id="edit-page" class="content-page edit">
             <!-- edit page is active by default -->
-            <div id="edit-toggle" class="page-toggle notosans text-dk active" onclick="togglePreviewMarkdownV1(false)">EDIT</div>
-            <%= f.text_area :content, {value: "",autocomplete: 'off', placeholder: "Say something", class: "article-page-content markdown text-dk"} %>
+            <div id="edit-toggle" class="page-toggle font text-dft active" onclick="togglePreviewMarkdownV1(false)">EDIT</div>
+            <%= f.text_area :content, {value: "",autocomplete: 'off', placeholder: "Say something", class: "article-page-content markdown text-dft"} %>
           </div>
         </div>
       </div>
 
       <div class="wrap-edit-btns">
         <div class="wrap-edit-cancel-save">
-          <a href="javascript:void(0)" id="cancel" class="btn cancel notosans text-e7" onclick="openConfirm(event)">&#x2715; Cancel</a>
-          <%= f.submit "&#x1F4BE; Create".html_safe, class: "btn save notosans text-e7" %>
+          <a href="javascript:void(0)" id="cancel" class="btn cancel font text-t7" onclick="openConfirm(event)">&#x2715; Cancel</a>
+          <%= f.submit "&#x1F4BE; Create".html_safe, class: "btn save font text-t7" %>
         </div>
       </div>
     </div>

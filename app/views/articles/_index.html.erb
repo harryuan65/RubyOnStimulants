@@ -2,25 +2,25 @@
   <div class="article-container notosans" id="article-<%=article.id%>">
     <a href="<%= article_path(article.id)%>" class="article-link">
       <div class="wrap-article-title">
-        <h3 class="article-title notosans"><%= article.title %></h3>
+        <h3 class="article-title font text-t3"><%= article.title %></h3>
         <% case article.state %>
         <% when "draft"%>
-          <%= article.draft?? '<span class="draft notosans text-dk">draft</span>'.html_safe : "" %>
+          <%= article.draft?? '<span class="draft font text-t7">draft</span>'.html_safe : "" %>
         <% when "hidden"%>
-          <%= article.hidden?? '<span class="private notosans text-dk">private</span>'.html_safe : "" %>
+          <%= article.hidden?? '<span class="private font text-t7">private</span>'.html_safe : "" %>
         <% end %>
       </div>
-      <!-- <span class="article-description subtitle notosans text-dk"><%= article.subtitle %></span>-->
+      <!-- <span class="article-description subtitle font text-dft"><%= article.subtitle %></span>-->
       <div class="wrap-tags">
         <% article.tags.map(&:name).each_with_index do |tag, i| %>
-            <span class="article-description tag text-dk"><%= tag %></span>
+            <span class="article-description tag text-dft"><%= tag %></span>
           <% if i!=article.tags.size-1 %>
-            <span class="notosans text-dk">,</span>
+            <span class="notosans text-dft">,</span>
           <% end %>
         <% end %>
       </div>
     </a>
-    <span class="article-author notosans text-dk"><%= username(article.user) %></span>
-    <span class="article-created-at notosans text-dk"><%= article.created_at.strftime("%B") %> <%= article.created_at.day %></span>
+    <span class="article-author font text-dft"><%= username(article.user) %></span>
+    <span class="article-created-at font text-dft"><%= article.created_at.strftime("%B") %> <%= article.created_at.day %></span>
   </div>
 <% end %>

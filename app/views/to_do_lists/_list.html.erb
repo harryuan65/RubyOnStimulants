@@ -2,8 +2,8 @@
   <% @lists.each_with_index do |list, i| %>
     <% if list.id.present? %>
       <div id="list-<%= list.id%>" class="list notosans" style="background-color: <%= list.bg_color%>;">
-        <input type="text" name="name" class="list-name notosans text-2b" autocomplete="off" value="<%= list.name %>"/>
-        <%= link_to "&#x2715;".html_safe, to_do_list_path(list), method: :delete, remote: true, class: "delete-list text-5b" %>
+        <input type="text" name="name" class="list-name font text-t2" autocomplete="off" value="<%= list.name %>"/>
+        <%= link_to "&#x2715;".html_safe, to_do_list_path(list), method: :delete, remote: true, class: "delete-list text-t3" %>
         <div class="list-body">
           <div class="body-content-base content display"></div>
           <div class="body-content-base mask">

@@ -22,20 +22,20 @@
 <div class="article-option-bar" id="article-option-bar">
   <div class="wrap-state">
     <div class="state-pair draft" onclick="select(event)">
-      <span class="notosans text-7e">Draft</span>
-      <%= radio_button_tag :state, "draft", @article.state=="draft", class: "notosans text-dk" %>
+      <span class="notosans text-t4">Draft</span>
+      <%= radio_button_tag :state, "draft", @article.state=="draft", class: "notosans text-dft" %>
     </div>
     <div class="state-pair published" onclick="select(event)">
-      <span class="notosans text-7e">Published</span>
-      <%= radio_button_tag :state, "published", @article.state=="published", class: "notosans text-dk" %>
+      <span class="notosans text-t4">Published</span>
+      <%= radio_button_tag :state, "published", @article.state=="published", class: "notosans text-dft" %>
     </div>
     <div class="state-pair hidden" onclick="select(event)">
-      <span class="notosans text-7e">Private</span>
-      <%= radio_button_tag :state, "hidden", @article.state=="hidden", class: "notosans text-dk" %>
+      <span class="notosans text-t4">Private</span>
+      <%= radio_button_tag :state, "hidden", @article.state=="hidden", class: "notosans text-dft" %>
     </div>
   </div>
   <div class="wrap-options">
-    <span id="status" class="notosans text-e7"></span>
+    <span id="status" class="notosans text-t7"></span>
     <%= link_to svg_asset("refresh"), "#", onclick: "forceUpdate(event)", class: "article-option refresh" %>
     <%= link_to svg("eye"), article_path(@article), class: "article-option" %>
     <%= link_to svg("trashcan"), article_path(@article), method: :delete, class: "article-option", data: {confirm: t('controller.articles.confirm_delete')} %>
@@ -44,10 +44,10 @@
 <div class="container article-new-v2">
   <div class="wrap-article-edit-page">
     <div id="edit-page" class="page edit">
-      <%= text_area_tag :content, @article.content, {id: "article-content-v2", spellcheck: false, autocomplete: 'off', placeholder: "Say something", class: "page-content markdown text-dk", oninput: "prepareToUpdateArticle()"} %>
+      <%= text_area_tag :content, @article.content, {id: "article-content-v2", spellcheck: false, autocomplete: 'off', placeholder: "Say something", class: "page-content markdown text-dft", oninput: "prepareToUpdateArticle()"} %>
     </div>
     <div id="preview-page" class="page preview">
-      <div id="preview-content" class="page-content markdown text-dk"></div>
+      <div id="preview-content" class="page-content markdown text-dft"></div>
     </div>
   </div>
 </div>

@@ -47,7 +47,7 @@ var currentData = {};
     if(isNew){
       list.prop('id', `list-${id}`);
       let listBody = list.find('.list-body');
-      listBody.before(`<a class="delete-list text-5b" data-remote="true" rel="nofollow" data-method="delete" href="/to_do_lists/${id}">✕</a>`);
+      listBody.before(`<a class="delete-list text-t3" data-remote="true" rel="nofollow" data-method="delete" href="/to_do_lists/${id}">✕</a>`);
       renderItems(`${id}`, []);
     }
 
@@ -267,7 +267,7 @@ function setUpNewListAction(){
     $('.content', newList).removeClass("empty-with-a-plus");
     $('.add-new-list', newList).toggle();
 
-    let newListName = $('<input type="text" name="name" class="list-name notosans text-2b" autocomplete="off" placeholder="New List Name"/>');
+    let newListName = $('<input type="text" name="name" class="list-name font text-t2" autocomplete="off" placeholder="New List Name"/>');
     newList.prepend(newListName);
     newList.setCreateListByName();
     newListName.focus();

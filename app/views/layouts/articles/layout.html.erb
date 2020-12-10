@@ -55,19 +55,19 @@
       <div class="confirm-container">
           <div class="wrap-confirm-text-all">
             <div class="wrap-confirm-text">
-              <h1 class="contirm-title notosans text-dk">Are You Sure?</h1>
-              <h4 class="confirm-message notosans text-dk">All you changes will be lost.</h4>
+              <h1 class="contirm-title font text-dft">Are You Sure?</h1>
+              <h4 class="confirm-message font text-dft">All you changes will be lost.</h4>
             </div>
-            <div class="x notosans text-dk" onclick="closeConfirm()">&#x2715;</div>
+            <div class="x font text-dft" onclick="closeConfirm()">&#x2715;</div>
           </div>
           <div class="wrap-confirm-btns confirm">
-            <button id="no" class="btn cancel notosans text-e7" onclick="closeConfirm()">&#x2715; No</button>
-            <input id="yes" type="submit" class="btn yes notosans text-e7" onclick="history.go(-1);return false;" value="&#x25EF; Yes">
+            <button id="no" class="btn cancel font text-t7" onclick="closeConfirm()">&#x2715; No</button>
+            <input id="yes" type="submit" class="btn yes font text-t7" onclick="history.go(-1);return false;" value="&#x25EF; Yes">
           </div>
       </div>
     </div>
     <%= render('shared/nav') %>
-    <main id="main" class="<%= should_expand_for_new ? "expand-for-article-new" : ""%>">
+    <main id="main" class="<%= "#{params[:controller]}-#{params[:action]}"%>">
       <%= yield %>
       <% if should_show_sidebar %>
         <%= render('shared/sidebar') %>

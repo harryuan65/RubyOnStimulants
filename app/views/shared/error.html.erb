@@ -1,8 +1,8 @@
 <%= stylesheet_link_tag('error') %>
-<div class="container notosans text-dk error">
+<div class="container font text-dft error">
   <h1 class="error-title"><%= @i18n_message %></h1>
   <% if current_user && current_user.admin? %>
     <h2 class="error-subtitle"><%= @error_message %></h2>
   <% end %>
-  <%= link_to(t('controller.general.go_home'), root_path, class: "link-go-home notosans text-dk") %>
+  <%= link_to(t('controller.general.go_home'), root_path, class: "link-go-home font text-dft") %>
 </div>

@@ -20,46 +20,46 @@
 
       <% if current_user %>
         <div class="nav-side-block">
-          <h2 class="nav-side-block-title notosans text-a9">
+          <h2 class="nav-side-block-title font text-t3">
             <img src="<%= current_user.image_url%>" alt="img" class="nav-profile-img crop-circle">
-            <span class="notosans username text-d3"><%= username(current_user) %></span>
+            <span class="notosans username text-t2"><%= username(current_user) %></span>
           </h2>
           <hr class="nav-side-block-hr">
           <div class="nav-side-block-content-container">
               <% if !["articles#new", "articles#edit"].include?("#{params[:controller]}##{params[:action]}") %>
-                <h3 class="nav-side-block-content"><%= link_to "<span class=\"pen\">&#x270e;</span> #{t('controller.articles.write_new')}".html_safe, new_article_path, class: "text-d3 notosans" %></h3>
+                <h3 class="nav-side-block-content"><%= link_to "<span class=\"pen\">&#x270e;</span> #{t('controller.articles.write_new')}".html_safe, new_article_path, class: "text-t3 notosans" %></h3>
               <% end %>
-            <h3 class="nav-side-block-content"><%= link_to t('controller.articles.mine').html_safe, mine_articles_path, class: "text-d3 notosans" %></h3>
+            <h3 class="nav-side-block-content"><%= link_to t('controller.articles.mine').html_safe, mine_articles_path, class: "text-t3 notosans" %></h3>
               <% if current_user.premium? %>
-                <h3 class="nav-side-block-content"><%= link_to t('controller.articles.backup').html_safe, backup_settings_articles_path, class: "text-d3 notosans" %></h3>
+                <h3 class="nav-side-block-content"><%= link_to t('controller.articles.backup').html_safe, backup_settings_articles_path, class: "text-t3 notosans" %></h3>
               <% end %>
-            <h3 class="nav-side-block-content"><%= link_to t('navbar.logout'), destroy_user_session_path, method: :delete, class: "text-d3 notosans", data: {confirm: t("devise.sessions.confirm_sign_out")} %></h3>
+            <h3 class="nav-side-block-content"><%= link_to t('navbar.logout'), destroy_user_session_path, method: :delete, class: "text-t3 notosans", data: {confirm: t("devise.sessions.confirm_sign_out")} %></h3>
           </div>
         </div>
       <% else %>
         <div class="nav-side-block">
-          <h2 class="nav-side-block-title notosans text-a9">
+          <h2 class="nav-side-block-title font text-t3">
             <div class="nav-profile-img crop-circle" style="background-color: #585858;"></div>
-            <span class="notosans username text-d3"><%= t('navbar.not_signed_in') %></span>
+            <span class="notosans username text-t4"><%= t('navbar.not_signed_in') %></span>
           </h2>
           <hr class="nav-side-block-hr">
           <div class="nav-side-block-content-container">
-            <h3 class="nav-side-block-content"><%= link_to t('navbar.sign_in'), new_user_session_path, class: "text-d3 notosans signin" %></h3>
-            <h3 class="nav-side-block-content"><%= link_to t('navbar.sign_up'), new_user_registration_path, class: "text-d3 notosans signup" %></h3>
+            <h3 class="nav-side-block-content"><%= link_to t('navbar.sign_in'), new_user_session_path, class: "text-t3fontsignin" %></h3>
+            <h3 class="nav-side-block-content"><%= link_to t('navbar.sign_up'), new_user_registration_path, class: "text-t3fontsignup" %></h3>
           </div>
         </div>
       <% end %>
 
 
       <div class="nav-side-block">
-        <h2 class="nav-side-block-title notosans text-a9"><%= link_to t('navbar.explore'), home_news_path, class: "notosans text-d3" %></h2>
+        <h2 class="nav-side-block-title font text-t5"><%= link_to t('navbar.explore'), home_news_path, class: "notosans text-t3" %></h2>
         <hr class="nav-side-block-hr">
         <div class="nav-side-block-content-container">
-          <h3 class="nav-side-block-content"><%= link_to t('navbar.articles'), articles_path, class: "notosans text-d3" %></h3>
-          <h3 class="nav-side-block-content"><%= link_to t('navbar.color_picker'), ENV['COLORPICKER_URL'] || "javascript:void(0)", class: "notosans text-d3" %></h3>
-          <h3 class="nav-side-block-content"><%= link_to t('navbar.word_book'), words_path, class: "notosans text-d3"%></h3>
-          <h3 class="nav-side-block-content"><%= link_to t('navbar.to_do_list'), to_do_lists_path, class: "notosans text-d3"%></h3>
-          <h3 class="nav-side-block-content"><%= link_to t('navbar.about'), ENV['ABOUT_URL'] || "javascript:void(0)", class: "notosans text-d3" %></h3>
+          <h3 class="nav-side-block-content"><%= link_to t('navbar.articles'), articles_path, class: "notosans text-t3" %></h3>
+          <h3 class="nav-side-block-content"><%= link_to t('navbar.color_picker'), ENV['COLORPICKER_URL'] || "javascript:void(0)", class: "notosans text-t3" %></h3>
+          <h3 class="nav-side-block-content"><%= link_to t('navbar.word_book'), words_path, class: "notosans text-t3"%></h3>
+          <h3 class="nav-side-block-content"><%= link_to t('navbar.to_do_list'), to_do_lists_path, class: "notosans text-t3"%></h3>
+          <h3 class="nav-side-block-content"><%= link_to t('navbar.about'), ENV['ABOUT_URL'] || "javascript:void(0)", class: "notosans text-t3" %></h3>
         </div>
       </div>
     </div>

@@ -2,12 +2,15 @@
 $logo-color: #e7e7e7;
 $nav-bg-color: #242527;
 $nav-top-height: 90px;
+// $bg-color: #242527;
+$bg-color: #1e1e1e;
+
 html, body{
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
-  background-color: #fff;
+  background-color: $bg-color;
 }
 body{
   -webkit-font-smoothing: antialiased;
@@ -214,12 +217,14 @@ main{
   min-height: 500px;
   @include flex(row, space-evenly, flex-start);
   margin-top: 100px;
-  &.expand-for-article-new{
+  &.articles-new{
     @include size(100%, 100%);
     top: 140px;
     position: absolute;
     margin-top: 0;
   }
+  // &.articles-show{
+  // }
 }
 .container{
   width: 700px;
@@ -228,7 +233,7 @@ main{
     @include size(100%, 100%);
     @include flex(column, center, center);
   }
-  &#article-show{
+  &#articles-show{
     width: 70%;
   }
 }
@@ -462,9 +467,17 @@ div[id*="dropdown-toggle"]{
   main{
     justify-content: center;
     width: 100%;
+    &.articles-show{
+      flex-direction: column;
+      justify-content: center;
+    }
   }
   .container{
     width: 320px;
+    &#articles-show{
+      width: 100%;
+      padding: 20px;
+    }
   }
   nav#nav-side{
     @include flex(column,center,center);

@@ -1,9 +1,9 @@
 <%= stylesheet_link_tag $markdown_hljs_css %>
 <%= stylesheet_link_tag "article-page"%>
 
-<div class="container" id="article-show">
+<div class="container" id="<%= "#{params[:controller]}-#{params[:action]}"%>">
   <div class="wrap-article show">
-    <div class="article-page-content show markdown text-dk">
+    <div class="article-page-content show markdown text-dft">
       <%= Article.to_markdown(@article.content) %>
     </div>
   </div>
@@ -12,18 +12,18 @@
   <div class="article-info">
     <% if @is_author%>
       <div class="wrap-edit">
-        <a href="<%= edit_article_path(@article)%>" class="article-page-edit notosans text-7e"><span class="pen">&#x270E;</span><span class="edit-txt"><%= t('controller.articles.edit') %></span></a>
+        <a href="<%= edit_article_path(@article)%>" class="article-page-edit font text-t2"><span class="pen">&#x270E;</span><span class="edit-txt"><%= t('controller.articles.edit') %></span></a>
       </div>
     <% end %>
-    <div class="wrap-created notosans text-7e">
+    <div class="wrap-created font text-t4">
       <span class="created-txt"><span class="clock">&#x1f551;</span><span class="txt"><%= t('controller.articles.created_at') %></span></span>
       <span class="article-page-created-at show"><%= @article.created_at.strftime("%b %d %Y") %></span>
     </div>
   </div>
   <hr>
   <div class="author-info">
-    <h3 class="author-name notosans text-5b"><%= @article.user.name %></h3>
-    <p class="author-desc notosans text-7e"><%= @article.user.intro%></p>
+    <h3 class="author-name font text-t3"><%= @article.user.name %></h3>
+    <p class="author-desc font text-t4"><%= @article.user.intro%></p>
     <img src="<%= @article.user.image_url%>" alt="<%@article.user.name%>" class="crop-circle">
   </div>
 </div>

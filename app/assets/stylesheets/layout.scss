@@ -217,7 +217,7 @@ main{
   min-height: 500px;
   @include flex(row, space-evenly, flex-start);
   margin-top: 100px;
-  &.articles-new{
+  &.articles-edit{
     @include size(100%, 100%);
     top: 140px;
     position: absolute;

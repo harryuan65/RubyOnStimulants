@@ -162,9 +162,11 @@ $article-option-bar-height: 90px;
       position: absolute;
       resize: none;
       font-size: 15px;
-      background-color: #1e1e1e;
-      color: #00aeff;
+      background-color: #2d2d2d;
+      color: #eee;
       outline: none;
+      font-weight: normal !important;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
     }
   }
 }
@@ -172,6 +174,7 @@ $article-option-bar-height: 90px;
 
 .markdown{
   h1, h2, h3, h4, h5, h6{
+    font-family: Arial, Helvetica, sans-serif;
     &:not(:first-of-type){
       margin-top: 80px;
     }
@@ -198,6 +201,7 @@ $article-option-bar-height: 90px;
     margin:0;
     font-size: 20px;
     color: #ddd;
+    font-family: Arial, Helvetica, sans-serif;
   }
   br{
     display: block;
@@ -214,15 +218,15 @@ $article-option-bar-height: 90px;
     color: #FF8632;
     background-color:#2b2b2b;
     padding: 7px;
-    margin: 0 3px 0 3px;
+    margin: 5px;
     border-radius: 4px;
+    line-height: 45px;
   }
   code, pre{
     font-family: Menlo, monospace;
   }
   p > code{
     font-size: 15px;
-    margin: 0 5px 0 5px;
   }
   pre > code{ //```
     border-radius: 4px;
@@ -267,6 +271,9 @@ $article-option-bar-height: 90px;
   }
   blockquote p {
     display: inline;
+  }
+  li{
+    font-size: 18px;
   }
 }
 // info

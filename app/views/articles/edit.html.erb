@@ -35,7 +35,7 @@
     </div>
   </div>
   <div class="wrap-options">
-    <span id="status" class="notosans text-t7"></span>
+    <span id="status" class="notosans text-t2"></span>
     <%= link_to svg_asset("refresh"), "#", onclick: "forceUpdate(event)", class: "article-option refresh" %>
     <%= link_to svg("eye"), article_path(@article), class: "article-option" %>
     <%= link_to svg("trashcan"), article_path(@article), method: :delete, class: "article-option", data: {confirm: t('controller.articles.confirm_delete')} %>

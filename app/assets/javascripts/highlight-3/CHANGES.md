@@ -1,164 +1,8 @@
-## Version 10.4.1
-
-Security
-
-- (fix) Exponential backtracking fixes for: [Josh Goebel][]
-  - cpp
-  - handlebars
-  - gams
-  - perl
-  - jboss-cli
-  - r
-  - erlang-repl
-  - powershell
-  - routeros
-- (fix) Polynomial backtracking fixes for: [Josh Goebel][]
-  - asciidoc
-  - reasonml
-  - latex
-  - kotlin
-  - gcode
-  - d
-  - aspectj
-  - moonscript
-  - coffeescript/livescript
-  - csharp
-  - scilab
-  - crystal
-  - elixir
-  - basic
-  - ebnf
-  - ruby
-  - fortran/irpf90
-  - livecodeserver
-  - yaml
-  - x86asm
-  - dsconfig
-  - markdown
-  - ruleslanguage
-  - xquery
-  - sqf
-
-Very grateful to [Michael Schmidt][] for all the help.
-
-[Michael Schmidt]: https://github.com/RunDevelopment
-[Josh Goebel]: https://github.com/joshgoebel
-
-
-## Version 10.4.0
-
-A largish release with many improvements and fixes from quite a few different contributors.  Enjoy!
-
-Deprecations:
-
-- (chore) `requireLanguage` is deprecated.
-  - Prefer `getLanguage` (with custom error handling) or built-time dependencies.
-  - See [Library API](https://highlightjs.readthedocs.io/en/latest/api.html#requirelanguage-name) for more information.
-
-Parser:
-
-- enh(parser) use negative look-ahead for `beginKeywords` support (#2813) [Josh Goebel][]
-- enh(grammars) allow `classNameAliases` for more complex grammars [Josh Goebel][]
-- fix(vue): Language name now appears in CSS class (#2807) [Michael Rush][]
-- (chore) Clean up all regexs to be UTF-8 compliant/ready (#2759) [Josh Goebel][]
-
-New Languages:
-
-- Added 3rd party Chapel grammar to SUPPORTED_LANGUAGES (#2806) [Brad Chamberlain][]
-- Added BBCode grammar to SUPPORTED_LANGUAGES (#2867) [Paul Reid][]
-- enh(javascript) Added `node-repl` for Node.js REPL sessions (#2792) [Marat Nagayev][]
+## Version 10.3.0 (next up)
 
 Language Improvements:
 
-- enh(shell) Recognize prompts which contain tilde `~` (#2859) [Guillaume Grossetie][]
-- enh(shell) Add support for multiline commands with line continuation `\` (#2861) [Guillaume Grossetie][]
-- enh(autodetect) Over 30+ improvements to auto-detect (#2745) [Josh Goebel][]
-    - 4-5% improvement in auto-detect against large sample set
-    - properties, angelscript, lsl, javascript, n1ql, ocaml, ruby
-    - protobuf, hy, scheme, crystal, yaml, r, vbscript, groovy
-    - python, java, php, lisp, matlab, clojure, csharp, css
-- fix(r) fixed keywords not properly spaced (#2852) [Josh Goebel][]
-- fix(javascript) fix potential catastrophic backtracking (#2852) [Josh Goebel][]
-- fix(livescript) fix potential catastrophic backtracking (#2852) [Josh Goebel][]
-- bug(xml) XML grammar was far too imprecise/fuzzy [Josh Goebel][]
-- enh(xml) Improve precision to prevent false auto-detect positives [Josh Goebel][]
-- fix(js/ts) Prevent for/while/if/switch from falsly matching as functions (#2803) [Josh Goebel][]
-- enh(julia) Update keyword lists for Julia 1.x (#2781) [Fredrik Ekre][]
-- enh(python) Match numeric literals per the language reference [Richard Gibson][]
-- enh(ruby) Match numeric literals per language documentation [Richard Gibson][]
-- enh(javascript) Match numeric literals per ECMA-262 spec [Richard Gibson][]
-- enh(java) Match numeric literals per Java Language Specification [Richard Gibson][]
-- enh(swift) Match numeric literals per language reference [Richard Gibson][]
-- enh(php) highlight variables (#2785) [Taufik Nurrohman][]
-- fix(python) Handle comments on decorators (#2804) [Jonathan Sharpe][]
-- enh(diff) improve highlighting of diff for git patches [Florian Bezdeka][]
-- fix(llvm) lots of small improvements and fixes (#2830) [Josh Goebel][]
-- enh(mathematica) Rework entire implementation [Patrick Scheibe][]
-  - Correct matching of the many variations of Mathematica's numbers
-  - Matching of named-characters aka special symbols like `\[Gamma]`
-  - Updated list of version 12.1 built-in symbols
-  - Matching of patterns, slots, message-names and braces
-- fix(swift) Handle keywords that start with `#` [Marcus Ortiz][]
-- enh(swift) Match `some` keyword [Marcus Ortiz][]
-- enh(swift) Match `@main` attribute [Marcus Ortiz][]
-
-Dev Improvements:
-
-- chore(dev) add theme picker to the tools/developer tool (#2770) [Josh Goebel][]
-- fix(dev) the Vue.js plugin no longer throws an exception when hljs is not in the global namespace [Kyle Brown][]
-
-New themes:
-
-- *StackOverflow Dark* by [Jan Pilzer][]
-- *StackOverflow Light* by [Jan Pilzer][]
-
-[Guillaume Grossetie]: https://github.com/mogztter
-[Brad Chamberlain]: https://github.com/bradcray
-[Marat Nagayev]: https://github.com/nagayev
-[Fredrik Ekre]: https://github.com/fredrikekre
-[Richard Gibson]: https://github.com/gibson042
-[Josh Goebel]: https://github.com/joshgoebel
-[Taufik Nurrohman]: https://github.com/taufik-nurrohman
-[Jan Pilzer]: https://github.com/Hirse
-[Jonathan Sharpe]: https://github.com/textbook
-[Michael Rush]: https://github.com/rushimusmaximus
-[Patrick Scheibe]: https://github.com/halirutan
-[Kyle Brown]: https://github.com/kylebrown9
-[Marcus Ortiz]: https://github.com/mportiz08
-[Paul Reid]: https://github.com/RedGuy12
-
-
-## Version 10.3.1
-
-Prior version let some look-behind regex sneak in, which does not work
-yet on Safari.  This release removes those incompatible regexes.
-
-Fix:
-
-- fix(Safari) Remove currently unsupported look-behind regex ([fix][187e7cfc]) [Josh Goebel][]
-
-[Josh Goebel]: https://github.com/joshgoebel
-[187e7cfc]: https://github.com/highlightjs/highlight.js/commit/187e7cfcb06277ce13b5f35fb6c37ab7a7b46de9
-
-
-## Version 10.3.0
-
-Language Improvements:
-
-- enh(latex) Complete ground up rewrite of LaTex grammar [schtandard][]
-- fix(cpp) implement backslash line continuation in comments (#2757) [Konrad Rudolph][]
-- fix(cpp) improve parsing issues with templates (#2752) [Josh Goebel][]
-- enh(cpp) add support for `enum (struct|class)` and `union` (#2752) [Josh Goebel][]
-- fix(js/ts) Fix nesting of `{}` inside template literals SUBST expression (#2748) [Josh Goebel][]
-- enh(js/ts) Highlight class methods as functions (#2727) [Josh Goebel][]
-- fix(js/ts) `constructor` is now highlighted as a function title (not keyword) (#2727) [Josh Goebel][]
-- fix(c-like) preprocessor directives not detected after else (#2738) [Josh Goebel][]
-- enh(javascript) allow `#` for private class fields (#2701) [Chris Krycho][]
-- fix(js) prevent runaway regex (#2746) [Josh Goebel][]
-- fix(bash) enh(bash) allow nested params (#2731) [Josh Goebel][]
-- fix(python) Fix highlighting of keywords and strings (#2713, #2715) [Konrad Rudolph][]
 - fix(fsharp) Prevent `(*)` from being detected as a multi-line comment [Josh Goebel][]
-- enh(bash) add support for heredocs (#2684) [Josh Goebel][]
 - enh(r) major overhaul of the R language grammar (and fix a few bugs) (#2680) [Konrad Rudolph][]
 - enh(csharp) Add all C# 9 keywords, and other missing keywords (#2679) [David Pine][]
 - enh(objectivec) Add `objective-c++` and `obj-c++` aliases for Objective-C [Josh Goebel][]
@@ -170,27 +14,13 @@ Language Improvements:
 - fix(scala) Comments inside class header should be highlighted (#1559) [Josh Goebel][]
 - fix(c-like) Correctly highlight modifiers (`final`) in class declaration (#2696) [Josh Goebel][]
 - enh(angelscript) Improve heredocs, numbers, metadata blocks (#2724) [Melissa Geels][]
-- enh(javascript) Implement Numeric Separators (#2617) [Antoine du Hamel][]
-- enh(typescript) TypeScript also gains support for numeric separators (#2617) [Antoine du Hamel][]
-- enh(php) Add support for PHP 8 `match` keyword and add `php8` as an alias (#2733) [Ayesh Karunaratne][]
-- fix(handlebars) Support if else keyboards (#2659) [Tom Wallace][]
 
-Deprecations:
-
-- `useBR` option deprecated and will be removed in v11.0. (#2559) [Josh Goebel][]
-
-[Chris Krycho]: https://github.com/chriskrycho
 [David Pine]: https://github.com/IEvangelist
-
-
+[Josh Goebel]: https://github.com/joshgoebel
 [Ryan Jonasson]: https://github.com/ryanjonasson
 [Philipp Engel]: https://github.com/interkosmos
 [Konrad Rudolph]: https://github.com/klmr
 [Melissa Geels]: https://github.com/codecat
-[Antoine du Hamel]: https://github.com/aduh95
-[Ayesh Karunaratne]: https://github.com/Ayesh
-[Tom Wallace]: https://github.com/thomasmichaelwallace
-[schtandard]: https://github.com/schtandard
 
 
 ## Version 10.2.1
@@ -1436,7 +1266,7 @@ Notable fixes and improvements to existing languages:
 - HTML `<script>` tag now allows any language, not just JavaScript.
 - Multi-line comments are supported now in MatLab.
 
-[Taufik Nurrohman]: https://github.com/taufik-nurrohman
+[Taufik Nurrohman]: https://github.com/tovic
 [Jet Brains]: https://www.jetbrains.com/
 [Peter Piwowarski]: https://github.com/oldlaptop
 [Kenta Sato]: https://github.com/bicycle1885

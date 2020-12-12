@@ -2,6 +2,7 @@ var collecting = false;
 var previewMarkdownDiv = null;
 var articleContent = null;
 var collection = [];
+var BORDER_SIZE = 4;
 function checkCollection(){
   let integration = collection.join('');
   console.log(integration);
@@ -63,9 +64,18 @@ var mappings = {
   "'": "'",
   "<":">"
 }
+function resize(e){
+  const dx = m_pos - e.x;
+  m_pos = e.x;
+  console.log(`e.x: ${e.x}  dx:${dx}`);
+  editPage.style.width = (parseInt(getComputedStyle(editPage, '').width) - dx) + "px";
+  previewPage.style.width = (parseInt(getComputedStyle(previewPage, '').width) + dx) + "px";
+}
 $(".container").ready(()=>{
   previewMarkdownDiv = document.getElementById('preview-content');
   articleContent = document.getElementById('article-content-v2');
+  editPage = document.getElementById('edit-page');
+  previewPage = document.getElementById('preview-page');
 
   hljs.initHighlighting();
   if(articleContent && typeof(articleContent.onkeydown)!=="undefined"){
@@ -107,21 +117,17 @@ $(".container").ready(()=>{
       }
     }
   }
-  // var previewPage = document.getElementById('preview-page');
-  // previewPage.onscroll= (e)=>{
-  //   articleContent.scrollTop = e.target.scrollTop;
-  // }
-  // articleContent.onscroll = (e)=>{
-  //   artContent = e.target;
-  //   previewPage.scrollTop = artContent.scrollTop;
-  //   // if(artContent.scrollTop + artContent.offsetHeight > artContent.scrollHeight){
-  //   //   previewPage.scrollTo({
-  //   //     top: previewPage.scrollHeight,
-  //   //     left: 0,
-  //   //     behavior: 'smooth'
-  //   //   });
-  //   // }
-  // }
+  previewPage.addEventListener("mousedown", function(e){
+    if (e.offsetX < BORDER_SIZE) {
+      m_pos = e.x;
+      console.log(`e.offsetX:${m_pos}`);
+      document.addEventListener("mousemove", resize, false);
+    }
+  }, false);
+
+  document.addEventListener("mouseup", function(){
+    document.removeEventListener("mousemove", resize, false);
+  }, false);
   previewArticle();
 })
 //v2

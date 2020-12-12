@@ -181,8 +181,10 @@ $article-option-bar-height: 90px;
   }
   font-family: Monaco;
   font-weight: bold;
+  p, ol, ul {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
   a{
-    // color: #3390cf;
     color: #89d9fe;
     transition: color .1s cubic-bezier(0.075, 0.82, 0.165, 1);
     text-decoration: underline;;
@@ -201,7 +203,6 @@ $article-option-bar-height: 90px;
     margin:0;
     font-size: 20px;
     color: #ddd;
-    font-family: Arial, Helvetica, sans-serif;
   }
   br{
     display: block;

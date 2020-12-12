@@ -3,9 +3,6 @@ var previewMarkdownDiv = null;
 var articleContent = null;
 var collection = [];
 function checkCollection(){
-  if(collection[0]!=="h"){
-    collection = collection.slice(1, collection.length);
-  }
   let integration = collection.join('');
   console.log(integration);
   if(!integration.includes("::")){ return; }
@@ -29,6 +26,23 @@ function checkCollection(){
       prepareToUpdateArticle();
       collection = [];
       break;
+    case "file":
+      articleContent.value = articleContent.value.replace(/::file/g, "📄");
+      prepareToUpdateArticle();
+      collection = [];
+      break;
+    case "nsc":
+      articleContent.value = articleContent.value.replace(/::nsc/g, "┣ ");
+      prepareToUpdateArticle();
+      collection = [];
+    case "c":
+      articleContent.value = articleContent.value.replace(/::c/g, "┃ ");
+      prepareToUpdateArticle();
+      collection = [];
+    case "ns":
+      articleContent.value = articleContent.value.replace(/::ns/g, "┗ ");
+      prepareToUpdateArticle();
+      collection = [];
     default:
       collection = [];
   }
@@ -59,6 +73,9 @@ $(".container").ready(()=>{
       if(Object.keys(mappings).includes(e.key)){
         insertTextInCaret(e.target, mappings[e.key]);
       }
+      if(e.key==="Enter"){
+        collection = [];
+      }
       if(e.key.length==1){
         collection.push(e.key);
       }
@@ -69,6 +86,7 @@ $(".container").ready(()=>{
       if(e.key==="Backspace"){
         collection.pop();
       }
+      console.log(collection);
     }
   }
   if(articleContent && typeof(articleContent.onpaste)!=="undefined"){

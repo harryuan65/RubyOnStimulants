@@ -265,6 +265,7 @@ en:
     about: "Author"
   controller:
     general:
+      welcome_message: "Hello there! This is Harry. I'm a web developer interested in mining all the goods out there on the Internet. Here you can find some of them which I've already organized. This site is powered by Rails 6 and hosted on Heroku. If you log in or register, you can also start writing your articles as well! Why not give it a try?"
       success: "Action done successfully!"
       error: "Oops... something is wrong!"
       not_logged_in: "You are not logged in."
@@ -274,7 +275,12 @@ en:
       record_invalid: "Record Invalid"
       internal_server_error: "Server Error"
       unauthorized: "Unauthorized"
+    home:
+      why_people_hate_rails: "Popularity of Rails has dropped since 2018. Why people seems not to like rails any more?"
     title:
+      about_rails: "About Rails"
+      about_site: "About this site"
+      about_rails: "About Rails"
       sign_in: "Login"
       hello: "Hello world"
       home: "Home"
@@ -294,7 +300,6 @@ en:
       load_more: "Load more..."
       search: "Search article..."
       search_result_title: "Articles containing keyword \"%{keyword}\""
-      welcome_message: "Hello there! This is Harry. I'm a web developer interested in mining all the goods out there on the Internet. Here you can find some of them which I've already organized."
       write_new: "Write Article"
       created_at: "Created At"
       edit: "Edit Article"

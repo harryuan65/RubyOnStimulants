@@ -1,7 +1,4 @@
 <div class="container">
-  <% unless params[:action] == "mine" %>
-    <p class="welcome-txt text-dft notosans"><%= t('controller.articles.welcome_message') %></p>
-  <% end %>
   <section class="articles">
     <h1 class="block-title font text-t3"><%= t("controller.articles.#{params[:action]}")%> <%= @category.present?? ": #{@category}" : "" %></h2>
     <hr class="block-hr">

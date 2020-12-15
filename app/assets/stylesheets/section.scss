@@ -1,3 +1,6 @@
+section{
+  max-height: 600px;
+}
 .block-title{
   margin: 0 0 3px 0;
   font-size: 33px;
@@ -9,10 +12,7 @@
   width: 100%;
 }
 .section-content-container{
-  margin-top: 25px;
-  // margin-bottom: 50px;
-  overflow: scroll;
-  height: 600px;
+  margin: 30px 0;
   overflow: scroll;
   &.articles{
     overflow: visible;

@@ -1,0 +1,34 @@
+.space-wrapper{
+  background-image: url("https://us.123rf.com/450wm/natalia0103/natalia01031508/natalia0103150800030/44239332-diepe-ruimte-achtergrond-met-sterren-.jpg");
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 300px;
+  overflow: hidden;
+}
+#player-ruby{
+  width: 60px;
+  animation: rotate 2s infinite;
+  filter: drop-shadow(0px 0px 8px #eee);
+}
+.player-ruby-wrap{
+  position: absolute;
+  left: -100%;
+  animation: eject 20s forwards;
+}
+
+@keyframes eject{
+  from{left: -100%;}
+  to{left: 200%;transform: rotate(4800deg);}
+}
+
+#narration{
+  overflow: hidden;
+  white-space: nowrap;
+  color: #eee;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  border-right: 1px solid black;
+  font-size: 18px;
+};

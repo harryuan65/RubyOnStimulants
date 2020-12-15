@@ -1,0 +1,21 @@
+<%= stylesheet_link_tag 'home', media: 'all', 'data-turbolinks-track': 'reload'%>
+
+<div class="container">
+  <p class="welcome-txt text-dft notosans">This website is managed by <a href="https://github.com/harryuan65/" class="text-dft notosans">Harry Yuan</a>.</p>
+  <section class="news">
+    <h1 class="block-title text-t2 notosans">Updates</h1>
+    <hr class="block-hr">
+    <div class="section-content-container">
+     <% @news_list.each do |news| %>
+      <div class="article-container">
+        <a href="javascript:void(0)" class="article-link news">
+         <h3 class="article-title font text-t3"><%= news[:title] %></h3>
+         <span class="article-description font text-dft"><%= news[:description] %></span>
+        </a>
+        <span class="article-author font text-dft"></span>
+        <span class="article-created-at font text-dft"><%= news[:date] %></span>
+      </div>
+     <% end %>
+    </div>
+  </section>
+</div>

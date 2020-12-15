@@ -1,28 +1,27 @@
-<%= stylesheet_link_tag 'home', media: 'all', 'data-turbolinks-track': 'reload'%>
+<%= stylesheet_link_tag "section" %>
+<%= stylesheet_link_tag "among_us" %>
+<%= javascript_include_tag "among_us/among_us" %>
 
 <div class="container">
-  <p class="welcome-txt text-dft notosans">This website is managed by <a href="https://github.com/harryuan65/" class="text-dft notosans">Harry Yuan</a>.</p>
-  <section class="news">
-    <h1 class="block-title text-t2 notosans">Updates</h1>
+  <section>
+    <h3 class="block-title font text-t4"><%= t('controller.title.about_site') %></h3>
     <hr class="block-hr">
     <div class="section-content-container">
-     <% @news_list.each do |news| %>
-      <div class="article-container">
-        <a href="javascript:void(0)" class="article-link news">
-         <h3 class="article-title font text-t3"><%= news[:title] %></h3>
-         <span class="article-description font text-dft"><%= news[:description] %></span>
-        </a>
-        <span class="article-author font text-dft"></span>
-        <span class="article-created-at font text-dft"><%= news[:date] %></span>
-      </div>
-     <% end %>
+      <p class="paragraph text-dft notosans"><%= t('controller.general.welcome_message') %></p>
+    </div>
+  </section>
+
+  <section>
+    <h3 class="block-title font text-t4"><%= t('controller.title.about_rails') %></h3>
+    <hr class="block-hr">
+    <div class="section-content-container">
+        <p class="why-people-dont-like-rails font text-t2"><%= t('controller.home.why_people_hate_rails') %></p>
+        <div class="space-wrapper">
+          <div class="player-ruby-wrap">
+            <%= image_tag("ruby-big.svg", id: "player-ruby") %>
+          </div>
+          <div id="narration" class="paragraph text-t2"></div>
+        </div>
     </div>
   </section>
 </div>
-<%# legacy %>
-<%# <%= link_to("#{content_tag(:span,"單字本",class:"option-text")}".html_safe, words_path(locale: 'zh-TW'),class:"home-option") %>
-<%# <%= link_to("#{content_tag(:span,"寫文章",class:"option-text")}".html_safe, articles_path(locale: 'zh-TW'),class:"home-option") %>
-<%# <%= link_to("#{content_tag(:span,"物資",class:"option-text")}".html_safe, supplies_path,class:"home-option") %>
-<%#<%= link_to("#{content_tag(:span,"待辦事項",class:"option-text")}".html_safe,to_do_list_path,class:"home-option") %>
-<%# <%= link_to("#{content_tag(:span,"記帳",class:"option-text")}".html_safe, accounts_path,class:"home-option") %>
-<%# <%= link_to("#{content_tag(:span,"Excel",class:"option-text")}".html_safe, excel_path,class:"home-option") %>

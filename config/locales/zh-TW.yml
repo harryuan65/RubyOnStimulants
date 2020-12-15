@@ -232,6 +232,7 @@ zh-TW:
     about: "關於本站作者"
   controller:
     general:
+      welcome_message: "哈囉！我是Harry，是個喜歡Rails的菜鳥工程師，喜歡學習各種新東西。覺得網路上自學找資料就像挖寶，想把挖到的資源整理在這裡。這個網站是用Rails 6建立，主要是放我整理的筆記跟一些小功能。若你註冊或是使用Facebook、Google登入，也可以一起在這上面寫文章喔～"
       success: "執行成功"
       error: "呃...似乎出了點差錯！"
       not_logged_in: "沒有登入"
@@ -242,7 +243,11 @@ zh-TW:
       internal_server_error: "發生錯誤"
       unauthorized: "無權限"
       invalid_url: "無效位址"
+    home:
+      why_people_hate_rails: "現在聽到市面上大家都在學Javascript，學一套打前後端。Rails還有優勢嗎？"
     title:
+      about_rails: "關於Rails"
+      about_site: "關於本站"
       sign_in: "登入"
       home: "首頁"
       accounts: "消費記錄"
@@ -261,7 +266,6 @@ zh-TW:
       load_more: "載入更多..."
       search: "搜尋文章..."
       search_result_title: "包含關鍵字 \"%{keyword}\" 的文章"
-      welcome_message: "哈囉！我是Harry，是個喜歡Rails的菜鳥工程師，喜歡學習各種新東西。覺得網路上自學找資料就像挖寶，想把挖到的資源整理在這裡。"
       write_new: "寫文章"
       created_at: "建立時間"
       edit: "編輯文章"

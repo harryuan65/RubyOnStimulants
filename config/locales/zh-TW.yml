@@ -244,7 +244,7 @@ zh-TW:
       unauthorized: "無權限"
       invalid_url: "無效位址"
     home:
-      why_people_hate_rails: "現在聽到市面上大家都在學Javascript，學一套打前後端。Rails還有優勢嗎？"
+      why_people_hate_rails: "現在聽到市面上大家都在學Javascript，學一套打前後端；Golang效能高，速度快適合做API server。即便如此還是改變不了Rails的強大。"
     title:
       about_rails: "關於Rails"
       about_site: "關於本站"

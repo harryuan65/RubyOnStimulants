@@ -276,7 +276,7 @@ en:
       internal_server_error: "Server Error"
       unauthorized: "Unauthorized"
     home:
-      why_people_hate_rails: "Popularity of Rails has dropped since 2018. Why people seems not to like rails any more?"
+      why_people_hate_rails: "Popularity of Rails has dropped since 2018. Still, Rails is powerful tool for building web applications"
     title:
       about_rails: "About Rails"
       about_site: "About this site"

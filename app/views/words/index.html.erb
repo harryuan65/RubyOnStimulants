@@ -30,11 +30,11 @@
     <div id="dropdown-form">
           <span class="x" onclick="toggleForm()">&#x2715;</span>
           <div class="wrap-form-title">
-            <span class="form-title">Create</span>
+            <span class="form-title font">Create</span>
           </div>
           <%= form_for @new_word, url:words_path, html:{id:"form-ph",name:"form-ph",autocomplete:"off"},remote:true ,method: 'post' do |f| %>
-            <%= f.text_field :name    , placeholder:"New word"   , required:true  , class:"input text-field"%>
-            <%= f.submit "Submit", class:"input submit" %>
+            <%= f.text_field :name    , placeholder:"New word"   , required:true  , class:"input text-field font"%>
+            <%= f.submit "Submit", class:"input submit font" %>
           <% end %>
     </div>
 </div>

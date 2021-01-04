@@ -1,7 +1,7 @@
 <%= stylesheet_link_tag "words" %>
 
 <div id="container-words" class="container document notosans">
-  <%= link_to t('controller.word.back_to_words'), words_path, class:'btn-back text-dft' %>
+  <%= link_to "⬅ #{t('controller.word.back_to_words')}", words_path, class:'btn-back text-dft' %>
   <div id="wrap-document">
     <h1 class="word-name"><%= @word.name %></h1>
     <hr>

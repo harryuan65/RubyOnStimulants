@@ -47,13 +47,12 @@ a{
   text-decoration: none;
 }
 #container-sign{
-  @include flex(row, space-evenly, center);
+  @include flex(row, space-evenly, flex-start);
   font-family: 'Noto Sans';
   width: 750px;
 }
 .txt-sign{
   font-size: 32px;
-  color: #636363;
   font-weight: normal;
   margin: 0 0 20px 0;
 }
@@ -63,7 +62,7 @@ a{
     @include size(300px, 300px);
   }
   &.oauth{
-    @include flex(column, center, center);
+    @include flex(column, flex-start, center);
     @include size(300px, 300px);
   }
   &.middle{
@@ -78,7 +77,6 @@ a{
   }
 }
 .txt{
-  color: #979797;
   font-size: 22px;
 }
 hr.sign{
@@ -175,12 +173,12 @@ hr.sign{
   }
 }
 .signin-label{  // for username/password
-  color: rgba(91, 91, 91, .6);
+  color: #ccc;
   transition: .2s ease;
   font-size: 18px;
   &.focus{ //signin.js focus
     transition: .2s ease;
-    color: #5B5B5B;
+    color: #fff;
   }
 }
 .link-signup{

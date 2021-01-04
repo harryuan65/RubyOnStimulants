@@ -2,7 +2,7 @@
   <%= javascript_include_tag "users/signin_and_register" %>
     <div id="container-sign" class="container">
         <div class="wrap oauth signin">
-        <h1 class="txt-sign">Sign In Via</h1>
+        <h1 class="txt-sign text-t2">Sign In Via</h1>
           <%- if devise_mapping.omniauthable? %>
             <%- resource_class.omniauth_providers.each do |provider| %>
               <% case provider.to_s %>
@@ -18,23 +18,23 @@
         <div class="wrap middle">
         </div>
         <div class="wrap inputs">
-          <h1 class="txt-sign">Sign In</h1>
+          <h1 class="txt-sign text-t2">Sign In</h1>
           <%= form_for @user, url: user_session_path(@user)  do |f| %>
             <div class="signin-pair">
-              <%= f.label "username", "username", class: 'signin-label' %>
+              <%= f.label "username", "username", class: 'signin-label text-t2' %>
               <% #text_field_tag(:email, nil, required: true, class: "signin-option input",required: true, autocomplete: 'on') %>
               <%= f.email_field(:email, class: "signin-option input username",required: true, autocomplete: 'off') %>
             </div>
 
             <div class="signin-pair">
-              <%= f.label "password", "password", class: 'signin-label' %>
+              <%= f.label "password", "password", class: 'signin-label text-t2' %>
               <%= f.password_field(:password, class: "signin-option input",required: true, autocomplete: 'off') %>
             </div>
 
             <div class="signin-pair">
               <%= f.submit "Sign In", class:"signin-option submit signin" %>
             </div>
-            <%= link_to "Don't have an account?", new_user_registration_path, class: "text-dft page-link"%>
+            <%= link_to "Don't have an account?", new_user_registration_path, class: "text-t2 page-link"%>
           <% end %>
         </div>
     </div>

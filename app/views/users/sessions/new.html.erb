@@ -4,8 +4,8 @@
         <div class="wrap oauth signin">
         <h1 class="txt-sign text-t2">Sign In Via</h1>
           <%- if devise_mapping.omniauthable? %>
-              <%= link_to "#{svg('facebook', id: "facebook", class: "icon-signin facebook")} Facebook".html_safe, user_facebook_omniauth_authorize_path, method: :post, class:"signin-option facebook" %>
-              <%= link_to "#{image_tag('google.png', class: "icon-signin google")} Google".html_safe, user_google_oauth2_omniauth_authorize_path, method: :post, class:"signin-option google" %>
+              <%= link_to "#{svg('facebook', id: "facebook", class: "icon-signin facebook")} Facebook".html_safe, user_facebook_omniauth_authorize_path, class:"signin-option facebook" %>
+              <%= link_to "#{image_tag('google.png', class: "icon-signin google")} Google".html_safe, user_google_oauth2_omniauth_authorize_path, class:"signin-option google" %>
           <% end %>
         </div>
         <div class="wrap middle">

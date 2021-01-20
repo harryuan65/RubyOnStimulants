@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.2'
+ruby '3.0.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails'
@@ -16,11 +16,11 @@ gem 'uglifier'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
 
-gem 'coffee-rails', '~> 5.0.0'
+gem 'coffee-rails'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
-gem 'turbolinks', '~> 5'
+gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.5'
+gem 'jbuilder'
 # Use Redis adapter to run Action Cable in production
 gem 'redis'
 # Use ActiveModel has_secure_password
@@ -33,7 +33,7 @@ gem 'redcarpet'
 # gem 'capistrano-rails', group: :development
 
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '>= 1.1.0', require: false
+gem 'bootsnap', require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -43,11 +43,11 @@ end
 gem 'solargraph', group: :development
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
-  gem 'web-console', '>= 3.3.0'
-  gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'web-console'
+  gem 'listen'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'spring-watcher-listen'
   gem 'faker'
   gem 'dotenv-rails'
   gem 'annotate'
@@ -56,7 +56,7 @@ end
 
 group :test do
   # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '>= 2.15'
+  gem 'capybara'
   gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'webdrivers'
@@ -74,7 +74,7 @@ gem 'pg'
 gem 'pry-rails'
 gem 'jquery-rails'
 
-gem 'devise'
+gem 'devise', :git => "https://github.com/heartcombo/devise.git", ref: '8bb358cf80a632d3232c3f548ce7b95fd94b6eb2'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
@@ -82,7 +82,7 @@ gem 'dalli' #for mem_cached_store for precompile
 gem 'line-bot-api'
 gem 'rails_param'
 gem 'gutentag'
-gem "jquery-ui-rails", "~> 6.0"
+gem "jquery-ui-rails"
 gem "acts_as_list"
 gem 'rollbar'
 gem 'elasticsearch-model'
@@ -91,4 +91,4 @@ gem 'rubyzip'
 
 gem 'sidekiq'
 gem 'sidekiq-scheduler'
-gem "thread_safe", "~> 0.3.6"
+gem "thread_safe"

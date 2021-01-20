@@ -1,6 +1,6 @@
-<%= stylesheet_link_tag "users/signin_and_register" %>
-<%= javascript_include_tag "users/signin_and_register" %>
-<%= javascript_include_tag "users/register" %>
+<%= stylesheet_link_tag "signin_and_register" %>
+<%= javascript_include_tag "signin_and_register" %>
+<%= javascript_include_tag "register" %>
 <div id="container-sign">
   <%= form_for(@user, as: :user, url: registration_path(@user), html: {id: 'form-signup'}) do |f| %>
     <h1 class="txt-sign">Sign Up</h1>

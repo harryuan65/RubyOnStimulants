@@ -93,3 +93,4 @@ gem 'sidekiq-scheduler'
 gem "thread_safe"
 
 gem "omniauth", "= 1.9.1"
+gem "webpacker"

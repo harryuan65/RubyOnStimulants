@@ -15,13 +15,10 @@ Rails.application.routes.draw do
   get 'err', controller:'application', action:'err'
   get 'privacy_policy', controller: 'home', action: 'privacy_policy'
   post 'cancel_fb_authorization', controller: 'application', action: 'dev_cancel_fb'
-  get 'poke', to: 'application#poke'
   get 'google3e784468cd0fd9bb.html', controller: 'home', action: 'domain_auth'
   scope :controller=>"home",:path=>"/", :as=>"home" do
-    get 'news'=>:index
-    get 'post_newrecord'=>:post_newrecord
-    get 'list_home'=>:list_home
-    post 'post_list'=>:post_list
+    get '/'=>:home
+    get 'index'=>:index
     get 'yeah'=>:yeah
     get 'test'=>:test
     post 'webhook'=>:webhook

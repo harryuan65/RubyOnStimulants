@@ -13,7 +13,7 @@ class Users::SessionsController < Devise::OmniauthCallbacksController
         sign_in user, store: true # store in session
         # set_flash_message! :notice, :signed_in 研究一下怎麼用才對
         flash[:notice] = I18n.t "devise.sessions.signed_in", kind: 'username'
-        redirect_to root_path
+        redirect_to articles_path
       else
         redirect_to new_user_session_path, alert: I18n.t("devise.sessions.info_incorrect")
       end

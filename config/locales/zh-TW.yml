@@ -229,7 +229,8 @@ zh-TW:
     color_picker: "顏色提取器"
     word_book: "單字本"
     to_do_list: "待辦事項"
-    about: "關於本站作者"
+    about: "關於本站"
+    about_author: "關於本站作者"
   controller:
     general:
       welcome_message: "哈囉！我是Harry，是個喜歡Rails的菜鳥工程師，喜歡學習各種新東西。覺得網路上自學找資料就像挖寶，想把挖到的資源整理在這裡。這個網站是用Rails 6建立，主要是放我整理的筆記跟一些小功能。若你註冊或是使用Facebook、Google登入，也可以一起在這上面寫文章喔～"

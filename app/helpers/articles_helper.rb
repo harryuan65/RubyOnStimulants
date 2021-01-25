@@ -8,9 +8,9 @@ module ArticlesHelper
     now = I18n.locale==:en ? Time.now.in_time_zone('UTC') : Time.now.in_time_zone("Taipei")
     if created_at.day==now.day # today
       if now.hour - created_at.hour==0 # created within 1 hour
-        I18n.t('time.formats.today.minutes_ago', minutes: now.min - created_at.min)
+        I18n.t('time.formats.today.minutes_ago', minutes: (now.min - created_at.min).abs)
       else
-        I18n.t('time.formats.today.hours_ago', hours: now.hour - created_at.hour)
+        I18n.t('time.formats.today.hours_ago', hours: (now.hour - created_at.hour).abs)
       end
     elsif created_at.year==now.year #same year
       I18n.t('time.formats.same_year',

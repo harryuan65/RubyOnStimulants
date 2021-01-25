@@ -1,34 +1,35 @@
-  <%= stylesheet_link_tag "signin_and_register" %>
-  <%= javascript_include_tag "signin_and_register" %>
-    <div id="container-sign" class="container">
-        <div class="wrap oauth signin">
-        <h1 class="txt-sign text-t2">Sign In Via</h1>
-          <%- if devise_mapping.omniauthable? %>
-              <%= link_to "#{svg('facebook', id: "facebook", class: "icon-signin facebook")} Facebook".html_safe, user_facebook_omniauth_authorize_path, class:"signin-option facebook" %>
-              <%= link_to "#{image_tag('google.png', class: "icon-signin google")} Google".html_safe, user_google_oauth2_omniauth_authorize_path, class:"signin-option google" %>
-          <% end %>
-        </div>
-        <div class="wrap middle">
-        </div>
-        <div class="wrap inputs">
-          <h1 class="txt-sign text-t2">Sign In</h1>
-          <%= form_for @user, url: user_session_path(@user)  do |f| %>
-            <div class="signin-pair">
-              <%= f.label "username", "username", class: 'signin-label text-t2' %>
-              <% #text_field_tag(:email, nil, required: true, class: "signin-option input",required: true, autocomplete: 'on') %>
-              <%= f.email_field(:email, class: "signin-option input username",required: true, autocomplete: 'off') %>
-            </div>
+<%= stylesheet_link_tag "signin_and_register" %>
+<%= javascript_include_tag "signin_and_register" %>
 
-            <div class="signin-pair">
-              <%= f.label "password", "password", class: 'signin-label text-t2' %>
-              <%= f.password_field(:password, class: "signin-option input",required: true, autocomplete: 'off') %>
-            </div>
-
-            <div class="signin-pair">
-              <%= f.submit "Sign In", class:"signin-option submit signin" %>
-            </div>
-            <%= link_to "Don't have an account?", new_user_registration_path, class: "text-t2 page-link"%>
-          <% end %>
-        </div>
+<div class="container-sign">
+    <div class="wrap oauth signin">
+    <h1 class="txt-sign">Sign In Via</h1>
+      <%- if devise_mapping.omniauthable? %>
+          <%= link_to "#{svg('facebook', id: "facebook", class: "icon-signin facebook")} Facebook".html_safe, user_facebook_omniauth_authorize_path, class:"signin-option facebook" %>
+          <%= link_to "#{image_tag('google.png', class: "icon-signin google")} Google".html_safe, user_google_oauth2_omniauth_authorize_path, class:"signin-option google" %>
+      <% end %>
     </div>
+    <div class="wrap middle">
+    </div>
+    <div class="wrap inputs">
+      <h1 class="txt-sign">Sign In</h1>
+      <%= form_for @user, url: user_session_path(@user)  do |f| %>
+        <div class="signin-pair">
+          <%= f.label "username", "username", class: 'signin-label' %>
+          <% #text_field_tag(:email, nil, required: true, class: "signin-option input",required: true, autocomplete: 'on') %>
+          <%= f.email_field(:email, class: "signin-option input username",required: true, autocomplete: 'off') %>
+        </div>
+
+        <div class="signin-pair">
+          <%= f.label "password", "password", class: 'signin-label' %>
+          <%= f.password_field(:password, class: "signin-option input",required: true, autocomplete: 'off') %>
+        </div>
+
+        <div class="signin-pair">
+          <%= f.submit "Sign In", class:"signin-option submit signin" %>
+        </div>
+        <%= link_to "Don't have an account?", new_user_registration_path, class: "page-link"%>
+      <% end %>
+    </div>
+</div>
 

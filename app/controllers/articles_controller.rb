@@ -1,16 +1,15 @@
 class ArticlesController < ApplicationController
   before_action :authenticate_user!, only: [:backup, :mine, :get_link_title]
-  require 'redcarpet/render_strip'
-  layout "articles/layout"
+
   def index
     @limit = 10
     @offset = params[:offset] || 0
     if current_user
-      @articles = Article.includes(:user, :tags).where(state: :published).or(
-                    Article.includes(:user, :tags).where(state: [:draft, :hidden], user_id: current_user.id)
+      @articles = Article.includes(:tags).where(state: :published).or(
+                    Article.includes(:tags).where(state: [:draft, :hidden], user_id: current_user.id)
                   ).order(id: :desc).limit(@limit).offset(@offset)
     else
-      @articles = Article.includes(:user, :tags).where(state: :published).order(id: :desc).limit(@limit).offset(@offset)
+      @articles = Article.includes(:tags).where(state: :published).order(id: :desc).limit(@limit).offset(@offset)
     end
     respond_to do |format|
       format.html
@@ -47,8 +46,8 @@ class ArticlesController < ApplicationController
     @scope = "mine"
     @limit = 10
     @offset = params[:offset] || 0
-    @articles = Article.includes(:user, :tags).where(state: :published).or(
-      Article.includes(:user, :tags).where(state: [:draft, :hidden], user_id: current_user.id)
+    @articles = Article.includes(:tags).where(state: :published).or(
+      Article.includes(:tags).where(state: [:draft, :hidden], user_id: current_user.id)
     ).order(id: :desc).limit(@limit).offset(@offset)
     respond_to do |format|
       format.html {render 'index'}
@@ -140,11 +139,11 @@ class ArticlesController < ApplicationController
     @limit = 10
     @offset = params[:offset] || 0
     if current_user
-      @articles = Article.includes(:user, :tags).where(state: :published).or(
-                    Article.includes(:user, :tags).where(state: [:draft, :hidden], user_id: current_user.id)
+      @articles = Article.includes(:tags).where(state: :published).or(
+                    Article.includes(:tags).where(state: [:draft, :hidden], user_id: current_user.id)
                   ).order(id: :desc).limit(@limit).offset(@offset)
     else
-      @articles = Article.includes(:user, :tags).where(state: :published).order(id: :desc).limit(@limit).offset(@offset)
+      @articles = Article.includes(:tags).where(state: :published).order(id: :desc).limit(@limit).offset(@offset)
     end
     @articles = @articles.where(id: article_ids).index_by(&:id).slice(*article_ids).values
 

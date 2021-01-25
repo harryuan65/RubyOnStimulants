@@ -1,2 +1,155 @@
-@import './section.scss';
-@import './article-list.scss';
+@import './common.scss';
+html,
+body {
+  background-color: $background-main;
+  position: relative;
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+  @include flex(column, center, center);
+}
+.body{
+  animation: fade-in .3s ease-in forwards;
+  opacity: 0;
+}
+.logo-wrap{
+  @include flex(column, center, center);
+  h1 {
+    font-size: 70px;
+    color: #FF414D;
+    font-family: Tahoma;
+    margin: 0;
+  }
+}
+.logo-wrap img{
+  height: 240px;
+  cursor: pointer;
+}
+ul {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  list-style: none;
+  li {
+    display: inline-block;
+    margin-right: 30px;
+    a {
+      font-size: 24px;
+      color: $color-aux;
+      font-family: Helvetica;
+      font-weight: lighter;
+      &:link,
+      &:active,
+      &:visited {
+        text-decoration: none;
+      }
+      &:active{
+        color: #ccc;
+      }
+    }
+  }
+}
+h3{
+  color: #C1B1B5;
+  font-size: 27px;
+  font-family: Helvetica;
+  font-weight: normal;
+  margin: 0;
+  text-align: center;
+}
+.icons-wrap{
+  margin-top: 79px;
+  width: 400px;
+  @include flex(row, space-evenly, center);
+  // padding: 0 60px;
+}
+.icon{
+  height: 40px;
+  transition: filter .1s ease;
+  &:active{
+    transition: filter .1s ease;
+    filter: drop-shadow(0px 0px 1px #fac410);
+  }
+  opacity: .8;
+}
+@media all and (max-width: 840px){
+  .logo-wrap img{
+    height: 160px;
+  }
+  .logo-wrap h1{
+    font-size: 60px;
+  }
+  ul{
+    width: 100%;
+    right: 0;
+    @include flex(row, center, center);
+  }
+  h3{
+    font-size: 24px;
+  }
+  .icons-wrap{
+    padding: 0 75px;
+  }
+}
+@media all and (max-width: 647px){
+  .logo-wrap img{
+    height: 150px;
+  }
+  .logo-wrap h1{
+    font-size: 46px;
+    margin-top: 30px;
+  }
+  h3{
+    font-size: 20px;
+  }
+  .icons-wrap{
+    padding: 0 90px;
+  }
+  .icon{
+    height: 34px;
+  }
+}
+@media all and (max-width: 647px){
+  h3{
+    display: none;
+  }
+  .icons-wrap{
+    padding: 0;
+  }
+  .icon{
+    height: 34px;
+  }
+}
+
+@media all and (max-width: 539px){
+  .logo-wrap h1{
+    font-size: 34px;
+  }
+  .icons-wrap{
+    padding: 0;
+    width: 320px;
+  }
+  .icon{
+    height: 34px;
+  }
+}
+
+@media all and (max-width: 539px){
+  .logo-wrap img{
+    height: 130px;
+  }
+  .logo-wrap h1{
+    font-size: 30px;
+  }
+  .icons-wrap{
+    padding: 0;
+  }
+  .icon{
+    height: 34px;
+  }
+}
+
+@keyframes fade-in{
+  from{}
+  to{opacity: 1;}
+}

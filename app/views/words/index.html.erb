@@ -1,8 +1,8 @@
-<%= javascript_include_tag("common/form") %>
-<%= javascript_include_tag('words/words') %>
+<%= javascript_include_tag('words') %>
 <%= stylesheet_link_tag("words") %>
 
 <div id="container-words" class="container cards notosans">
+  <span id="dropdown-toggle" onclick="toggleForm()">Add</span>
 <% if @words.any? %>
   <%@words.each do |word| %>
   <div class="card-wrap">
@@ -19,7 +19,7 @@
           <p class="translation"><%= word.first_definition.first_example&.translation || ""%></p>
         </div>
         </div>
-        <%= link_to "詳細", word_path(word.id), class:"btn-details" %>
+        <%= link_to "詳細", word_path(word.id), class:"page-link" %>
     </div>
   </div>
   <% end %>
@@ -27,18 +27,14 @@
 </div>
 
 <div id="wrap-dropdown-form">
-    <div id="dropdown-form">
-          <span class="x" onclick="toggleForm()">&#x2715;</span>
-          <div class="wrap-form-title">
-            <span class="form-title font">Create</span>
-          </div>
-          <%= form_for @new_word, url:words_path, html:{id:"form-ph",name:"form-ph",autocomplete:"off"},remote:true ,method: 'post' do |f| %>
-            <%= f.text_field :name    , placeholder:"New word"   , required:true  , class:"input text-field font"%>
-            <%= f.submit "Submit", class:"input submit font" %>
-          <% end %>
+  <div id="dropdown-form">
+    <span class="x" onclick="toggleForm()">&#x2715;</span>
+    <div class="wrap-form-title">
+      <span class="form-title font">Create</span>
     </div>
-</div>
-
-<div id="dropdown-toggle" onclick="toggleForm()">
-  <div class="icon-wrap"><%= image_tag("add.png",class:"icon-add") %></div>
+    <%= form_for @new_word, url:words_path, html:{id:"form-ph",name:"form-ph",autocomplete:"off"},remote:true ,method: 'post' do |f| %>
+      <%= f.text_field :name    , placeholder:"New word"   , required:true  , class:"input text-field font"%>
+      <%= f.submit "Submit", class:"input submit font" %>
+    <% end %>
+  </div>
 </div>

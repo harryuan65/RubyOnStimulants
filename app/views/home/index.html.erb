@@ -1,27 +1,16 @@
-<%= stylesheet_link_tag "section" %>
-<%= stylesheet_link_tag "among_us" %>
-<%= javascript_include_tag "among_us" %>
-
-<div class="container">
-  <section>
-    <h3 class="block-title font text-t4"><%= t('controller.title.about_site') %></h3>
-    <hr class="block-hr">
-    <div class="section-content-container">
-      <p class="paragraph text-dft notosans"><%= t('controller.general.welcome_message') %></p>
-    </div>
-  </section>
-
-  <section>
-    <h3 class="block-title font text-t4"><%= t('controller.title.about_rails') %></h3>
-    <hr class="block-hr">
-    <div class="section-content-container">
-        <p class="why-people-dont-like-rails paragraph notosans text-t2"><%= t('controller.home.why_people_hate_rails') %></p>
-        <div class="space-wrapper">
-          <div class="player-ruby-wrap">
-            <%= image_tag("ruby-big.svg", id: "player-ruby") %>
-          </div>
-          <div id="narration" class="paragraph text-t2"></div>
-        </div>
-    </div>
-  </section>
+<%= stylesheet_link_tag "home" %>
+<div class="logo-wrap">
+  <%= image_tag("ros/ruby-on-syringe415x590.png") %>
+  <h1>Ruby On Stimulants</h1>
+</div>
+<h3>Learn and make things fun, like taking a stimulant</h3>
+<ul>
+  <li><a href="#">About</a></li>
+  <li><%= link_to "Articles", articles_path %></li>
+</ul>
+<div class="icons-wrap">
+  <a href="#"><%= image_tag("ros/medium_subed_logo.png", class: "icon") %></a>
+  <a href="#"><%= image_tag("ros/fb_subed_logo.png", class: "icon") %></a>
+  <a href="#"><%= image_tag("ros/git_subed_logo.png", class: "icon") %></a>
+  <a href="#"><%= image_tag("ros/linkedin_subed_logo.png", class: "icon") %></a>
 </div>

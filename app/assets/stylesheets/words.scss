@@ -1,17 +1,4 @@
-// Place all the styles related to the vocabs controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
-@import './resources.scss';
-@mixin flex($fd:row, $jc:flex-start,$ai:flex-start){
-  display: flex;
-  flex-direction: $fd;
-  justify-content: $jc;
-  align-items: $ai;
-}
-@mixin size($w, $h){
-  width: $w;
-  height: $h;
-}
+@import './common.scss';
 #container-words{
   &.cards{
     @include flex(row, center, center);
@@ -105,10 +92,10 @@
         }
     }
   }
-  a.btn-details{
+  a{
     &:link, &:visited{
       text-decoration: none;
-      color: #fff;
+      color: #3d3d3d;
     }
     position: absolute;
     right: -55px;
@@ -119,10 +106,10 @@
   max-width: 900px;
 }
 .word-name{
-  color: #fff;
+  color: #2e2e2e;
 }
 .wrap-definition{
-  color: #fff;
+  color: #3e3e3e;
 }
 .def-block{
   margin-top: 40px;
@@ -134,7 +121,7 @@
 }
 .word-def-org{
   margin-top: 30px;
-  color: #fff;
+  color: #4e4e4e;
 }
 .word-pos{
   padding: 5px;
@@ -165,6 +152,7 @@
 }
 .btn-back{
   font-size: 27px;
+  color: #5e5e5e;
   transition: color .1s ease;
   &:hover{
     color: #aaa;
@@ -172,13 +160,19 @@
   }
 }
 #dropdown-toggle{
+  cursor: pointer;
   position: fixed;
-  right: 9px;
-  top: 101px;
-  z-index: 999;
-  .icon-add{
-    zoom: .4;
-  }
+  top: 150px;
+  right: 20px;
+  width: 100px;
+  font-size: 24px;
+  $color: #ffffff;
+  background-color: #117864;
+  border: 1px solid $color;
+  color: $color;
+  border-radius: 6px;
+  text-align: center;
+  padding: 10px;
 }
 @keyframes drop{
   from {opacity: 0;}
@@ -187,9 +181,6 @@
 @keyframes fold{
   from {opacity: 1;}
   to{opacity: 0;}
-}
-div[id*="dropdown-toggle"]{
-  cursor: pointer;
 }
 #wrap-dropdown-form{
   background-color: rgba(0, 0, 0, 0.5);

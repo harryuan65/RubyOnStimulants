@@ -1,0 +1,35 @@
+<%= stylesheet_link_tag "footer" %>
+<footer>
+  <div class="block">
+    <h2>About</h2>
+    <ul>
+      <li><a href="javascript:void(0)">Me</a></li>
+      <li><a href="javascript:void(0)">Partnership</a></li>
+    </ul>
+  </div>
+  <div class="block">
+    <h2>Connect</h2>
+    <ul>
+      <li><a href="javascript:void(0)">Contact</a></li>
+      <li><a href="javascript:void(0)">Updates</a></li>
+    </ul>
+  </div>
+  <div class="block">
+    <h2>Resources</h2>
+    <ul>
+      <li><%= link_to t('navbar.color_picker'), ENV['COLORPICKER_URL'] || "javascript:void(0)", class: " " %></li>
+      <li><%= link_to t('navbar.word_book'), words_path%></li>
+    </ul>
+  </div>
+  <ul class="contact-links">
+    <li><a href="javascript:void(0)"><%= image_tag("ros/medium_subed_logo.png") %></li>
+    <li><a href="javascript:void(0)"><%= image_tag("ros/git_subed_logo.png") %></li>
+    <li><a href="javascript:void(0)"><%= image_tag("ros/fb_subed_logo.png") %></li>
+    <li><a href="javascript:void(0)"><%= image_tag("ros/linkedin_subed_logo.png") %></li>
+  </ul>
+  <ul class="others">
+    <li><a href="javascript:void(0)">Terms Of Use</a></li>
+    <li><a href="./terms.html">Privacy Policy</a></li>
+    <li><a href="javascript:void(0)">Cookie Policy</a></li>
+  </ul>
+</footer>

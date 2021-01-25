@@ -1,26 +1,20 @@
 <% @articles.each do |article| %>
-  <div class="article-container notosans" id="article-<%=article.id%>">
-    <a href="<%= article_path(article.id)%>" class="article-link">
-      <div class="wrap-article-title">
-        <h3 class="article-title font text-t3"><%= article.title %></h3>
-        <% case article.state %>
-        <% when "draft"%>
-          <%= article.draft?? '<span class="draft font text-t7">draft</span>'.html_safe : "" %>
-        <% when "hidden"%>
-          <%= article.hidden?? '<span class="private font text-t7">private</span>'.html_safe : "" %>
-        <% end %>
+    <article>
+      <div class="img-wrap">
+        <%= image_tag("ros/logo.png") %>
       </div>
-      <!-- <span class="article-description subtitle font text-dft"><%= article.subtitle %></span>-->
-      <div class="wrap-tags">
-        <% article.tags.map(&:name).each_with_index do |tag, i| %>
-            <span class="article-description tag text-dft"><%= tag %></span>
-          <% if i!=article.tags.size-1 %>
-            <span class="notosans text-dft">,</span>
+      <div class="info-wrap">
+        <a href="<%= article_path(article.id)%>">
+          <h3><%= article.title %></h3>
+        </a>
+        <div class="tags-wrap">
+          <% article.tags.map(&:name).each do |tag| %>
+            <a href="/">
+              <span class="tag"><%= tag %></span>
+            </a>
           <% end %>
-        <% end %>
+        </div>
+        <span class="timestamp"><%= readable_time(article.created_at) %></span>
       </div>
-    </a>
-    <span class="article-author font text-dft"><%= username(article.user) %></span>
-    <span class="article-created-at font text-dft"><%= article.created_at.strftime("%B") %> <%= article.created_at.day %></span>
-  </div>
-<% end %>
+    </article>
+  <% end %>

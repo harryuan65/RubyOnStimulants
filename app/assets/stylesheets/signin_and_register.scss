@@ -1,4 +1,5 @@
-@import './resources.scss';
+// @import './resources.scss';
+@import './common.scss';
 @font-face {
   font-family: 'fontello';
   src: font-url('asterisk/fontello.eot?27015240');
@@ -30,26 +31,11 @@ input[type="password"] {
 	/* add spacing to better separate each image */
 	letter-spacing: 2px;
 }
-*{
-  box-sizing: border-box;
-}
-html, body{
-  margin: 0;
-  padding: 0;
-  @include size(100%, 100%);
-}
-body{
-  display: grid;
-  justify-content: center;
-  align-content: center;
-}
-a{
-  text-decoration: none;
-}
-#container-sign{
-  @include flex(row, space-evenly, flex-start);
-  font-family: 'Noto Sans';
-  width: 750px;
+
+.container-sign{
+  @include flex(row, center, center);
+  // @include size(100%, 100%);
+  min-height: 500px;
 }
 .txt-sign{
   font-size: 32px;
@@ -57,6 +43,8 @@ a{
   margin: 0 0 20px 0;
 }
 .wrap{
+  opacity: 0;
+  animation: fade-in .2s .2s forwards;
   &.signup{
     margin-bottom: 21px;
     @include size(300px, 300px);
@@ -146,15 +134,13 @@ hr.sign{
     &.signin{
       background-color: #36A44F;
       &:hover{
-        background-color: #216431;
-        color: rgba(216, 216, 216,.8);
+        opacity: .9;
       }
     }
     &.signup{
       background-color: #2D3047;
       &:hover{
-        background-color: #373944;
-        color: rgba(216, 216, 216,.8);
+        opacity: .9;
       }
     }
   }
@@ -178,7 +164,7 @@ hr.sign{
   font-size: 18px;
   &.focus{ //signin.js focus
     transition: .2s ease;
-    color: #fff;
+    color: #888;
   }
 }
 .link-signup{
@@ -189,10 +175,12 @@ hr.sign{
   text-align: center;
   width: 290px;
   display: inline-block;
+  color: #4e4e4e;
+  margin-top: 5px;
 }
 
 @media only screen and (max-width: 768px){
-  #container-sign{
+  .container-sign{
     @include flex(column, space-evenly, center);
   }
   .wrap.middle{

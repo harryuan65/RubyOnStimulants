@@ -1,0 +1,36 @@
+$background-main: #222831;
+$color-aux: #eee;
+// $accent: #FFC300;
+@mixin flex($fd, $jc, $ai) {
+  display: flex;
+  flex-direction: $fd;
+  justify-content: $jc;
+  align-items: $ai;
+}
+@mixin size($w, $h){
+  width: $w;
+  height: $h;
+}
+$fade-time: 0.2s;
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+.fade-in {
+  animation: fade-in $fade-time forwards;
+}
+.fade-out {
+  animation: fade-out $fade-time forwards;
+}

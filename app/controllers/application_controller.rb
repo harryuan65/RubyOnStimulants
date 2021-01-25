@@ -60,10 +60,6 @@ class ApplicationController < ActionController::Base
     puts '========================'
   end
 
-  def poke
-    render json:{msg: "ok"}
-  end
-
   def post_test
     # raise ActiveRecord::RecordNotFound # test ajax fail
     if request.headers["REMOTE_ADDR"] == "::1"

@@ -156,3 +156,33 @@ header .search-form input{
 .alert.alert-danger {
   background-color: rgba(199, 13, 58, 0.7);
 }
+
+@media all and (max-width: 560px){
+  header img{
+    height: 79px;
+  }
+  header .search-form{
+    left: 0px;
+    position: fixed;
+    @include flex(row, center, center);
+    height: 79px;
+    // width: 340px;
+    width: calc(100% - 110px);
+    background-color: $background-main;
+  }
+  header .search-form input{
+    width: 80%
+  }
+}
+
+// @media all and (max-width: 476px){
+//   header .search-form{
+//     width: 280px;
+//   }
+// }
+
+// @media all and (max-width: 390px){
+//   header .search-form{
+//     width: 280px;
+//   }
+// }

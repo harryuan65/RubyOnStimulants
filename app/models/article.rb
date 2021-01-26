@@ -19,7 +19,7 @@ class Article < ApplicationRecord
   Gutentag::ActiveRecord.call self
 
   validates :title, presence: true
-  default_scope {includes(:user, :tags)}
+  default_scope {includes(:tags)}
   belongs_to :user
   has_many :comments
   has_one :last_comment, ->{select("distinct on (article_id) *").order("article_id desc, created_at desc")}, class_name: "Comment", foreign_key: :article_id

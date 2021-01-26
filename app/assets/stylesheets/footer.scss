@@ -71,3 +71,15 @@ footer .others{
     }
   }
 }
+@media all and (max-width: 560px){
+  footer{
+    @include flex(column, flex-start, center);
+  }
+  footer .block{
+    width: 150px;
+  }
+  footer .contact-links{
+    width: 150px;
+    margin-top: 90px;
+  }
+}

@@ -40,6 +40,11 @@ main {
   padding: 50px 50px 100px 50px;
   grid-column: 1/2;
 }
+@media all and (max-width: 600px){
+  main{
+    padding: 20px 20px 70px 20px;
+  }
+}
 // @import './resources';
 // $logo-color: #e7e7e7;
 // $nav-bg-color: #242527;

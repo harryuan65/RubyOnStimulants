@@ -15,6 +15,16 @@
   <div class="markdown show">
     <%= Article.to_markdown(@article.content) %>
   </div>
+  <div class="bottom-info">
+    <span>WRITTEN BY</span>
+    <h1><%= @article.user.name %></h1>
+    <p><%= @article.user.intro %></p>
+    <hr>
+    <span><%= @article.created_at.strftime("%Y/%m/%d") %></span>
+    <% if @is_author%>
+    <span><a href="<%= edit_article_path(@article)%>">&#x270E; <%= t('controller.articles.edit') %></a></span>
+    <% end %>
+  </div>
 </div>
 
 <script>
@@ -22,5 +32,14 @@
   document.querySelectorAll('pre code').forEach(e=>{
     hljs.highlightBlock(e);
   });
+  $('.content-article-show').ready(function(){
+    window.onscroll = (event) => {
+      if(document.documentElement.scrollTop > 350){
+        $('.side-info').addClass('show');
+      }else{
+        $('.side-info').removeClass('show');
+      }
+    }
+  })
 })();
 </script>

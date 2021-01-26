@@ -1,0 +1,116 @@
+@import './common.scss';
+
+.markdown{
+  font-family: Monaco;
+  font-weight: lighter;
+  &.show{
+    opacity: 0;
+    animation: fade-in .4s $fade-time forwards;
+    grid-column: 2/3;
+  }
+  h1, h2, h3, h4, h5, h6{
+    font-weight: lighter;
+    font-family: Arial, Helvetica, sans-serif;
+    &:not(:first-of-type){
+      margin-top: 80px;
+    }
+  }
+  p, ol, ul {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  a{
+    color: #0e56a9;
+    transition: color .1s cubic-bezier(0.075, 0.82, 0.165, 1);
+    text-decoration: underline;;
+    &:hover{
+      // color: #20567a;
+      color: #69a8ee;
+      transition: color .1s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+    &:active{
+      color: #598cc7;
+      transition: color .1s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+  }
+  p{
+    margin:0;
+    color: #3d3d3d;
+  }
+  br{
+    display: block;
+    content: "";
+    margin-top: 35px;
+  }
+  pre{
+    white-space: pre-wrap; //break lines when too long
+  }
+  ul{
+    list-style: revert;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+  }
+  li:not(:first-child){
+    margin-top: 10px;
+  }
+  p > code, li > code{ // `this`
+    color: #FF8632;
+    background-color:#3b3b3b;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 2px;
+    line-height: 45px;
+    font-weight: bold;
+    font-size: 15px;
+  }
+  code, pre{
+    font-family: Menlo, monospace;
+  }
+  pre{
+    width: 100%;
+    padding: 1.5em 1.5em;
+  }
+  pre > code{
+    border-radius: 5px;
+    padding: 1.5em;
+    font-size: 14px;
+    width: 100%;
+    display: inline-block;
+    white-space: pre;
+  }
+  table{
+    border-collapse: collapse;
+    margin: 30px 0 30px 30px;
+    th{
+      background-color: rgba(22, 22, 22, .2);
+    }
+    td{
+      background-color: rgba(100, 100, 100, .1);
+    }
+    td, th{
+      text-align: center;
+      border: 1px solid #5b5b5b7c;
+      padding: 15px;
+    }
+    & + p {
+      margin: 80px 0 80px 0;
+    }
+  }
+  blockquote {
+    background: #2d2d2d;
+    margin: 1.5em;
+    padding: 1.5em 1.5em;
+    border-radius: 10px;
+  }
+  blockquote p {
+    color: #aaa !important;
+    word-break: break-all;
+    font-style: italic;
+    font-weight: normal;
+  }
+  li{
+    font-size: 18px;
+  }
+}

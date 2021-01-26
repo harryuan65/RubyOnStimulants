@@ -8,7 +8,8 @@
     <meta name="google-site-verification" content="ShpDI9Bv2xUb3AwyKKldqZ2Ax87ZG9dFxVFvYqWvrG4" />
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" >
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= stylesheet_link_tag    'layout', media: 'all', 'data-turbolinks-track': 'reload'%>
+    <%= stylesheet_link_tag  'layout', media: 'all', 'data-turbolinks-track': 'reload'%>
+    <%= stylesheet_link_tag  'tomorrow-night-eighties.css', media: 'all', 'data-turbolinks-track': 'reload'%>
 
     <% if params[:controller] == "articles" %>
       <%= javascript_include_tag "highlight" %>
@@ -42,7 +43,7 @@
 
   <body>
     <%= render('shared/header') %>
-    <main id="main">
+    <main id="main" class="<%= "#{params[:controller]}##{params[:action]}" == "articles#edit" ? "no-pad" : "" %>"  >
       <%= yield %>
     </main>
     <%= render('shared/footer') %>

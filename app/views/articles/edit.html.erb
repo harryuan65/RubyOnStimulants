@@ -1,11 +1,12 @@
-<%= javascript_include_tag "highlight/highlight" %>
+<%= javascript_include_tag "highlight" %>
+<%= stylesheet_link_tag "article-edit" %>
 <script>
   function hightlightAllCodes(){
     document.querySelectorAll('pre code').forEach(e=>{
       hljs.highlightBlock(e);
     })
   }
-  $(".container").ready(function(){
+  $(".content-article-edit").ready(function(){
     $('input[type="radio"]:checked').parent().addClass("selected");
     $(".state-pair input[type='radio']:checked").addClass("selected");
     currentArticleId = <%= @article.id %>;
@@ -13,6 +14,15 @@
     savedText = "<%= t('controller.articles.saved') %>";
     doneText = "<%= t('controller.articles.done') %>";
     fetchingPreviewText = "<%= t('controller.articles.fetching_preview') %>";
+    window.onscroll = (event) => {
+      if(document.documentElement.scrollTop > 110){
+        $('.content-article-edit').addClass('scrolled');
+        $('.article-option-bar').addClass('scrolled');
+      }else{
+        $('.content-article-edit').removeClass('scrolled');
+        $('.article-option-bar').removeClass('scrolled');
+      }
+    }
   });
 </script>
 <%= javascript_include_tag "edit" %>
@@ -22,32 +32,27 @@
 <div class="article-option-bar" id="article-option-bar">
   <div class="wrap-state">
     <div class="state-pair draft" onclick="select(event)">
-      <span class="notosans text-t4">Draft</span>
-      <%= radio_button_tag :state, "draft", @article.state=="draft", class: "notosans text-dft" %>
+      <span>Draft</span>
+      <%= radio_button_tag :state, "draft", @article.state=="draft" %>
     </div>
     <div class="state-pair published" onclick="select(event)">
-      <span class="notosans text-t4">Published</span>
-      <%= radio_button_tag :state, "published", @article.state=="published", class: "notosans text-dft" %>
+      <span>Published</span>
+      <%= radio_button_tag :state, "published", @article.state=="published" %>
     </div>
     <div class="state-pair hidden" onclick="select(event)">
-      <span class="notosans text-t4">Private</span>
-      <%= radio_button_tag :state, "hidden", @article.state=="hidden", class: "notosans text-dft" %>
+      <span>Private</span>
+      <%= radio_button_tag :state, "hidden", @article.state=="hidden" %>
     </div>
   </div>
   <div class="wrap-options">
-    <span id="status" class="notosans text-t2"></span>
+    <span id="status" class="text-t2"></span>
     <%= link_to svg_asset("refresh"), "#", onclick: "forceUpdate(event)", class: "article-option refresh" %>
     <%= link_to svg("eye"), article_path(@article), class: "article-option" %>
     <%= link_to svg("trashcan"), article_path(@article), method: :delete, class: "article-option", data: {confirm: t('controller.articles.confirm_delete')} %>
   </div>
 </div>
-<div class="container article-new-v2">
-  <div class="wrap-article-edit-page">
-    <div id="edit-page" class="page edit">
-      <%= text_area_tag :content, @article.content, {id: "article-content-v2", spellcheck: false, autocomplete: 'off', placeholder: "Say something", class: "page-content markdown text-dft", oninput: "prepareToUpdateArticle()"} %>
-    </div>
-    <div id="preview-page" class="page preview">
-      <div id="preview-content" class="page-content markdown text-dft"></div>
-    </div>
-  </div>
+
+<div class="content-article-edit">
+  <%= text_area_tag :content, @article.content, {id: "article-content", spellcheck: false, autocomplete: 'off', placeholder: "Say something", class: "edit", oninput: "prepareToUpdateArticle()"} %>
+  <div id="preview-content" class="markdown"></div>
 </div>

@@ -71,9 +71,9 @@ function resize(e){
   editPage.style.width = (parseInt(getComputedStyle(editPage, '').width) - dx) + "px";
   previewPage.style.width = (parseInt(getComputedStyle(previewPage, '').width) + dx) + "px";
 }
-$(".container").ready(()=>{
+$(".content-article-edit").ready(()=>{
   previewMarkdownDiv = document.getElementById('preview-content');
-  articleContent = document.getElementById('article-content-v2');
+  articleContent = document.getElementById('article-content');
   editPage = document.getElementById('edit-page');
   previewPage = document.getElementById('preview-page');
 
@@ -117,7 +117,7 @@ $(".container").ready(()=>{
       }
     }
   }
-  previewPage.addEventListener("mousedown", function(e){
+  previewMarkdownDiv.addEventListener("mousedown", function(e){
     if (e.offsetX < BORDER_SIZE) {
       m_pos = e.x;
       console.log(`e.offsetX:${m_pos}`);

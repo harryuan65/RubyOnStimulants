@@ -1,5 +1,7 @@
 <%= stylesheet_link_tag "articles" %>
 <div class="articles-wrapper">
+  <h1><%= t('controller.title.articles') %></h1>
+  <hr>
   <% @articles.each do |article| %>
     <article>
       <!-- <div class="img-wrap">
@@ -7,8 +9,17 @@
       </div> -->
       <div class="info-wrap">
         <a href="<%= article_path(article.id)%>">
-          <h3><%= article.title %></h3>
+          <h3><%= article.title %>
+          <% if article.draft? %>
+            <span class="draft">draft</span>
+          <% end %>
+
+          <% if article.hidden? %>
+            <span class="private">private</span>
+          <% end %>
+          </h3>
         </a>
+        <h4><%= article.user.name %></h4>
         <div class="tags-wrap">
           <% article.tags.map(&:name).each do |tag| %>
             <a href="/">
@@ -20,4 +31,5 @@
       </div>
     </article>
   <% end %>
+  <h1 id="load-more" onclick="LoadMore()" ><%= t('controller.articles.load_more') %></h1>
 </div>

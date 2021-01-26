@@ -1,6 +1,6 @@
 <%= stylesheet_link_tag "header" %>
 <header>
-  <a href="/index"><%= image_tag("ros/ruby-on-stimulants1772x757.png") %></a>
+  <a href="/"><%= image_tag("ros/ruby-on-stimulants1772x757.png") %></a>
   <%= form_tag search_articles_path, class: 'search-form' do%>
     <%= text_field_tag :keyword, nil, autocomplete: 'off', placeholder: t('controller.articles.search'), disabled: true %>
   <% end %>
@@ -66,8 +66,7 @@
     <hr>
     <ul>
       <li><%= link_to t('navbar.articles'), articles_path, class: " " %></li>
-      <li><%= link_to t('navbar.about'), ENV['ABOUT_URL'] || "javascript:void(0)", class: " " %></li>
-      <!--<li> link_to t('navbar.to_do_list'), to_do_lists_path, class: " "</li>-->
+      <li><%= link_to t('navbar.about'), home_about_path, class: " " %></li>
     </ul>
   </div>
   </nav>

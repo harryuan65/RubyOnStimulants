@@ -317,6 +317,10 @@ GEM
       unicode-display_width (>= 1.4.0, < 3.0)
     rubocop-ast (1.4.0)
       parser (>= 2.7.1.5)
+    rubocop-rails (2.9.1)
+      activesupport (>= 4.2.0)
+      rack (>= 1.1)
+      rubocop (>= 0.90.0, < 2.0)
     ruby-progressbar (1.11.0)
     ruby2_keywords (0.0.4)
     rubyzip (2.3.0)
@@ -372,6 +376,8 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    terser (1.1.1)
+      execjs (>= 0.3.0, < 3)
     thor (1.0.1)
     thread_safe (0.3.6)
     thwait (0.2.0)
@@ -455,6 +461,7 @@ DEPENDENCIES
   rest-client
   rollbar
   rspec-rails (~> 4.0.1)
+  rubocop-rails (~> 2.9)
   rubyzip
   sass-rails
   selenium-webdriver
@@ -463,6 +470,7 @@ DEPENDENCIES
   solargraph
   spring
   spring-watcher-listen
+  terser (~> 1.1)
   thread_safe
   turbolinks
   tzinfo-data

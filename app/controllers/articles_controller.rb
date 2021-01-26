@@ -5,11 +5,11 @@ class ArticlesController < ApplicationController
     @limit = 10
     @offset = params[:offset] || 0
     if current_user
-      @articles = Article.includes(:tags).where(state: :published).or(
-                    Article.includes(:tags).where(state: [:draft, :hidden], user_id: current_user.id)
+      @articles = Article.includes(:user, :tags).where(state: :published).or(
+                    Article.includes(:user, :tags).where(state: [:draft, :hidden], user_id: current_user.id)
                   ).order(id: :desc).limit(@limit).offset(@offset)
     else
-      @articles = Article.includes(:tags).where(state: :published).order(id: :desc).limit(@limit).offset(@offset)
+      @articles = Article.includes(:user, :tags).where(state: :published).order(id: :desc).limit(@limit).offset(@offset)
     end
     respond_to do |format|
       format.html
@@ -24,7 +24,7 @@ class ArticlesController < ApplicationController
 
   def create
     permitted_params = article_params
-    tag_str = permitted_params.delete(:tags)
+    tag_str = permitted_params.delete(:user, :tags)
 
     @article = Article.create!(permitted_params)
     @article.state = :draft if @article.state.nil?
@@ -46,8 +46,8 @@ class ArticlesController < ApplicationController
     @scope = "mine"
     @limit = 10
     @offset = params[:offset] || 0
-    @articles = Article.includes(:tags).where(state: :published).or(
-      Article.includes(:tags).where(state: [:draft, :hidden], user_id: current_user.id)
+    @articles = Article.includes(:user, :tags).where(state: :published).or(
+      Article.includes(:user, :tags).where(state: [:draft, :hidden], user_id: current_user.id)
     ).order(id: :desc).limit(@limit).offset(@offset)
     respond_to do |format|
       format.html {render 'index'}
@@ -104,7 +104,7 @@ class ArticlesController < ApplicationController
 
   def update
     param! :content, String, required: true
-    @article = Article.includes(:tags).find(params[:id])
+    @article = Article.includes(:user, :tags).find(params[:id])
     current_tags = @article.tags.map(&:name)
     parsed_tags = Article.get_tags(params[:content])
     should_update_tags = Set.new(current_tags) != Set.new(parsed_tags)
@@ -139,11 +139,11 @@ class ArticlesController < ApplicationController
     @limit = 10
     @offset = params[:offset] || 0
     if current_user
-      @articles = Article.includes(:tags).where(state: :published).or(
-                    Article.includes(:tags).where(state: [:draft, :hidden], user_id: current_user.id)
+      @articles = Article.includes(:user, :tags).where(state: :published).or(
+                    Article.includes(:user, :tags).where(state: [:draft, :hidden], user_id: current_user.id)
                   ).order(id: :desc).limit(@limit).offset(@offset)
     else
-      @articles = Article.includes(:tags).where(state: :published).order(id: :desc).limit(@limit).offset(@offset)
+      @articles = Article.includes(:user, :tags).where(state: :published).order(id: :desc).limit(@limit).offset(@offset)
     end
     @articles = @articles.where(id: article_ids).index_by(&:id).slice(*article_ids).values
 
@@ -202,6 +202,6 @@ class ArticlesController < ApplicationController
   private
   def article_params
     # params.permit(:title, :subtitle, :content, :privacy)
-    params.require(:article).permit(:user_id, :title, :subtitle, :content, :state, :category, :tags)
+    params.require(:article).permit(:user_id, :title, :subtitle, :content, :state, :category, :user, :tags)
   end
 end

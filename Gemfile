@@ -44,6 +44,7 @@ gem 'solargraph', group: :development
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console'
+  gem "rubocop-rails", "~> 2.9"
   gem 'listen'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
@@ -94,3 +95,4 @@ gem "thread_safe"
 
 gem "omniauth", "= 1.9.1"
 gem "webpacker"
+gem "terser", "~> 1.1"

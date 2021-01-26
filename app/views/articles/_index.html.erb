@@ -1,12 +1,21 @@
-<% @articles.each do |article| %>
+  <% @articles.each do |article| %>
     <article>
-      <div class="img-wrap">
-        <%= image_tag("ros/logo.png") %>
-      </div>
+      <!-- <div class="img-wrap">
+         <%# image_tag("ros/logo.png") %>
+      </div> -->
       <div class="info-wrap">
         <a href="<%= article_path(article.id)%>">
-          <h3><%= article.title %></h3>
+          <h3><%= article.title %>
+          <% if article.draft? %>
+            <span class="draft">draft</span>
+          <% end %>
+
+          <% if article.hidden? %>
+            <span class="private">private</span>
+          <% end %>
+          </h3>
         </a>
+        <h4><%= article.user.name %></h4>
         <div class="tags-wrap">
           <% article.tags.map(&:name).each do |tag| %>
             <a href="/">

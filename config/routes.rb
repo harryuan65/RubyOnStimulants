@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   scope :controller=>"home",:path=>"/", :as=>"home" do
     get '/'=>:home
     get 'index'=>:index
+    get 'about'=>:about
     get 'yeah'=>:yeah
     get 'test'=>:test
     post 'webhook'=>:webhook
@@ -80,8 +81,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :words, :controller=>'words' do
-  end
+  resources :words, :controller=>'words'
 
   match '*unmatched', to: 'application#route_not_found', via: :all
 end

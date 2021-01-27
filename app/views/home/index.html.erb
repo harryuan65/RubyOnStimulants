@@ -9,8 +9,8 @@
   <li><%= link_to "Articles", articles_path %></li>
 </ul>
 <div class="icons-wrap">
-  <a href="#"><%= image_tag("ros/medium_subed_logo.png", class: "icon") %></a>
-  <a href="#"><%= image_tag("ros/fb_subed_logo.png", class: "icon") %></a>
-  <a href="#"><%= image_tag("ros/git_subed_logo.png", class: "icon") %></a>
-  <a href="#"><%= image_tag("ros/linkedin_subed_logo.png", class: "icon") %></a>
+  <a href="<%= ENV['MEDIUM_URL']%>"><%= image_tag("ros/medium_subed_logo.png", class: "icon") %></a>
+  <a href="javascript:void(0)"><%= image_tag("ros/fb_subed_logo.png", class: "icon") %></a>
+  <a href="<%= ENV['GITHUB_URL']%>"><%= image_tag("ros/git_subed_logo.png", class: "icon") %></a>
+  <a href="<%= ENV['LINKEDIN_URL']%>"><%= image_tag("ros/linkedin_subed_logo.png", class: "icon") %></a>
 </div>

@@ -1,6 +1,6 @@
 desc "This task is called by the Heroku scheduler add-on"
 task :poke => :environment do
-  res = RestClient.get "https://activemine.herokuapp.com/"
+  res = RestClient.get "https://rubyonstimulants.herokuapp.com/"
   puts "Poke: #{res.code}"
 end
 

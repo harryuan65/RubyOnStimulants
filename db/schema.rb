@@ -2,15 +2,15 @@
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
 #
-# This file is the source Rails uses to define your schema when running `rails
-# db:schema:load`. When creating a new database, `rails db:schema:load` tends to
+# This file is the source Rails uses to define your schema when running `bin/rails
+# db:schema:load`. When creating a new database, `bin/rails db:schema:load` tends to
 # be faster and is potentially less error prone than running all of your
 # migrations from scratch. Old migrations may fail to apply correctly if those
 # migrations use external dependencies or application code.
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_21_085402) do
+ActiveRecord::Schema.define(version: 2021_01_27_005303) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -114,41 +114,6 @@ ActiveRecord::Schema.define(version: 2020_11_21_085402) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["line_uid"], name: "index_onb_line_users_on_line_uid", unique: true
-  end
-
-  create_table "supplies", force: :cascade do |t|
-    t.string "name"
-    t.integer "category"
-    t.integer "quantity"
-    t.datetime "earliest_expiration"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "to_do_items", force: :cascade do |t|
-    t.string "name", null: false
-    t.integer "state", default: 0
-    t.string "description"
-    t.datetime "due_date"
-    t.bigint "user_id"
-    t.bigint "to_do_list_id"
-    t.integer "position"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["name"], name: "index_to_do_items_on_name"
-    t.index ["to_do_list_id"], name: "index_to_do_items_on_to_do_list_id"
-    t.index ["user_id"], name: "index_to_do_items_on_user_id"
-  end
-
-  create_table "to_do_lists", force: :cascade do |t|
-    t.bigint "user_id"
-    t.string "name", null: false
-    t.integer "items_count", default: 0
-    t.string "bg_color"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id", "name"], name: "index_to_do_lists_on_user_id_and_name", unique: true
-    t.index ["user_id"], name: "index_to_do_lists_on_user_id"
   end
 
   create_table "user_word_ships", force: :cascade do |t|

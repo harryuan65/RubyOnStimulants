@@ -1,7 +1,7 @@
 <nav id="nav-top" class="notosans">
   <a class="link-wrap-title" href="/">
     <%= svg('ruby', class: "ruby-icon") %>
-    <span class="title">ActiveMine</span>
+    <span class="title">RubyOnStimulants</span>
   </a>
   <%= form_tag search_articles_path, id: 'search-form' do%>
     <%= text_field_tag :keyword, nil, id: 'searchbar', autocomplete: 'off', placeholder: t('controller.articles.search'), disabled: true %>
@@ -13,7 +13,6 @@
     <div id="nav-side-toggle" class="nav-top-option idle" onclick="toggleSideNav()">
       <%= svg_asset('menu-icon') %>
     </div>
-    <!-- <div class="nav-top-option idle" id="nav-side-toggle" onclick="toggleSideNav()">&#x2630;</div> -->
   </div>
   <nav id="nav-side" class="no-dark">
     <div id="nav-side-menu-container">
